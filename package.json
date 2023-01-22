@@ -1,19 +1,31 @@
 {
-  "name": "playbook",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "13.1.4",
+    "@emotion/css": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@tanstack/react-query": "^4.22.0",
+    "axios": "^1.2.3",
+    "cors": "^2.8.5",
+    "emotion": "^11.0.0",
     "eslint": "8.32.0",
-    "eslint-config-next": "13.1.4",
-    "next": "13.1.4",
+    "eslint-config-next": "13.1.2",
+    "express": "^4.18.2",
+    "firebase": "^9.15.0",
+    "next": "13.1.2",
+    "nodemon": "^2.0.20",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "recoil": "^0.7.6",
+    "request": "^2.88.2",
+    "xml-js": "^1.6.11"
   }
 }

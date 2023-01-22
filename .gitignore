@@ -16,6 +16,10 @@
 /build
 
 # misc
+.yarn
+yarn.
+.history
+.env
 .DS_Store
 *.pem
 
