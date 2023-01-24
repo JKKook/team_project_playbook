@@ -11,7 +11,9 @@ export const global = css`
   }
 
   body {
+    width: 95vw;
     min-height: 100vh;
+    margin: auto;
     background: white;
     color: black;
   }
