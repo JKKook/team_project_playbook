@@ -12,7 +12,7 @@ export const global = css`
 
   body {
     min-height: 100vh;
-    background: green;
+    background: white;
     color: black;
   }
 
