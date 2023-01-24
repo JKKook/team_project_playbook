@@ -1,16 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import {
-  firebaseAuth,
+  auth,
   loginWithGoogle,
   loginWithMeta,
   logout,
   onUserStateChange,
+  signIn,
   submitWithStandard,
 } from '../api/auth/firebase';
 import AvatarImage from '../../src/components/atoms/AvatarImage';
+import { signUp } from '../api/auth/firebase';
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -18,40 +19,35 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newAccount, setNewAccount] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
 
   // email과 비밀번호로 로그인
-  const firebaseAuthentication = firebaseAuth;
-  const sample = async () => {
+  const handleSignIn = async () => {
+    signIn(email, password);
+  };
+
+  // 회원 가입
+  const handleSignUp = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
-        firebaseAuthentication,
-        email,
-        password,
-      );
-      console.log(user);
+      setErrorMsg('');
+      const newRegister = signUp(email, password);
+      console.log(newRegister);
     } catch (error) {
-      console.log(error.message);
+      // Errors : https://firebase.google.com/docs/auth/admin/errors
+      switch (error.code) {
+        case 'auth/invalid-email':
+          setErrorMsg(`${email}은 유효하지 않은 이메일 주소입니다`);
+          break;
+
+        case 'auth/invalid-password':
+          setErrorMsg('비밀번호는 6자리 이상이어야 합니다');
+          break;
+
+        case 'auth/email-already-exists':
+          setErrorMsg('이미 가입 된 계정입니다');
+          break;
+      }
     }
-  };
-
-  // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
-  useEffect(() => {
-    onUserStateChange(setUser);
-  }, []);
-
-  // 로그인 , 로그아웃 다루는 메서드입니다
-  const handleGoogleLogin = () => {
-    // firebase login이 성공하게 되면 user의 정보를 받아옵니다.
-    loginWithGoogle();
-  };
-
-  const handleMetaLogin = () => {
-    loginWithMeta();
-  };
-
-  const handleLogout = () => {
-    // firebase logout이 성공하게 되면 null를 받아옵니다.
-    logout();
   };
 
   // email 존재 유무에 따라 value값을 이메일과 패스워드에 할당
@@ -62,10 +58,22 @@ const Login = () => {
     name === 'email' ? setEmail(value) : setPassword(value);
   };
 
-  // 기존 사용자와 신규 사용자 submit 제어
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    submitWithStandard();
+  // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
+  useEffect(() => {
+    onUserStateChange(setUser);
+  }, []);
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle();
+  };
+
+  const handleMetaLogin = () => {
+    loginWithMeta();
+  };
+
+  const handleLogout = () => {
+    // firebase logout이 성공하게 되면 null를 받아옵니다.
+    logout();
   };
 
   return (
@@ -159,8 +167,8 @@ const Login = () => {
                     backgroundColor: '#A3BB98',
                   }}
                   type='submit'
-                  // onClick={sample}
                   value={'로그인'}
+                  onClick={handleSignIn}
                 />
               </div>
             </form>
@@ -221,6 +229,7 @@ const Login = () => {
         <div css={{ textAlign: 'left', marginTop: '4rem' }}>
           <span css={{ color: 'gray' }}>플레이북 이용이 처음이십니까?</span>
           <span
+            onClick={handleSignUp}
             css={{
               marginLeft: '1rem',
               color: '#658864',
