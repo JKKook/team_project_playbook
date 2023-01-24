@@ -2,24 +2,27 @@
 import { css, jsx } from '@emotion/react';
 import React, { useState, useEffect } from 'react';
 import {
-  auth,
   loginWithGoogle,
   loginWithMeta,
   logout,
   onUserStateChange,
   signIn,
-  submitWithStandard,
 } from '../api/auth/firebase';
 import AvatarImage from '../../src/components/atoms/AvatarImage';
 import { signUp } from '../api/auth/firebase';
+import { Link } from 'next/link';
+import { Router, useRouter } from 'next/router';
 
 const Login = () => {
   // 로그인한 사용자의 정보
   const [user, setUser] = useState(); // null, undefined 초기값
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  //
+  const router = useRouter();
 
   // email과 비밀번호로 로그인
   const handleSignIn = async () => {
@@ -229,7 +232,7 @@ const Login = () => {
         <div css={{ textAlign: 'left', marginTop: '4rem' }}>
           <span css={{ color: 'gray' }}>플레이북 이용이 처음이십니까?</span>
           <span
-            onClick={handleSignUp}
+            onClick={() => router.push('/subPages/Register')}
             css={{
               marginLeft: '1rem',
               color: '#658864',
@@ -237,7 +240,7 @@ const Login = () => {
               cursor: 'pointer',
             }}
           >
-            {newAccount ? '회원가입' : '로그인'}
+            {!newAccount && '회원가입'}
           </span>
         </div>
       </div>

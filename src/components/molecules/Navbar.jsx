@@ -223,16 +223,9 @@ const Navbar = () => {
           >
             로그인
           </Link>
-
-          <Link
-            href='/subPages/Register'
-            className={'MainLink' + isActive('/subPages/Register')}
-          >
-            회원가입
-          </Link>
         </li>
 
-        {/* {loggedRouter()} */}
+        {loggedRouter()}
       </ul>
     </nav>
   );
