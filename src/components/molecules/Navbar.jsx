@@ -216,7 +216,7 @@ const Navbar = () => {
 
       <ul css={[NavBar]}>
         {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
-        {/* <li css={[Main]}>
+        <li css={[Main]}>
           <Link
             href='/subPages/Login'
             className={'MainLink' + isActive('/subPages/Login')}
@@ -230,9 +230,9 @@ const Navbar = () => {
           >
             회원가입
           </Link>
-        </li> */}
+        </li>
 
-        {loggedRouter()}
+        {/* {loggedRouter()} */}
       </ul>
     </nav>
   );

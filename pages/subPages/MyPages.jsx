@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import avatar from '../../public/asset/user.png';
 import Image from 'next/image';

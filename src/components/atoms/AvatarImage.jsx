@@ -23,9 +23,7 @@ const AvatarImage = ({ user: { photoURL, displayName } }) => {
           wordBreak: 'break-word',
           fontSize: '18px',
         }}
-      >
-        {displayName}님 반갑습니다
-      </span>
+      ></span>
     </div>
   );
 };

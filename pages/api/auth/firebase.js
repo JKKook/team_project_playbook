@@ -17,31 +17,28 @@ const firebaseConfig = {
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 };
 
+// export const firebaseAuth = getAuth(app);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const firebaseAuth = getAuth(app);
-
 // 사용자가 로그인을 호출할 때, firebase에서 제공하는 config 사용
-const auth = getAuth();
+export const auth = getAuth();
 // 파이어베이스 Authentication 사용
 const providerGoogle = new GoogleAuthProvider();
 const providerMeta = new FacebookAuthProvider();
 
-// 계정 만들기 (패스워드 기반)
-export const createNewAccountBaseOnPassword = () => {
-  createUserWithEmailAndPassword(auth).catch(console.error);
-};
 // 신규 사용자 등록
-export const submitWithStandard = () => {
-  createUserWithEmailAndPassword(authService, email, password).catch(
-    console.error
+export const signUp = (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password).then((userCredentail) =>
+    console.log(userCredentail),
   );
 };
 
 // 기존 사용자 로그인
-export const loginWithStandard = () => {
-  signInWithEmailAndPassword(auth, email, password).catch(console.error);
+export const signIn = (email, password) => {
+  signInWithEmailAndPassword(auth, email, password)
+    .then(console.log(userCredentail))
+    .catch(console.error);
 };
 
 // Google 사용자 로그인
