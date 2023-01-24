@@ -3,15 +3,15 @@ import { css, jsx } from '@emotion/react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import {
+  firebaseAuth,
   loginWithGoogle,
   loginWithMeta,
   logout,
   onUserStateChange,
   submitWithStandard,
-} from '../../src/components/api/firebase';
+} from '../api/auth/firebase';
 import AvatarImage from '../../src/components/atoms/AvatarImage';
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { firebaseAuth } from '../../src/components/api/firebase';
+
 const Login = () => {
   // 로그인한 사용자의 정보
   const [user, setUser] = useState(); // null, undefined 초기값
@@ -19,20 +19,20 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [newAccount, setNewAccount] = useState(true);
 
-  // // email과 비밀번호로 로그인
-  // const firebaseAuthentication = firebaseAuth;
-  // const sample = async () => {
-  //   try {
-  //     const user = await createUserWithEmailAndPassword(
-  //       firebaseAuthentication,
-  //       email,
-  //       password,
-  //     );
-  //     console.log(user);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+  // email과 비밀번호로 로그인
+  const firebaseAuthentication = firebaseAuth;
+  const sample = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        firebaseAuthentication,
+        email,
+        password
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
   useEffect(() => {
@@ -96,7 +96,6 @@ const Login = () => {
             marginBottom: '0px',
           }}
         >
-          <img css={{ marginBottom: '2rem' }} />
           <h2 css={{ marginBottom: '0.5rem' }}>로그인</h2>
           <p css={{ marginTop: '0.5rem', marginBottom: '2rem', color: 'gray' }}>
             PlayBook Account(으)로 계속 이동
