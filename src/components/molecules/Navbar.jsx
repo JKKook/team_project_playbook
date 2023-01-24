@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import logo from '../../../public/asset/logo.png';
+import logo from '../../../public/asset/playbook-logo.png';
 import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 
 const NavContainer = css`
   position: relative;
-  width: 90%;
+  width: 100%;
   margin: auto;
   // top: 0;
   // right: 0;
@@ -225,7 +225,7 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {loggedRouter()}
+        {/* {loggedRouter()} */}
       </ul>
     </nav>
   );
