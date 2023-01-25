@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import logo from '../../../public/asset/playbook-logo.png';
 import user from '../../../public/asset/user.png';
 import Image from 'next/image';
+import classNames from 'classnames';
 
 const NavContainer = css`
   position: relative;
@@ -44,7 +44,7 @@ const NavBar = css`
     }
   }
 
-  .active {
+  .isActive {
     color: rgba(0, 0, 0, 0.8);
   }
 `;
@@ -133,7 +133,7 @@ const Main = css`
     }
   }
 
-  .active {
+  .isActive {
     color: rgba(0, 0, 0, 0.8);
   }
 `;
@@ -146,23 +146,26 @@ const UserAvatar = css`
 
 const Navbar = () => {
   const router = useRouter();
-  // const handleShow = () => {
-  //   setShow((prev) => !prev);
-  // };
+  // router.pathname을 pathname이라는 변수에 저장
+  const pathname = router.pathname;
+
 
   // 현재 경로와 클릭한 메뉴의 경로가 같으면 active 클래스 추가하면 css 변경
-  const isActive = (path) => {
-    if (path === router.pathname) {
-      return ' active';
-    } else {
-      return '';
-    }
-  };
+  // const isActive = (path) => {
+  //   if (path === router.pathname) {
+  //     return ' ~active';
+  //   } else {
+  //     return '';
+  //   }
+  // };
 
   const loggedRouter = () => {
     return (
       <li css={[Dropdown]}>
-        <Link href='/' css={[DropdownToggle]}>
+        <Link
+          href='/'
+          css={[DropdownToggle]}
+        >
           <Image
             src={user}
             alt='user'
@@ -184,6 +187,25 @@ const Navbar = () => {
     );
   };
 
+  // 같은 코드를 사용하는 부분을 배열로 묶음.
+  const NavRouterData = [
+    {
+      id: 0,
+      link: '/',
+      title: '홈',
+    },
+    {
+      id: 1,
+      link: '/mainPages/Performance',
+      title: '전체 공연',
+    },
+    {
+      id: 2,
+      link: '/subPages/BookSystem',
+      title: '북마크',
+    },
+  ];
+
   return (
     <nav css={[NavContainer]}>
       <Link href='/' css={[NavbarLogo]}>
@@ -191,15 +213,26 @@ const Navbar = () => {
       </Link>
 
       <ul css={[NavBar]}>
-        <li>
-          <Link href='/' className={'NavBarLink' + isActive('/')}>
-            홈
-          </Link>
-        </li>
+        {/* classnames 라이브러리를 활용해 기존 NavBarLink의 클래스도 사용하고 isActive라는 클래스는 router.pathname이 배열의 객체 내에 link랑 같으면 활성화됨. */}
+        {NavRouterData.map((data) => (
+          <li key={data.id}>
+            <Link
+              href={data.link}
+              className={classNames('NavBarLink', {
+                isActive: pathname === data.link,
+              })}
+            >
+              {data.title}
+            </Link>
+          </li>
+        ))}
+        {/* 
         <li>
           <Link
             href='/mainPages/Performance'
-            className={'NavBarLink' + isActive('/mainPages/Performance')}
+            className={classNames('NavBarLink', {
+              isActive: pathname === '/mainPages/Performance',
+            })}
           >
             전체 공연
           </Link>
@@ -207,25 +240,30 @@ const Navbar = () => {
         <li>
           <Link
             href='/subPages/BookSystem'
-            className={'NavBarLink' + isActive('/subPages/BookSystem')}
+            className={classNames('NavBarLink', {
+              isActive: pathname === '/subPages/BookSystem',
+            })}
           >
             북마크
           </Link>
-        </li>
+        </li> */}
       </ul>
 
       <ul css={[NavBar]}>
         {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
+
         <li css={[Main]}>
           <Link
             href='/subPages/Login'
-            className={'MainLink' + isActive('/subPages/Login')}
+            className={classNames('MainLink', {
+              isActive: pathname === '/subPages/Login',
+            })}
           >
             로그인
           </Link>
         </li>
 
-        {/* {loggedRouter()} */}
+        {loggedRouter()}
       </ul>
     </nav>
   );
