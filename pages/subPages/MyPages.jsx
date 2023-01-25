@@ -44,6 +44,7 @@ const AvatarImage = css`
   height: 100%;
   display: block;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 const ChangeImage = css`
@@ -51,10 +52,10 @@ const ChangeImage = css`
   bottom: -100%;
   left: 0;
   width: 100%;
-  height: 40%;
+  height: 50%;
   background: #fff8;
   text-align: center;
-  font-weight: 600;
+  font-weight: 400;
   color: rgb(255, 140, 45);
   transition: 0.3 ease-in-out;
   cursor: pointer;
