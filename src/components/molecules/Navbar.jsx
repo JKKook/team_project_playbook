@@ -6,6 +6,7 @@ import logo from '../../../public/asset/playbook-logo.png';
 import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
+import { useEffect, useRef, useState } from 'react';
 
 const NavContainer = css`
   position: relative;
@@ -144,28 +145,70 @@ const UserAvatar = css`
   margin-right: 3px;
 `;
 
+// const useOutsideClick = (ref) => {
+//   useEffect(() => {
+//     console.log(`useEffect()`);
+
+//     const handleClickOutside = (e) => {
+//       console.log(ref);
+
+//       // 현재 document에서 mousedown 이벤트가 동작하면 호출되는 함수입니다.
+//       if (ref.current && !ref.current.contains(e.target)) {
+//         console.log(`select의 외부 클릭을 감지!`);
+//       }
+//     };
+
+//     // 현재 document에 이벤트리스너를 추가합니다.
+//     document.addEventListener('mousedown', handleClickOutside);
+
+//     // useEffect 함수가 return하는 것은 마운트 해제하는 것과 동일합니다.
+//     // 즉, Class 컴포넌트의 componentWillUnmount 생명주기와 동일합니다.
+//     // 더 이상'mousedown'이벤트가 동작하더라도 handleClickOutside 함수가 실행되지 않습니다.
+//     return () => {
+//       document.removeEventListener('mousedown', handleClickOutside);
+//     };
+//   }, [ref]); // ref가 변경되면 useEffect를 다시 생성합니다.
+// };
+
 const Navbar = () => {
   const router = useRouter();
   // router.pathname을 pathname이라는 변수에 저장
   const pathname = router.pathname;
 
+  // useRef로 DOM 접근하도록 생성
+  const outsideRef = useRef(null);
 
-  // 현재 경로와 클릭한 메뉴의 경로가 같으면 active 클래스 추가하면 css 변경
-  // const isActive = (path) => {
-  //   if (path === router.pathname) {
-  //     return ' ~active';
-  //   } else {
-  //     return '';
-  //   }
-  // };
+  const [open, setOpen] = useState(false);
 
+  /** ------------------------------- 함수 영역 ------------------------------------ */
+
+  // dropdown menu toggle되도록 함수 생성
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
+  // dropdown 영역이 활성화된 상태이면서 outsideRef.current에 이벤트가 발생한 html element가 포함되어 있지 않을 경우 false로 바꿔주며 dropdown 영역을 닫는다.
+  const handleClickOutSide = (e) => {
+    if (open && !outsideRef.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+
+  // 현재 document에서 mousedown 이벤트가 동작하면 handleClickOutSide 함수 호출
+  // 현재 document에 이벤트리스너 추가 및 제거
+  // useEffect로 한 번 실행된 후에 'mousedown' 이벤트가 동작해도 handleClickOutSide가 동작하지 않음.
+  useEffect(() => {
+    if (open) document.addEventListener('mousedown', handleClickOutSide);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutSide);
+    };
+  });
+
+  // 로그인 완료 후에는 로그인 링크가 사라지고 아바타 이미지 및 드롭다운이 구현되도록 loggedRouter함수 만들어줌.
   const loggedRouter = () => {
     return (
-      <li css={[Dropdown]}>
-        <Link
-          href='/'
-          css={[DropdownToggle]}
-        >
+      <li css={[Dropdown]} onClick={handleOpen}>
+        <Link href='#' css={[DropdownToggle]}>
           <Image
             src={user}
             alt='user'
@@ -175,14 +218,16 @@ const Navbar = () => {
           />
           이인재
         </Link>
-
-        <div css={[DropdownMenu]}>
-          <Link css={[DropdownItem]} href='/subPages/MyPages'>
-            마이페이지
-          </Link>
-          <div css={[Divider]}></div>
-          <button css={[DropdownItem, Button]}>로그아웃</button>
-        </div>
+        {/* 클릭하면 dropdown menu가 열리도록, 다시 클릭하면 닫히도록, dropdown 영역 밖을 클릭하면 dropdown 영역 사라지도록 */}
+        {open ? (
+          <div css={[DropdownMenu]} ref={outsideRef}>
+            <Link css={[DropdownItem]} href='/subPages/MyPages'>
+              마이페이지
+            </Link>
+            <div css={[Divider]}></div>
+            <button css={[DropdownItem, Button]}>로그아웃</button>
+          </div>
+        ) : null}
       </li>
     );
   };
@@ -226,27 +271,6 @@ const Navbar = () => {
             </Link>
           </li>
         ))}
-        {/* 
-        <li>
-          <Link
-            href='/mainPages/Performance'
-            className={classNames('NavBarLink', {
-              isActive: pathname === '/mainPages/Performance',
-            })}
-          >
-            전체 공연
-          </Link>
-        </li>
-        <li>
-          <Link
-            href='/subPages/BookSystem'
-            className={classNames('NavBarLink', {
-              isActive: pathname === '/subPages/BookSystem',
-            })}
-          >
-            북마크
-          </Link>
-        </li> */}
       </ul>
 
       <ul css={[NavBar]}>
