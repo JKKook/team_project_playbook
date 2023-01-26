@@ -22,7 +22,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // 사용자가 로그인을 호출할 때, firebase에서 제공하는 config 사용
-export const auth = getAuth();
+export const auth = getAuth(app);
 // 파이어베이스 Authentication 사용
 const providerGoogle = new GoogleAuthProvider();
 const providerMeta = new FacebookAuthProvider();
@@ -35,9 +35,9 @@ export const signUp = (email, password) => {
 };
 
 // 기존 사용자 로그인
-export const signIn = (email, password) => {
+export const signIn = async (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
-    .then(console.log(userCredentail))
+    .then((userCredentail) => console.log(userCredentail))
     .catch(console.error);
 };
 
@@ -69,5 +69,6 @@ export const logout = async () => {
 export const onUserStateChange = (callback) => {
   onAuthStateChanged(auth, (user) => {
     callback(user);
+    console.log(user);
   });
 };

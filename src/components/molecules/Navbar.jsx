@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import logo from '../../../public/asset/playbook-logo.png';
+import logo from '../../../public/asset/logo.png';
 import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
