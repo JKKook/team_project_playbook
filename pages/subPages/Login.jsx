@@ -9,8 +9,10 @@ import {
   signIn,
 } from '../api/auth/firebase';
 import AvatarImage from '../../src/components/atoms/AvatarImage';
-import { signUp } from '../api/auth/firebase';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import logo from '../../public/asset/playbook-logo.png';
+import Link from 'next/link';
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -18,7 +20,6 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newAccount, setNewAccount] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
 
   // rotuer
   const router = useRouter();
@@ -26,8 +27,7 @@ const Login = () => {
   // email과 비밀번호로 로그인
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const member = signIn(email, password);
-    console.log(member);
+    signIn(email, password);
   };
 
   const handleAccount = (e) => {
@@ -54,177 +54,243 @@ const Login = () => {
   };
 
   return (
-    <div
-      css={{
-        display: ' flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        backgroundColor: '#3C6255',
-      }}
-    >
-      <div
-        css={{
-          padding: '50px',
-          backgroundColor: 'white',
-          borderRadius: '12px',
-          boxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-          WebkitBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-          MozBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-        }}
-      >
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'start',
-            marginBottom: '0px',
-          }}
-        >
-          <h2 css={{ marginBottom: '0.5rem' }}>로그인</h2>
-          <p css={{ marginTop: '0.5rem', marginBottom: '2rem', color: 'gray' }}>
-            PlayBook Account(으)로 계속 이동
-          </p>
-        </div>
-        <div css={{ display: 'flex', flexDirection: 'column' }}>
-          {!user && (
-            <form onSubmit={handleSignIn}>
-              <input
-                css={{
-                  width: '450px',
-                  height: '36px',
-                  border: '1px solid gray',
-                  borderRadius: '4px',
-                  marginBottom: '1rem',
-                  textIndent: '1rem',
-                  fontSize: '16px',
-                }}
-                type='email'
-                name='email'
-                placeholder='이메일을 입력해주십시오'
-                required
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              <div>
+    <>
+      <div css={[LoginExtraContainer]}>
+        <div css={[LoginInnerContainer]}>
+          <div css={[LoginDisplay]}>
+            <Link href='/'>
+              <Image src={logo} alt='logo' width={150} />
+            </Link>
+            <h2 css={[LoginTitle]}>로그인</h2>
+            <p css={[LoginSubTitle]}>PlayBook Account(으)로 계속 이동</p>
+          </div>
+          <div css={[LoginFormContainer]}>
+            {!user && (
+              <form onSubmit={handleSignIn}>
                 <input
-                  css={{
-                    width: '450px',
-                    height: '36px',
-                    border: '1px solid gray',
-                    borderRadius: '4px',
-                    marginBottom: '1rem',
-                    textIndent: '1rem',
-                    fontSize: '16px',
-                  }}
-                  type='password'
-                  name='password'
-                  placeholder='비밀번호를 입력해주십시오'
+                  css={[LoginEmailInput]}
+                  type='email'
+                  name='email'
+                  placeholder='이메일을 입력해주십시오'
                   required
-                  value={password}
-                  autoComplete='on'
+                  value={email}
                   onChange={(e) => {
-                    setPassword(e.target.value);
+                    setEmail(e.target.value);
                   }}
                 />
-              </div>
-              <div
-                css={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                }}
-              >
+                <div>
+                  <input
+                    css={[LoginPasswordInput]}
+                    type='password'
+                    name='password'
+                    placeholder='비밀번호를 입력해주십시오'
+                    required
+                    value={password}
+                    autoComplete='on'
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div>
+                  <input
+                    css={[LoginSubmit]}
+                    type='submit'
+                    value='로그인'
+                    onClick={handleSignIn}
+                  />
+                </div>
+              </form>
+            )}
+            {!user && (
+              <form>
+                <p css={[LoginOptionText]}>또는</p>
                 <input
-                  css={{
-                    width: '455px',
-                    height: '40px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    marginBottom: '1rem',
-                    fontSize: '16px',
-                    color: 'white',
-                    backgroundColor: '#A3BB98',
-                    cursor: 'pointer',
-                  }}
-                  type='submit'
-                  value='로그인'
-                  onClick={handleSignIn}
+                  css={[LoginWithSocial]}
+                  placeholder='Google(으)로 계속하기'
+                  onClick={handleGoogleLogin}
                 />
-              </div>
-            </form>
-          )}
-          {!user && (
-            <form>
-              <input
-                css={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  width: '450px',
-                  height: '42px',
-                  border: '1px solid gray',
-                  borderRadius: '4px',
-                  marginBottom: '1rem',
-                  textAlign: 'center',
-                  fontWeight: 'semi-bold',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                }}
-                placeholder='Google(으)로 계속하기'
-                onClick={handleGoogleLogin}
-              />
-              <input
-                css={{
-                  width: '450px',
-                  height: '42px',
-                  border: '1px solid gray',
-                  borderRadius: '4px',
-                  marginBottom: '1rem',
-                  textAlign: 'center',
-                  fontWeight: 'semi-bold',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                }}
-                placeholder='Meta / FaceBook(으)로 계속하기'
-                onClick={handleMetaLogin}
-              />
-            </form>
-          )}
-          {user && (
-            <button
-              css={{
-                width: '70px',
-                height: '70px',
-                border: 'none',
-                borderRadius: '50%',
-                top: '2rem',
-                padding: '0',
-                cursor: 'pointer',
-              }}
-              onClick={handleLogout}
+                <input
+                  css={[LoginWithSocial]}
+                  placeholder='Meta / FaceBook(으)로 계속하기'
+                  onClick={handleMetaLogin}
+                />
+              </form>
+            )}
+            {user && (
+              <button css={[LoginAvatarIcon]} onClick={handleLogout}>
+                <AvatarImage user={user} />
+              </button>
+            )}
+          </div>
+          <div css={[LoginSupportMsgCon]}>
+            <span css={[LoginSupportMsgFirst]}>
+              플레이북 이용이 처음이십니까?
+            </span>
+            <span
+              css={[LoginSupportMsgSecond]}
+              onClick={() => router.push('/subPages/Register')}
             >
-              <AvatarImage user={user} />
-            </button>
-          )}
-        </div>
-        <div css={{ textAlign: 'left', marginTop: '4rem' }}>
-          <span css={{ color: 'gray' }}>플레이북 이용이 처음이십니까?</span>
-          <span
-            onClick={() => router.push('/subPages/Register')}
-            css={{
-              marginLeft: '1rem',
-              color: '#658864',
-              fontWeight: '600',
-              cursor: 'pointer',
-            }}
-          >
-            {!newAccount ? '회원가입' : '로그인'}
-          </span>
+              {!newAccount ? '회원가입' : '로그인'}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default Login;
+
+const LoginExtraContainer = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #3c6255;
+`;
+
+const LoginInnerContainer = css`
+  padding-top: 15px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.07);
+  webkit-box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.07);
+  moz-box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.07);
+`;
+
+const LoginDisplay = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-bottom: 0px;
+`;
+
+const LoginTitle = css`
+  margin-bottom: 0.5rem;
+  font-size: 26px;
+  font-weight: bold;
+`;
+
+const LoginSubTitle = css`
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  color: gray;
+`;
+
+const LoginFormContainer = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+const LoginEmailInput = css`
+  width: 450px;
+  height: 36px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-indent: 1rem;
+  font-size: 16px;
+`;
+
+const LoginPasswordInput = css`
+  width: 450px;
+  height: 36px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  text-indent: 1rem;
+  font-size: 16px;
+`;
+
+const LoginSubmit = css`
+  width: 455px;
+  height: 50px;
+  border: none;
+  border-radius: 4px;
+  margin: 1rem 0;
+  font-size: 20px;
+  color: white;
+  background-color: #a3bb98;
+  cursor: pointer;
+  &:hover {
+    background-color: #3c6255;
+  }
+`;
+
+const LoginOptionText = css`
+  display: flex;
+  flex-basis: 100%;
+  aligin-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 16px;
+  margin: 1rem 0;
+
+  &:before {
+    content: '';
+    flex-grow: 1;
+    margin: 0 0.7rem;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0px;
+    line-height: 3px;
+  }
+
+  &:after {
+    content: '';
+    flex-grow: 1;
+    margin: 0 0.7rem;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0px;
+    line-height: 3px;
+  }
+`;
+
+const LoginWithSocial = css`
+  display: flex;
+  justify-content: center;
+  width: 450px;
+  height: 42px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: semi-bold;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: #eeeeee;
+  }
+`;
+
+// 로그인 시, MyPages로 이동 예정
+const LoginAvatarIcon = css`
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 50%;
+  top: 2rem;
+  padding: 0;
+  cursor: pointer;
+`;
+
+const LoginSupportMsgCon = css`
+  text-align: left;
+  margin-top: 4rem;
+`;
+
+const LoginSupportMsgFirst = css`
+  color: gray;
+`;
+
+const LoginSupportMsgSecond = css`
+  margin-left: 1rem;
+  color: #658864;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover { text-decoration: underline; color: #1A0000;
+`;
