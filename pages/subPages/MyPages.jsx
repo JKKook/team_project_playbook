@@ -18,7 +18,9 @@ const MypageSection = css`
 `;
 
 const DetailSection = css`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   padding-right: 15px;
   padding-left: 5rem;
@@ -30,7 +32,7 @@ const Text = css`
   color: #8d98a0;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  `;
+`;
 
 const Avatar = css`
   width: 150px;
@@ -62,9 +64,12 @@ const ChangeImage = css`
   background: #fff8;
   text-align: center;
   font-weight: 400;
-  color: rgb(255, 140, 45);
   transition: 0.3 ease-in-out;
   cursor: pointer;
+
+  p {
+    color: rgb(255, 140, 45);
+  }
 
   &:hover {
     bottom: -15%;
@@ -106,17 +111,15 @@ const FormInput = css`
 `;
 
 const BtnContainer = css`
-  text-align: center;
+  width: 100%;
   margin-top: 1rem;
 `;
 
 const Button = css`
   display: inline-block;
   font-weight: 400;
-  text-align: center;
-  vertical-align: middle;
   user-select: none;
-  width: 25rem;
+  width: 100%;
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
@@ -127,6 +130,7 @@ const Button = css`
   background-color: #17a2b8;
   border-color: none;
   cursor: pointer;
+  margin-left: 1rem;
 
   &:hover {
     background-color: #1bc4de;

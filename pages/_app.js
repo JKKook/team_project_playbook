@@ -8,22 +8,25 @@ import { Global } from '@emotion/react';
 import reset from '@/src/contexts/resetStyled';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import Layout from '@/src/components/molecules/Layout';
+import NextProgress from 'nextjs-progressbar';
+import { RecoilRoot } from 'recoil';
 
 // props로 받는 Component는 요청한 페이지다. GET/요청시 Component에서는 pages/index.js 파일이 props로 내려온다.
 // pageProps는 페이지 getInitialProps를 통해 내려받은 props들을 말한다.
 const App = ({ Component, pageProps }) => {
   const queryClient = React.useRef(new QueryClient());
   return (
-    <>
+    <RecoilRoot>
       <QueryClientProvider client={queryClient.current}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={reset} />
           <Layout>
+            <NextProgress />
             <Component {...pageProps} />
           </Layout>
         </Hydrate>
       </QueryClientProvider>
-    </>
+    </RecoilRoot>
   );
 };
 

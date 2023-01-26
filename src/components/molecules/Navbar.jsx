@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import logo from '../../../public/asset/playbook-logo.png';
+import logo from '../../../public/asset/logo.png';
 import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
@@ -28,23 +28,19 @@ const NavbarLogo = css`
 const NavBar = css`
   display: flex;
   margin-right: 3rem;
-
   .NavBarLink {
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     padding: 5px 0;
     margin: 0 2rem;
     transition: all 0.5s ease;
-
     &:hover {
       color: rgba(0, 0, 0, 0.8);
     }
-
     &:first-child {
       padding-left: 5rem;
     }
   }
-
   .isActive {
     color: rgba(0, 0, 0, 0.8);
   }
@@ -60,11 +56,9 @@ const DropdownToggle = css`
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.55);
   font-weight: 600;
-
   &:hover {
     color: rgba(0, 0, 0, 0.8);
   }
-
   &::after {
     display: inline-block;
     margin-left: 0.255em;
@@ -116,7 +110,6 @@ const Button = css`
   display: flex;
   font-size: 
   justify-content: center;
-
   &:hover {
     cursor: pointer;
   }
@@ -125,7 +118,6 @@ const Button = css`
 const Main = css`
   display: flex;
   align-items: center;
-
   .MainLink {
     display: flex;
     align-items: center;
@@ -134,12 +126,10 @@ const Main = css`
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     transition: all 0.5s ease;
-
     &:hover {
       color: rgba(0, 0, 0, 0.8);
     }
   }
-
   .isActive {
     color: rgba(0, 0, 0, 0.8);
   }
