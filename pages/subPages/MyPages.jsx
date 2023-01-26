@@ -37,6 +37,10 @@ const Avatar = css`
   margin: 15px auto;
   bottom: 1px solid #ddd;
   border-radius: 50%;
+
+  &:hover span {
+    bottom: -20%;
+  }
 `;
 
 const AvatarImage = css`
@@ -44,7 +48,6 @@ const AvatarImage = css`
   height: 100%;
   display: block;
   object-fit: cover;
-  cursor: pointer;
 `;
 
 const ChangeImage = css`
