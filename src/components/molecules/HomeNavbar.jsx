@@ -8,10 +8,10 @@ const HomeNavbar = ({ onClickCategory }) => {
                     <Link href={"/"}>플레이북 추천</Link>
                 </li>
                 <li value={"new"}>
-                    <Link href={"/mainPages/newperformence"}>신작 공연</Link>
+                    <Link href={"/mainPages/NewPerformance"}>신작 공연</Link>
                 </li>
                 <li value={"best"}>
-                    <Link href={"/mainPages/bestperformence"}>Best 공연</Link>
+                    <Link href={"/mainPages/BestPerformence"}>Best 공연</Link>
                 </li>
             </List>
         </>
