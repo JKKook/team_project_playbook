@@ -22,23 +22,26 @@ const NavContainer = css`
 const NavbarLogo = css`
   display: flex;
   align-items: center;
-  margin-left: 1rem;
+  margin-left: 4rem;
 `;
 
 const NavBar = css`
   display: flex;
-
   margin-right: 2rem;
 
   .NavBarLink {
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     padding: 5px 0;
-    margin: 0 30px;
+    margin: 0 .5rem;
     transition: all 0.5s ease;
 
     &:hover {
       color: rgba(0, 0, 0, 0.8);
+    }
+
+    &:first-child {
+      padding-left: 10rem;
     }
   }
 
@@ -52,8 +55,15 @@ const Dropdown = css`
 `;
 
 const DropdownToggle = css`
+  display: flex;
+  align-items: center;
   white-space: nowrap;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.55);
+  font-weight: 600;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.8);
+  }
 
   &::after {
     display: inline-block;

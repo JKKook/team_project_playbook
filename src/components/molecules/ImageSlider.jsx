@@ -61,7 +61,7 @@ const Container = styled.div`
     overflow: hidden;
     position: relative;
     top: 20px;
-    left: 25%;
+    left: 35%;
 `;
 const List = styled.ul`
     padding: 0;
