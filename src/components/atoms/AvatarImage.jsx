@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react';
+import Image from 'next/image';
 import React from 'react';
 
 const AvatarImage = ({ user: { photoURL, displayName } }) => {

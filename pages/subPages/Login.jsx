@@ -10,8 +10,7 @@ import {
 } from '../api/auth/firebase';
 import AvatarImage from '../../src/components/atoms/AvatarImage';
 import { signUp } from '../api/auth/firebase';
-import { Link } from 'next/link';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -21,44 +20,19 @@ const Login = () => {
   const [newAccount, setNewAccount] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  //
+  // rotuer
   const router = useRouter();
 
   // email과 비밀번호로 로그인
-  const handleSignIn = async () => {
-    signIn(email, password);
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const member = signIn(email, password);
+    console.log(member);
   };
 
-  // 회원 가입
-  const handleSignUp = async () => {
-    try {
-      setErrorMsg('');
-      const newRegister = signUp(email, password);
-      console.log(newRegister);
-    } catch (error) {
-      // Errors : https://firebase.google.com/docs/auth/admin/errors
-      switch (error.code) {
-        case 'auth/invalid-email':
-          setErrorMsg(`${email}은 유효하지 않은 이메일 주소입니다`);
-          break;
-
-        case 'auth/invalid-password':
-          setErrorMsg('비밀번호는 6자리 이상이어야 합니다');
-          break;
-
-        case 'auth/email-already-exists':
-          setErrorMsg('이미 가입 된 계정입니다');
-          break;
-      }
-    }
-  };
-
-  // email 존재 유무에 따라 value값을 이메일과 패스워드에 할당
-  const handleChange = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-    name === 'email' ? setEmail(value) : setPassword(value);
+  const handleAccount = (e) => {
+    e.preventDefault();
+    setNewAccount((prev) => !prev);
   };
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
@@ -114,7 +88,7 @@ const Login = () => {
         </div>
         <div css={{ display: 'flex', flexDirection: 'column' }}>
           {!user && (
-            <form>
+            <form onSubmit={handleSignIn}>
               <input
                 css={{
                   width: '450px',
@@ -130,7 +104,9 @@ const Login = () => {
                 placeholder='이메일을 입력해주십시오'
                 required
                 value={email}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
               <div>
                 <input
@@ -149,7 +125,9 @@ const Login = () => {
                   required
                   value={password}
                   autoComplete='on'
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
               </div>
               <div
@@ -168,49 +146,50 @@ const Login = () => {
                     fontSize: '16px',
                     color: 'white',
                     backgroundColor: '#A3BB98',
+                    cursor: 'pointer',
                   }}
                   type='submit'
-                  value={'로그인'}
+                  value='로그인'
                   onClick={handleSignIn}
                 />
               </div>
             </form>
           )}
           {!user && (
-            <input
-              css={{
-                display: 'flex',
-                justifyContent: 'center',
-                width: '450px',
-                height: '42px',
-                border: '1px solid gray',
-                borderRadius: '4px',
-                marginBottom: '1rem',
-                textAlign: 'center',
-                fontWeight: 'semi-bold',
-                fontSize: '16px',
-                cursor: 'pointer',
-              }}
-              placeholder='Google(으)로 계속하기'
-              onClick={handleGoogleLogin}
-            ></input>
-          )}
-          {!user && (
-            <input
-              css={{
-                width: '450px',
-                height: '42px',
-                border: '1px solid gray',
-                borderRadius: '4px',
-                marginBottom: '1rem',
-                textAlign: 'center',
-                fontWeight: 'semi-bold',
-                fontSize: '16px',
-                cursor: 'pointer',
-              }}
-              placeholder='Meta / FaceBook(으)로 계속하기'
-              onClick={handleMetaLogin}
-            ></input>
+            <form>
+              <input
+                css={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '450px',
+                  height: '42px',
+                  border: '1px solid gray',
+                  borderRadius: '4px',
+                  marginBottom: '1rem',
+                  textAlign: 'center',
+                  fontWeight: 'semi-bold',
+                  fontSize: '16px',
+                  cursor: 'pointer',
+                }}
+                placeholder='Google(으)로 계속하기'
+                onClick={handleGoogleLogin}
+              />
+              <input
+                css={{
+                  width: '450px',
+                  height: '42px',
+                  border: '1px solid gray',
+                  borderRadius: '4px',
+                  marginBottom: '1rem',
+                  textAlign: 'center',
+                  fontWeight: 'semi-bold',
+                  fontSize: '16px',
+                  cursor: 'pointer',
+                }}
+                placeholder='Meta / FaceBook(으)로 계속하기'
+                onClick={handleMetaLogin}
+              />
+            </form>
           )}
           {user && (
             <button
@@ -240,7 +219,7 @@ const Login = () => {
               cursor: 'pointer',
             }}
           >
-            {!newAccount && '회원가입'}
+            {!newAccount ? '회원가입' : '로그인'}
           </span>
         </div>
       </div>
