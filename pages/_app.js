@@ -17,8 +17,8 @@ const App = ({ Component, pageProps }) => {
     <>
       <QueryClientProvider client={queryClient.current}>
         <Hydrate state={pageProps.dehydratedState}>
+          <Global styles={reset} />
           <Layout>
-            <Global styles={reset} />
             <Component {...pageProps} />
           </Layout>
         </Hydrate>
