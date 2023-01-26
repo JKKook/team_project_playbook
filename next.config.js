@@ -19,3 +19,19 @@ module.exports = (phase, { defaultConfig }) => {
     swcMinify: true,
   };
 };
+
+// 외부에서 이미지를 불러올때 next.config.js에서 외부 경로를 설정해주어야한다. 
+module.exports = {
+  images: {
+    domains: [ 'www.kopis.or.kr' ],
+    unoptimized: true,
+  },
+  async rewrites() {
+    return [
+      {
+        destination: `http://localhost:4000`,
+        source: "/main/:image*"
+      }
+    ]
+  }
+}
