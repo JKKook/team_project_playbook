@@ -27,13 +27,13 @@ const NavbarLogo = css`
 
 const NavBar = css`
   display: flex;
-  margin-right: 2rem;
+  margin-right: 3rem;
 
   .NavBarLink {
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     padding: 5px 0;
-    margin: 0 .5rem;
+    margin: 0 2rem;
     transition: all 0.5s ease;
 
     &:hover {
@@ -41,7 +41,7 @@ const NavBar = css`
     }
 
     &:first-child {
-      padding-left: 10rem;
+      padding-left: 5rem;
     }
   }
 
@@ -114,6 +114,7 @@ const Divider = css`
 
 const Button = css`
   display: flex;
+  font-size: 
   justify-content: center;
 
   &:hover {
@@ -167,27 +168,32 @@ const Navbar = () => {
     setOpen(!open);
   };
 
-  // dropdown 영역이 활성화된 상태이면서 outsideRef.current에 이벤트가 발생한 html element가 포함되어 있지 않을 경우 false로 바꿔주며 dropdown 영역을 닫는다.
-  const handleClickOutSide = (e) => {
-    if (open && !outsideRef.current.contains(e.target)) {
-      setOpen(false);
-    }
-  };
-
   // 현재 document에서 mousedown 이벤트가 동작하면 handleClickOutSide 함수 호출
   // 현재 document에 이벤트리스너 추가 및 제거
   // useEffect로 한 번 실행된 후에 'mousedown' 이벤트가 동작해도 handleClickOutSide가 동작하지 않음.
   useEffect(() => {
-    if (open) document.addEventListener('mousedown', handleClickOutSide);
+    // dropdown 영역이 활성화된 상태이면서 outsideRef.current에 이벤트가 발생한 html element가 포함되어 있지 않을 경우 false로 바꿔주며 dropdown 영역을 닫는다.
+    const handleClickOutSide = (e) => {
+      if (open && !outsideRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    if (open) document.addEventListener('click', handleClickOutSide);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutSide);
+      document.removeEventListener('click', handleClickOutSide);
     };
   });
 
   // 로그인 완료 후에는 로그인 링크가 사라지고 아바타 이미지 및 드롭다운이 구현되도록 loggedRouter함수 만들어줌.
   const loggedRouter = () => {
     return (
-      <li css={[Dropdown]} onClick={handleOpen}>
+      <li
+        css={[Dropdown]}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleOpen();
+        }}
+      >
         <Link href='#' css={[DropdownToggle]}>
           <Image
             src={user}

@@ -14,7 +14,6 @@ const MypageSection = css`
   grid-template-columns: 1fr 2fr;
   flex-wrap: wrap;
   margin-left: 2rem;
-  color: #6c757d;
   margin-bottom: 1rem !important;
 `;
 
@@ -27,7 +26,11 @@ const DetailSection = css`
 
 const Text = css`
   text-align: center !important;
-`;
+  font-size: 1.75rem;
+  color: #8d98a0;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  `;
 
 const Avatar = css`
   width: 150px;
