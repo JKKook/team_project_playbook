@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import logo from '../../../public/asset/logo.png';
+import logo from '../../../public/asset/playbook-logo.png';
 import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
@@ -60,6 +60,8 @@ const DropdownToggle = css`
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.55);
   font-weight: 600;
+  cursor: pointer;
+  user-select: none;
 
   &:hover {
     color: rgba(0, 0, 0, 0.8);
@@ -98,12 +100,23 @@ const DropdownItem = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem 1rem;
-  clear: both;
   font-weight: 400;
   color: #212529;
+  padding: 0.25rem 1.5rem;
+  text-align: inherit;
   background-color: transparent;
   border: 0;
+
+  &:hover {
+    background-color: #e7ecef;
+  }
+`;
+
+const DropdownItemLink = css`
+  margin-top: 0.8rem;
+  margin-bottom: 0.7rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 `;
 
 const Divider = css`
@@ -114,8 +127,10 @@ const Divider = css`
 
 const Button = css`
   display: flex;
-  font-size: 
   justify-content: center;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  font-size: inherit;
 
   &:hover {
     cursor: pointer;
@@ -194,7 +209,7 @@ const Navbar = () => {
           handleOpen();
         }}
       >
-        <Link href='#' css={[DropdownToggle]}>
+        <div css={[DropdownToggle]}>
           <Image
             src={user}
             alt='user'
@@ -203,11 +218,14 @@ const Navbar = () => {
             css={[UserAvatar]}
           />
           이인재
-        </Link>
+        </div>
         {/* 클릭하면 dropdown menu가 열리도록, 다시 클릭하면 닫히도록, dropdown 영역 밖을 클릭하면 dropdown 영역 사라지도록 */}
         {open ? (
           <div css={[DropdownMenu]} ref={outsideRef}>
-            <Link css={[DropdownItem]} href='/subPages/MyPages'>
+            <Link
+              css={[DropdownItem, DropdownItemLink]}
+              href='/subPages/MyPages'
+            >
               마이페이지
             </Link>
             <div css={[Divider]}></div>

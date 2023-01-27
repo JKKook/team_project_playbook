@@ -228,7 +228,6 @@ export const LoginOptionText = css`
   color: rgba(0, 0, 0, 0.35);
   font-size: 16px;
   margin: 1rem 0;
-
   &:before {
     content: '';
     flex-grow: 1;
@@ -238,7 +237,6 @@ export const LoginOptionText = css`
     font-size: 0px;
     line-height: 3px;
   }
-
   &:after {
     content: '';
     flex-grow: 1;

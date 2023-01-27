@@ -52,7 +52,6 @@ const Container = styled.div`
   justify-content: center;
   width: 500px;
   height: 490px;
-
   overflow: hidden;
   position: relative;
   top: 20px;
@@ -65,7 +64,6 @@ const List = styled.ul`
   left: 10%;
   transition: ${(props) => (!props.count ? '' : 'all 0.7s ease-in-out')};
   transform: ${(props) => 'translateX(-' + props.count * 800 + 'px)'};
-
   @media screen and (max-width: 500px) {
     left: 0%;
   }
@@ -80,19 +78,16 @@ const Label = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   top: 450px;
   left: 380px;
   width: 50px;
   hight: 0px;
   border-radius: 15px;
   z-index: 10;
-
   background: gray;
   opacity: 0.7;
   text-align: center;
   color: white;
-
   p {
     color: white;
     opacity: 1;
@@ -100,7 +95,6 @@ const Label = styled.div`
 `;
 
 /*
-
                     {performances?.map((item) => {
                         return (
                             <ImageCard
