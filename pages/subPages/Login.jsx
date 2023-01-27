@@ -11,6 +11,7 @@ import {
 import AvatarImage from '../../src/components/atoms/AvatarImage';
 import { signUp } from '../api/auth/firebase';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -54,61 +55,47 @@ const Login = () => {
   };
 
   return (
-    <div
-      css={{
-        display: ' flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        backgroundColor: '#3C6255',
-      }}
-    >
+    <>
+      <Head>
+        <title>로그인</title>
+      </Head>
       <div
         css={{
-          padding: '50px',
-          backgroundColor: 'white',
-          borderRadius: '12px',
-          boxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-          WebkitBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-          MozBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
+          display: ' flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+          backgroundColor: '#3C6255',
         }}
       >
         <div
           css={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'start',
-            marginBottom: '0px',
+            padding: '50px',
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            boxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
+            WebkitBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
+            MozBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
           }}
         >
-          <h2 css={{ marginBottom: '0.5rem' }}>로그인</h2>
-          <p css={{ marginTop: '0.5rem', marginBottom: '2rem', color: 'gray' }}>
-            PlayBook Account(으)로 계속 이동
-          </p>
-        </div>
-        <div css={{ display: 'flex', flexDirection: 'column' }}>
-          {!user && (
-            <form onSubmit={handleSignIn}>
-              <input
-                css={{
-                  width: '450px',
-                  height: '36px',
-                  border: '1px solid gray',
-                  borderRadius: '4px',
-                  marginBottom: '1rem',
-                  textIndent: '1rem',
-                  fontSize: '16px',
-                }}
-                type='email'
-                name='email'
-                placeholder='이메일을 입력해주십시오'
-                required
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              <div>
+          <div
+            css={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'start',
+              marginBottom: '0px',
+            }}
+          >
+            <h2 css={{ marginBottom: '0.5rem' }}>로그인</h2>
+            <p
+              css={{ marginTop: '0.5rem', marginBottom: '2rem', color: 'gray' }}
+            >
+              PlayBook Account(으)로 계속 이동
+            </p>
+          </div>
+          <div css={{ display: 'flex', flexDirection: 'column' }}>
+            {!user && (
+              <form onSubmit={handleSignIn}>
                 <input
                   css={{
                     width: '450px',
@@ -119,111 +106,132 @@ const Login = () => {
                     textIndent: '1rem',
                     fontSize: '16px',
                   }}
-                  type='password'
-                  name='password'
-                  placeholder='비밀번호를 입력해주십시오'
+                  type='email'
+                  name='email'
+                  placeholder='이메일을 입력해주십시오'
                   required
-                  value={password}
-                  autoComplete='on'
+                  value={email}
                   onChange={(e) => {
-                    setPassword(e.target.value);
+                    setEmail(e.target.value);
                   }}
                 />
-              </div>
-              <div
-                css={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                }}
-              >
+                <div>
+                  <input
+                    css={{
+                      width: '450px',
+                      height: '36px',
+                      border: '1px solid gray',
+                      borderRadius: '4px',
+                      marginBottom: '1rem',
+                      textIndent: '1rem',
+                      fontSize: '16px',
+                    }}
+                    type='password'
+                    name='password'
+                    placeholder='비밀번호를 입력해주십시오'
+                    required
+                    value={password}
+                    autoComplete='on'
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div
+                  css={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  <input
+                    css={{
+                      width: '455px',
+                      height: '40px',
+                      border: 'none',
+                      borderRadius: '4px',
+                      marginBottom: '1rem',
+                      fontSize: '16px',
+                      color: 'white',
+                      backgroundColor: '#A3BB98',
+                      cursor: 'pointer',
+                    }}
+                    type='submit'
+                    value='로그인'
+                    onClick={handleSignIn}
+                  />
+                </div>
+              </form>
+            )}
+            {!user && (
+              <form>
                 <input
                   css={{
-                    width: '455px',
-                    height: '40px',
-                    border: 'none',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '450px',
+                    height: '42px',
+                    border: '1px solid gray',
                     borderRadius: '4px',
                     marginBottom: '1rem',
+                    textAlign: 'center',
+                    fontWeight: 'semi-bold',
                     fontSize: '16px',
-                    color: 'white',
-                    backgroundColor: '#A3BB98',
                     cursor: 'pointer',
                   }}
-                  type='submit'
-                  value='로그인'
-                  onClick={handleSignIn}
+                  placeholder='Google(으)로 계속하기'
+                  onClick={handleGoogleLogin}
                 />
-              </div>
-            </form>
-          )}
-          {!user && (
-            <form>
-              <input
+                <input
+                  css={{
+                    width: '450px',
+                    height: '42px',
+                    border: '1px solid gray',
+                    borderRadius: '4px',
+                    marginBottom: '1rem',
+                    textAlign: 'center',
+                    fontWeight: 'semi-bold',
+                    fontSize: '16px',
+                    cursor: 'pointer',
+                  }}
+                  placeholder='Meta / FaceBook(으)로 계속하기'
+                  onClick={handleMetaLogin}
+                />
+              </form>
+            )}
+            {user && (
+              <button
                 css={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  width: '450px',
-                  height: '42px',
-                  border: '1px solid gray',
-                  borderRadius: '4px',
-                  marginBottom: '1rem',
-                  textAlign: 'center',
-                  fontWeight: 'semi-bold',
-                  fontSize: '16px',
+                  width: '70px',
+                  height: '70px',
+                  border: 'none',
+                  borderRadius: '50%',
+                  top: '2rem',
+                  padding: '0',
                   cursor: 'pointer',
                 }}
-                placeholder='Google(으)로 계속하기'
-                onClick={handleGoogleLogin}
-              />
-              <input
-                css={{
-                  width: '450px',
-                  height: '42px',
-                  border: '1px solid gray',
-                  borderRadius: '4px',
-                  marginBottom: '1rem',
-                  textAlign: 'center',
-                  fontWeight: 'semi-bold',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                }}
-                placeholder='Meta / FaceBook(으)로 계속하기'
-                onClick={handleMetaLogin}
-              />
-            </form>
-          )}
-          {user && (
-            <button
+                onClick={handleLogout}
+              >
+                <AvatarImage user={user} />
+              </button>
+            )}
+          </div>
+          <div css={{ textAlign: 'left', marginTop: '4rem' }}>
+            <span css={{ color: 'gray' }}>플레이북 이용이 처음이십니까?</span>
+            <span
+              onClick={() => router.push('/subPages/Register')}
               css={{
-                width: '70px',
-                height: '70px',
-                border: 'none',
-                borderRadius: '50%',
-                top: '2rem',
-                padding: '0',
+                marginLeft: '1rem',
+                color: '#658864',
+                fontWeight: '600',
                 cursor: 'pointer',
               }}
-              onClick={handleLogout}
             >
-              <AvatarImage user={user} />
-            </button>
-          )}
-        </div>
-        <div css={{ textAlign: 'left', marginTop: '4rem' }}>
-          <span css={{ color: 'gray' }}>플레이북 이용이 처음이십니까?</span>
-          <span
-            onClick={() => router.push('/subPages/Register')}
-            css={{
-              marginLeft: '1rem',
-              color: '#658864',
-              fontWeight: '600',
-              cursor: 'pointer',
-            }}
-          >
-            {!newAccount ? '회원가입' : '로그인'}
-          </span>
+              {!newAccount ? '회원가입' : '로그인'}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
