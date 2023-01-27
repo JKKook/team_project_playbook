@@ -142,7 +142,7 @@ const Login = () => {
 
 export default Login;
 
-const LoginExtraContainer = css`
+export const LoginExtraContainer = css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -150,7 +150,7 @@ const LoginExtraContainer = css`
   background-color: #3c6255;
 `;
 
-const LoginInnerContainer = css`
+export const LoginInnerContainer = css`
   padding-top: 15px;
   padding-bottom: 50px;
   padding-left: 50px;
@@ -162,31 +162,31 @@ const LoginInnerContainer = css`
   moz-box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.07);
 `;
 
-const LoginDisplay = css`
+export const LoginDisplay = css`
   display: flex;
   flex-direction: column;
   justify-content: start;
   margin-bottom: 0px;
 `;
 
-const LoginTitle = css`
+export const LoginTitle = css`
   margin-bottom: 0.5rem;
   font-size: 26px;
   font-weight: bold;
 `;
 
-const LoginSubTitle = css`
+export const LoginSubTitle = css`
   margin-top: 0.5rem;
   margin-bottom: 2rem;
   color: gray;
 `;
 
-const LoginFormContainer = css`
+export const LoginFormContainer = css`
   display: flex;
   flex-direction: column;
 `;
 
-const LoginEmailInput = css`
+export const LoginEmailInput = css`
   width: 450px;
   height: 36px;
   border: 1px solid gray;
@@ -196,7 +196,7 @@ const LoginEmailInput = css`
   font-size: 16px;
 `;
 
-const LoginPasswordInput = css`
+export const LoginPasswordInput = css`
   width: 450px;
   height: 36px;
   border: 1px solid gray;
@@ -205,7 +205,7 @@ const LoginPasswordInput = css`
   font-size: 16px;
 `;
 
-const LoginSubmit = css`
+export const LoginSubmit = css`
   width: 455px;
   height: 50px;
   border: none;
@@ -220,7 +220,7 @@ const LoginSubmit = css`
   }
 `;
 
-const LoginOptionText = css`
+export const LoginOptionText = css`
   display: flex;
   flex-basis: 100%;
   aligin-items: center;
@@ -250,7 +250,7 @@ const LoginOptionText = css`
   }
 `;
 
-const LoginWithSocial = css`
+export const LoginWithSocial = css`
   display: flex;
   justify-content: center;
   width: 450px;
@@ -268,7 +268,7 @@ const LoginWithSocial = css`
 `;
 
 // 로그인 시, MyPages로 이동 예정
-const LoginAvatarIcon = css`
+export const LoginAvatarIcon = css`
   width: 70px;
   height: 70px;
   border: none;
@@ -278,16 +278,16 @@ const LoginAvatarIcon = css`
   cursor: pointer;
 `;
 
-const LoginSupportMsgCon = css`
+export const LoginSupportMsgCon = css`
   text-align: left;
   margin-top: 4rem;
 `;
 
-const LoginSupportMsgFirst = css`
+export const LoginSupportMsgFirst = css`
   color: gray;
 `;
 
-const LoginSupportMsgSecond = css`
+export const LoginSupportMsgSecond = css`
   margin-left: 1rem;
   color: #658864;
   font-weight: 600;

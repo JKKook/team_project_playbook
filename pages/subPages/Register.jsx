@@ -1,8 +1,27 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { onUserStateChange, signUp } from '../api/auth/firebase';
 import AvatarImage from '../../src/components/atoms/AvatarImage';
+import {
+  LoginDisplay,
+  LoginExtraContainer,
+  LoginInnerContainer,
+  LoginTitle,
+  LoginSubTitle,
+  LoginFormContainer,
+  LoginEmailInput,
+  LoginPasswordInput,
+  LoginSubmit,
+  LoginAvatarIcon,
+  LoginSupportMsgCon,
+  LoginSupportMsgFirst,
+  LoginSupportMsgSecond,
+} from './Login';
+import Image from 'next/image';
+import logo from '../../public/asset/playbook-logo.png';
+import Link from 'next/link';
 
 const Register = () => {
   const [user, setUser] = useState();
@@ -60,56 +79,21 @@ const Register = () => {
 
   return (
     <>
-      <div
-        css={{
-          display: ' flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          backgroundColor: '#3C6255',
-        }}
-      >
-        <div
-          css={{
-            padding: '50px',
-            backgroundColor: 'white',
-            borderRadius: '12px',
-            boxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-            WebkitBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-            MozBoxShadow: '10px 10px 5px -2px rgba(0,0,0,0.07)',
-          }}
-        >
-          <div
-            css={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'start',
-              marginBottom: '0px',
-            }}
-          >
-            <h2 css={{ marginBottom: '0.5rem' }}>PlayBook ID 생성</h2>
-            <p
-              css={{ marginTop: '0.5rem', marginBottom: '2rem', color: 'gray' }}
-            >
-              PlayBook Account 생성중
-            </p>
+      <div css={[LoginExtraContainer]}>
+        <div css={[LoginInnerContainer]}>
+          <div css={[LoginDisplay]}>
+            <Link href='/'>
+              <Image src={logo} alt='logo' width={150} />
+            </Link>
+            <h2 css={[LoginTitle]}>PlayBook ID 생성</h2>
+            <p css={[LoginSubTitle]}>PlayBook Account 생성중</p>
           </div>
-          <div css={{ display: 'flex', flexDirection: 'column' }}>
+          <div css={[LoginFormContainer]}>
             {!user && (
-              <form css={{ display: 'flex', flexDirection: 'column' }}>
-                <p css={{ margin: '0.5rem 0', color: 'gray' }}>이메일</p>
+              <form css={[LoginFormContainer]}>
+                <p css={[RegisterFormText]}>이메일</p>
                 <input
-                  css={{
-                    display: 'flex',
-                    width: '450px',
-                    height: '36px',
-                    border: '1px solid gray',
-                    borderRadius: '4px',
-                    marginBottom: '1rem',
-                    textIndent: '1rem',
-                    fontSize: '16px',
-                    color: 'darkgrey',
-                  }}
+                  css={[LoginEmailInput]}
                   type='email'
                   name='email'
                   placeholder='생성하고자 하는 이메일 주소를 입력하십시오'
@@ -118,19 +102,9 @@ const Register = () => {
                   onChange={handleChange}
                 />
                 <div>
-                  <p css={{ margin: '0.5rem 0', color: 'gray' }}>비밀번호</p>
+                  <p css={[RegisterFormText]}>비밀번호</p>
                   <input
-                    css={{
-                      display: 'flex',
-                      width: '450px',
-                      height: '36px',
-                      border: '1px solid gray',
-                      borderRadius: '4px',
-                      marginBottom: '1rem',
-                      textIndent: '1rem',
-                      fontSize: '16px',
-                      color: 'darkgrey',
-                    }}
+                    css={[LoginPasswordInput]}
                     type='password'
                     name='password'
                     placeholder='생성하고자 하는 비밀번호를 입력하십시오'
@@ -139,30 +113,13 @@ const Register = () => {
                     value={password}
                     onChange={handleChange}
                   />
-                  <p
-                    css={{
-                      margin: '1.5rem 0',
-                      color: 'darkgrey',
-                      fontSize: 'small',
-                    }}
-                  >
+                  <p css={RegisterFormTextSub}>
                     *비밀번호는 6자 이상이어야 하며 공백으로 시작하거나 끝날 수
                     없습니다.
                   </p>
-                  <p css={{ margin: '0.5rem 0', color: 'gray' }}>
-                    새 비밀번호 확인
-                  </p>
+                  <p css={RegisterFormText}>새 비밀번호 확인</p>
                   <input
-                    css={{
-                      display: 'flex',
-                      width: '450px',
-                      height: '36px',
-                      border: '1px solid gray',
-                      borderRadius: '4px',
-                      marginBottom: '1rem',
-                      textIndent: '1rem',
-                      fontSize: '16px',
-                    }}
+                    css={LoginEmailInput}
                     type='password'
                     name='password'
                     required
@@ -171,45 +128,16 @@ const Register = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div
-                  css={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                >
+                <div>
                   <input
-                    css={{
-                      width: '455px',
-                      height: '55px',
-                      border: 'none',
-                      borderRadius: '4px',
-                      margin: '1rem 0',
-                      fontSize: '20px',
-                      color: 'white',
-                      backgroundColor: '#A3BB98',
-                      textAlign: 'center',
-                      ':hover ': {
-                        backgroundColor: '#3C6255',
-                      },
-                    }}
+                    css={LoginSubmit}
                     type='submit'
                     value='PlayBook ID 생성'
                     onClick={handleSignUp}
                   />
                   {user && (
                     <div>
-                      <button
-                        css={{
-                          width: '70px',
-                          height: '70px',
-                          border: 'none',
-                          borderRadius: '50%',
-                          top: '2rem',
-                          padding: '0',
-                          cursor: 'pointer',
-                        }}
-                        onClick={handleLogout}
-                      >
+                      <button css={LoginAvatarIcon} onClick={handleLogout}>
                         <AvatarImage user={user} />
                       </button>
                     </div>
@@ -218,17 +146,13 @@ const Register = () => {
               </form>
             )}
           </div>
-          <div css={{ textAlign: 'left', marginTop: '4rem' }}>
-            <span css={{ color: 'gray' }}>플레이북 ID가 이미 있으십니까?</span>
+          <div css={[LoginSupportMsgCon]}>
+            <span css={[LoginSupportMsgFirst]}>
+              플레이북 ID가 이미 있으십니까?
+            </span>
             <span
               onClick={() => uRouter.push('/subPages/Login')}
-              css={{
-                marginLeft: '1rem',
-                color: '#658864',
-                fontWeight: '600',
-                cursor: 'pointer',
-                ':hover ': { textDecoration: 'underline', color: '#1A0000' },
-              }}
+              css={LoginSupportMsgSecond}
             >
               로그인
             </span>
@@ -240,3 +164,14 @@ const Register = () => {
 };
 
 export default Register;
+
+const RegisterFormText = css`
+  margin: 0.5rem 0;
+  color: gray;
+`;
+
+const RegisterFormTextSub = css`
+  margin: 1.5rem 0;
+  color: darkgrey;
+  font-size: small;
+`;
