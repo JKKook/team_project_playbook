@@ -6,14 +6,14 @@ import React from 'react';
 const AvatarImage = ({ user: { photoURL, displayName } }) => {
   return (
     <div>
-      <img
+      <Image
         css={{
           borderRadius: '50%',
           width: '70px',
           height: '70px',
         }}
-        src={photoURL}
-        alt={displayName}
+        src={photoURL ? photoURL : ''}
+        alt={displayName ? displayName : ''}
       />
       <span css={{ fontSize: '14px' }}>{displayName}</span>
       <span
