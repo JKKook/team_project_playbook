@@ -30,7 +30,7 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   // 쿼리 Login 컴포넌트에서 받아오기
-  const uRouter = useRouter();
+  const router = useRouter();
   // const { query } = uRouter.query;
   // console.log(uRouter.query);
 
@@ -133,13 +133,16 @@ const Register = () => {
                     css={LoginSubmit}
                     type='submit'
                     value='PlayBook ID 생성'
-                    onClick={handleSignUp}
+                    onClick={(handleSignUp) => {
+                      handleSignUp ? router.push('/') : '';
+                    }}
                   />
                   {user && (
                     <div>
-                      <button css={LoginAvatarIcon} onClick={handleLogout}>
-                        <AvatarImage user={user} />
-                      </button>
+                      <button
+                        css={LoginAvatarIcon}
+                        onClick={handleLogout}
+                      ></button>
                     </div>
                   )}
                 </div>
@@ -151,7 +154,7 @@ const Register = () => {
               플레이북 ID가 이미 있으십니까?
             </span>
             <span
-              onClick={() => uRouter.push('/subPages/Login')}
+              onClick={() => router.push('/subPages/Login')}
               css={LoginSupportMsgSecond}
             >
               로그인
