@@ -8,11 +8,12 @@ import {
   onUserStateChange,
   signIn,
 } from '../api/auth/firebase';
-import AvatarImage from '../../src/components/atoms/AvatarImage';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
+import NotifyLogin from './NotifyLogin';
+import Navbar from '../../src/components/molecules/Navbar';
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -97,7 +98,9 @@ const Login = () => {
                     css={[LoginSubmit]}
                     type='submit'
                     value='로그인'
-                    onClick={handleSignIn}
+                    onClick={(handleSignIn) => {
+                      handleSignIn ? router.push('/') : '';
+                    }}
                   />
                 </div>
               </form>
@@ -117,11 +120,16 @@ const Login = () => {
                 />
               </form>
             )}
+            {/* user가 입력 될 시, navbar로 user정보와 로그아웃 메서드 전달 */}
             {user && (
-              <button css={[LoginAvatarIcon]} onClick={handleLogout}>
-                <AvatarImage user={user} />
-              </button>
+              <Link href='/subPages/Login'>
+                {/* <button css={[LoginAvatarIcon]} onClick={handleLogout}></button> */}
+                <Navbar loggedInUser={user} handleLogout={handleLogout} />
+              </Link>
             )}
+            {/* {user && (
+              <NotifyLogin loggedInUser={user} handleLogout={handleLogout} />
+            )} */}
           </div>
           <div css={[LoginSupportMsgCon]}>
             <span css={[LoginSupportMsgFirst]}>
