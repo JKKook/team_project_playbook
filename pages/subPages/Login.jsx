@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from '@emotion/react';
-import React, { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
+import { useState, useEffect } from 'react';
 import {
   loginWithGoogle,
   loginWithMeta,
