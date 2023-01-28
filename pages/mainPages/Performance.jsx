@@ -1,6 +1,11 @@
+import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
 import React from 'react';
 
 const Performance = () => {
-  return <div>Performance</div>;
+  return (
+    <div>
+      <RecommendPerformance />
+    </div>
+  );
 };
 export default Performance;

@@ -4,6 +4,7 @@ import axios from 'axios';
 import ImageSlider from '@/src/components/molecules/ImageSlider';
 import styled from '@emotion/styled';
 import HomeNavbar from '@/src/components/molecules/HomeNavbar';
+import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
 
 const getApiData = async () => {
   const response = await axios.get('http://localhost:4000/main/image');
@@ -33,6 +34,7 @@ const Index = () => {
       <div>{<ImageSlider performances={data} />}</div>
       <Recommend>
         <h2>이런 공연은 어떠세요?</h2>
+        <div>{<RecommendPerformance performances={data} />}</div>
       </Recommend>
     </>
   );
