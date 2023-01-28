@@ -9,7 +9,6 @@ const TOTAL_SLIDE = 7;
 // 에러해결해야 첨부터 부드럽게 넘어간다. 브라우저 정책변경
 
 const ImageSlider = ({ performances }) => {
-    const images = performances.map((v) => v.image);
     const [count, setCount] = useState(0);
     const [currentIdx, setCurrentIdx] = useState(0);
     const slideRef = useRef(null);
@@ -28,11 +27,11 @@ const ImageSlider = ({ performances }) => {
         <>
             <Container>
                 <List ref={slideRef} count={count}>
-                    {images?.map((elem, idx) => (
-                        <ImageList key={idx}>
-                            <Link href={"/"}>
+                    {performances?.map((elem, idx) => (
+                        <ImageList key={`${idx}_${elem.name}`}>
+                            <Link href={`/description/${elem.id}`}>
                                 <Image
-                                    src={elem}
+                                    src={elem.image}
                                     alt={"images"}
                                     height={480}
                                     width={400}

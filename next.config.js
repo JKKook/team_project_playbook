@@ -25,12 +25,17 @@ module.exports = {
   images: {
     domains: [ 'www.kopis.or.kr' ],
     unoptimized: true,
+    imageSizes: [300, 640, 750, 828, 1000, 1200, 1920, 2048, 2840]
   },
   async rewrites() {
     return [
       {
         destination: `http://localhost:4000`,
         source: "/main/:image*"
+      },
+      {
+        destination: `http://www.kopis.or.kr/:path*`,
+        source: "/openApi/restful/:path*"
       }
     ]
   }
