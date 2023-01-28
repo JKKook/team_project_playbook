@@ -166,7 +166,7 @@ const UserAvatar = css`
   margin-right: 3px;
 `;
 
-const Navbar = () => {
+const Navbar = ({ loggedInUser, handleLogout }) => {
   const router = useRouter();
   // router.pathname을 pathname이라는 변수에 저장
   const pathname = router.pathname;
@@ -229,7 +229,10 @@ const Navbar = () => {
               마이페이지
             </Link>
             <div css={[Divider]}></div>
-            <button css={[DropdownItem, Button]}>로그아웃</button>
+
+            <button css={[DropdownItem, Button]} onClick={handleLogout}>
+              로그아웃
+            </button>
           </div>
         ) : null}
       </li>
@@ -279,8 +282,21 @@ const Navbar = () => {
 
       <ul css={[NavBar]}>
         {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
-
-        <li css={[Main]}>
+        {loggedInUser ? (
+          loggedRouter()
+        ) : (
+          <li css={[Main]}>
+            <Link
+              href='/subPages/Login'
+              className={classNames('MainLink', {
+                isActive: pathname === '/subPages/Login',
+              })}
+            >
+              로그인
+            </Link>
+          </li>
+        )}
+        {/* <li css={[Main]}>
           <Link
             href='/subPages/Login'
             className={classNames('MainLink', {
@@ -291,7 +307,7 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {loggedRouter()}
+        {loggedRouter()} */}
       </ul>
     </nav>
   );
