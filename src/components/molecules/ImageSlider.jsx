@@ -9,39 +9,44 @@ const TOTAL_SLIDE = 7;
 // 에러해결해야 첨부터 부드럽게 넘어간다. 브라우저 정책변경
 
 const ImageSlider = ({ performances }) => {
-  const images = performances.map((v) => v.image);
-  const [count, setCount] = useState(0);
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const slideRef = useRef(null);
+    const [count, setCount] = useState(0);
+    const [currentIdx, setCurrentIdx] = useState(0);
+    const slideRef = useRef(null);
 
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      setCount((prev) => (prev === TOTAL_SLIDE ? 0 : prev + 1));
-    }, 5000);
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            setCount((prev) => (prev === TOTAL_SLIDE ? 0 : prev + 1));
+        }, 5000);
 
-    return () => {
-      clearInterval(timerId);
-    };
-  }, [count]);
+        return () => {
+            clearInterval(timerId);
+        };
+    }, [count]);
 
-  return (
-    <>
-      <Container>
-        <List ref={slideRef} count={count}>
-          {images?.map((elem, idx) => (
-            <ImageList key={idx}>
-              <Link href={'/'}>
-                <Image src={elem} alt={'images'} height={480} width={400} />
-              </Link>
-            </ImageList>
-          ))}
-        </List>
-        <Label>
-          <p>{count + 1} / 8</p>
-        </Label>
-      </Container>
-    </>
-  );
+    return (
+        <>
+            <Container>
+                <List ref={slideRef} count={count}>
+                    {performances?.map((elem, idx) => (
+                        <ImageList key={`${idx}_${elem.name}`}>
+                            <Link href={`/description/${elem.id}`}>
+                                <Image
+                                    src={elem.image}
+                                    alt={"images"}
+                                    height={480}
+                                    width={400}
+                                />
+                            </Link>
+                        </ImageList>
+                    ))}
+                </List>
+                <Label>
+                    <p>{count + 1} / 8</p>
+                </Label>
+            </Container>
+        </>
+    );
+
 };
 
 export default ImageSlider;
