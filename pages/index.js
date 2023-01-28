@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react **/
 // 여기에 우리가 원하는 구현들을 넣으면된다
+
 import { dehydrate, QueryClient, useQueries, useQuery } from "react-query";
 import axios from "axios";
 import ImageSlider from "@/src/components/molecules/ImageSlider";
@@ -10,11 +11,13 @@ const HOST = `http://kopis.or.kr/openApi/restful/pblprfr`;
 // api key
 const KEY = "98e02b76a394447699b7324b7ff14b83";
 
+
 // 한달전부터 현재까지 공연하는 정보 불러오기
 const requestUrl = `${HOST}?service=${KEY}&stdate=20221201&eddate=20230401&cpage=1&rows=20`;
 
 // 8개의 이미지슬라이드를 위해 가져오는 api
 const getApiData = async () => {
+
     const response = await axios.get("http://localhost:4000/main/image");
     const arr = [];
     //console.log(response.data.elements[0].elements); // 8개 공연정보
@@ -28,6 +31,7 @@ const getApiData = async () => {
         arr.push(obj);
     });
     return arr;
+
 };
 
 // 이런공연은 어떠세요 리스트를 가져오는 api
@@ -80,6 +84,7 @@ const Index = () => {
             <ul css={[RecommendList]}>{}</ul>
         </>
     );
+
 };
 
 export default Index;
@@ -95,11 +100,11 @@ export default Index;
 // }
 
 const Recommend = styled.div`
-    position: relative;
-    top: 100px;
-    left: 20px;
+  position: relative;
+  top: 100px;
+  left: 20px;
 
-    font-size: 25px;
-    font-weight: bold;
+  font-size: 25px;
+  font-weight: bold;
 `;
 const RecommendList = css``;

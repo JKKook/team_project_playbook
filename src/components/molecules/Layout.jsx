@@ -1,3 +1,4 @@
+
 import React from "react";
 import Navbar from "./Navbar";
 import HomeNavbar from "./HomeNavbar";
@@ -10,6 +11,7 @@ const Layout = ({ children }) => {
             {children}
         </div>
     );
+
 };
 
 export default Layout;

@@ -27,13 +27,13 @@ const NavbarLogo = css`
 
 const NavBar = css`
   display: flex;
-  margin-right: 2rem;
+  margin-right: 3rem;
 
   .NavBarLink {
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     padding: 5px 0;
-    margin: 0 .5rem;
+    margin: 0 2rem;
     transition: all 0.5s ease;
 
     &:hover {
@@ -41,7 +41,7 @@ const NavBar = css`
     }
 
     &:first-child {
-      padding-left: 10rem;
+      padding-left: 5rem;
     }
   }
 
@@ -60,6 +60,8 @@ const DropdownToggle = css`
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.55);
   font-weight: 600;
+  cursor: pointer;
+  user-select: none;
 
   &:hover {
     color: rgba(0, 0, 0, 0.8);
@@ -98,12 +100,23 @@ const DropdownItem = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem 1rem;
-  clear: both;
   font-weight: 400;
   color: #212529;
+  padding: 0.25rem 1.5rem;
+  text-align: inherit;
   background-color: transparent;
   border: 0;
+
+  &:hover {
+    background-color: #e7ecef;
+  }
+`;
+
+const DropdownItemLink = css`
+  margin-top: 0.8rem;
+  margin-bottom: 0.7rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 `;
 
 const Divider = css`
@@ -115,6 +128,9 @@ const Divider = css`
 const Button = css`
   display: flex;
   justify-content: center;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  font-size: inherit;
 
   &:hover {
     cursor: pointer;
@@ -167,28 +183,33 @@ const Navbar = () => {
     setOpen(!open);
   };
 
-  // dropdown 영역이 활성화된 상태이면서 outsideRef.current에 이벤트가 발생한 html element가 포함되어 있지 않을 경우 false로 바꿔주며 dropdown 영역을 닫는다.
-  const handleClickOutSide = (e) => {
-    if (open && !outsideRef.current.contains(e.target)) {
-      setOpen(false);
-    }
-  };
-
   // 현재 document에서 mousedown 이벤트가 동작하면 handleClickOutSide 함수 호출
   // 현재 document에 이벤트리스너 추가 및 제거
   // useEffect로 한 번 실행된 후에 'mousedown' 이벤트가 동작해도 handleClickOutSide가 동작하지 않음.
   useEffect(() => {
-    if (open) document.addEventListener('mousedown', handleClickOutSide);
+    // dropdown 영역이 활성화된 상태이면서 outsideRef.current에 이벤트가 발생한 html element가 포함되어 있지 않을 경우 false로 바꿔주며 dropdown 영역을 닫는다.
+    const handleClickOutSide = (e) => {
+      if (open && !outsideRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    if (open) document.addEventListener('click', handleClickOutSide);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutSide);
+      document.removeEventListener('click', handleClickOutSide);
     };
   });
 
   // 로그인 완료 후에는 로그인 링크가 사라지고 아바타 이미지 및 드롭다운이 구현되도록 loggedRouter함수 만들어줌.
   const loggedRouter = () => {
     return (
-      <li css={[Dropdown]} onClick={handleOpen}>
-        <Link href='#' css={[DropdownToggle]}>
+      <li
+        css={[Dropdown]}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleOpen();
+        }}
+      >
+        <div css={[DropdownToggle]}>
           <Image
             src={user}
             alt='user'
@@ -197,11 +218,14 @@ const Navbar = () => {
             css={[UserAvatar]}
           />
           이인재
-        </Link>
+        </div>
         {/* 클릭하면 dropdown menu가 열리도록, 다시 클릭하면 닫히도록, dropdown 영역 밖을 클릭하면 dropdown 영역 사라지도록 */}
         {open ? (
           <div css={[DropdownMenu]} ref={outsideRef}>
-            <Link css={[DropdownItem]} href='/subPages/MyPages'>
+            <Link
+              css={[DropdownItem, DropdownItemLink]}
+              href='/subPages/MyPages'
+            >
               마이페이지
             </Link>
             <div css={[Divider]}></div>

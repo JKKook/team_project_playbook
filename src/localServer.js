@@ -2,11 +2,13 @@
 // 4000을 default로 잡았습니다.
 // Server router 수정시 자동으로 서버가 새로고침이 안되니 수동으로 껐다 켜주세요.
 // yarn server (package.json 참조)
-const express = require("express");
+const express = require('express');
 const app = express();
+
 const cors = require("cors");
 const request = require("request");
 const converter = require("xml-js");
+
 
 
 const PORT = 4000;
@@ -19,17 +21,19 @@ const mainRecommend = require("./serverRouter/mainRecommendRouter");
 const descriptionRouter = require("./serverRouter/descriptionRouter");
 const KEY = "98e02b76a394447699b7324b7ff14b83";
 
+
 // cors 정책 허용 라이브러리
 // 설명: https://velog.io/@logqwerty/CORS
 app.use(
-    cors({
-        origin: "*", // 권한허용 페이지
-        credentials: true, // 쿠키 인증요청 여부
-        optionsSuccessStatus: 200, // 상태 설정
-    })
+  cors({
+    origin: '*', // 권한허용 페이지
+    credentials: true, // 쿠키 인증요청 여부
+    optionsSuccessStatus: 200, // 상태 설정
+  }),
 );
 
 // 라우터 경로 설정
+
 app.use("/main/image", mainImageRouter);
 app.use("/main/recommend", mainRecommend);
 
@@ -55,6 +59,7 @@ app.get("/description/:id", (req, res) => {
 
 app.listen(PORT, () => {
     console.log("listening on port http://localhost:4000");
+
 });
 
 // https://velog.io/@garam0410/Java-OPEN-API-%ED%8C%8C%EC%8B%B1%ED%95%98%EA%B8%B0-JSON
