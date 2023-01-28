@@ -33,8 +33,10 @@ const Index = () => {
       <HomeNavbar />
       <div>{<ImageSlider performances={data} />}</div>
       <Recommend>
-        <h2>이런 공연은 어떠세요?</h2>
-        <div>{<RecommendPerformance performances={data} />}</div>
+        <h2 style={{textAlign: 'center'}}>이런 공연은 어떠세요?</h2>
+        <div style={{ margin: '10rem 0', userSelect: 'none' }}>
+          {<RecommendPerformance performances={data} />}
+        </div>
       </Recommend>
     </>
   );
