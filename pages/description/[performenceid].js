@@ -73,7 +73,7 @@ const Post = () => {
                 <div css={[InfoContainer]}>
                     <h2 css={[InfoName]}>공연 정보</h2>
                     <ul css={[List]}>
-                        <li>장소: {data.place}</li>
+                        <li>장소vv: {data.place}</li>
                         <li>출연진: {data.actor}</li>
                         <li>
                             기간: {data.from} ~ {data.to}
