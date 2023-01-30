@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { auth, onUserStateChange, signUp } from '../api/auth/firebase';
+import { onUserStateChange, signUp } from '../api/auth/firebase';
 import {
   LoginDisplay,
   LoginExtraContainer,
@@ -11,7 +11,6 @@ import {
   LoginSubTitle,
   LoginFormContainer,
   LoginEmailInput,
-  LoginPasswordInput,
   LoginSubmit,
   LoginAvatarIcon,
   LoginSupportMsgCon,
@@ -52,25 +51,24 @@ const Register = () => {
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
   useEffect(() => {
-    onUserStateChange(setUser);
+      onUserStateChange(setUser);
   }, []);
 
   // 회원 가입
   const handleSignUp = async (e) => {
     e.preventDefault();
     clearErrors();
-    const newRegister = signUp(email, password).then(router.push('/'));
-    console.log(newRegister);
+    signUp(email, password);
   };
 
   // 이메일
   const handleChangeEmail = (e) => {
     const emailRegex =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    const emailCurrent = e.target.value;
-    setEmail(emailCurrent);
+    const email = e.target.value;
+    setEmail(email);
 
-    if (!emailRegex.test(emailCurrent)) {
+    if (!emailRegex.test(email)) {
       setEmailMessage(
         '올바른 이메일 형식이 아닙니다, 다시 한 번 확인 해주세요',
       );
@@ -114,14 +112,6 @@ const Register = () => {
     }
   };
 
-  // email 존재 유무에 따라 value값을 이메일과 패스워드에 할당
-  const handleChange = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-    name === 'email' ? setEmail(value) : setPassword(value);
-  };
-
   const handleLogout = () => {
     // firebase logout이 성공하게 되면 null를 받아옵니다.
     logout();
@@ -152,14 +142,17 @@ const Register = () => {
                   onChange={handleChangeEmail}
                 />
                 {email.length > 0 && (
-                  <span className={`message ${isEmail ? 'success' : 'error'}`}>
+                  <span
+                    css={[RegisterNoticeText]}
+                    className={`message ${isEmail ? 'success' : 'error'}`}
+                  >
                     {emailMessage}
                   </span>
                 )}
                 <div>
                   <p css={[RegisterFormText]}>비밀번호</p>
                   <input
-                    css={[LoginPasswordInput]}
+                    css={[LoginEmailInput]}
                     type='password'
                     name='password'
                     placeholder='생성하고자 하는 비밀번호를 입력하십시오'
@@ -171,6 +164,7 @@ const Register = () => {
                   <div>
                     {password.length > 0 && (
                       <span
+                        css={[RegisterNoticeText]}
                         className={`message ${
                           isPassword ? 'success' : 'error'
                         }`}
@@ -179,14 +173,13 @@ const Register = () => {
                       </span>
                     )}
                   </div>
-                  <p css={RegisterFormTextSub}>
-                    *비밀번호는 6자 이상이어야 하며 공백으로 시작하거나 끝날 수
-                    없습니다.
-                  </p>
-                  <p css={RegisterFormText}>새 비밀번호 확인</p>
+                  <div css={{ marginTop: '2rem' }}>
+                    <p css={[RegisterFormText]}>새 비밀번호 확인</p>
+                  </div>
                   <input
-                    css={LoginEmailInput}
+                    css={[LoginEmailInput]}
                     type='password'
+                    name='password'
                     required
                     autoComplete='on'
                     value={passwordConfirm}
@@ -195,6 +188,7 @@ const Register = () => {
                   <div>
                     {passwordConfirm.length > 0 && (
                       <span
+                        css={[RegisterNoticeText]}
                         className={`message ${
                           isPasswordConfirm ? 'success' : 'error'
                         }`}
@@ -210,7 +204,7 @@ const Register = () => {
                     type='submit'
                     value='PlayBook ID 생성'
                     disabled={!(isEmail && isPassword && isPasswordConfirm)}
-                    // onClick={handleRouter}
+                    onClick={handleSignUp}
                   />
                   {user && (
                     <div>
@@ -248,8 +242,8 @@ const RegisterFormText = css`
   color: gray;
 `;
 
-const RegisterFormTextSub = css`
-  margin: 1.5rem 0;
-  color: darkgrey;
-  font-size: small;
+const RegisterNoticeText = css`
+  color: #f08a5d;
+  font-size: 14px;
+  margin-bottom: 1rem;
 `;
