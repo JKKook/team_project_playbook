@@ -108,6 +108,7 @@ const reset = css`
     }
     body {
         line-height: 1;
+        overflow-x: hidden;
     }
     ol,
     ul {

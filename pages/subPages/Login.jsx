@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from '@emotion/react';
-import React, { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
+import { useState, useEffect } from 'react';
 import {
   loginWithGoogle,
   loginWithMeta,
@@ -122,10 +122,10 @@ const Login = () => {
             )}
             {/* user가 입력 될 시, navbar로 user정보와 로그아웃 메서드 전달 */}
             {user && (
-              <Link href='/subPages/Login'>
+              <div>
                 {/* <button css={[LoginAvatarIcon]} onClick={handleLogout}></button> */}
                 <Navbar loggedInUser={user} handleLogout={handleLogout} />
-              </Link>
+              </div>
             )}
             {/* {user && (
               <NotifyLogin loggedInUser={user} handleLogout={handleLogout} />

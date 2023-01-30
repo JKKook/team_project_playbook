@@ -89,16 +89,6 @@ const Index = () => {
 
 export default Index;
 
-// export const getStaticProps = async() => {
-//     const queryClient = new QueryClient();
-//     await queryClient.prefetchQuery("image", getApiData);
-//     return {
-//         props: {
-//             dehydratedState: dehydrate(queryClient)
-//         }
-//     };
-// }
-
 const Recommend = styled.div`
   position: relative;
   top: 100px;
