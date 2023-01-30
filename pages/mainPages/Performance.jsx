@@ -1,11 +1,16 @@
-import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
-import React from 'react';
+import { useQuery } from 'react-query';
+import { getApiData } from '../index';
+import PerformanceList from '@/src/components/molecules/PerformanceList';
 
 const Performance = () => {
+  const { data } = useQuery('image', getApiData);
+  if (!data) {
+    return <div>No data</div>;
+  }
   return (
-    <div>
-      <RecommendPerformance />
-    </div>
+    <>
+      <PerformanceList performances={data} />
+    </>
   );
 };
 export default Performance;

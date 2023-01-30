@@ -5,8 +5,9 @@ import ImageSlider from '@/src/components/molecules/ImageSlider';
 import styled from '@emotion/styled';
 import HomeNavbar from '@/src/components/molecules/HomeNavbar';
 import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
+import { async } from '@firebase/util';
 
-const getApiData = async () => {
+export const getApiData = async () => {
   const response = await axios.get('http://localhost:4000/main/image');
   const arr = [];
   // console.log(response.data.elements[0].elements); // 8개 공연정보
@@ -33,7 +34,7 @@ const Index = () => {
       <HomeNavbar />
       <div>{<ImageSlider performances={data} />}</div>
       <Recommend>
-        <h2 style={{textAlign: 'center'}}>이런 공연은 어떠세요?</h2>
+        <h2 style={{ textAlign: 'center' }}>이런 공연은 어떠세요?</h2>
         <div style={{ margin: '10rem 0', userSelect: 'none' }}>
           {<RecommendPerformance performances={data} />}
         </div>
@@ -43,16 +44,6 @@ const Index = () => {
 };
 
 export default Index;
-
-// export const getStaticProps = async() => {
-//     const queryClient = new QueryClient();
-//     await queryClient.prefetchQuery("image", getApiData);
-//     return {
-//         props: {
-//             dehydratedState: dehydrate(queryClient)
-//         }
-//     };
-// }
 
 const Recommend = styled.div`
   position: relative;
