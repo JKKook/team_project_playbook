@@ -7,8 +7,6 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 const RecommendPerformance = ({ performances }) => {
-  const images = performances.map((v) => v.image);
-
   return (
     <Swiper
       navigation={true}
@@ -30,10 +28,10 @@ const RecommendPerformance = ({ performances }) => {
       modules={[EffectCoverflow, Pagination]}
       className='mySwiper'
     >
-      {images?.map((elem, idx) => (
-        <SwiperSlide key={''}>
-          <li key={idx} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Image src={elem} alt={'images'} height={480} width={400} />
+      {performances?.map((elem, idx) => (
+        <SwiperSlide key={`${idx}_${elem.name}`}>
+          <li>
+            <Image src={elem.image} alt={'images'} height={480} width={400} />
           </li>
         </SwiperSlide>
       ))}
