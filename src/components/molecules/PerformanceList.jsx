@@ -26,6 +26,7 @@ const CardContainer = css`
 const ImgBox = css`
   height: 350px;
   width: 100%;
+  border-radius: 0.25rem;
 `;
 
 const CardBody = css`
@@ -116,16 +117,12 @@ const PerformanceList = ({ total }) => {
             <p css={[Detail]} title={elem.place}>
               장소 : {elem.place}
             </p>
-            <p css={[Detail]}>
-              장르 : {elem.genre}
-            </p>
+            <p css={[Detail]}>장르 : {elem.genre}</p>
 
             <p css={[Detail]}>
               기간 : {elem.start} ~ {elem.end}
             </p>
-            <p css={[Detail, PlayingStatus]}>
-              {elem.isPlaying}
-            </p>
+            <p css={[Detail, PlayingStatus]}>{elem.isPlaying}</p>
 
             <div css={[ButtonContainer]}>
               <Link

@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
 import { useQuery } from 'react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getTotalApi } from '@/pages/mainPages/Performance';
+import filterSearch from '../atoms/FilterSearch';
+import { useRouter } from 'next/router';
 
 const InputGroup = css`
   position: relative;
@@ -42,6 +44,7 @@ const CategorySelect = css`
   color: #495057;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
+  cursor: pointer;
 `;
 
 const InputForm = css`
@@ -57,10 +60,16 @@ const Filter = () => {
 
   const { data } = useQuery('total', getTotalApi);
 
+  const router = useRouter();
+
   const handleCategory = (e) => {
     setCategory(e.target.value);
-    console.log(e.target.value);
+    filterSearch({ router, category: e.target.value });
   };
+
+  useEffect(() => {
+    filterSearch({ router, search: search ? search : 'all' });
+  }, [search]);
 
   return (
     <div css={[InputGroup]}>
@@ -72,6 +81,7 @@ const Filter = () => {
           css={[CategorySelect]}
         >
           <option value='all'>전체 공연</option>
+          {/* option value 중복 제거 */}
           {data
             .filter(
               (arr, index, callback) =>

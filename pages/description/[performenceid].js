@@ -8,25 +8,81 @@ const { useState, useEffect } = require('react');
 const { useRouter } = require('next/router');
 
 // 여기서 공연 상세정보 API 불러오기
-export const getDescriptionAPI = async (id) => {
+const getDescriptionAPI = async (id) => {
   const response = await axios.get(`http://localhost:4000/description/${id}`);
   const resData = response.data;
-  // console.log(resData.elements[0].elements[0].elements[16].elements[tab].elements[0].text);
-
-  // console.log(resData.elements[0].elements[0].elements[16].elements);
+  // console.log(resData);
+  // console.log({
+  //   id: resData.elements[0].elements[0].elements[0].elements
+  //     ? resData.elements[0].elements[0].elements[0].elements[0].text
+  //     : '정보없음', // 공연 아이디
+  //   name: resData.elements[0].elements[0].elements[1].elements
+  //     ? resData.elements[0].elements[0].elements[1].elements[0].text
+  //     : '정보없음', // 공연 이름
+  //   from: resData.elements[0].elements[0].elements[2].elements
+  //     ? resData.elements[0].elements[0].elements[2].elements[0].text
+  //     : '정보없음', // 공연 시작일
+  //   to: resData.elements[0].elements[0].elements[3].elements
+  //     ? resData.elements[0].elements[0].elements[3].elements[0].text
+  //     : '정보없음', // 공연 종료일
+  //   actor: resData.elements[0].elements[0].elements[5].elements
+  //     ? resData.elements[0].elements[0].elements[5].elements[0].text
+  //     : '정보없음', // 출연배우
+  //   runtime: resData.elements[0].elements[0].elements[7].elements
+  //     ? resData.elements[0].elements[0].elements[7].elements[0].text
+  //     : '정보없음', // 런타임시간
+  //   place: resData.elements[0].elements[0].elements[4].elements
+  //     ? resData.elements[0].elements[0].elements[4].elements[0].text
+  //     : '정보없음', // 장소
+  //   price: resData.elements[0].elements[0].elements[10].elements
+  //     ? resData.elements[0].elements[0].elements[10].elements[0].text
+  //     : '정보없음', // 가격
+  //   genre: resData.elements[0].elements[0].elements[13].elements
+  //     ? resData.elements[0].elements[0].elements[13].elements[0].text
+  //     : '정보없음', // 공연장르
+  //   posterImage: resData.elements[0].elements[0].elements[11].elements
+  //     ? resData.elements[0].elements[0].elements[11].elements[0].text
+  //     : '정보없음', // 포스터이미지
+  //   // descriptImage: [{type: "element", name: "", elements: [{ type: 'text', text: 'url경로' }]}]
+  //   descripImage: resData.elements[0].elements[0].elements[16].elements
+  //     ? resData.elements[0].elements[0].elements[16].elements
+  //     : [], // 공연 상세이미지
+  // });
   return {
-    id: resData.elements[0].elements[0].elements[0].elements[0].text, // 공연 아이디
-    name: resData.elements[0].elements[0].elements[1].elements[0].text, // 공연 이름
-    from: resData.elements[0].elements[0].elements[2].elements[0].text, // 공연 시작일
-    to: resData.elements[0].elements[0].elements[3].elements[0].text, // 공연 종료일
-    actor: resData.elements[0].elements[0].elements[5].elements[0].text, // 출연배우
-    runtime: resData.elements[0].elements[0].elements[7].elements[0].text, // 런타임시간
-    place: resData.elements[0].elements[0].elements[4].elements[0].text, // 장소
-    price: resData.elements[0].elements[0].elements[10].elements[0].text, // 가격
-    genre: resData.elements[0].elements[0].elements[13].elements[0].text, // 공연장르
-    posterImage: resData.elements[0].elements[0].elements[11].elements[0].text, // 포스터이미지
+    id: resData.elements[0].elements[0].elements[0].elements
+      ? resData.elements[0].elements[0].elements[0].elements[0].text
+      : '정보없음', // 공연 아이디
+    name: resData.elements[0].elements[0].elements[1].elements
+      ? resData.elements[0].elements[0].elements[1].elements[0].text
+      : '정보없음', // 공연 이름
+    from: resData.elements[0].elements[0].elements[2].elements
+      ? resData.elements[0].elements[0].elements[2].elements[0].text
+      : '정보없음', // 공연 시작일
+    to: resData.elements[0].elements[0].elements[3].elements
+      ? resData.elements[0].elements[0].elements[3].elements[0].text
+      : '정보없음', // 공연 종료일
+    actor: resData.elements[0].elements[0].elements[5].elements
+      ? resData.elements[0].elements[0].elements[5].elements[0].text
+      : '정보없음', // 출연배우
+    runtime: resData.elements[0].elements[0].elements[7].elements
+      ? resData.elements[0].elements[0].elements[7].elements[0].text
+      : '정보없음', // 런타임시간
+    place: resData.elements[0].elements[0].elements[4].elements
+      ? resData.elements[0].elements[0].elements[4].elements[0].text
+      : '정보없음', // 장소
+    price: resData.elements[0].elements[0].elements[10].elements
+      ? resData.elements[0].elements[0].elements[10].elements[0].text
+      : '정보없음', // 가격
+    genre: resData.elements[0].elements[0].elements[13].elements
+      ? resData.elements[0].elements[0].elements[13].elements[0].text
+      : '정보없음', // 공연장르
+    posterImage: resData.elements[0].elements[0].elements[11].elements
+      ? resData.elements[0].elements[0].elements[11].elements[0].text
+      : '정보없음', // 포스터이미지
     // descriptImage: [{type: "element", name: "", elements: [{ type: 'text', text: 'url경로' }]}]
-    descripImage: resData.elements[0].elements[0].elements[16].elements, // 공연 상세이미지
+    descripImage: resData.elements[0].elements[0].elements[16].elements
+      ? resData.elements[0].elements[0].elements[16].elements
+      : [], // 공연 상세이미지
   };
 };
 
@@ -41,9 +97,17 @@ const getImageSize = (src) => {
   };
 };
 
+const srcMatch = (src) => {
+  const regexp = RegExp(/^(http:\/\/)/);
+  const isSrc = regexp.test(src);
+  if (!isSrc) {
+    return `http://www.kopis.or.kr/upload/pfmIntroImage/${src}.jpg`;
+  }
+  return src;
+};
+
 const Post = () => {
   const router = useRouter();
-
   // path 아디 정보
   const { performenceid } = router.query;
   let imageSize = null;
@@ -53,28 +117,10 @@ const Post = () => {
     () => getDescriptionAPI(performenceid)
   );
 
-  // console.log(data.descripImage[0].elements[0].text);
-
-  if (!isLoading) {
-    imageSize = getImageSize(data.descripImage);
-  }
-
   return (
     <>
       {!isLoading ? (
         <div css={[Container]}>
-          <div>
-            {data.descripImage?.map((item, idx) => {
-              <NextImage
-                css={[Images]}
-                key={idx}
-                src={item}
-                alt={'image'}
-                width={700}
-                height={5000}
-              />;
-            })}
-          </div>
           <div css={[ImageContainer]}>
             <NextImage
               src={data.posterImage}
@@ -87,7 +133,7 @@ const Post = () => {
           <div css={[InfoContainer]}>
             <h2 css={[InfoName]}>공연 정보</h2>
             <ul css={[List]}>
-              <li>장소: {data.place}</li>
+              <li>장소vv: {data.place}</li>
               <li>출연진: {data.actor}</li>
               <li>
                 기간: {data.from} ~ {data.to}
@@ -102,18 +148,26 @@ const Post = () => {
             <button>북마크</button>
           </div>
           <div css={[DescriptionImage]}>
-            {data.descripImage?.map((item, idx) => {
-              return (
-                <NextImage
-                  css={[Images]}
-                  key={idx}
-                  src={item.elements[0].text}
-                  alt={'image'}
-                  width={700}
-                  height={5000}
-                />
-              );
-            })}
+            {data.descripImage.length !== 0 ? (
+              data.descripImage.map((item, idx) => {
+                return (
+                  <NextImage
+                    css={[Images]}
+                    key={idx}
+                    src={
+                      !item.elements
+                        ? srcMatch(item.text)
+                        : item.elements[0].text
+                    }
+                    alt={'image'}
+                    width={700}
+                    height={5000}
+                  />
+                );
+              })
+            ) : (
+              <div>상세정보 이미지가 없습니다.</div>
+            )}
           </div>
         </div>
       ) : (
@@ -131,13 +185,6 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-`;
-
-const ImageBox = css`
-  @media screen and (min-width: 768px) {
-    flex: 0 0 auto;
-    width: 50%;
-  }
 `;
 
 const ImageContainer = css`
