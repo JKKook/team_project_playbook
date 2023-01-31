@@ -2,11 +2,12 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import PerformanceList from '@/src/components/molecules/PerformanceList';
 
-const getTotalApi = async () => {
+import Filter from '@/src/components/molecules/Filter';
+
+export const getTotalApi = async () => {
   const response = await axios.get('http://localhost:4000/main/total');
   const arr = [];
   const resData = response.data.elements[0].elements;
-  console.log(resData);
   resData.map((v) => {
     const obj = {
       id: v.elements[0].elements[0].text, // 공연 id
@@ -26,19 +27,15 @@ const getTotalApi = async () => {
 const Performance = () => {
   const { data, isLoading, isFetching } = useQuery('total', getTotalApi);
 
-  // const [tab, setTab] = useState(0);
-
-  // const isActive = (index) => {
-  //   if (tab === index) return ' active';
-  //   return '';
-  // };
-
   if (isLoading) {
     return <div>loading...</div>;
   }
 
   return (
     <>
+      <div>
+        <Filter />
+      </div>
       <PerformanceList total={data} />
     </>
   );

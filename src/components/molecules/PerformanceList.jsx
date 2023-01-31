@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
 
 const Performances = css`
   display: grid;
@@ -97,7 +96,6 @@ const BookmarkButton = css`
 `;
 
 const PerformanceList = ({ total }) => {
-  console.log(total);
   return (
     <div css={[Performances]}>
       {total?.map((elem, idx) => (
@@ -118,21 +116,21 @@ const PerformanceList = ({ total }) => {
             <p css={[Detail]} title={elem.place}>
               장소 : {elem.place}
             </p>
-            <p css={[Detail]} title={elem.genre}>
+            <p css={[Detail]}>
               장르 : {elem.genre}
             </p>
 
             <p css={[Detail]}>
               기간 : {elem.start} ~ {elem.end}
             </p>
-            <p css={[Detail, PlayingStatus]} title={elem.isPlaying}>
+            <p css={[Detail, PlayingStatus]}>
               {elem.isPlaying}
             </p>
 
             <div css={[ButtonContainer]}>
               <Link
                 css={[ButtonToDetail, LinkToDescription]}
-                href={`/description/${performance.id}`}
+                href={`/description/${elem.id}`}
               >
                 자세히
               </Link>
