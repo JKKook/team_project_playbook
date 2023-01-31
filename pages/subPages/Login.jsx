@@ -15,6 +15,8 @@ import Link from 'next/link';
 import NotifyLogin from './NotifyLogin';
 import Navbar from '../../src/components/molecules/Navbar';
 
+const useUser = () => ({ user: null });
+
 const Login = () => {
   // 로그인한 사용자의 정보
   const [user, setUser] = useState(); // null, undefined 초기값
@@ -98,9 +100,7 @@ const Login = () => {
                     css={[LoginSubmit]}
                     type='submit'
                     value='로그인'
-                    onClick={(handleSignIn) => {
-                      handleSignIn ? router.push('/') : '';
-                    }}
+                    onClick={handleSignIn}
                   />
                 </div>
               </form>
