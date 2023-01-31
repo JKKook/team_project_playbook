@@ -6,8 +6,8 @@ import HomeNavbar from "./HomeNavbar";
 const Layout = ({ children }) => {
     return (
         <div>
-            {/* <Navbar /> */}
-            <HomeNavbar />
+            <Navbar />
+            {/* <HomeNavbar /> */}
             {children}
         </div>
     );
