@@ -51,14 +51,16 @@ const Register = () => {
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
   useEffect(() => {
-      onUserStateChange(setUser);
+    onUserStateChange(setUser);
   }, []);
 
   // 회원 가입
   const handleSignUp = async (e) => {
     e.preventDefault();
     clearErrors();
-    signUp(email, password);
+    const result = await signUp(email, password);
+    const resultRouter = await router.push('/');
+    return result && resultRouter;
   };
 
   // 이메일

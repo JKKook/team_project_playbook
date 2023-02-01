@@ -28,17 +28,13 @@ const providerGoogle = new GoogleAuthProvider();
 const providerMeta = new FacebookAuthProvider();
 
 // 신규 사용자 등록
-export const signUp = (email, password) => {
-  createUserWithEmailAndPassword(auth, email, password).then((userCredentail) =>
-    console.log(userCredentail),
-  );
+export const signUp = async (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password).catch(console.error);
 };
 
 // 기존 사용자 로그인
 export const signIn = async (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredentail) => console.log(userCredentail))
-    .catch(console.error);
+  signInWithEmailAndPassword(auth, email, password).catch(console.error);
 };
 
 // Google 사용자 로그인

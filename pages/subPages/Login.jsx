@@ -30,7 +30,9 @@ const Login = () => {
   // email과 비밀번호로 로그인
   const handleSignIn = async (e) => {
     e.preventDefault();
-    signIn(email, password);
+    const result = await signIn(email, password);
+    const resultRouter = await router.push('/');
+    return result && resultRouter;
   };
 
   const handleAccount = (e) => {
@@ -100,6 +102,7 @@ const Login = () => {
                     css={[LoginSubmit]}
                     type='submit'
                     value='로그인'
+                    disabled={!email && !password}
                     onClick={handleSignIn}
                   />
                 </div>
