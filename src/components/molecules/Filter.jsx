@@ -54,11 +54,14 @@ const InputForm = css`
   width: 40%;
 `;
 
-const Filter = () => {
+const Filter = ({ total }) => {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
 
-  const { data } = useQuery('total', getTotalApi);
+  const { status } = useQuery(
+    ['total', { genre: category }],
+    getTotalApi
+  );
 
   const router = useRouter();
 
@@ -81,23 +84,25 @@ const Filter = () => {
           css={[CategorySelect]}
         >
           <option value='all'>전체 공연</option>
+
           {/* option value 중복 제거 */}
-          {data
-            .filter(
-              (arr, index, callback) =>
-                index === callback.findIndex((el) => el.genre === arr.genre)
-            )
-            .map((item) => (
-              <option key={item.id} value={item.genre}>
-                {item.genre}
-              </option>
-            ))}
+          {status === 'success' &&
+            total
+              .filter(
+                (arr, index, callback) =>
+                  index === callback.findIndex((el) => el.genre === arr.genre)
+              )
+              .map((item) => (
+                <option key={item.id} value={item.genre}>
+                  {item.genre}
+                </option>
+              ))}
         </select>
       </div>
 
       <form autoComplete='off' css={[InputForm]}>
         <input
-          type='text'
+          type='search'
           list='performance'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
