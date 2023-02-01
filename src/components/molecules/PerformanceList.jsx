@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
 
 const Performances = css`
   display: grid;
@@ -27,6 +26,7 @@ const CardContainer = css`
 const ImgBox = css`
   height: 350px;
   width: 100%;
+  border-radius: 0.25rem;
 `;
 
 const CardBody = css`
@@ -96,53 +96,52 @@ const BookmarkButton = css`
   cursor: pointer;
 `;
 
-const PerformanceList = ({ total }) => {
-  console.log(total);
+const PerformanceList = ({ total, search }) => {
+  console.log(search);
+
   return (
     <div css={[Performances]}>
-      {total?.map((elem, idx) => (
-        <div key={idx} css={[CardContainer]}>
-          <Link href={`/description/${elem.id}`}>
-            <Image
-              src={elem.image}
-              alt={'이미지'}
-              height={400}
-              width={288}
-              css={[ImgBox]}
-            />
-          </Link>
-          <div css={[CardBody]}>
-            <h5 css={[CardTitle]} title={elem.name}>
-              {elem.name}
-            </h5>
-            <p css={[Detail]} title={elem.place}>
-              장소 : {elem.place}
-            </p>
-            <p css={[Detail]} title={elem.genre}>
-              장르 : {elem.genre}
-            </p>
+      {total
+        .filter((performance) => performance.name.includes(search))
+        .map((elem, idx) => (
+          <div key={idx} css={[CardContainer]}>
+            <Link href={`/description/${elem.id}`}>
+              <Image
+                src={elem.image}
+                alt={'이미지'}
+                height={400}
+                width={288}
+                css={[ImgBox]}
+              />
+            </Link>
+            <div css={[CardBody]}>
+              <h5 css={[CardTitle]} title={elem.name}>
+                {elem.name}
+              </h5>
+              <p css={[Detail]} title={elem.place}>
+                장소 : {elem.place}
+              </p>
+              <p css={[Detail]}>장르 : {elem.genre}</p>
 
-            <p css={[Detail]}>
-              기간 : {elem.start} ~ {elem.end}
-            </p>
-            <p css={[Detail, PlayingStatus]} title={elem.isPlaying}>
-              {elem.isPlaying}
-            </p>
+              <p css={[Detail]}>
+                기간 : {elem.start} ~ {elem.end}
+              </p>
+              <p css={[Detail, PlayingStatus]}>{elem.isPlaying}</p>
 
-            <div css={[ButtonContainer]}>
-              <Link
-                css={[ButtonToDetail, LinkToDescription]}
-                href={`/description/${performance.id}`}
-              >
-                자세히
-              </Link>
-              <button css={[ButtonToDetail, BookmarkButton]}>
-                북마크 추가
-              </button>
+              <div css={[ButtonContainer]}>
+                <Link
+                  css={[ButtonToDetail, LinkToDescription]}
+                  href={`/description/${elem.id}`}
+                >
+                  자세히
+                </Link>
+                <button css={[ButtonToDetail, BookmarkButton]}>
+                  북마크 추가
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };

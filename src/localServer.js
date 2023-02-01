@@ -17,7 +17,7 @@ const PORT = 4000;
 const mainImageRouter = require('./serverRouter/mainImageRouter');
 const mainRecommend = require('./serverRouter/mainRecommendRouter');
 const descriptionRouter = require('./serverRouter/descriptionRouter');
-// const totalRouter = require('./serverRouter/totalPerformanceRouter');
+const totalRouter = require('./serverRouter/totalPerformanceRouter');
 const KEY = '98e02b76a394447699b7324b7ff14b83';
 
 // cors 정책 허용 라이브러리
@@ -34,7 +34,7 @@ app.use(
 
 app.use('/main/image', mainImageRouter);
 app.use('/main/recommend', mainRecommend);
-// app.use('/main/total', totalRouter);
+app.use('/main/total', totalRouter);
 
 // server메인
 app.get('/', (_, res) => {
