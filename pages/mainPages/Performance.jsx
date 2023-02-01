@@ -60,7 +60,7 @@ const InputForm = css`
 
 /**---------------------- 함수 영역-------------------------------- */
 
-const getTotalApi = async (key) => {
+export const getTotalApi = async (key) => {
   const response = await axios.get('http://localhost:4000/main/total');
   const arr = [];
   const resData = response.data.elements[0].elements;

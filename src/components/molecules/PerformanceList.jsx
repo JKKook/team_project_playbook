@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getTotalApi } from '@/pages/mainPages/Performance';
 
 const Performances = css`
   display: grid;
