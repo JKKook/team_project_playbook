@@ -12,17 +12,23 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
-import NotifyLogin from './NotifyLogin';
 import Navbar from '../../src/components/molecules/Navbar';
-
-const useUser = () => ({ user: null });
 
 const Login = () => {
   // 로그인한 사용자의 정보
   const [user, setUser] = useState(); // null, undefined 초기값
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [newAccount, setNewAccount] = useState(false);
+
+  const [loginForm, setLoginForm] = useState({
+    email: '',
+    password: '',
+    newAccount: false,
+  });
+
+  //
+  const handleFormValue = (e) => {
+    const { name, value } = e.target;
+    setLoginForm({ ...loginForm, [name]: value });
+  };
 
   // rotuer
   const router = useRouter();
@@ -30,12 +36,9 @@ const Login = () => {
   // email과 비밀번호로 로그인
   const handleSignIn = async (e) => {
     e.preventDefault();
-    signIn(email, password);
-  };
-
-  const handleAccount = (e) => {
-    e.preventDefault();
-    setNewAccount((prev) => !prev);
+    const result = await signIn(loginForm.email, loginForm.password);
+    const resultRouter = await router.push('/');
+    return result && resultRouter;
   };
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
@@ -76,10 +79,8 @@ const Login = () => {
                   name='email'
                   placeholder='이메일을 입력해주십시오'
                   required
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  value={loginForm.email}
+                  onChange={handleFormValue}
                 />
                 <div>
                   <input
@@ -88,11 +89,9 @@ const Login = () => {
                     name='password'
                     placeholder='비밀번호를 입력해주십시오'
                     required
-                    value={password}
+                    value={loginForm.password}
                     autoComplete='on'
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
+                    onChange={handleFormValue}
                   />
                 </div>
                 <div>
@@ -100,6 +99,7 @@ const Login = () => {
                     css={[LoginSubmit]}
                     type='submit'
                     value='로그인'
+                    disabled={!loginForm.email && !loginForm.password}
                     onClick={handleSignIn}
                   />
                 </div>
@@ -127,9 +127,6 @@ const Login = () => {
                 <Navbar loggedInUser={user} handleLogout={handleLogout} />
               </div>
             )}
-            {/* {user && (
-              <NotifyLogin loggedInUser={user} handleLogout={handleLogout} />
-            )} */}
           </div>
           <div css={[LoginSupportMsgCon]}>
             <span css={[LoginSupportMsgFirst]}>
@@ -139,7 +136,7 @@ const Login = () => {
               css={[LoginSupportMsgSecond]}
               onClick={() => router.push('/subPages/Register')}
             >
-              {!newAccount ? '회원가입' : '로그인'}
+              {!loginForm.newAccount ? '회원가입' : '로그인'}
             </span>
           </div>
         </div>

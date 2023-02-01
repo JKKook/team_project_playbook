@@ -66,7 +66,7 @@ const getTotalApi = async (key) => {
 
   // console.log(key);
   const category = key.queryKey[1].genre;
-  console.log(category);
+  // console.log(category);
 
   resData.map((v) => {
     const obj = {
@@ -90,7 +90,6 @@ const getTotalApi = async (key) => {
 const Performance = () => {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
-  const [selected, setSelected] = useState(false);
 
   const { data, status, isLoading } = useQuery(
     ['total', { genre: category }],
@@ -105,13 +104,15 @@ const Performance = () => {
     filterSearch({ router, category: e.target.value });
   };
 
-  useEffect(() => {
-    filterSearch({ router, search: search ? search : 'all' });
-  }, [search]);
+  // useEffect(() => {
+  //   filterSearch({ router, search: search ? search : 'all' });
+  // }, [search]);
 
   if (isLoading) {
     return <div>loading...</div>;
   }
+
+  // console.log(data.filter((user) => user.name.includes(search)));
 
   return (
     <>
@@ -153,7 +154,7 @@ const Performance = () => {
           </form>
         </div>
       </div>
-      <PerformanceList total={data} />
+      <PerformanceList total={data} search={search} />
     </>
   );
 };

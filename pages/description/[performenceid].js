@@ -11,6 +11,7 @@ const { useRouter } = require('next/router');
 const getDescriptionAPI = async (id) => {
   const response = await axios.get(`http://localhost:4000/description/${id}`);
   const resData = response.data;
+<<<<<<< HEAD
   // console.log(resData);
   // console.log({
   //   id: resData.elements[0].elements[0].elements[0].elements
@@ -48,6 +49,12 @@ const getDescriptionAPI = async (id) => {
   //     ? resData.elements[0].elements[0].elements[16].elements
   //     : [], // 공연 상세이미지
   // });
+=======
+  // console.log(resData.elements[0].elements[0].elements[16].elements[tab].elements[0].text);
+
+  // console.log(resData.elements[0].elements[0].elements[16].elements);
+
+>>>>>>> 19f8f61c7138f102b40611aaaea744b6ddab4fe1
   return {
     id: resData.elements[0].elements[0].elements[0].elements
       ? resData.elements[0].elements[0].elements[0].elements[0].text
@@ -114,7 +121,7 @@ const Post = () => {
 
   const { data, isLoading, isFetching } = useQuery(
     ['description', performenceid],
-    () => getDescriptionAPI(performenceid)
+    () => getDescriptionAPI(performenceid),
   );
 
   return (

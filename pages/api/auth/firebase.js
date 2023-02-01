@@ -8,6 +8,8 @@ import {
   FacebookAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updatePassword,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -23,22 +25,41 @@ const app = initializeApp(firebaseConfig);
 
 // 사용자가 로그인을 호출할 때, firebase에서 제공하는 config 사용
 export const auth = getAuth(app);
+const user = auth.currentUser;
+// const newPassword = getASecureRandomPassword();
+
 // 파이어베이스 Authentication 사용
 const providerGoogle = new GoogleAuthProvider();
 const providerMeta = new FacebookAuthProvider();
 
+// 비밀번호 변경
+// ** 단, 비밀번호를 설정하려면 사용자가 최근에 로그인한 적이 있어야 한다!
+export const changePassword = async (newPassword) => {
+  updatePassword(user, newPassword)
+    .then(() => {
+      // Update successful.
+    })
+    .catch(console.error);
+};
+
+// email 인증을 통해 비밀번호 변경
+export const changePassowordFromEmail = async () => {
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+    })
+    .catch(console.error);
+};
+
 // 신규 사용자 등록
-export const signUp = (email, password) => {
-  createUserWithEmailAndPassword(auth, email, password).then((userCredentail) =>
-    console.log(userCredentail),
-  );
+export const signUp = async (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password).catch(console.error);
 };
 
 // 기존 사용자 로그인
 export const signIn = async (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredentail) => console.log(userCredentail))
-    .catch(console.error);
+  signInWithEmailAndPassword(auth, email, password).catch(console.error);
 };
 
 // Google 사용자 로그인
