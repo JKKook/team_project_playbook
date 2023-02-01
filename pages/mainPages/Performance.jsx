@@ -112,8 +112,6 @@ const Performance = () => {
     return <div>loading...</div>;
   }
 
-  // console.log(data.filter((user) => user.name.includes(search)));
-
   return (
     <>
       <div>
