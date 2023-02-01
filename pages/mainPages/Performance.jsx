@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import PerformanceList from '@/src/components/molecules/PerformanceList';
 import { useState, useEffect } from 'react';
+import Loading from '@/src/components/atoms/Loading';
 
 /**---------------------- style 영역-------------------------------- */
 
@@ -109,7 +110,7 @@ const Performance = () => {
   // }, [search]);
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   return (
