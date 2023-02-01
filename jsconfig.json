@@ -4,5 +4,12 @@
     "paths": {
       "@/*": ["./*"]
     }
-  }
+  },
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".history",
+    "coverage",
+    "storybook-static"
+  ]
 }

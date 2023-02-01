@@ -130,7 +130,7 @@ const Button = css`
   background-color: #17a2b8;
   border-color: none;
   cursor: pointer;
-  margin-left: .7rem;
+  margin-left: 0.7rem;
 
   &:hover {
     background-color: #1bc4de;
@@ -233,11 +233,7 @@ const MyPages = () => {
           </div>
 
           <div css={[BtnContainer]}>
-            <button
-              css={[Button]}
-            >
-              업데이트
-            </button>
+            <button css={[Button]}>업데이트</button>
           </div>
         </div>
 

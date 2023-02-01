@@ -20,34 +20,39 @@ import {
 import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
+import MyPages from './MyPages';
 
 const Register = () => {
   // 이메일, 비밀번호 , 비밀번호 확인
   const [user, setUser] = useState();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  });
 
   // 오류메시지 상태 저장
-  const [emailMessage, setEmailMessage] = useState('');
-  const [passwordMessage, setPasswordMessage] = useState('');
-  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState('');
+  const [formMessage, setFormMessage] = useState({
+    emailMessage: '',
+    passwordMessage: '',
+    passwordConfirmMessage: '',
+  });
 
   // 유효성 검사
-  const [isEmail, setIsEmail] = useState(false);
-  const [isPassword, setIsPassword] = useState(false);
-  const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+  const [isForm, setIsForm] = useState({
+    isEmail: false,
+    isPassword: false,
+    isPasswordConfirm: false,
+  });
 
+  // 에러 방지를 위해 초기값 '' 세팅
   const clearErrors = () => {
-    setEmail('');
-    setPassword('');
-    setPasswordConfirm('');
+    setForm('');
   };
 
   // 쿼리 Login 컴포넌트에서 받아오기
   const router = useRouter();
-  // const { query } = uRouter.query;
-  // console.log(uRouter.query);
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
   useEffect(() => {
@@ -58,62 +63,83 @@ const Register = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     clearErrors();
-    const result = await signUp(email, password);
+    const result = await signUp(form.email, form.password);
     const resultRouter = await router.push('/');
     return result && resultRouter;
   };
 
   // 이메일
-  const handleChangeEmail = (e) => {
+  const handleCheckEmail = (e) => {
     const emailRegex =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     const email = e.target.value;
-    setEmail(email);
+    setForm({ ...form, email: email });
 
     if (!emailRegex.test(email)) {
-      setEmailMessage(
-        '올바른 이메일 형식이 아닙니다, 다시 한 번 확인 해주세요',
-      );
-      setIsEmail(false);
+      setFormMessage({
+        ...formMessage,
+        emailMessage: '올바른 이메일 형식이 아닙니다, 다시 한 번 확인 해주세요',
+      });
+
+      setIsForm({ ...isForm, isEmail: false });
     } else {
-      setEmailMessage('사용 가능한 이메일입니다 :)');
-      setIsEmail(true);
+      setFormMessage({
+        ...formMessage,
+        emailMessage: '사용 가능한 이메일입니다 :)',
+      });
+      setIsForm({ ...isForm, isEmail: true });
     }
   };
 
   // 비밀번호
-  const handleChangePassword = (e) => {
+  const handleCheckPassword = (e) => {
     const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
 
     const currentPassword = e.target.value;
-    setPassword(currentPassword);
+    setForm({ ...form, password: currentPassword });
 
     if (!passwordRegex.test(currentPassword)) {
-      setPasswordMessage(
-        '숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요',
-      );
-      setIsPassword(false);
+      setFormMessage({
+        ...formMessage,
+        passwordMessage:
+          '숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요',
+      });
+      setIsForm({ ...isForm, isPassword: false });
     } else {
-      setPasswordMessage('사용가능한 비밀번호입니다');
-      setIsPassword(true);
+      setFormMessage({
+        ...formMessage,
+        passwordMessage: '사용 가능한 비밀번호입니다.',
+      });
+      setIsForm({ ...isForm, isPassword: true });
     }
   };
 
   // 비밀번호 확인
-  const handleChangePasswordConfirm = (e) => {
+  const handleCheckPasswordConfirm = (e) => {
     const currentPasswordConfirm = e.target.value;
-    setPasswordConfirm(currentPasswordConfirm);
+    setForm({ ...form, passwordConfirm: currentPasswordConfirm });
 
     if (password !== currentPasswordConfirm) {
-      setPasswordConfirmMessage('설정한 비밀번호가 일치하지 않습니다');
-      setIsPasswordConfirm(false);
+      setFormMessage({
+        ...formMessage,
+        passwordConfirmMessage: '설정한 비밀번호가 일치하지 않습니다',
+      });
+      setIsForm({ ...form, isPasswordConfirm: false });
     } else {
-      setPasswordConfirmMessage('비밀번호가 동일합니다');
-      setIsPasswordConfirm(true);
+      setFormMessage({
+        ...formMessage,
+        passwordConfirmMessage: '설정한 비밀번호가 일치합니다',
+      });
+      setIsForm({ ...form, isPasswordConfirm: true });
     }
   };
+  // 비밀번호 변경
+  const handleChangePassword = async (passwordConfirm) => {
+    changePassword(passwordConfirm);
+  };
 
+  // 로그아웃
   const handleLogout = () => {
     // firebase logout이 성공하게 되면 null를 받아옵니다.
     logout();
@@ -140,15 +166,17 @@ const Register = () => {
                   name='email'
                   placeholder='생성하고자 하는 이메일 주소를 입력하십시오'
                   required
-                  value={email}
-                  onChange={handleChangeEmail}
+                  value={form.email}
+                  onChange={handleCheckEmail}
                 />
-                {email.length > 0 && (
+                {form.email.length > 0 && (
                   <span
                     css={[RegisterNoticeText]}
-                    className={`message ${isEmail ? 'success' : 'error'}`}
+                    className={`message ${
+                      isForm.isEmail ? 'success' : 'error'
+                    }`}
                   >
-                    {emailMessage}
+                    {formMessage.emailMessage}
                   </span>
                 )}
                 <div>
@@ -160,18 +188,18 @@ const Register = () => {
                     placeholder='생성하고자 하는 비밀번호를 입력하십시오'
                     required
                     autoComplete='on'
-                    value={password}
-                    onChange={handleChangePassword}
+                    value={form.password}
+                    onChange={handleCheckPassword}
                   />
                   <div>
-                    {password.length > 0 && (
+                    {form.password.length > 0 && (
                       <span
                         css={[RegisterNoticeText]}
                         className={`message ${
-                          isPassword ? 'success' : 'error'
+                          isForm.isPassword ? 'success' : 'error'
                         }`}
                       >
-                        {passwordMessage}
+                        {formMessage.passwordMessage}
                       </span>
                     )}
                   </div>
@@ -184,18 +212,18 @@ const Register = () => {
                     name='password'
                     required
                     autoComplete='on'
-                    value={passwordConfirm}
-                    onChange={handleChangePasswordConfirm}
+                    value={form.passwordConfirm}
+                    onChange={handleCheckPasswordConfirm}
                   />
                   <div>
-                    {passwordConfirm.length > 0 && (
+                    {form.passwordConfirm.length > 0 && (
                       <span
                         css={[RegisterNoticeText]}
                         className={`message ${
-                          isPasswordConfirm ? 'success' : 'error'
+                          isForm.isPasswordConfirm ? 'success' : 'error'
                         }`}
                       >
-                        {passwordConfirmMessage}
+                        {formMessage.passwordConfirmMessage}
                       </span>
                     )}
                   </div>
@@ -205,7 +233,7 @@ const Register = () => {
                     css={LoginSubmit}
                     type='submit'
                     value='PlayBook ID 생성'
-                    disabled={!(isEmail && isPassword && isPasswordConfirm)}
+                    disabled={!isForm}
                     onClick={handleSignUp}
                   />
                   {user && (
@@ -239,12 +267,12 @@ const Register = () => {
 
 export default Register;
 
-const RegisterFormText = css`
+export const RegisterFormText = css`
   margin: 0.5rem 0;
   color: gray;
 `;
 
-const RegisterNoticeText = css`
+export const RegisterNoticeText = css`
   color: #f08a5d;
   font-size: 14px;
   margin-bottom: 1rem;
