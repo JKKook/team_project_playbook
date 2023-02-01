@@ -14,19 +14,42 @@ export const getDescriptionAPI = async (id) => {
   // console.log(resData.elements[0].elements[0].elements[16].elements[tab].elements[0].text);
 
   // console.log(resData.elements[0].elements[0].elements[16].elements);
+
   return {
-    id: resData.elements[0].elements[0].elements[0].elements[0].text, // 공연 아이디
-    name: resData.elements[0].elements[0].elements[1].elements[0].text, // 공연 이름
-    from: resData.elements[0].elements[0].elements[2].elements[0].text, // 공연 시작일
-    to: resData.elements[0].elements[0].elements[3].elements[0].text, // 공연 종료일
-    actor: resData.elements[0].elements[0].elements[5].elements[0].text, // 출연배우
-    runtime: resData.elements[0].elements[0].elements[7].elements[0].text, // 런타임시간
-    place: resData.elements[0].elements[0].elements[4].elements[0].text, // 장소
-    price: resData.elements[0].elements[0].elements[10].elements[0].text, // 가격
-    genre: resData.elements[0].elements[0].elements[13].elements[0].text, // 공연장르
-    posterImage: resData.elements[0].elements[0].elements[11].elements[0].text, // 포스터이미지
+    id: resData.elements[0].elements[0].elements[0].elements
+      ? resData.elements[0].elements[0].elements[0].elements[0].text
+      : '정보없음', // 공연 아이디
+    name: resData.elements[0].elements[0].elements[1].elements
+      ? resData.elements[0].elements[0].elements[1].elements[0].text
+      : '정보없음', // 공연 이름
+    from: resData.elements[0].elements[0].elements[2].elements
+      ? resData.elements[0].elements[0].elements[2].elements[0].text
+      : '정보없음', // 공연 시작일
+    to: resData.elements[0].elements[0].elements[3].elements
+      ? resData.elements[0].elements[0].elements[3].elements[0].text
+      : '정보없음', // 공연 종료일
+    actor: resData.elements[0].elements[0].elements[5].elements
+      ? resData.elements[0].elements[0].elements[5].elements[0].text
+      : '정보없음', // 출연배우
+    runtime: resData.elements[0].elements[0].elements[7].elements
+      ? resData.elements[0].elements[0].elements[7].elements[0].text
+      : '정보없음', // 런타임시간
+    place: resData.elements[0].elements[0].elements[4].elements
+      ? resData.elements[0].elements[0].elements[4].elements[0].text
+      : '정보없음', // 장소
+    price: resData.elements[0].elements[0].elements[10].elements
+      ? resData.elements[0].elements[0].elements[10].elements[0].text
+      : '정보없음', // 가격
+    genre: resData.elements[0].elements[0].elements[13].elements
+      ? resData.elements[0].elements[0].elements[13].elements[0].text
+      : '정보없음', // 공연장르
+    posterImage: resData.elements[0].elements[0].elements[11].elements
+      ? resData.elements[0].elements[0].elements[11].elements[0].text
+      : '정보없음', // 포스터이미지
     // descriptImage: [{type: "element", name: "", elements: [{ type: 'text', text: 'url경로' }]}]
-    descripImage: resData.elements[0].elements[0].elements[16].elements, // 공연 상세이미지
+    descripImage: resData.elements[0].elements[0].elements[16].elements
+      ? resData.elements[0].elements[0].elements[16].elements
+      : [], // 공연 상세이미지
   };
 };
 
@@ -50,7 +73,7 @@ const Post = () => {
 
   const { data, isLoading, isFetching } = useQuery(
     ['description', performenceid],
-    () => getDescriptionAPI(performenceid)
+    () => getDescriptionAPI(performenceid),
   );
 
   // console.log(data.descripImage[0].elements[0].text);
