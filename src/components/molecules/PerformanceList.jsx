@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getTotalApi } from '@/pages/mainPages/Performance';
 
 const Performances = css`
   display: grid;
@@ -103,7 +102,6 @@ const PerformanceList = ({ total, search }) => {
   return (
     <div css={[Performances]}>
       {total
-        .filter((performance) => performance.name.includes(search))
         .map((elem, idx) => (
           <div key={idx} css={[CardContainer]}>
             <Link href={`/description/${elem.id}`}>

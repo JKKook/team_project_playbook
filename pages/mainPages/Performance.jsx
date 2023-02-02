@@ -94,7 +94,11 @@ const Performance = () => {
 
   const { data, status, isLoading } = useQuery(
     ['total', { genre: category }],
-    getTotalApi
+    getTotalApi,
+    {
+      select: (total) =>
+        total.filter((performance) => performance.name.includes(search)),
+    }
     // { staleTime: Infinity, cacheTime: Infinity }
   );
 
