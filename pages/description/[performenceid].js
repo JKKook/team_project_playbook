@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import Loading from '@/src/components/atoms/Loading';
 import { css } from '@emotion/react';
 import axios from 'axios';
 import NextImage from 'next/image';
@@ -81,7 +82,7 @@ const Post = () => {
 
   const { data, isLoading, isFetching } = useQuery(
     ['description', performenceid],
-    () => getDescriptionAPI(performenceid),
+    () => getDescriptionAPI(performenceid)
   );
 
   return (
@@ -138,7 +139,9 @@ const Post = () => {
           </div>
         </div>
       ) : (
-        <div>Loading중</div>
+        <div>
+          <Loading />
+        </div>
       )}
     </>
   );

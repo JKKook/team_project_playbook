@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import PerformanceList from '@/src/components/molecules/PerformanceList';
 import { useState, useEffect } from 'react';
+import Loading from '@/src/components/atoms/Loading';
 
 /**---------------------- style 영역-------------------------------- */
 
@@ -59,7 +60,7 @@ const InputForm = css`
 
 /**---------------------- 함수 영역-------------------------------- */
 
-const getTotalApi = async (key) => {
+export const getTotalApi = async (key) => {
   const response = await axios.get('http://localhost:4000/main/total');
   const arr = [];
   const resData = response.data.elements[0].elements;
@@ -93,7 +94,11 @@ const Performance = () => {
 
   const { data, status, isLoading } = useQuery(
     ['total', { genre: category }],
-    getTotalApi
+    getTotalApi,
+    {
+      select: (total) =>
+        total.filter((performance) => performance.name.includes(search)),
+    }
     // { staleTime: Infinity, cacheTime: Infinity }
   );
 
@@ -109,10 +114,8 @@ const Performance = () => {
   // }, [search]);
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
-
-  // console.log(data.filter((user) => user.name.includes(search)));
 
   return (
     <>

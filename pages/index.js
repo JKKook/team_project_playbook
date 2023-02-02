@@ -10,6 +10,7 @@ import Navbar from '@/src/components/molecules/Navbar';
 import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
 import { async } from '@firebase/util';
 import HomeNavbar from '@/src/components/molecules/HomeNavbar';
+import Loading from '@/src/components/atoms/Loading';
 // 공공기관 api 경로 (쿼리전까지)
 const HOST = `http://kopis.or.kr/openApi/restful/pblprfr`;
 // api key
@@ -71,8 +72,8 @@ const Index = () => {
     },
   ]);
   const loading = resultData.some((result) => result.isLoading);
-  if (loading) {
-    return <div>loading....</div>;
+  {
+    loading && <Loading />;
   }
 
   return (

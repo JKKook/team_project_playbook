@@ -102,7 +102,6 @@ const PerformanceList = ({ total, search }) => {
   return (
     <div css={[Performances]}>
       {total
-        .filter((performance) => performance.name.includes(search))
         .map((elem, idx) => (
           <div key={idx} css={[CardContainer]}>
             <Link href={`/description/${elem.id}`}>
