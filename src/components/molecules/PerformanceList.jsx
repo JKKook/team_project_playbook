@@ -97,12 +97,7 @@ const BookmarkButton = css`
   cursor: pointer;
 `;
 
-const PerformanceList = ({ total, search }) => {
-  console.log(search);
-
-  // console.log(bookmark);
-  // console.log(total);
-
+const PerformanceList = ({ total }) => {
   return (
     <div css={[Performances]}>
       {total.map((elem, idx) => (
