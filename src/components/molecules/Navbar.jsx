@@ -15,7 +15,6 @@ const NavContainer = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(248, 249, 250, 1);
   transition: all 0.5s ease;
 `;
 
@@ -30,14 +29,14 @@ const NavBar = css`
   margin-right: 3rem;
 
   .NavBarLink {
-    color: rgba(0, 0, 0, 0.55);
+    color: white;
     font-weight: 600;
     padding: 5px 0;
     margin: 0 2rem;
     transition: all 0.5s ease;
 
     &:hover {
-      color: rgba(0, 0, 0, 0.8);
+      color: skyblue;
     }
 
     &:first-child {
@@ -46,7 +45,7 @@ const NavBar = css`
   }
 
   .isActive {
-    color: rgba(0, 0, 0, 0.8);
+    color: skyblue;
   }
 `;
 
@@ -58,13 +57,13 @@ const DropdownToggle = css`
   display: flex;
   align-items: center;
   white-space: nowrap;
-  color: rgba(0, 0, 0, 0.55);
+  color: skyblue;
   font-weight: 600;
   cursor: pointer;
   user-select: none;
 
   &:hover {
-    color: rgba(0, 0, 0, 0.8);
+    color: skyblue;
   }
 
   &::after {
@@ -92,7 +91,7 @@ const DropdownMenu = css`
   color: #212529;
   text-align: center;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid skyblue;
   border-radius: 0.25rem;
 `;
 
@@ -146,17 +145,17 @@ const Main = css`
     align-items: center;
     margin-right: 25px;
     margin-left: 10px;
-    color: rgba(0, 0, 0, 0.55);
+    color: white;
     font-weight: 600;
     transition: all 0.5s ease;
 
     &:hover {
-      color: rgba(0, 0, 0, 0.8);
+      color: skyblue;
     }
   }
 
   .isActive {
-    color: rgba(0, 0, 0, 0.8);
+    color: skyblue;
   }
 `;
 

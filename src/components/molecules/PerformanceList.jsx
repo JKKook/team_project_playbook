@@ -97,6 +97,9 @@ const BookmarkButton = css`
   cursor: pointer;
 `;
 
+// react query localstorage : user, email 등등...
+// 
+
 const PerformanceList = ({ total }) => {
   return (
     <div css={[Performances]}>

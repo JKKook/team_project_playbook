@@ -1,5 +1,5 @@
 // css 초기화 설정
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
 const reset = css`
     html,
@@ -109,6 +109,7 @@ const reset = css`
     body {
         line-height: 1;
         overflow-x: hidden;
+        background:radial-gradient(63.1% 88.47% at 35.91% -15.51%, #47494B 0%, #1A1B20 100%);
     }
     ol,
     ul {
