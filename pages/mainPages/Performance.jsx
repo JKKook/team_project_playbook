@@ -69,6 +69,7 @@ export const getTotalApi = async (key) => {
   const category = key.queryKey[1].genre;
   // console.log(category);
 
+  //useLocation
   resData.map((v) => {
     const obj = {
       id: v.elements[0].elements[0].text, // 공연 id
@@ -77,8 +78,8 @@ export const getTotalApi = async (key) => {
       end: v.elements[3].elements[0].text, // 공연 시작일
       place: v.elements[4].elements[0].text, // 공연 장소
       image: v.elements[5].elements[0].text, // 공연 포스터이미지
-      isPlaying: v.elements[7].elements[0].text, // 공연 상태
       genre: v.elements[6].elements[0].text, // 공연 장르
+      isPlaying: v.elements[7].elements[0].text, // 공연 상태
     };
     arr.push(obj);
   });
@@ -91,6 +92,7 @@ export const getTotalApi = async (key) => {
 const Performance = () => {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
+  const [bookmark, setBookmark] = useState([]);
 
   const { data, status, isLoading } = useQuery(
     ['total', { genre: category }],
