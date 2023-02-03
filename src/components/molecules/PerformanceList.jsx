@@ -97,16 +97,8 @@ const BookmarkButton = css`
   cursor: pointer;
 `;
 
-const PerformanceList = ({ total, search, bookmark, setBookmark }) => {
+const PerformanceList = ({ total, search }) => {
   console.log(search);
-
-  const addToBookmark = () => {
-    const bookmarkItem = total.map();
-
-    console.log(bookmarkItem);
-
-    setBookmark([...bookmark, bookmarkItem]);
-  };
 
   // console.log(bookmark);
   // console.log(total);
@@ -145,10 +137,7 @@ const PerformanceList = ({ total, search, bookmark, setBookmark }) => {
               >
                 자세히
               </Link>
-              <button
-                css={[ButtonToDetail, BookmarkButton]}
-                onClick={addToBookmark}
-              >
+              <button css={[ButtonToDetail, BookmarkButton]}>
                 북마크 추가
               </button>
             </div>
