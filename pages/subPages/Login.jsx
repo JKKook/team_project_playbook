@@ -52,7 +52,7 @@ const Login = () => {
 
   const handleLogout = () => {
     // firebase logout이 성공하게 되면 null를 받아옵니다.
-    logOut();
+    logout();
   };
 
   return (
@@ -68,7 +68,7 @@ const Login = () => {
           </div>
           <div css={[LoginFormContainer]}>
             {!user && (
-              <form onSubmit={handleSignIn}>
+              <form onSubmit={handleSignIn} method='post'>
                 <input
                   css={[LoginEmailInput]}
                   type='email'
@@ -106,12 +106,12 @@ const Login = () => {
                 <p css={[LoginOptionText]}>또는</p>
                 <input
                   css={[LoginWithSocial]}
-                  placeholder='Google(으)로 계속하기'
+                  value='Google(으)로 계속하기'
                   onClick={handleGoogleLogin}
                 />
                 <input
                   css={[LoginWithSocial]}
-                  placeholder='Meta / FaceBook(으)로 계속하기'
+                  value='Meta / FaceBook(으)로 계속하기'
                   onClick={handleMetaLogin}
                 />
               </form>
@@ -192,7 +192,7 @@ export const LoginEmailInput = css`
   height: 36px;
   border: 1px solid gray;
   border-radius: 4px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   text-indent: 1rem;
   font-size: 16px;
 `;
@@ -260,9 +260,11 @@ export const LoginWithSocial = css`
   text-align: center;
   font-weight: semi-bold;
   font-size: 16px;
+  color: rgba(0, 0, 0, 0.35);
   cursor: pointer;
   &:hover {
-    background-color: #eeeeee;
+    background-color: #52616b;
+    color: #ffffff;
   }
 `;
 
