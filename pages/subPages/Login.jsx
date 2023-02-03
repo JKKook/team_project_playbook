@@ -13,18 +13,14 @@ import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
 import Navbar from '../../src/components/molecules/Navbar';
+import { useRecoilState } from 'recoil';
+import { userFormState } from '../../src/components/Recoil/recoil-auth';
 
 const Login = () => {
   // 로그인한 사용자의 정보
   const [user, setUser] = useState(); // null, undefined 초기값
+  const [loginForm, setLoginForm] = useRecoilState(userFormState);
 
-  const [loginForm, setLoginForm] = useState({
-    email: '',
-    password: '',
-    newAccount: false,
-  });
-
-  //
   const handleFormValue = (e) => {
     const { name, value } = e.target;
     setLoginForm({ ...loginForm, [name]: value });
@@ -72,7 +68,7 @@ const Login = () => {
           </div>
           <div css={[LoginFormContainer]}>
             {!user && (
-              <form onSubmit={handleSignIn}>
+              <form onSubmit={handleSignIn} method='post'>
                 <input
                   css={[LoginEmailInput]}
                   type='email'
@@ -110,12 +106,12 @@ const Login = () => {
                 <p css={[LoginOptionText]}>또는</p>
                 <input
                   css={[LoginWithSocial]}
-                  placeholder='Google(으)로 계속하기'
+                  value='Google(으)로 계속하기'
                   onClick={handleGoogleLogin}
                 />
                 <input
                   css={[LoginWithSocial]}
-                  placeholder='Meta / FaceBook(으)로 계속하기'
+                  value='Meta / FaceBook(으)로 계속하기'
                   onClick={handleMetaLogin}
                 />
               </form>
@@ -196,7 +192,7 @@ export const LoginEmailInput = css`
   height: 36px;
   border: 1px solid gray;
   border-radius: 4px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   text-indent: 1rem;
   font-size: 16px;
 `;
@@ -264,9 +260,11 @@ export const LoginWithSocial = css`
   text-align: center;
   font-weight: semi-bold;
   font-size: 16px;
+  color: rgba(0, 0, 0, 0.35);
   cursor: pointer;
   &:hover {
-    background-color: #eeeeee;
+    background-color: #52616b;
+    color: #ffffff;
   }
 `;
 

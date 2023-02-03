@@ -25,8 +25,8 @@ const app = initializeApp(firebaseConfig);
 
 // 사용자가 로그인을 호출할 때, firebase에서 제공하는 config 사용
 export const auth = getAuth(app);
-const user = auth.currentUser;
 // const newPassword = getASecureRandomPassword();
+const user = auth.currentUser;
 
 // 파이어베이스 Authentication 사용
 const providerGoogle = new GoogleAuthProvider();
@@ -43,7 +43,7 @@ export const changePassword = async (newPassword) => {
 };
 
 // email 인증을 통해 비밀번호 변경
-export const changePassowordFromEmail = async () => {
+export const changePassowordFromEmail = async (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
