@@ -13,7 +13,6 @@ import {
 import { passwordRegex } from '../../src/utils/auth-regex';
 import { RegisterFormText, RegisterNoticeText } from './Register';
 import { changePassowordFromEmail, changePassword } from '../api/auth/firebase';
-import { LoginSupportMsgSecond } from './Login';
 
 const MyPages = ({ user }) => {
   const [userData = user, setUserData] = useRecoilState(userFormState);
@@ -122,9 +121,11 @@ const MyPages = ({ user }) => {
               />
             </span>
           </div>
-          <form>
+          <form method='post'>
             <div css={[FormGroup]}>
-              <label htmlFor='name'>이름</label>
+              <label css={[LabelText]} htmlFor='name'>
+                이름
+              </label>
               <input
                 type='text'
                 name='name'
@@ -135,7 +136,9 @@ const MyPages = ({ user }) => {
             </div>
 
             <div css={[FormGroup]}>
-              <label htmlFor='email'>Email</label>
+              <label css={[LabelText]} htmlFor='email'>
+                Email
+              </label>
               <input
                 type='text'
                 name='email'
@@ -146,9 +149,20 @@ const MyPages = ({ user }) => {
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <button
+                onClick={handleChangePasswordThroughEmail}
+                css={[Button]}
+                disabled={!userData.email}
+              >
+                이메일로 비밀번호 변경 링크 받기
+              </button>
+            </div>
 
             <div css={[FormGroup]}>
-              <label htmlFor='password'>비밀번호</label>
+              <label css={[LabelText]} htmlFor='password'>
+                비밀번호
+              </label>
               <input
                 type='password'
                 name='password'
@@ -171,7 +185,9 @@ const MyPages = ({ user }) => {
             </div>
 
             <div css={[FormGroup]}>
-              <label htmlFor='cf_password'>비밀번호 확인</label>
+              <label css={[LabelText]} htmlFor='cf_password'>
+                비밀번호 확인
+              </label>
               <input
                 type='password'
                 name='cf_password'
@@ -192,15 +208,7 @@ const MyPages = ({ user }) => {
                 </span>
               )}
             </div>
-            <div>
-              <button
-                onClick={handleChangePasswordThroughEmail}
-                css={[Button]}
-                disabled={!userData.email}
-              >
-                이메일로 비밀번호 변경요청
-              </button>
-            </div>
+
             <div css={[BtnContainer]}>
               {!user && (
                 <button
@@ -308,17 +316,18 @@ const UploadFile = css`
 `;
 
 const FormGroup = css`
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
 `;
 
 const FormInput = css`
   display: block;
+  // margin-bottom: 1rem;
   width: 100%;
   height: calc(1.5em + 0.75rem + 2px);
-  padding: 0.375rem 0.75rem;
+  padding: 0.1rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -350,9 +359,13 @@ const Button = css`
   background-color: #17a2b8;
   border-color: none;
   cursor: pointer;
-  margin-left: 0.7rem;
+  margin: 1rem 0.7rem;
 
   &:hover {
     background-color: #1bc4de;
   }
+`;
+
+const LabelText = css`
+  margin-top: 1rem;
 `;

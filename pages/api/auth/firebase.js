@@ -82,7 +82,7 @@ export const loginWithMeta = () => {
 
 // logout 로직입니다. 데이터는 firebase를 토대로 받아옵니다.
 // singOut매서드가 호출되며 데이터는 빈 값을 갖게 됩니다.
-export const logOut = async () => {
+export const logout = async () => {
   return signOut(auth).then(() => null);
 };
 

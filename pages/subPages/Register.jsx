@@ -132,7 +132,7 @@ const Register = () => {
   // 로그아웃
   const handleLogout = () => {
     // firebase logout이 성공하게 되면 null를 받아옵니다.
-    logOut();
+    logout();
   };
 
   return (
@@ -148,7 +148,11 @@ const Register = () => {
           </div>
           <div css={[LoginFormContainer]}>
             {!user && (
-              <form css={[LoginFormContainer]} onSubmit={handleSignUp}>
+              <form
+                css={[LoginFormContainer]}
+                method='post'
+                onSubmit={handleSignUp}
+              >
                 <p css={[RegisterFormText]}>이메일</p>
                 <input
                   css={[LoginEmailInput]}
@@ -200,6 +204,7 @@ const Register = () => {
                     css={[LoginEmailInput]}
                     type='password'
                     name='password'
+                    placeholder='생성하고자 하는 비밀번호를 확인하십시오'
                     required
                     autoComplete='on'
                     value={registerForm.passwordConfirm}
@@ -258,12 +263,12 @@ const Register = () => {
 export default Register;
 
 export const RegisterFormText = css`
-  margin: 0.5rem 0;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
   color: gray;
 `;
 
 export const RegisterNoticeText = css`
   color: #f08a5d;
   font-size: 14px;
-  margin-bottom: 1rem;
 `;
