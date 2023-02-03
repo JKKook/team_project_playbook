@@ -13,18 +13,14 @@ import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
 import Navbar from '../../src/components/molecules/Navbar';
+import { useRecoilState } from 'recoil';
+import { userFormState } from '../../src/components/Recoil/recoil-auth';
 
 const Login = () => {
   // 로그인한 사용자의 정보
   const [user, setUser] = useState(); // null, undefined 초기값
+  const [loginForm, setLoginForm] = useRecoilState(userFormState);
 
-  const [loginForm, setLoginForm] = useState({
-    email: '',
-    password: '',
-    newAccount: false,
-  });
-
-  //
   const handleFormValue = (e) => {
     const { name, value } = e.target;
     setLoginForm({ ...loginForm, [name]: value });
@@ -56,7 +52,7 @@ const Login = () => {
 
   const handleLogout = () => {
     // firebase logout이 성공하게 되면 null를 받아옵니다.
-    logout();
+    logOut();
   };
 
   return (
