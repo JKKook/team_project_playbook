@@ -91,6 +91,7 @@ export const getTotalApi = async (key) => {
 const Performance = () => {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
+  const [bookmark, setBookmark] = useState([]);
 
   const { data, status, isLoading } = useQuery(
     ['total', { genre: category }],
@@ -157,7 +158,12 @@ const Performance = () => {
           </form>
         </div>
       </div>
-      <PerformanceList total={data} search={search} />
+      <PerformanceList
+        total={data}
+        search={search}
+        bookmark={bookmark}
+        setBookmark={setBookmark}
+      />
     </>
   );
 };
