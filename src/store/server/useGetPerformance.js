@@ -5,9 +5,8 @@ const getTotalApi = async () => {
   return await axios.get('http://localhost:4000/main/total');
 };
 
-const useGetGenre = () => {
+const useGetPerformance = () => {
   return useQuery(['total'], getTotalApi, {
-    // Category가 변경될 때만 렌더링
     select: (data) => {
       const resData = data.data.elements[0].elements;
       const arr = [];
@@ -25,11 +24,11 @@ const useGetGenre = () => {
         arr.push(obj);
       });
       return {
-        genreList:new Set(arr.map(list => list.genre)),
-        data:arr 
+        genreList: new Set(arr.map((list) => list.genre)),
+        data: arr,
       };
     },
   });
 };
 
-export default useGetGenre;
+export default useGetPerformance;

@@ -4,11 +4,9 @@
 import { dehydrate, QueryClient, useQueries, useQuery } from 'react-query';
 import axios from 'axios';
 import ImageSlider from '@/src/components/molecules/ImageSlider';
-import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import Navbar from '@/src/components/molecules/Navbar';
 import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
-import { async } from '@firebase/util';
 import HomeNavbar from '@/src/components/molecules/HomeNavbar';
 import Loading from '@/src/components/atoms/Loading';
 // 공공기관 api 경로 (쿼리전까지)
@@ -102,6 +100,7 @@ const Recommend = css`
   text-align: center;
   font-size: 25px;
   font-weight: bold;
+  color: white;
 `;
 const RecommendList = css`
   margin-top: 5rem;

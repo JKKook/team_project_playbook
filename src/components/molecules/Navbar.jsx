@@ -8,163 +8,6 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 
-const NavContainer = css`
-  position: relative;
-  width: 100%;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.5s ease;
-`;
-
-const NavbarLogo = css`
-  display: flex;
-  align-items: center;
-  margin-left: 4rem;
-`;
-
-const NavBar = css`
-  display: flex;
-  margin-right: 3rem;
-
-  .NavBarLink {
-    color: white;
-    font-weight: 600;
-    padding: 5px 0;
-    margin: 0 2rem;
-    transition: all 0.5s ease;
-
-    &:hover {
-      color: skyblue;
-    }
-
-    &:first-child {
-      padding-left: 5rem;
-    }
-  }
-
-  .isActive {
-    color: skyblue;
-  }
-`;
-
-const Dropdown = css`
-  position: relative;
-`;
-
-const DropdownToggle = css`
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  color: skyblue;
-  font-weight: 600;
-  cursor: pointer;
-  user-select: none;
-
-  &:hover {
-    color: skyblue;
-  }
-
-  &::after {
-    display: inline-block;
-    margin-left: 0.255em;
-    vertical-align: 0.255em;
-    content: '';
-    border-top: 0.3em solid;
-    border-right: 0.3em solid transparent;
-    border-bottom: 0;
-    border-left: 0.3em solid transparent;
-  }
-`;
-
-const DropdownMenu = css`
-  position: absolute;
-  top: 130%;
-  left: -1.9rem;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 10rem;
-  margin: 0.125rem 0 0;
-  color: #212529;
-  text-align: center;
-  background-color: #fff;
-  border: 1px solid skyblue;
-  border-radius: 0.25rem;
-`;
-
-const DropdownItem = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
-  color: #212529;
-  padding: 0.25rem 1.5rem;
-  text-align: inherit;
-  background-color: transparent;
-  border: 0;
-
-  &:hover {
-    background-color: #e7ecef;
-  }
-`;
-
-const DropdownItemLink = css`
-  margin-top: 0.8rem;
-  margin-bottom: 0.7rem;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-`;
-
-const Divider = css`
-  height: 0;
-  overflow: hidden;
-  border-top: 1px solid #e9ecef;
-`;
-
-const Button = css`
-  display: flex;
-  justify-content: center;
-  margin-top: 0.6rem;
-  margin-bottom: 0.6rem;
-  font-size: inherit;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const Main = css`
-  display: flex;
-  align-items: center;
-
-  .MainLink {
-    display: flex;
-    align-items: center;
-    margin-right: 25px;
-    margin-left: 10px;
-    color: white;
-    font-weight: 600;
-    transition: all 0.5s ease;
-
-    &:hover {
-      color: skyblue;
-    }
-  }
-
-  .isActive {
-    color: skyblue;
-  }
-`;
-
-const UserAvatar = css`
-  border-radius: 50%;
-  transform: translateY(-3px);
-  margin-right: 3px;
-`;
-
 const Navbar = ({ loggedInUser, handleLogout }) => {
   const router = useRouter();
   // router.pathname을 pathname이라는 변수에 저장
@@ -313,3 +156,150 @@ const Navbar = ({ loggedInUser, handleLogout }) => {
 };
 
 export default Navbar;
+
+const NavContainer = css`
+  position: relative;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(248, 249, 250, 1);
+  transition: all 0.5s ease;
+`;
+
+const NavbarLogo = css`
+  display: flex;
+  align-items: center;
+  margin-left: 4rem;
+`;
+
+const NavBar = css`
+  display: flex;
+  margin-right: 3rem;
+  .NavBarLink {
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 600;
+    padding: 5px 0;
+    margin: 0 2rem;
+    transition: all 0.5s ease;
+    &:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+    &:first-child {
+      padding-left: 5rem;
+    }
+  }
+  .isActive {
+    color: rgba(0, 0, 0, 0.8);
+  }
+`;
+
+const Dropdown = css`
+  position: relative;
+`;
+
+const DropdownToggle = css`
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.55);
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  &::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: '';
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+  }
+`;
+
+const DropdownMenu = css`
+  position: absolute;
+  top: 130%;
+  left: -1.9rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 10rem;
+  margin: 0.125rem 0 0;
+  color: #212529;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+`;
+
+const DropdownItem = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  color: #212529;
+  padding: 0.25rem 1.5rem;
+  text-align: inherit;
+  background-color: transparent;
+  border: 0;
+  &:hover {
+    background-color: #e7ecef;
+  }
+`;
+
+const DropdownItemLink = css`
+  margin-top: 0.8rem;
+  margin-bottom: 0.7rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+`;
+
+const Divider = css`
+  height: 0;
+  overflow: hidden;
+  border-top: 1px solid #e9ecef;
+`;
+
+const Button = css`
+  display: flex;
+  justify-content: center;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  font-size: inherit;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Main = css`
+  display: flex;
+  align-items: center;
+  .MainLink {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    margin-left: 10px;
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 600;
+    transition: all 0.5s ease;
+    &:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+  .isActive {
+    color: rgba(0, 0, 0, 0.8);
+  }
+`;
+
+const UserAvatar = css`
+  border-radius: 50%;
+  transform: translateY(-3px);
+  margin-right: 3px;
+`;
