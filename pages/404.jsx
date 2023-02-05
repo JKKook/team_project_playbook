@@ -33,7 +33,7 @@ export const TextContainer = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
   gap: 1.5rem;
 `;
 
@@ -43,24 +43,24 @@ const NotFoundImg = css`
   color: #52616b;
 `;
 
-const NotFoundTitle = css`
+export const NotFoundTitle = css`
   font-size: 13rem;
   font-weight: bold;
   color: #52616b;
 `;
 
-const NotFoundText = css`
+export const NotFoundText = css`
   font-size: 1.5rem;
   font-weight: bold;
   color: #52616b;
 `;
 
-const NotFoundTextEng = css`
+export const NotFoundTextEng = css`
   font-size: 1rem;
   text-decoration: underline;
 `;
 
-const BackToHomeButton = css`
+export const BackToHomeButton = css`
   margin-top: 1.5rem;
   border: none;
   cursor: pointer;

@@ -13,6 +13,10 @@ const Support = () => {
     return router.push('/subPages/MyPages');
   };
 
+  const handleBookTicket = () => {
+    return router.push('/subPages/ComingSoon');
+  };
+
   // 추후, 게시판 만들게 되면
   // 1:1 상담 컴포넌트를 만들 예정
 
@@ -27,7 +31,7 @@ const Support = () => {
         </header>
         <div css={[SupportMain]}>
           <div css={[SupportMainCon]}>
-            <div css={[SupportMainTitleCon]}>
+            <div css={[SupportMainTitleCon]} onClick={handleBookTicket}>
               <h3 css={[SupportMainTitle]}>예매 도움</h3>
               <h3 css={[SupportMainSubTitle]}>받기</h3>
             </div>
