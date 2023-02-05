@@ -27,7 +27,7 @@ const NotFound = () => {
 };
 export default NotFound;
 
-const TextContainer = css`
+export const TextContainer = css`
   position: relative;
   display: flex;
   flex-direction: column;
