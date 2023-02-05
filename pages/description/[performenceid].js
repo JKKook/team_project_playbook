@@ -1,58 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import Loading from '@/src/components/atoms/Loading';
 import { css } from '@emotion/react';
-import axios from 'axios';
 import NextImage from 'next/image';
 import { useQuery } from 'react-query';
+import useGetDescription from '@/src/store/server/useGetDescription';
 const { useState, useEffect } = require('react');
 
 const { useRouter } = require('next/router');
 
 // 여기서 공연 상세정보 API 불러오기
-const getDescriptionAPI = async (id) => {
-  const response = await axios.get(`http://localhost:4000/description/${id}`);
-  const resData = response.data;
-  // console.log(resData.elements[0].elements[0].elements[16].elements[tab].elements[0].text);
-
-  // console.log(resData.elements[0].elements[0].elements[16].elements);
-
-  return {
-    id: resData.elements[0].elements[0].elements[0].elements
-      ? resData.elements[0].elements[0].elements[0].elements[0].text
-      : '정보없음', // 공연 아이디
-    name: resData.elements[0].elements[0].elements[1].elements
-      ? resData.elements[0].elements[0].elements[1].elements[0].text
-      : '정보없음', // 공연 이름
-    from: resData.elements[0].elements[0].elements[2].elements
-      ? resData.elements[0].elements[0].elements[2].elements[0].text
-      : '정보없음', // 공연 시작일
-    to: resData.elements[0].elements[0].elements[3].elements
-      ? resData.elements[0].elements[0].elements[3].elements[0].text
-      : '정보없음', // 공연 종료일
-    actor: resData.elements[0].elements[0].elements[5].elements
-      ? resData.elements[0].elements[0].elements[5].elements[0].text
-      : '정보없음', // 출연배우
-    runtime: resData.elements[0].elements[0].elements[7].elements
-      ? resData.elements[0].elements[0].elements[7].elements[0].text
-      : '정보없음', // 런타임시간
-    place: resData.elements[0].elements[0].elements[4].elements
-      ? resData.elements[0].elements[0].elements[4].elements[0].text
-      : '정보없음', // 장소
-    price: resData.elements[0].elements[0].elements[10].elements
-      ? resData.elements[0].elements[0].elements[10].elements[0].text
-      : '정보없음', // 가격
-    genre: resData.elements[0].elements[0].elements[13].elements
-      ? resData.elements[0].elements[0].elements[13].elements[0].text
-      : '정보없음', // 공연장르
-    posterImage: resData.elements[0].elements[0].elements[11].elements
-      ? resData.elements[0].elements[0].elements[11].elements[0].text
-      : '정보없음', // 포스터이미지
-    // descriptImage: [{type: "element", name: "", elements: [{ type: 'text', text: 'url경로' }]}]
-    descripImage: resData.elements[0].elements[0].elements[16].elements
-      ? resData.elements[0].elements[0].elements[16].elements
-      : [], // 공연 상세이미지
-  };
-};
 
 const getImageSize = (src) => {
   let img = new Image();
@@ -74,20 +30,23 @@ const srcMatch = (src) => {
   return src;
 };
 
+export const addReservation = () => {
+  console.log('예매하기');
+};
+
 const Post = () => {
   const router = useRouter();
   // path 아디 정보
   const { performenceid } = router.query;
   let imageSize = null;
 
-  const { data, isLoading, isFetching } = useQuery(
-    ['description', performenceid],
-    () => getDescriptionAPI(performenceid)
-  );
+  const { data, isLoading } = useGetDescription(performenceid);
+
+  console.log(data);
 
   return (
     <>
-      {!isLoading ? (
+      {!isLoading && data ? (
         <div css={[Container]}>
           <div css={[ImageContainer]}>
             <NextImage
@@ -112,30 +71,26 @@ const Post = () => {
             </ul>
           </div>
           <div css={[ButtonContainer]}>
-            <button>예매하기</button>
+            <button onClick={addReservation}>예매하기</button>
             <button>북마크</button>
           </div>
           <div css={[DescriptionImage]}>
-            {data.descripImage.length !== 0 ? (
+            {/* {data.descripImage.length !== 0 ? (
               data.descripImage.map((item, idx) => {
-                return (
-                  <NextImage
-                    css={[Images]}
-                    key={idx}
-                    src={
-                      !item.elements
-                        ? srcMatch(item.text)
-                        : item.elements[0].text
-                    }
-                    alt={'image'}
-                    width={700}
-                    height={5000}
-                  />
-                );
+                return ( */}
+            <NextImage
+              css={[Images]}
+              // key={idx}
+              src={data.descriptImage}
+              alt={'image'}
+              width={700}
+              height={5000}
+            />
+            {/* );
               })
             ) : (
               <div>상세정보 이미지가 없습니다.</div>
-            )}
+            )} */}
           </div>
         </div>
       ) : (

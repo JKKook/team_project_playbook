@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import avatar from '../../public/asset/user.png';
 import Image from 'next/image';
 import { useRecoilState } from 'recoil';
@@ -86,7 +86,7 @@ const MyPages = ({ user }) => {
     e.preventDefault();
     clearErrors();
     const result = await changePassword(user, userData.password).then(
-      alert('비밀번호가 변경되었습니다.'),
+      alert('비밀번호가 변경되었습니다.')
     );
     return result;
   };
@@ -94,7 +94,7 @@ const MyPages = ({ user }) => {
   // email 인증을 통해 비밀번호 변경
   const handleChangePasswordThroughEmail = async () => {
     const result = await changePassowordFromEmail(userData.email).then(
-      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.'),
+      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.')
     );
     return result;
   };
@@ -223,8 +223,32 @@ const MyPages = ({ user }) => {
           </form>
         </div>
 
-        <div className='detailSection'>
+        <div css={[ReservationContainer]}>
           <h2 css={[Text]}>예약한 공연</h2>
+          <div css={[TableContainer]}>
+            <table css={[TableBox]}>
+              <thead css={[TableHead]}>
+                <tr>
+                  <td css={[TableHeadText]}>ID</td>
+                  <td css={[TableHeadText]}>날짜</td>
+                  <td css={[TableHeadText]}>공연 이름</td>
+                  <td css={[TableHeadText]}>예약 좌석 수</td>
+                  <td css={[TableHeadText]}>결제</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td css={[TableText]}>ddf</td>
+                  {/* <td>{new Date(order.createdAt).toLocaleDateString()}</td> */}
+                  <td css={[TableText]}>ddf</td>
+                  <td css={[TableText]}>ddf</td>
+                  <td css={[TableText]}>ddf</td>
+                  <td css={[TableText]}>ddf</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </div>
@@ -239,7 +263,7 @@ const MyPageStyle = css`
 
 const MypageSection = css`
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1.2fr 2fr;
   flex-wrap: wrap;
   margin-left: 2rem;
   margin-bottom: 1rem !important;
@@ -249,9 +273,9 @@ const DetailSection = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
   padding-right: 15px;
   padding-left: 5rem;
+  margin-right: 3rem;
 `;
 
 const Text = css`
@@ -324,7 +348,6 @@ const FormGroup = css`
 
 const FormInput = css`
   display: block;
-  // margin-bottom: 1rem;
   width: 100%;
   height: calc(1.5em + 0.75rem + 2px);
   padding: 0.1rem 0.75rem;
@@ -368,4 +391,41 @@ const Button = css`
 
 const LabelText = css`
   margin-top: 1rem;
+`;
+
+const TableContainer = css`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  text-align: center;
+  width: 100%;
+  overflow-x: auto;
+`;
+
+const TableBox = css`
+  width: 80%;
+  min-width: 600px;
+`;
+
+const TableHead = css`
+  font-weight: 700;
+  background-color: #f8f9fa;
+`;
+
+const TableHeadText = css`
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  border-bottom-width: 3px;
+`;
+
+const TableText = css`
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+`;
+
+const ReservationContainer = css`
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
 `;
