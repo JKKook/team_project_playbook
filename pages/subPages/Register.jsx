@@ -22,17 +22,17 @@ import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
 import { emailRegex, passwordRegex } from '../../src/utils/auth-regex';
 import { useRecoilState } from 'recoil';
-
 import {
   userState,
   userFormMessageState,
   userFormState,
   isUserState,
 } from '../../src/components/Recoil/recoil-auth';
+import MyPages from './MyPages';
 
 const Register = () => {
   // 로그인 user 유무
-  const [user, setUser] = useRecoilState(userState);
+  const [user, setUser] = useState();
   // 이메일, 비밀번호 , 비밀번호 확인
   const [registerForm, setRegisterForm] = useRecoilState(userFormState);
   // 오류메시지 상태 저장
@@ -228,11 +228,16 @@ const Register = () => {
                     css={LoginSubmit}
                     type='submit'
                     value='PlayBook ID 생성'
-                    disabled={!{ ...isForm }}
+                    disabled={
+                      !isForm.isEmail &&
+                      !isForm.isPassword &&
+                      !isForm.isPasswordConfirm
+                    }
                     onClick={handleSignUp}
                   />
                   {user && (
                     <div>
+                      <MyPages user={user} />
                       <button
                         css={[LoginAvatarIcon]}
                         onClick={handleLogout}

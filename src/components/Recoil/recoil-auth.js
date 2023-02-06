@@ -1,12 +1,12 @@
 import { atom, selector } from 'recoil';
 import { emailRegex, passwordRegex } from '/src/utils/auth-regex';
 
-export const userState = atom({
-  key: 'userState',
-  default: {
-    user: '',
-  },
-});
+// export const userState = atom({
+//   key: 'userState',
+//   default: {
+//     user,
+//   },
+// });
 
 export const userFormState = atom(
   {
