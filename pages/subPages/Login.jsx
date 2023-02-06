@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import {
+  addDocRef,
   loginWithGoogle,
   loginWithMeta,
   logout,
@@ -15,6 +16,7 @@ import Link from 'next/link';
 import Navbar from '../../src/components/molecules/Navbar';
 import { useRecoilState } from 'recoil';
 import { userFormState } from '../../src/components/Recoil/recoil-auth';
+import MyPages from './MyPages';
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -32,9 +34,16 @@ const Login = () => {
   // email과 비밀번호로 로그인
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const result = await signIn(loginForm.email, loginForm.password);
-    const resultRouter = await router.push('/');
-    return result && resultRouter;
+    try {
+      const result = await signIn(loginForm.email, loginForm.password);
+      const resultDocRef = await addDocRef(user);
+      console.log('doc', resultDocRef);
+      const resultRouter = await router.push('/');
+      return result && resultDocRef && resultRouter;
+    } catch (err) {
+      console.log(err);
+    }
+    setUser();
   };
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
@@ -75,7 +84,7 @@ const Login = () => {
                   name='email'
                   placeholder='이메일을 입력해주십시오'
                   required
-                  value={loginForm.email}
+                  defaultValue={loginForm.email}
                   onChange={handleFormValue}
                 />
                 <div>
@@ -85,7 +94,7 @@ const Login = () => {
                     name='password'
                     placeholder='비밀번호를 입력해주십시오'
                     required
-                    value={loginForm.password}
+                    defaultValue={loginForm.password}
                     autoComplete='on'
                     onChange={handleFormValue}
                   />
@@ -94,7 +103,7 @@ const Login = () => {
                   <input
                     css={[LoginSubmit]}
                     type='submit'
-                    value='로그인'
+                    defaultValue='로그인'
                     disabled={!loginForm.email && !loginForm.password}
                     onClick={handleSignIn}
                   />
@@ -106,12 +115,12 @@ const Login = () => {
                 <p css={[LoginOptionText]}>또는</p>
                 <input
                   css={[LoginWithSocial]}
-                  value='Google(으)로 계속하기'
+                  defaultValue='Google(으)로 계속하기'
                   onClick={handleGoogleLogin}
                 />
                 <input
                   css={[LoginWithSocial]}
-                  value='Meta / FaceBook(으)로 계속하기'
+                  defaultValue='Meta / FaceBook(으)로 계속하기'
                   onClick={handleMetaLogin}
                 />
               </form>
@@ -119,7 +128,7 @@ const Login = () => {
             {/* user가 입력 될 시, navbar로 user정보와 로그아웃 메서드 전달 */}
             {user && (
               <div>
-                {/* <button css={[LoginAvatarIcon]} onClick={handleLogout}></button> */}
+                <MyPages user={user} />
                 <Navbar loggedInUser={user} handleLogout={handleLogout} />
               </div>
             )}
