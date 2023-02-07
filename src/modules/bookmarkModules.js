@@ -20,7 +20,6 @@ export const getBookmarkInfo = () => {
     return result;
 }
 
-
 export const removeBookMarkInfo = (performanceid) => {
     const bookmarkInfo = getBookmarkInfo();
     const newBookmarkInfo = bookmarkInfo.filter((info) => info !== performanceid);
@@ -40,9 +39,6 @@ export const handleBookMarkInfo = (id, state) => {
     }
 }
 
-
-
-
 export const isCheckBookMark = (id) => {
     const bookmarkInfo = getBookmarkInfo();
 
@@ -51,3 +47,4 @@ export const isCheckBookMark = (id) => {
     }
     return true;
 }
+

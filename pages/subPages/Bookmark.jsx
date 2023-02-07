@@ -41,6 +41,7 @@ const Bookmark = () => {
     if (isLoading) {
         return <div>로딩중</div>;
     }
+    console.log(data);
     if (data.length === 0) {
         return <div>북마크 정보가 없습니다.</div>;
     }
