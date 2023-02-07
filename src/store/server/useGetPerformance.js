@@ -5,6 +5,8 @@ const getTotalApi = async () => {
   return await axios.get('http://localhost:4000/main/total');
 };
 
+// staletime
+
 const useGetPerformance = () => {
   return useQuery(['total'], getTotalApi, {
     select: (data) => {
@@ -15,7 +17,7 @@ const useGetPerformance = () => {
           id: v.elements[0].elements[0].text, // 공연 id
           name: v.elements[1].elements[0].text, // 공연 이름
           start: v.elements[2].elements[0].text, // 공연 시작일
-          end: v.elements[3].elements[0].text, // 공연 시작일
+          end: v.elements[3].elements[0].text, // 공연 종료일
           place: v.elements[4].elements[0].text, // 공연 장소
           image: v.elements[5].elements[0].text, // 공연 포스터이미지
           genre: v.elements[6].elements[0].text, // 공연 장르
@@ -25,6 +27,8 @@ const useGetPerformance = () => {
       });
       return {
         genreList: new Set(arr.map((list) => list.genre)),
+        startDate: new Set(arr.map((date) => date.start)),
+        endDate: new Set(arr.map((date) => date.end)),
         data: arr,
       };
     },

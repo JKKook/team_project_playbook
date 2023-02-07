@@ -38,6 +38,9 @@ const getListApi = async () => {
 
 const Bookmark = () => {
     const { data, isLoading } = useQuery(["listApi"], getListApi);
+
+    // console.log(data);
+
     if (isLoading) {
         return <div>로딩중</div>;
     }

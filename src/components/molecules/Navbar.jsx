@@ -161,14 +161,14 @@ const Navbar = ({ loggedInUser, handleLogout }) => {
 export default Navbar;
 
 const NavContainer = css`
-    position: relative;
-    width: 100%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(248, 249, 250, 1);
-    transition: all 0.5s ease;
+  position: relative;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // background: rgba(248, 249, 250, 1);
+  transition: all 0.5s ease;
 `;
 
 const NavbarLogo = css`
