@@ -1,0 +1,1 @@
+export const PERFORMANCE_LIKE_KEY = 'bookmark_info';
