@@ -13,11 +13,10 @@ import {
 import { passwordRegex } from '../../src/utils/auth-regex';
 import { RegisterFormText, RegisterNoticeText } from './Register';
 import { changePassowordFromEmail, changePassword } from '../api/auth/firebase';
-import Reservation from '@/src/components/molecules/Reservation';
 import useGetPerformance from '@/src/store/server/useGetPerformance';
 
 const MyPages = ({ user }) => {
-  const [userData = user, setUserData] = useRecoilState(userFormState);
+  const [userData, setUserData] = useRecoilState(userFormState);
   const [registerForm, setRegisterForm] = useRecoilState(userFormMessageState);
   const [isForm, setIsForm] = useRecoilState(isUserState);
 
@@ -90,7 +89,7 @@ const MyPages = ({ user }) => {
     e.preventDefault();
     clearErrors();
     const result = await changePassword(user, userData.password).then(
-      alert('비밀번호가 변경되었습니다.')
+      alert('비밀번호가 변경되었습니다.'),
     );
     return result;
   };
@@ -98,7 +97,7 @@ const MyPages = ({ user }) => {
   // email 인증을 통해 비밀번호 변경
   const handleChangePasswordThroughEmail = async () => {
     const result = await changePassowordFromEmail(userData.email).then(
-      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.')
+      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.'),
     );
     return result;
   };
@@ -170,8 +169,10 @@ const MyPages = ({ user }) => {
               <input
                 type='password'
                 name='password'
+                autoComplete='on'
                 css={[FormInput]}
                 placeholder='새 비밀번호를 작성하세요.'
+                disabled={!handleCheckPassword}
                 onChange={handleCheckPassword}
               />
             </div>
@@ -194,7 +195,8 @@ const MyPages = ({ user }) => {
               </label>
               <input
                 type='password'
-                name='cf_password'
+                name='passwordConfirm'
+                autoComplete='on'
                 css={[FormInput]}
                 placeholder='새 비밀번호를 한 번 더 작성하세요.'
                 onChange={handleCheckPasswordConfirm}
@@ -227,7 +229,6 @@ const MyPages = ({ user }) => {
           </form>
         </div>
 
-        <Reservation data={data} />
       </section>
     </div>
   );
