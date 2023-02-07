@@ -1,19 +1,12 @@
-export const addReservationState = (reserve, performance) => {
-  const newReservation = [...reserve];
-  const foundIndex = reserve.findIndex((x) => x.id === performance.id);
+import useGetDescription from '@/src/store/server/useGetDescription';
+import { atom, selector } from 'recoil';
 
-  if (foundIndex >= 0) {
-    newReservation[foundIndex] = {
-      ...reserve[foundIndex],
-      quantity: reserve[foundIndex].isStocked + 1,
-    };
-    return newReservation;
-  }
+export const performanceListState = atom({
+  key: 'performanceListState',
+  default: [],
+});
 
-  newReservation.push({
-    performance,
-    id: performance.id,
-    quantity: 1,
-  });
-  return newReservation;
-};
+export const performanceState = atom({
+  key: 'performanceState',
+  default: '',
+});

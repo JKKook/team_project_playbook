@@ -164,7 +164,7 @@ const NavContainer = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(248, 249, 250, 1);
+  // background: rgba(248, 249, 250, 1);
   transition: all 0.5s ease;
 `;
 

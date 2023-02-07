@@ -13,11 +13,15 @@ import {
 import { passwordRegex } from '../../src/utils/auth-regex';
 import { RegisterFormText, RegisterNoticeText } from './Register';
 import { changePassowordFromEmail, changePassword } from '../api/auth/firebase';
+import Reservation from '@/src/components/molecules/Reservation';
+import useGetPerformance from '@/src/store/server/useGetPerformance';
 
 const MyPages = ({ user }) => {
   const [userData = user, setUserData] = useRecoilState(userFormState);
   const [registerForm, setRegisterForm] = useRecoilState(userFormMessageState);
   const [isForm, setIsForm] = useRecoilState(isUserState);
+
+  const { data } = useGetPerformance();
 
   // 실시간으로 input의 데이터가 입력되도록
   const handleChange = (e) => {
@@ -223,33 +227,7 @@ const MyPages = ({ user }) => {
           </form>
         </div>
 
-        <div css={[ReservationContainer]}>
-          <h2 css={[Text]}>예약한 공연</h2>
-          <div css={[TableContainer]}>
-            <table css={[TableBox]}>
-              <thead css={[TableHead]}>
-                <tr>
-                  <td css={[TableHeadText]}>ID</td>
-                  <td css={[TableHeadText]}>날짜</td>
-                  <td css={[TableHeadText]}>공연 이름</td>
-                  <td css={[TableHeadText]}>예약 좌석 수</td>
-                  <td css={[TableHeadText]}>결제</td>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td css={[TableText]}>ddf</td>
-                  {/* <td>{new Date(order.createdAt).toLocaleDateString()}</td> */}
-                  <td css={[TableText]}>ddf</td>
-                  <td css={[TableText]}>ddf</td>
-                  <td css={[TableText]}>ddf</td>
-                  <td css={[TableText]}>ddf</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <Reservation data={data} />
       </section>
     </div>
   );
@@ -391,41 +369,4 @@ const Button = css`
 
 const LabelText = css`
   margin-top: 1rem;
-`;
-
-const TableContainer = css`
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  text-align: center;
-  width: 100%;
-  overflow-x: auto;
-`;
-
-const TableBox = css`
-  width: 80%;
-  min-width: 600px;
-`;
-
-const TableHead = css`
-  font-weight: 700;
-  background-color: #f8f9fa;
-`;
-
-const TableHeadText = css`
-  border: 1px solid #dee2e6;
-  padding: 1rem;
-  border-bottom-width: 3px;
-`;
-
-const TableText = css`
-  border: 1px solid #dee2e6;
-  padding: 1rem;
-`;
-
-const ReservationContainer = css`
-  position: relative;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
 `;

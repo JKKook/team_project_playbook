@@ -2,7 +2,6 @@
 import Loading from '@/src/components/atoms/Loading';
 import { css } from '@emotion/react';
 import NextImage from 'next/image';
-import { useQuery } from 'react-query';
 import useGetDescription from '@/src/store/server/useGetDescription';
 const { useState, useEffect } = require('react');
 
@@ -28,10 +27,6 @@ const srcMatch = (src) => {
     return `http://www.kopis.or.kr/upload/pfmIntroImage/${src}.jpg`;
   }
   return src;
-};
-
-export const addReservation = () => {
-  console.log('예매하기');
 };
 
 const Post = () => {
@@ -71,7 +66,7 @@ const Post = () => {
             </ul>
           </div>
           <div css={[ButtonContainer]}>
-            <button onClick={addReservation}>예매하기</button>
+            <button>예매하기</button>
             <button>북마크</button>
           </div>
           <div css={[DescriptionImage]}>

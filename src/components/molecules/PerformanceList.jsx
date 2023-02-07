@@ -2,11 +2,6 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { addReservation } from '@/pages/description/[performenceid]';
-
-
-// react query localstorage : user, email 등등...
-//
 
 const PerformanceList = ({ total }) => {
   return (
@@ -43,14 +38,7 @@ const PerformanceList = ({ total }) => {
               >
                 자세히
               </Link>
-              <Link href='/subPages/Order'>
-                <button
-                  css={[ButtonToDetail, ReserveButton]}
-                  onClick={addReservation}
-                >
-                  예약하기
-                </button>
-              </Link>
+              <button css={[ButtonToDetail, ReserveButton]}>예약하기</button>
             </div>
           </div>
         </div>
@@ -66,15 +54,15 @@ const Performances = css`
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   justify-content: center;
   align-items: cetner;
-  margin: 20px 0;
+  margin: 50px 0;
   row-gap: 5rem;
-  background-color: #fff;
+  // background-color: #fff;
 `;
 
 const CardContainer = css`
   width: 18rem;
   margin: 30px auto;
-  osition: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.125);

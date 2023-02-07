@@ -76,7 +76,7 @@ const Index = () => {
 
   return (
     <>
-      <HomeNavbar />
+      {/* <HomeNavbar /> */}
       <div>
         <ImageSlider performances={resultData[0]?.data} />
       </div>
@@ -100,7 +100,7 @@ const Recommend = css`
   text-align: center;
   font-size: 25px;
   font-weight: bold;
-  color: white;
+  // color: white;
 `;
 const RecommendList = css`
   margin-top: 5rem;

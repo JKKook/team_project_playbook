@@ -25,6 +25,8 @@ const useGetPerformance = () => {
       });
       return {
         genreList: new Set(arr.map((list) => list.genre)),
+        startDate: new Set(arr.map((date) => date.start)),
+        endDate: new Set(arr.map((date) => date.end)),
         data: arr,
       };
     },
