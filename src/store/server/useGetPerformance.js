@@ -5,6 +5,8 @@ const getTotalApi = async () => {
   return await axios.get('http://localhost:4000/main/total');
 };
 
+// staletime
+
 const useGetPerformance = () => {
   return useQuery(
     ['total'],

@@ -2,7 +2,6 @@
 import Loading from '@/src/components/atoms/Loading';
 import { css } from '@emotion/react';
 import NextImage from 'next/image';
-import { useQuery } from 'react-query';
 import useGetDescription from '@/src/store/server/useGetDescription';
 const { useState, useEffect } = require('react');
 
@@ -30,10 +29,6 @@ const srcMatch = (src) => {
   return src;
 };
 
-export const addReservation = () => {
-  console.log('예매하기');
-};
-
 const Post = () => {
   const router = useRouter();
   // path 아디 정보
@@ -48,51 +43,51 @@ const Post = () => {
     <>
       {!isLoading && data ? (
         <div css={[Container]}>
-          <div css={[ImageContainer]}>
-            <NextImage
-              src={data.posterImage}
-              alt={data.name}
-              width={350}
-              height={500}
-            />
-          </div>
-          <h1 css={[PerformenceName]}>{data.name}</h1>
-          <div css={[InfoContainer]}>
-            <h2 css={[InfoName]}>공연 정보</h2>
-            <ul css={[List]}>
-              <li>장소vv: {data.place}</li>
-              <li>출연진: {data.actor}</li>
-              <li>
-                기간: {data.from} ~ {data.to}
-              </li>
-              <li>가격: {data.price}</li>
-              <li>공연장르: {data.genre}</li>
-              <li>공연시간: {data.runtime}</li>
-            </ul>
-          </div>
-          <div css={[ButtonContainer]}>
-            <button onClick={addReservation}>예매하기</button>
-            <button>북마크</button>
-          </div>
-          <div css={[DescriptionImage]}>
-            {/* {data.descripImage.length !== 0 ? (
+            <div css={[ImageContainer]}>
+              <NextImage
+                src={data.posterImage}
+                alt={data.name}
+                width={350}
+                height={500}
+              />
+            </div>
+            <h1 css={[PerformenceName]}>{data.name}</h1>
+            <div css={[InfoContainer]}>
+              <h2 css={[InfoName]}>공연 정보</h2>
+              <ul css={[List]}>
+                <li>장소vv: {data.place}</li>
+                <li>출연진: {data.actor}</li>
+                <li>
+                  기간: {data.from} ~ {data.to}
+                </li>
+                <li>가격: {data.price}</li>
+                <li>공연장르: {data.genre}</li>
+                <li>공연시간: {data.runtime}</li>
+              </ul>
+            </div>
+            <div css={[ButtonContainer]}>
+              <button>예매하기</button>
+              <button>북마크</button>
+            </div>
+            <div css={[DescriptionImage]}>
+              {/* {data.descripImage.length !== 0 ? (
               data.descripImage.map((item, idx) => {
                 return ( */}
-            <NextImage
-              css={[Images]}
-              // key={idx}
-              src={data.descriptImage}
-              alt={'image'}
-              width={700}
-              height={5000}
-            />
-            {/* );
+              <NextImage
+                css={[Images]}
+                // key={idx}
+                src={data.descriptImage}
+                alt={'image'}
+                width={700}
+                height={5000}
+              />
+              {/* );
               })
             ) : (
               <div>상세정보 이미지가 없습니다.</div>
             )} */}
+            </div>
           </div>
-        </div>
       ) : (
         <div>
           <Loading />
@@ -110,6 +105,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  background: url();
 `;
 
 const ImageContainer = css`
