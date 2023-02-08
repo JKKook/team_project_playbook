@@ -7,8 +7,13 @@ import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
+import HelpInquiry from '../../../pages/subPages/HelpInquiry';
+import Support from '../../../pages/mainPages/Support';
 
-const Navbar = ({ loggedInUser, handleLogout }) => {
+const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
+  console.log(!!isLoggedIn);
+  console.log('Nav : isUserData', userData);
+
   const router = useRouter();
   // router.pathname을 pathname이라는 변수에 저장
   const pathname = router.pathname;
@@ -98,6 +103,12 @@ const Navbar = ({ loggedInUser, handleLogout }) => {
       link: '/subPages/BookSystem',
       title: '북마크',
     },
+    {
+      id: 3,
+      link: '/mainPages/Support',
+      title: '고객센터',
+      query: { userData },
+    },
   ];
 
   return (
@@ -111,7 +122,11 @@ const Navbar = ({ loggedInUser, handleLogout }) => {
         {NavRouterData.map((data) => (
           <li key={data.id}>
             <Link
-              href={data.link}
+              href={{
+                pathname: data.link,
+                query: { userData: JSON.stringify(data.query) },
+              }}
+              as={`/about/question/${userData}`}
               className={classNames('NavBarLink', {
                 isActive: pathname === data.link,
               })}
@@ -124,7 +139,7 @@ const Navbar = ({ loggedInUser, handleLogout }) => {
 
       <ul css={[NavBar]}>
         {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
-        {loggedInUser ? (
+        {isLoggedIn ? (
           loggedRouter()
         ) : (
           <li css={[Main]}>
@@ -186,7 +201,7 @@ const NavBar = css`
     &:hover {
       color: rgba(0, 0, 0, 0.8);
     }
-    &:first-child {
+    &:first-of-type {
       padding-left: 5rem;
     }
   }
