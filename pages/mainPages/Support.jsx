@@ -6,7 +6,7 @@ import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import HelpInquiry from '../subPages/HelpInquiry';
+
 const Support = () => {
   const router = useRouter();
   console.log('supportQuery :', router.query.pid);

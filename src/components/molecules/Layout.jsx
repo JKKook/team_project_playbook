@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
-import { RecoilRoot, useSetRecoilState } from 'recoil';
-import { logout, onUserStateChange } from '@/pages/api/auth/firebase';
+import { RecoilRoot } from 'recoil';
+import { logout } from '@/pages/api/auth/firebase';
 import { auth } from '../../../pages/api/auth/firebase';
 const Layout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
