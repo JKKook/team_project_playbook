@@ -11,7 +11,12 @@ import {
   updatePassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import { addDoc, getFirestore, serverTimestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  getFirestore,
+  serverTimestamp,
+  collection,
+} from 'firebase/firestore';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -28,23 +33,22 @@ const app = initializeApp(firebaseConfig);
 // firebaseConfig 정보로 firebase 시작
 
 // firebase의 firestore 인스턴스를 변수에 저장
-export const db = getFirestore(app);
+export const db = getFirestore();
 
 // ** 데이터 추가하기 **
 // collection : database table
 // document : collection에 저장되는 데이터 정보 => RestAPI의 엘리먼트라고 보면 됨
-
-export const addDocRef = async (user) => {
-  try {
-    const docRef = await addDoc(collection(db, 'playbook'), {
-      user,
-      createdAt: serverTimestamp(),
-    });
-    console.log('Added data in playbook', docRef);
-  } catch (error) {
-    console.error('this is Error :', error);
-  }
-};
+// export const addDocRef = async (user) => {
+//   try {
+//     const docRef = await addDoc(collection(db, 'playbook'), {
+//       user,
+//       createdAt: serverTimestamp(),
+//     });
+//     console.log('Added data in playbook', docRef);
+//   } catch (error) {
+//     console.error('this is Error :', error);
+//   }
+// };
 
 // ***************** auth
 // 사용자가 로그인을 호출할 때, firebase에서 제공하는 config 사용
@@ -82,22 +86,13 @@ export const signUp = async (email, password) => {
 
 // 기존 사용자 로그인
 export const signIn = async (email, password) => {
-  const user = await signInWithEmailAndPassword(auth, email, password).catch(
-    console.error,
-  );
-  return user;
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  ).catch(console.error);
+  return userCredential.user;
 };
-
-// 만약 프로미스로 변환한다면
-export const login = () => {
-  signInWithEmailAndPassword(auth, email, password).then(
-    ((result) => {
-      const user = result.user;
-      return user;
-    }).catch(console.error),
-  );
-};
-// then문은 생략 가능 즉 user 리턴은 생략이 가능한 부분
 
 // Google 사용자 로그인
 // auth, provider가 호출되면 결과 값으로 user의 정보를 받아옵니다. 에러가 발생 시, 에러 메시지를 호출합니다.
@@ -127,6 +122,5 @@ export const logout = async () => {
 export const onUserStateChange = (callback) => {
   onAuthStateChanged(auth, (user) => {
     callback(user);
-    console.log(user);
   });
 };

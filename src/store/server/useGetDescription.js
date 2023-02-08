@@ -10,6 +10,10 @@ const useGetDescription = (performenceid) => {
     ['description', performenceid],
     () => getDescriptionAPI(performenceid),
     {
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 40,
+    },
+    {
       enabled: !!performenceid,
       select: (data) => {
         const resData = data.data.elements[0].elements[0].elements;
@@ -27,7 +31,7 @@ const useGetDescription = (performenceid) => {
           descriptImage: resData[16].elements[0].elements[0].text ? resData[16].elements[0].elements[0].text : [],
         };
       },
-    }
+    },
   );
 };
 
