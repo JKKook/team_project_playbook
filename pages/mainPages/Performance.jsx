@@ -70,7 +70,7 @@ const Performance = () => {
   //   0 +
   //   new Date().getDate();
 
-  console.log(getDatesStartToEnd(date[0].startDate, date[0].endDate));
+  // console.log(getDatesStartToEnd(date[0].startDate, date[0].endDate));
   // console.log(startDay, endDay);
   // console.log(data);
   // console.log(Array.from(data.startDate));

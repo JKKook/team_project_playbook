@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const getListApi = async () => {
+export const getListApi = async () => {
     const list = getBookmarkInfo();
     const urlArr = [];
     list.forEach((elem) => {
