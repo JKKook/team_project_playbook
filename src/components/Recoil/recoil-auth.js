@@ -1,19 +1,6 @@
 import { atom, selector, selectorFamily } from 'recoil';
 import { emailRegex, passwordRegex } from '/src/utils/auth-regex';
 import axios from 'axios';
-import { async } from '@firebase/util';
-
-// export const userInitState = atom({
-//   key: 'userInit',
-//   default: false,
-// });
-
-export const userState = atom({
-  key: 'userState',
-  default: null || undefined,
-});
-
-// TypeScript 실행오류 Cannot add property, object is not extensible
 
 export const userFormState = atom(
   {

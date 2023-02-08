@@ -13,13 +13,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
-import Navbar from '../../src/components/molecules/Navbar';
 import { useRecoilState } from 'recoil';
-import {
-  userFormState,
-  userState,
-} from '../../src/components/Recoil/recoil-auth';
-import Layout from '../../src/components/molecules/Layout';
+import { userFormState } from '../../src/components/Recoil/recoil-auth';
 
 const Login = () => {
   // 로그인한 사용자의 정보

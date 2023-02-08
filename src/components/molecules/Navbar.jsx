@@ -7,8 +7,6 @@ import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import HelpInquiry from '../../../pages/subPages/HelpInquiry';
-import Support from '../../../pages/mainPages/Support';
 
 const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
   console.log(!!isLoggedIn);
@@ -153,18 +151,6 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
             </Link>
           </li>
         )}
-        {/* <li css={[Main]}>
-          <Link
-            href='/subPages/Login'
-            className={classNames('MainLink', {
-              isActive: pathname === '/subPages/Login',
-            })}
-          >
-            로그인
-          </Link>
-        </li>
-
-        {loggedRouter()} */}
       </ul>
     </nav>
   );

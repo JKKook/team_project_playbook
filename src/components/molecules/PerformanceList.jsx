@@ -17,7 +17,6 @@ import {
 import { useState } from "react";
 
 // react query localstorage : user, email 등등...
-//
 
 const PerformanceList = ({ total }) => {
     // const [bookmarkList, setBookmarkList] = useRecoilState(bookmarkState);
