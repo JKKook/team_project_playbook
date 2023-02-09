@@ -16,7 +16,6 @@ import { useState } from 'react';
 import ReservationButton from './ReservationButton';
 
 // react query localstorage : user, email 등등...
-//
 
 const PerformanceList = ({ total }) => {
   // console.log(total);

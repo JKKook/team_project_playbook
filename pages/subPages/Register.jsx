@@ -12,7 +12,6 @@ import {
   LoginFormContainer,
   LoginEmailInput,
   LoginSubmit,
-  LoginAvatarIcon,
   LoginSupportMsgCon,
   LoginSupportMsgFirst,
   LoginSupportMsgSecond,
@@ -23,12 +22,12 @@ import Link from 'next/link';
 import { emailRegex, passwordRegex } from '../../src/utils/auth-regex';
 import { useRecoilState } from 'recoil';
 import {
-  userState,
   userFormMessageState,
   userFormState,
   isUserState,
 } from '../../src/components/Recoil/recoil-auth';
 import MyPages from './MyPages';
+import Layout from '../../src/components/molecules/Layout';
 
 const Register = () => {
   // 로그인 user 유무
@@ -238,10 +237,10 @@ const Register = () => {
                   {user && (
                     <div>
                       <MyPages user={user} />
-                      <button
-                        css={[LoginAvatarIcon]}
-                        onClick={handleLogout}
-                      ></button>
+                      <Layout
+                        isLoggedInNewAccount={user}
+                        userDataFromRegister={registerForm}
+                      />
                     </div>
                   )}
                 </div>

@@ -86,7 +86,7 @@ const Performance = () => {
     e.preventDefault();
     if (!data) return;
     const filteredData = data.data.filter((el) =>
-      el.name.toLowerCase().includes(search.toLowerCase())
+      el.name.toLowerCase().includes(search.toLowerCase()),
     );
     setSearchData(filteredData);
   };
@@ -142,7 +142,7 @@ const Performance = () => {
               css={[CalendarText]}
             >{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
               date[0].endDate,
-              'MM/dd/yyyy'
+              'MM/dd/yyyy',
             )}`}</span>
 
             {openDate && (

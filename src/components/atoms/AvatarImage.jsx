@@ -2,29 +2,18 @@
 import { css, jsx } from '@emotion/react';
 import Image from 'next/image';
 import React from 'react';
+import { UserAvatar } from '../molecules/Navbar';
 
-const AvatarImage = ({ user: { photoURL, displayName } }) => {
+const AvatarImage = ({ userData: { photoURL, displayName } }) => {
   return (
     <div>
       <Image
-        css={{
-          borderRadius: '50%',
-          width: '70px',
-          height: '70px',
-        }}
-        src={photoURL ? photoURL : ''}
-        alt={displayName ? displayName : ''}
+        css={[UserAvatar]}
+        src={photoURL}
+        alt={displayName}
+        width={30}
+        height={30}
       />
-      <span css={{ fontSize: '14px' }}>{displayName}</span>
-      <span
-        css={{
-          position: 'absolute',
-          transform: 'translate(30%, -200%)',
-          maxWidth: '170px',
-          wordBreak: 'break-word',
-          fontSize: '18px',
-        }}
-      ></span>
     </div>
   );
 };

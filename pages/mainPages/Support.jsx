@@ -6,15 +6,20 @@ import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+
 const Support = () => {
   const router = useRouter();
+  console.log('supportQuery :', router.query.pid);
 
   const handleAccount = () => {
     return router.push('/subPages/MyPages');
   };
 
   const handleBookTicket = () => {
-    return router.push('/subPages/ComingSoon');
+    return router.push({
+      pathname: '/subPages/HelpInquiry',
+      query: { pid: JSON.stringify(router.query) },
+    });
   };
 
   // 추후, 게시판 만들게 되면

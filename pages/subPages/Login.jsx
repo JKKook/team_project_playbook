@@ -13,10 +13,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
-import Navbar from '../../src/components/molecules/Navbar';
 import { useRecoilState } from 'recoil';
 import { userFormState } from '../../src/components/Recoil/recoil-auth';
-import MyPages from './MyPages';
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -35,15 +33,14 @@ const Login = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const result = await signIn(loginForm.email, loginForm.password);
-      const resultDocRef = await addDocRef(user);
-      console.log('doc', resultDocRef);
+      const authUser = await signIn(loginForm.email, loginForm.password);
+      const userDoc = await addDocRef(authUser);
+      console.log('doc', userDoc);
       const resultRouter = await router.push('/');
-      return result && resultDocRef && resultRouter;
+      return resultRouter;
     } catch (err) {
       console.log(err);
     }
-    setUser();
   };
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
@@ -66,17 +63,17 @@ const Login = () => {
 
   return (
     <>
-      <div css={[LoginExtraContainer]}>
-        <div css={[LoginInnerContainer]}>
-          <div css={[LoginDisplay]}>
-            <Link href='/'>
-              <Image src={logo} alt='logo' width={150} />
-            </Link>
-            <h2 css={[LoginTitle]}>로그인</h2>
-            <p css={[LoginSubTitle]}>PlayBook Account(으)로 계속 이동</p>
-          </div>
-          <div css={[LoginFormContainer]}>
-            {!user && (
+      {!user ? (
+        <div css={[LoginExtraContainer]}>
+          <div css={[LoginInnerContainer]}>
+            <div css={[LoginDisplay]}>
+              <Link href='/'>
+                <Image src={logo} alt='logo' width={150} />
+              </Link>
+              <h2 css={[LoginTitle]}>로그인</h2>
+              <p css={[LoginSubTitle]}>PlayBook Account(으)로 계속 이동</p>
+            </div>
+            <div css={[LoginFormContainer]}>
               <form onSubmit={handleSignIn} method='post'>
                 <input
                   css={[LoginEmailInput]}
@@ -109,8 +106,6 @@ const Login = () => {
                   />
                 </div>
               </form>
-            )}
-            {!user && (
               <form>
                 <p css={[LoginOptionText]}>또는</p>
                 <input
@@ -124,28 +119,35 @@ const Login = () => {
                   onClick={handleMetaLogin}
                 />
               </form>
-            )}
-            {/* user가 입력 될 시, navbar로 user정보와 로그아웃 메서드 전달 */}
-            {user && (
-              <div>
-                <MyPages user={user} />
-                <Navbar loggedInUser={user} handleLogout={handleLogout} />
-              </div>
-            )}
-          </div>
-          <div css={[LoginSupportMsgCon]}>
-            <span css={[LoginSupportMsgFirst]}>
-              플레이북 이용이 처음이십니까?
-            </span>
-            <span
-              css={[LoginSupportMsgSecond]}
-              onClick={() => router.push('/subPages/Register')}
-            >
-              {!loginForm.newAccount ? '회원가입' : '로그인'}
-            </span>
+            </div>
+            <div css={[LoginSupportMsgCon]}>
+              <span css={[LoginSupportMsgFirst]}>
+                플레이북 이용이 처음이십니까?
+              </span>
+              <span
+                css={[LoginSupportMsgSecond]}
+                onClick={() => router.push('/subPages/Register')}
+              >
+                {!loginForm.newAccount ? '회원가입' : '로그인'}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        ''
+      )}
+      {/* user가 입력 될 시, navbar로 user정보와 로그아웃 메서드 전달 */}
+      {/* {user ? (
+        <>
+          <Layout
+          // isLoggedIn={user}
+          // userData={loginForm}
+          // handleLogout={handleLogout}
+          />
+        </>
+      ) : (
+        ''
+      )} */}
     </>
   );
 };
