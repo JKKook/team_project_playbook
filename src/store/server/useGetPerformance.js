@@ -5,16 +5,11 @@ const getTotalApi = async () => {
   return await axios.get('http://localhost:4000/main/total');
 };
 
-// staletime
-
 const useGetPerformance = () => {
   return useQuery(
     ['total'],
     getTotalApi,
-    {
-      staleTime: 1000 * 60 * 5,
-      cacheTime: 1000 * 40,
-    },
+
     {
       select: (data) => {
         const resData = data.data.elements[0].elements;
