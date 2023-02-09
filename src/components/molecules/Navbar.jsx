@@ -7,6 +7,9 @@ import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
+import AvatarImage from '../atoms/AvatarImage';
+import { FiLogOut } from 'react-icons/fi';
+import { MdContactPage } from 'react-icons/md';
 
 const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
   console.log(!!isLoggedIn);
@@ -55,28 +58,46 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
         }}
       >
         <div css={[DropdownToggle]}>
-          <Image
-            src={user}
-            alt='user'
-            width={30}
-            height={30}
-            css={[UserAvatar]}
-          />
-          이인재
+          {userData && userData.photoURL ? (
+            <AvatarImage userData={userData} />
+          ) : (
+            <Image
+              src={user}
+              alt='user'
+              width={30}
+              height={30}
+              css={[UserAvatar]}
+            />
+          )}
+
+          {userData && (
+            <span css={[UserAvatarDisPlayName]}>
+              {`${userData.displayName}`}님
+            </span>
+          )}
         </div>
         {/* 클릭하면 dropdown menu가 열리도록, 다시 클릭하면 닫히도록, dropdown 영역 밖을 클릭하면 dropdown 영역 사라지도록 */}
         {open ? (
           <div css={[DropdownMenu]} ref={outsideRef}>
+            <div css={[DropdownItem]}>
+              {/* <span
+                css={[DropDownUserAvatarDisPlayName]}
+              >{`${userData.email}님 `}</span> */}
+              <span css={[DropDownUserAvatarDisPlayName]}>
+                방문해주셔서 감사합니다
+              </span>
+            </div>
+
             <Link
               css={[DropdownItem, DropdownItemLink]}
               href='/subPages/MyPages'
             >
-              마이페이지
+              <MdContactPage css={[DropDownIcon]} /> 마이페이지
             </Link>
             <div css={[Divider]}></div>
 
             <button css={[DropdownItem, Button]} onClick={handleLogout}>
-              로그아웃
+              <FiLogOut css={[DropDownIcon]} /> 로그아웃
             </button>
           </div>
         ) : null}
@@ -120,14 +141,14 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
         {NavRouterData.map((data) => (
           <li key={data.id}>
             <Link
+              className={classNames('NavBarLink', {
+                isActive: pathname === data.link,
+              })}
               href={{
                 pathname: data.link,
                 query: { userData: JSON.stringify(data.query) },
               }}
               as={`/about/question/${userData}`}
-              className={classNames('NavBarLink', {
-                isActive: pathname === data.link,
-              })}
             >
               {data.title}
             </Link>
@@ -137,9 +158,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
 
       <ul css={[NavBar]}>
         {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
-        {isLoggedIn ? (
-          loggedRouter()
-        ) : (
+        {!isLoggedIn ? (
           <li css={[Main]}>
             <Link
               href='/subPages/Login'
@@ -150,6 +169,8 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
               로그인
             </Link>
           </li>
+        ) : (
+          loggedRouter()
         )}
       </ul>
     </nav>
@@ -299,8 +320,26 @@ const Main = css`
   }
 `;
 
-const UserAvatar = css`
+export const UserAvatar = css`
   border-radius: 50%;
   transform: translateY(-3px);
   margin-right: 3px;
+`;
+
+const UserAvatarDisPlayName = css`
+  max-width: 150px;
+  white-space: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+const DropDownUserAvatarDisPlayName = css`
+  font-size: 0.9rem;
+  padding: 0 1rem;
+  max-width: 150px;
+  word-break: break-all;
+`;
+
+const DropDownIcon = css`
+  margin-right: 0.3rem;
+  font-size: 1.2rem;
 `;
