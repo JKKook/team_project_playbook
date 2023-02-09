@@ -13,7 +13,7 @@ import {
   isCheckBookMark,
 } from '@/src/modules/bookmarkModules';
 import { useState } from 'react';
-// import ReservationButton from './ReservationButton';
+import ReservationButton from './ReservationButton';
 
 // react query localstorage : user, email 등등...
 //
@@ -59,7 +59,7 @@ const PerformanceList = ({ total }) => {
                 >
                   자세히
                 </Link>
-                {/* <ReservationButton id={elem.id} /> */}
+                <ReservationButton data={total} id={elem.id} />
               </div>
             </div>
           </div>

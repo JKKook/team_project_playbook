@@ -13,7 +13,9 @@ import {
 import { passwordRegex } from '../../src/utils/auth-regex';
 import { RegisterFormText, RegisterNoticeText } from './Register';
 import { changePassowordFromEmail, changePassword } from '../api/auth/firebase';
-// import Reservation from '@/src/components/molecules/Reservation';
+import Reservation from '@/src/components/molecules/Reservation';
+import { useQuery } from 'react-query';
+import useGetReservation from '@/src/store/server/useGetReservation';
 
 const MyPages = ({ user }) => {
   const [userData, setUserData] = useRecoilState(userFormState);
@@ -99,6 +101,11 @@ const MyPages = ({ user }) => {
     );
     return result;
   };
+
+  const { data, isLoading } = useQuery(['listApi'], useGetReservation);
+
+
+
 
   return (
     <div css={[MyPageStyle]}>
@@ -230,7 +237,7 @@ const MyPages = ({ user }) => {
       <section css={[MypageSection]}>
         <div css={[ReservationSection]}>
           <h2 css={[Text]}>내 예약 목록</h2>
-          {/* <Reservation /> */}
+          <Reservation data={data} />
         </div>
       </section>
     </div>
@@ -242,7 +249,6 @@ export default MyPages;
 const MyPageStyle = css`
   margin-top: 2rem;
   display: flex;
-  gap: 5rem;
 `;
 
 const MypageSection = css`
@@ -265,7 +271,7 @@ const DetailSection = css`
 
 const ReservationSection = css`
   padding-left: 2rem;
-`
+`;
 
 const Text = css`
   text-align: center !important;

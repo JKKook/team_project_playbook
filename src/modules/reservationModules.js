@@ -2,7 +2,7 @@ import { PERFORMANCE_RESERVE_KEY } from '../contexts/localStorageKey';
 
 export const reservationMoudle = (performanceid) => {
   const result = getReservationInfo();
-  console.log(performanceid);
+  // console.log(performanceid);
 
   if (result.find((info) => info === performanceid)) {
     console.log(true);
@@ -38,7 +38,8 @@ export const handleReservationInfo = (id, state) => {
       JSON.stringify([...reservationInfo, id])
     );
     state(true);
-  } else {
+  }
+   else {
     removeReservationInfo(id);
     state(false);
   }

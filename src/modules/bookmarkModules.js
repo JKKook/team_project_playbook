@@ -3,8 +3,6 @@ import { PERFORMANCE_LIKE_KEY } from '../contexts/localStorageKey';
 export const bookmarkModule = (performanceid) => {
   const result = getBookmarkInfo();
 
-  console.log('boo', performanceid);
-
   // if (!result) return false;
 
   if (result.find((info) => info === performanceid)) {
