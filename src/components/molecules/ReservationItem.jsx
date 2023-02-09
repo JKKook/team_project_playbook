@@ -12,20 +12,15 @@ import { useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 const ReservationItem = ({ total, id }) => {
-  const reserveInfo = getReservationInfo();
-  const [data, setData] = useState(reserveInfo);
-
   const handleRemoveReservation = (performanceid) => {
-    const leftData = data.filter((item) => item.id !== performanceid);
-    localStorage.setItem(PERFORMANCE_RESERVE_KEY, JSON.stringify(leftData));
-    setData(leftData);
-
-    console.log(leftData, data);
-
-    // localStorage.removeItem(
-    //   PERFORMANCE_RESERVE_KEY,
-    //   JSON.stringify(newReservation)
-    // );
+    const reserveInfo = getReservationInfo();
+    const newReservation = reserveInfo.filter(
+      (item) => item !== performanceid
+    );
+    localStorage.setItem(
+      PERFORMANCE_RESERVE_KEY,
+      JSON.stringify(newReservation)
+    );
   };
 
   return (
@@ -62,7 +57,9 @@ const ReservationItem = ({ total, id }) => {
                 </div>
               </div>
               <div css={[DeleteIcon]}>
-                <AiOutlineDelete onClick={handleRemoveReservation} />
+                <AiOutlineDelete
+                  onClick={() => handleRemoveReservation(elem.id)}
+                />
               </div>
             </div>
           </div>

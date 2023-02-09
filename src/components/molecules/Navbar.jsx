@@ -119,7 +119,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
     },
     {
       id: 2,
-      link: '/subPages/BookSystem',
+      link: '/subPages/Bookmark',
       title: '북마크',
     },
     {
@@ -158,7 +158,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
 
       <ul css={[NavBar]}>
         {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
-        {!isLoggedIn ? (
+        {!userData ? (
           <li css={[Main]}>
             <Link
               href='/subPages/Login'
@@ -247,7 +247,7 @@ const DropdownToggle = css`
 const DropdownMenu = css`
   position: absolute;
   top: 130%;
-  left: -1.9rem;
+  left: -9.8rem;
   z-index: 1000;
   display: flex;
   flex-direction: column;
