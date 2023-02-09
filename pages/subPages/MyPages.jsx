@@ -13,14 +13,14 @@ import {
 import { passwordRegex } from '../../src/utils/auth-regex';
 import { RegisterFormText, RegisterNoticeText } from './Register';
 import { changePassowordFromEmail, changePassword } from '../api/auth/firebase';
-import useGetPerformance from '@/src/store/server/useGetPerformance';
+import Reservation from '@/src/components/molecules/Reservation';
+import { useQuery } from 'react-query';
+import useGetReservation from '@/src/store/server/useGetReservation';
 
 const MyPages = ({ user }) => {
   const [userData, setUserData] = useRecoilState(userFormState);
   const [registerForm, setRegisterForm] = useRecoilState(userFormMessageState);
   const [isForm, setIsForm] = useRecoilState(isUserState);
-
-  const { data } = useGetPerformance();
 
   // 실시간으로 input의 데이터가 입력되도록
   const handleChange = (e) => {
@@ -89,7 +89,7 @@ const MyPages = ({ user }) => {
     e.preventDefault();
     clearErrors();
     const result = await changePassword(user, userData.password).then(
-      alert('비밀번호가 변경되었습니다.'),
+      alert('비밀번호가 변경되었습니다.')
     );
     return result;
   };
@@ -97,10 +97,15 @@ const MyPages = ({ user }) => {
   // email 인증을 통해 비밀번호 변경
   const handleChangePasswordThroughEmail = async () => {
     const result = await changePassowordFromEmail(userData.email).then(
-      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.'),
+      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.')
     );
     return result;
   };
+
+  const { data, isLoading } = useQuery(['listApi'], useGetReservation);
+
+
+
 
   return (
     <div css={[MyPageStyle]}>
@@ -228,7 +233,12 @@ const MyPages = ({ user }) => {
             </div>
           </form>
         </div>
-
+      </section>
+      <section css={[MypageSection]}>
+        <div css={[ReservationSection]}>
+          <h2 css={[Text]}>내 예약 목록</h2>
+          <Reservation data={data} />
+        </div>
       </section>
     </div>
   );
@@ -238,11 +248,13 @@ export default MyPages;
 
 const MyPageStyle = css`
   margin-top: 2rem;
+  display: flex;
 `;
 
 const MypageSection = css`
-  display: grid;
-  grid-template-columns: 1.2fr 2fr;
+  // display: grid;
+  // grid-template-columns: 1.2fr 2fr;
+  width: 40%;
   flex-wrap: wrap;
   margin-left: 2rem;
   margin-bottom: 1rem !important;
@@ -255,6 +267,10 @@ const DetailSection = css`
   padding-right: 15px;
   padding-left: 5rem;
   margin-right: 3rem;
+`;
+
+const ReservationSection = css`
+  padding-left: 2rem;
 `;
 
 const Text = css`

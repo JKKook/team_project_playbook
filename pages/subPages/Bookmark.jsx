@@ -8,13 +8,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const getListApi = async () => {
-  const list = getBookmarkInfo();
-  const urlArr = [];
-  list.forEach((elem) => {
-    const url = `http://localhost:4000/description/${elem}`;
-    urlArr.push(axios.get(url));
-  });
-  const response = await axios.all(urlArr);
+    const list = getBookmarkInfo();
+    const urlArr = [];
+    list.forEach((elem) => {
+        const url = `http://localhost:4000/description/${elem}`;
+        urlArr.push(axios.get(url));
+    });
+    const response = await axios.all(urlArr);
 
   // 파싱
   const arr = [];
