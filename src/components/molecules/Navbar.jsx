@@ -58,46 +58,28 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
         }}
       >
         <div css={[DropdownToggle]}>
-          {userData && userData.photoURL ? (
-            <AvatarImage userData={userData} />
-          ) : (
-            <Image
-              src={user}
-              alt='user'
-              width={30}
-              height={30}
-              css={[UserAvatar]}
-            />
-          )}
-
-          {userData && (
-            <span css={[UserAvatarDisPlayName]}>
-              {`${userData.displayName}`}님
-            </span>
-          )}
+          <Image
+            src={user}
+            alt='user'
+            width={30}
+            height={30}
+            css={[UserAvatar]}
+          />
+          이인재
         </div>
         {/* 클릭하면 dropdown menu가 열리도록, 다시 클릭하면 닫히도록, dropdown 영역 밖을 클릭하면 dropdown 영역 사라지도록 */}
         {open ? (
           <div css={[DropdownMenu]} ref={outsideRef}>
-            <div css={[DropdownItem]}>
-              {/* <span
-                css={[DropDownUserAvatarDisPlayName]}
-              >{`${userData.email}님 `}</span> */}
-              <span css={[DropDownUserAvatarDisPlayName]}>
-                방문해주셔서 감사합니다
-              </span>
-            </div>
-
             <Link
               css={[DropdownItem, DropdownItemLink]}
               href='/subPages/MyPages'
             >
-              <MdContactPage css={[DropDownIcon]} /> 마이페이지
+              마이페이지
             </Link>
             <div css={[Divider]}></div>
 
             <button css={[DropdownItem, Button]} onClick={handleLogout}>
-              <FiLogOut css={[DropDownIcon]} /> 로그아웃
+              로그아웃
             </button>
           </div>
         ) : null}
@@ -206,12 +188,9 @@ const NavBar = css`
     &:hover {
       color: rgba(0, 0, 0, 0.8);
     }
-    &:first-of-type {
-      padding-left: 5rem;
-    }
   }
-  .isActive {
-    color: rgba(0, 0, 0, 0.8);
+  &:first-of-type {
+    padding-left: 5rem;
   }
 `;
 

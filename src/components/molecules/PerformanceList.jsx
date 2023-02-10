@@ -83,7 +83,11 @@ const Performances = css`
     align-items: cetner;
     margin: 20px 0;
     row-gap: 5rem;
+<<<<<<< HEAD
     // background-color: #fff;
+=======
+    background-color: #fff;
+>>>>>>> 5549379 (FEAT: Add to Bookmark Button and Bookmark Page)
 `;
 
 const CardContainer = css`
