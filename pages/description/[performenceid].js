@@ -78,8 +78,8 @@ const Post = () => {
               // key={idx}
               src={data.descriptImage}
               alt={'image'}
-              width={800}
-              height={5000}
+              width={700}
+              height={2500}
             />
             {/* );
               })
@@ -162,8 +162,8 @@ const DescriptionImage = css`
 `;
 
 const Images = css`
-  // position: relative;
-  // width: 100%;
+  width: 700px;
   height: 100%;
   object-fit: fill;
+  // aspect-ratio: auto 1/1;
 `;

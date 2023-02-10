@@ -11,12 +11,8 @@ import {
   updatePassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import {
-  addDoc,
-  getFirestore,
-  serverTimestamp,
-  collection,
-} from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -27,34 +23,17 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORE,
 };
 
+// initialize App for firebase
 const app = initializeApp(firebaseConfig);
 
-// ***************** database
-// firebaseConfig 정보로 firebase 시작
-
-// firebase의 firestore 인스턴스를 변수에 저장
-export const db = getFirestore();
-
-// ** 데이터 추가하기 **
-// collection : database table
-// document : collection에 저장되는 데이터 정보 => RestAPI의 엘리먼트라고 보면 됨
-// export const addDocRef = async (user) => {
-//   try {
-//     const docRef = await addDoc(collection(db, 'playbook'), {
-//       user,
-//       createdAt: serverTimestamp(),
-//     });
-//     console.log('Added data in playbook', docRef);
-//   } catch (error) {
-//     console.error('this is Error :', error);
-//   }
-// };
-
-// ***************** auth
-// 사용자가 로그인을 호출할 때, firebase에서 제공하는 config 사용
+// database
+export const db = getFirestore(app);
+// storage
+export const storage = getStorage(app);
+// authentication
 export const auth = getAuth(app);
 
-// 파이어베이스 Authentication 사용
+// social authentication provider
 const providerGoogle = new GoogleAuthProvider();
 const providerMeta = new FacebookAuthProvider();
 

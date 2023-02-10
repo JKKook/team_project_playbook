@@ -3,12 +3,16 @@ import Navbar from './Navbar';
 import { RecoilRoot } from 'recoil';
 import { logout } from '@/pages/api/auth/firebase';
 import { auth } from '../../../pages/api/auth/firebase';
+import { useRouter } from 'next/router';
 const Layout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
 
+  const router = useRouter();
+
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
   useEffect(() => {
+    // isLoggedIn은 로그인, 로그아웃, 초기화 시 반응!
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUserData(user);
@@ -21,7 +25,7 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
     // firebase logout이 성공하게 되면 null를 받아옵니다.
-    logout();
+    logout().then(() => router.push('/'));
   };
 
   return (
