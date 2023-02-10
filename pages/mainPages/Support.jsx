@@ -6,9 +6,12 @@ import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+<<<<<<< HEAD
 import SupportBoard from '../../src/components/organisms/SupportBoard';
 import SupportChat from '../../src/components/organisms/SupportChat';
 import HelpInquiry from '../../pages/subPages/HelpInquiry';
+=======
+>>>>>>> cf05386 (DOC: conflict-piles)
 
 const Support = () => {
   const router = useRouter();
