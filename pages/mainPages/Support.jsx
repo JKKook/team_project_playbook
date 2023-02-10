@@ -6,10 +6,13 @@ import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import SupportBoard from '../../src/components/organisms/SupportBoard';
+import SupportChat from '../../src/components/organisms/SupportChat';
+import HelpInquiry from '../../pages/subPages/HelpInquiry';
 
 const Support = () => {
   const router = useRouter();
-  console.log('supportQuery :', router.query.pid);
+  console.log('supportQuery :', router);
 
   const handleAccount = () => {
     return router.push('/subPages/MyPages');
@@ -18,7 +21,7 @@ const Support = () => {
   const handleBookTicket = () => {
     return router.push({
       pathname: '/subPages/HelpInquiry',
-      query: { pid: JSON.stringify(router.query) },
+      query: router.query,
     });
   };
 
@@ -129,7 +132,7 @@ const SupportMain = css`
   justify-items: center;
   justify-self: center;
   align-self: center;
-  grid-template-columns: repeat(2, 3fr);
+  grid-template-columns: repeat(2, 4fr);
   // column-gap: 1rem;
   row-gap: 5rem;
 `;

@@ -119,14 +119,14 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
     },
     {
       id: 2,
-      link: '/subPages/BookSystem',
+      link: '/subPages/Bookmark',
       title: '북마크',
     },
     {
       id: 3,
       link: '/mainPages/Support',
       title: '고객센터',
-      query: { userData },
+      query: !userData ? '' : { id: userData.uid },
     },
   ];
 
@@ -135,7 +135,6 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
       <Link href='/' css={[NavbarLogo]}>
         <Image src={logo} alt='로고' width={110} />
       </Link>
-
       <ul css={[NavBar]}>
         {/* classnames 라이브러리를 활용해 기존 NavBarLink의 클래스도 사용하고 isActive라는 클래스는 router.pathname이 배열의 객체 내에 link랑 같으면 활성화됨. */}
         {NavRouterData.map((data) => (
@@ -146,19 +145,18 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
               })}
               href={{
                 pathname: data.link,
-                query: { userData: JSON.stringify(data.query) },
+                query: data.query,
               }}
-              as={`/about/question/${userData}`}
+              // as={`/about/question/${userData}`}
             >
               {data.title}
             </Link>
           </li>
         ))}
       </ul>
-
       <ul css={[NavBar]}>
         {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
-        {!isLoggedIn ? (
+        {!userData ? (
           <li css={[Main]}>
             <Link
               href='/subPages/Login'
