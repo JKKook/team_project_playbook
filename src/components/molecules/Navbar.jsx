@@ -224,7 +224,7 @@ const DropdownToggle = css`
 const DropdownMenu = css`
   position: absolute;
   top: 130%;
-  left: -1.9rem;
+  left: -9.8rem;
   z-index: 1000;
   display: flex;
   flex-direction: column;
