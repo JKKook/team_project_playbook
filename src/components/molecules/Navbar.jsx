@@ -7,12 +7,9 @@ import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-<<<<<<< HEAD
 import AvatarImage from '../atoms/AvatarImage';
 import { FiLogOut } from 'react-icons/fi';
 import { MdContactPage } from 'react-icons/md';
-=======
->>>>>>> cf05386 (DOC: conflict-piles)
 
 const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
   console.log(!!isLoggedIn);
