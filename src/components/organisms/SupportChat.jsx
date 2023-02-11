@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { FiEdit } from 'react-icons/fi';
@@ -6,6 +8,7 @@ import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import Image from 'next/image';
 import { deleteObject, ref } from 'firebase/storage';
+import { FormInput } from '@/pages/subPages/HelpInquiry';
 const SupportChat = ({ chatObj, isOwner }) => {
   // console.log('chat', chatObj);
   const [editting, setEditting] = useState(false);
@@ -40,39 +43,118 @@ const SupportChat = ({ chatObj, isOwner }) => {
   return (
     <>
       {isOwner && (
-        <div>
+        <div css={[ChatFormContainer]}>
           {editting ? (
             <form onSubmit={handleUpdateSubmit}>
-              <input onChange={handleChange} value={newChat} required />
-              <input type='submit' value='변경' />
-              <button onClick={toggleEditting}>취소</button>
+              <input
+                css={[NewChatInput]}
+                onChange={handleChange}
+                value={newChat}
+                required
+              />
+              <input css={[SubmitBtn]} type='submit' value='변경' />
+              <button css={[SubmitBtn]} onClick={toggleEditting}>
+                취소
+              </button>
             </form>
           ) : (
-            <div>
-              <h4>{chatObj.text}</h4>
+            <div css={[Chat]}>
+              <div css={[ChatUserName]}>user</div>
+              <p css={[ChatEditText]}>{chatObj.text}</p>
               {chatObj.attachmentURL && (
                 <Image
+                  css={[ChatImg]}
                   src={chatObj.attachmentURL}
                   alt='photo_image'
-                  width={200}
-                  height={200}
+                  width={150}
+                  height={150}
                 />
               )}
             </div>
           )}
-          <>
-            <button onClick={toggleEditting}>
+
+          <div css={[ChatEditDelete]}>
+            <button css={[SubmitBtn]} onClick={toggleEditting}>
               수정
               <FiEdit />
             </button>
-            <button onClick={handleDeleteClick}>
+            <button css={[SubmitBtn]} onClick={handleDeleteClick}>
               삭제
               <TiDelete />
             </button>
-          </>
+          </div>
         </div>
       )}
     </>
   );
 };
 export default SupportChat;
+
+const ChatFormContainer = css`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justity-content: center;
+  margin-top: 3rem;
+`;
+
+const Chat = css`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  height: 35px;
+  margin-top: 0.5rem;
+  margin-right: 2rem;
+  padding-left: 0.5rem;
+  word-break: break-all;
+`;
+
+const ChatUserName = css`
+  margin-bottom: 1rem;
+  padding-left: 0.2rem;
+`;
+
+const ChatEditText = css`
+  font-size: 14px;
+  border: thick double #798777;
+  border-radius: 12px;
+  padding: 2rem 0;
+  padding-left: 0.2rem;
+  margin-bottom: 4rem;
+`;
+
+const ChatImg = css`
+  position: absolute;
+  border: 1px solid white;
+  border-radius: 50%;
+  transform: translate(300%, -15%);
+`;
+
+const ChatEditDelete = css`
+  margin-top: 0.4rem;
+  margin-bottom: 4rem;
+  padding-left: 0.2rem;
+`;
+
+// edit form
+
+const NewChatInput = css`
+  width: 300px;
+`;
+
+const SubmitBtn = css`
+  border: none;
+  border-radius: 8px;
+  margin-right: 1.5rem;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  color: gray;
+  background-color: white;
+  cursor: pointer;
+
+  &: hover {
+    color: #404258;
+  }
+`;

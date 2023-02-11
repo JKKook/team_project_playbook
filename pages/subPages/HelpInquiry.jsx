@@ -18,6 +18,10 @@ import SupportChat from '../../src/components/organisms/SupportChat';
 import SupportBoard from '../../src/components/organisms/SupportBoard';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
+import { LoginInnerContainer } from './Login';
+import { MdPhotoCamera } from 'react-icons/md';
+import logo from '../../public/asset/playbook-logo.png';
+import { BsChatLeftText } from 'react-icons/bs';
 
 const HelpInquiry = () => {
   const router = useRouter();
@@ -106,41 +110,160 @@ const HelpInquiry = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={inquiry}
-          onChange={handleChange}
-          type='text'
-          placeholder='문의 하실 내용을 기재해주십시오'
-          maxLength={120}
-        />
-        {/* uploadFiles */}
-        <input type='file' accept='image/*' onChange={handleFileChange} />
-        <input type='submit' value='제출' />
-        {attachment && (
-          <div>
-            <Image
-              src={attachment}
-              alt='UpLoad Image'
-              width='400'
-              height='400'
-            />
-            <button onClick={handleCancelAttachment}>취소</button>
-          </div>
-        )}
-      </form>
+    <section css={[Section]}>
       <div>
-        {inquiries.map((inquiry) => (
-          <SupportChat
-            key={inquiry.id}
-            chatObj={inquiry}
-            isOwner={inquiry.creatorId === router.query.id}
-          />
-        ))}
+        <h3 css={[SectionHeadLine]}>
+          문의 사항을 남겨주세요
+          <BsChatLeftText css={{ paddingLeft: '1rem' }} />
+        </h3>
       </div>
-    </div>
+      <div css={[LoginInnerContainer]}>
+        <div css={[ChatContainer]}>
+          <form css={[FormContainer]} onSubmit={handleSubmit}>
+            <div>
+              <p css={[FormUser]}>user.email</p>
+              <div css={{ position: 'relative' }}>
+                <input
+                  css={[FormInput]}
+                  value={inquiry}
+                  onChange={handleChange}
+                  type='text'
+                  placeholder='댓글을 남겨보세요'
+                />
+
+                {attachment && (
+                  <div css={[AttachmentContainer]}>
+                    <Image
+                      src={attachment}
+                      alt='UpLoad Image'
+                      width='60'
+                      height='60'
+                    />
+                    <button css={[SubmitBtn]} onClick={handleCancelAttachment}>
+                      취소
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* uploadFiles */}
+              <div css={[FormFooter]}>
+                <input
+                  css={[inputFile]}
+                  id='input-file'
+                  type='file'
+                  accept='image/*'
+                  onChange={handleFileChange}
+                />
+                <label for='input-file'>
+                  <MdPhotoCamera css={{ cursor: 'pointer' }} />
+                </label>
+                <input css={[SubmitBtn]} type='submit' value='등록' />
+              </div>
+            </div>
+          </form>
+          <div css={[ChatTextContainer]}>
+            {inquiries.map((inquiry) => (
+              <SupportChat
+                key={inquiry.id}
+                chatObj={inquiry}
+                isOwner={inquiry.creatorId === router.query.id}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
 export default HelpInquiry;
+
+const Section = css`
+  min-height: 100vh;
+  padding-top: 0;
+  margin-bottom: 4rem;
+`;
+
+const SectionHeadLine = css`
+  margin: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ce7777;
+`;
+
+const FormContainer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0;
+  padding-left: 1.2rem;
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 1px 10px 5px -2px rgba(0.7, 0.7, 0, 0.07);
+  webkit-box-shadow: 10px 10px 5px -2px rgba(0.7, 0.7, 0, 0.07);
+  moz-box-shadow: 10px 10px 5px -2px rgba(0.7, 0.7, 0, 0.07);
+  margin-bottom: 5rem;
+`;
+
+const FormUser = css`
+  font-size: 18px;
+  margin: 1rem 0;
+  color: #3c4048;
+`;
+
+export const FormInput = css`
+  width: 90%;
+  border: none;
+  color: #3c4048;
+`;
+
+const inputFile = css`
+  display: none;
+`;
+
+const FormFooter = css`
+  display: flex;
+  margin: 1.5rem 0;
+  font-size: 20px;
+  justify-content: space-between;
+`;
+
+export const SubmitBtn = css`
+  border: none;
+  margin-right: 1.5rem;
+  color: gray;
+  background-color: white;
+  cursor: pointer;
+
+  &: hover {
+    color: #404258;
+  }
+`;
+
+const ChatContainer = css`
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 3rem;
+`;
+
+const AttachmentContainer = css`
+  position: absolute;
+  transform: translate(50%, 0%);
+`;
+
+// ****** 구분선
+
+const ChatTextContainer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 3rem;
+  background-color: white;
+  width: 100%;
+  border-radius: 12px;
+`;
