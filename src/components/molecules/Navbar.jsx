@@ -58,28 +58,46 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
         }}
       >
         <div css={[DropdownToggle]}>
-          <Image
-            src={user}
-            alt='user'
-            width={30}
-            height={30}
-            css={[UserAvatar]}
-          />
-          이인재
+          {userData && userData.photoURL ? (
+            <AvatarImage userData={userData} />
+          ) : (
+            <Image
+              src={user}
+              alt='user'
+              width={30}
+              height={30}
+              css={[UserAvatar]}
+            />
+          )}
+
+          {userData && (
+            <span css={[UserAvatarDisPlayName]}>
+              {`${userData.displayName}`}님
+            </span>
+          )}
         </div>
         {/* 클릭하면 dropdown menu가 열리도록, 다시 클릭하면 닫히도록, dropdown 영역 밖을 클릭하면 dropdown 영역 사라지도록 */}
         {open ? (
           <div css={[DropdownMenu]} ref={outsideRef}>
+            <div css={[DropdownItem]}>
+              <div>
+                <p css={[DropDownUserAvatarDisPlayName]}>
+                  {`${userData.displayName}님 `}
+                </p>
+                <p>방문해주셔서 감사합니다</p>
+              </div>
+            </div>
+
             <Link
               css={[DropdownItem, DropdownItemLink]}
               href='/subPages/MyPages'
             >
-              마이페이지
+              <MdContactPage css={[DropDownIcon]} /> 마이페이지
             </Link>
             <div css={[Divider]}></div>
 
             <button css={[DropdownItem, Button]} onClick={handleLogout}>
-              로그아웃
+              <FiLogOut css={[DropDownIcon]} /> 로그아웃
             </button>
           </div>
         ) : null}
@@ -129,7 +147,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
                 pathname: data.link,
                 query: data.query,
               }}
-              // as={`/about/question/${userData}`}
+              as={`/about/question/${userData}`}
             >
               {data.title}
             </Link>
@@ -188,9 +206,12 @@ const NavBar = css`
     &:hover {
       color: rgba(0, 0, 0, 0.8);
     }
+    &:first-of-type {
+      padding-left: 5rem;
+    }
   }
-  &:first-of-type {
-    padding-left: 5rem;
+  .isActive {
+    color: rgba(0, 0, 0, 0.8);
   }
 `;
 
@@ -310,9 +331,8 @@ const UserAvatarDisPlayName = css`
   text-overflow: ellipsis;
 `;
 const DropDownUserAvatarDisPlayName = css`
-  font-size: 0.9rem;
-  padding: 0 1rem;
-  max-width: 150px;
+  padding: 1rem;
+  max-width: 100px;
   word-break: break-all;
 `;
 

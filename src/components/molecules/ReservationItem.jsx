@@ -14,12 +14,10 @@ import { AiOutlineDelete } from 'react-icons/ai';
 const ReservationItem = ({ total, id }) => {
   const handleRemoveReservation = (performanceid) => {
     const reserveInfo = getReservationInfo();
-    const newReservation = reserveInfo.filter(
-      (item) => item !== performanceid
-    );
+    const newReservation = reserveInfo.filter((item) => item !== performanceid);
     localStorage.setItem(
       PERFORMANCE_RESERVE_KEY,
-      JSON.stringify(newReservation)
+      JSON.stringify(newReservation),
     );
   };
 
