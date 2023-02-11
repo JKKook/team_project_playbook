@@ -17,7 +17,7 @@ const ReservationItem = ({ total, id }) => {
     const newReservation = reserveInfo.filter((item) => item !== performanceid);
     localStorage.setItem(
       PERFORMANCE_RESERVE_KEY,
-      JSON.stringify(newReservation),
+      JSON.stringify(newReservation)
     );
   };
 

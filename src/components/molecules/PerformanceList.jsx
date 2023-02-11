@@ -2,9 +2,7 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { addReservation } from '@/pages/description/[performenceid]';
 import BookmarkHeart from '../atoms/BookmarkHeart';
-import { useRecoilState } from 'recoil';
 import {
   bookmarkState,
   handlePerformanceBookmark,
@@ -15,61 +13,56 @@ import {
   isCheckBookMark,
 } from '@/src/modules/bookmarkModules';
 import { useState } from 'react';
+import ReservationButton from './ReservationButton';
 
 // react query localstorage : user, email 등등...
 
 const PerformanceList = ({ total }) => {
-  // const [bookmarkList, setBookmarkList] = useRecoilState(bookmarkState);
+  // console.log(total);
 
   return (
     <div css={[Performances]}>
-      {total.map((elem, idx) => (
-        <div key={idx} css={[CardContainer]}>
-          <Link href={`/description/${elem.id}`}>
-            <Image
-              src={elem.image}
-              alt={'이미지'}
-              height={400}
-              width={288}
-              css={[ImgBox]}
-            />
-          </Link>
-          <div css={[CardBody]}>
-            <h5 css={[CardTitle]} title={elem.name}>
-              {elem.name}
-              <span css={[CardBookmark]}>
-                <BookmarkHeart id={elem.id} />
-              </span>
-            </h5>
-            <p css={[Detail]} title={elem.place}>
-              장소 : {elem.place}
-            </p>
-            <p css={[Detail]}>장르 : {elem.genre}</p>
+      {total &&
+        total.map((elem, idx) => (
+          <div key={idx} css={[CardContainer]}>
+            <Link href={`/description/${elem.id}`}>
+              <Image
+                src={elem.image}
+                alt={'이미지'}
+                height={400}
+                width={288}
+                css={[ImgBox]}
+              />
+            </Link>
+            <div css={[CardBody]}>
+              <h5 css={[CardTitle]} title={elem.name}>
+                {elem.name}
+                <span css={[CardBookmark]}>
+                  <BookmarkHeart id={elem.id} />
+                </span>
+              </h5>
+              <p css={[Detail]} title={elem.place}>
+                장소 : {elem.place}
+              </p>
+              <p css={[Detail]}>장르 : {elem.genre}</p>
 
-            <p css={[Detail]}>
-              기간 : {elem.start} ~ {elem.end}
-            </p>
-            <p css={[Detail, PlayingStatus]}>{elem.isPlaying}</p>
+              <p css={[Detail]}>
+                기간 : {elem.start} ~ {elem.end}
+              </p>
+              <p css={[Detail, PlayingStatus]}>{elem.isPlaying}</p>
 
-            <div css={[ButtonContainer]}>
-              <Link
-                css={[ButtonToDetail, LinkToDescription]}
-                href={`/description/${elem.id}`}
-              >
-                자세히
-              </Link>
-              <Link href='/subPages/Order'>
-                <button
-                  css={[ButtonToDetail, ReserveButton]}
-                  onClick={addReservation}
+              <div css={[ButtonContainer]}>
+                <Link
+                  css={[ButtonToDetail, LinkToDescription]}
+                  href={`/description/${elem.id}`}
                 >
-                  예약하기
-                </button>
-              </Link>
+                  자세히
+                </Link>
+                <ReservationButton data={total} id={elem.id} />
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };

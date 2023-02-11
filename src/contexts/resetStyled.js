@@ -87,10 +87,10 @@ const reset = css`
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     text-decoration: none;
-    color: black;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
   }
   /* HTML5 display-role reset for older browsers */
   article,
@@ -106,9 +106,22 @@ const reset = css`
   section {
     display: block;
   }
-  body {
+  html::-webkit-scrollbar {
+    width: 1rem;
+    background: transparent;
+  }
+
+  /* 스크롤바 버튼에 대한 스타일링 */
+  html::-webkit-scrollbar-thumb {
+    background: #c0cab6;
+    border-radius: 30px;
+  }
+
+  html body {
     line-height: 1;
     overflow-x: hidden;
+    box-sizing: border-box;
+    background-color: #eaeded;
   }
   ol,
   ul {
@@ -131,6 +144,7 @@ const reset = css`
   }
   button {
     cursor: pointer;
+    outline: 0;
   }
 `;
 
