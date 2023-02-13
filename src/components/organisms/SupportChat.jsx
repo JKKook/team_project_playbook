@@ -8,9 +8,9 @@ import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import Image from 'next/image';
 import { deleteObject, ref } from 'firebase/storage';
-import { FormInput } from '@/pages/subPages/HelpInquiry';
-const SupportChat = ({ chatObj, isOwner }) => {
+const SupportChat = ({ chatObj, isOwner, isUserName, isUserPhoto }) => {
   // console.log('chat', chatObj);
+  console.log('photo', isUserPhoto);
   const [editting, setEditting] = useState(false);
   const [newChat, setNewChat] = useState(chatObj.text);
 
@@ -59,7 +59,21 @@ const SupportChat = ({ chatObj, isOwner }) => {
             </form>
           ) : (
             <div css={[Chat]}>
-              <div css={[ChatUserName]}>user</div>
+              <div css={{ display: 'flex' }}>
+                <div css={[ChatUserName]}>{isUserName}</div>
+                <div>
+                  {isUserPhoto && (
+                    <Image
+                      css={[ChatUserIcon]}
+                      src={isUserPhoto}
+                      alt='userPhoto'
+                      width={30}
+                      height={30}
+                    />
+                  )}
+                </div>
+              </div>
+
               <p css={[ChatEditText]}>{chatObj.text}</p>
               {chatObj.attachmentURL && (
                 <Image
@@ -114,15 +128,23 @@ const Chat = css`
 const ChatUserName = css`
   margin-bottom: 1rem;
   padding-left: 0.2rem;
+  font-weight: bold;
 `;
 
 const ChatEditText = css`
   font-size: 14px;
-  border: thick double #798777;
+  border: 1px solid #798777;
   border-radius: 12px;
   padding: 2rem 0;
   padding-left: 0.2rem;
   margin-bottom: 4rem;
+`;
+
+const ChatUserIcon = css`
+  margin-left: 0.5rem;
+  border: 1px solid white;
+  border-radius: 50%;
+  transform: translateY(-25%);
 `;
 
 const ChatImg = css`

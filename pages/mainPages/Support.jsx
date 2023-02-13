@@ -6,9 +6,6 @@ import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import SupportBoard from '../../src/components/organisms/SupportBoard';
-import SupportChat from '../../src/components/organisms/SupportChat';
-import HelpInquiry from '../../pages/subPages/HelpInquiry';
 
 const Support = () => {
   const router = useRouter();
