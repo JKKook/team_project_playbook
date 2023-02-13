@@ -184,10 +184,12 @@ const NavContainer = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 1px 1px 3px 1px #d5dada;
+  // box-shadow: 1px 1px 3px 1px #d5dada;
   transition: all 0.5s ease;
-  background: #eaeded;
+  background: #adc5c5;
+  z-index: 1000;
   // opacity: 0.8
+  scroll-snap-stop: always;
 `;
 
 const NavbarLogo = css`
