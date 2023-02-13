@@ -6,9 +6,6 @@ import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import SupportBoard from '../../src/components/organisms/SupportBoard';
-import SupportChat from '../../src/components/organisms/SupportChat';
-import HelpInquiry from '../../pages/subPages/HelpInquiry';
 
 const Support = () => {
   const router = useRouter();
@@ -32,20 +29,20 @@ const Support = () => {
     <>
       <section css={[Section]}>
         <header css={[SupportHeader]}>
+          <h2 css={[SupportHeaderTitleTxt]}>Support</h2>
           <div css={[SupportHeaderTitleIcon]}>
             <MdSupportAgent />
           </div>
-          <h2 css={[SupportHeaderTitleTxt]}>Support</h2>
         </header>
         <div css={[SupportMain]}>
           <div css={[SupportMainCon]}>
             <div css={[SupportMainTitleCon]} onClick={handleBookTicket}>
-              <h3 css={[SupportMainTitle]}>예매 도움</h3>
+              <h3 css={[SupportMainTitle]}>상담 도움</h3>
               <h3 css={[SupportMainSubTitle]}>받기</h3>
             </div>
             <div css={[SupportMainDescription]}>
-              플레이북 예매 방법이 궁금하신가요? 예매 안내를 통해서 편리한
-              예매방법을 알아보세요.
+              플레이북 이용 방법이 궁금하신가요? 궁금하신 사항이 있다면 1:1
+              상담을 이용해보세요.
             </div>
             <div css={[SupportMainIconBox]}>
               <HiOutlineTicket />
@@ -116,14 +113,16 @@ const SupportHeader = css`
 `;
 
 const SupportHeaderTitleIcon = css`
-  font-size: 1.5rem;
+  color: #ce7777;
+  font-size: 2rem;
+  margin-left: 1rem;
 `;
 
 const SupportHeaderTitleTxt = css`
   color: #ce7777;
 
-  margin-left: 2rem;
-  font-size: 1.5rem;
+  margin-left: 1rem;
+  font-size: 2rem;
   font-weight: bold;
 `;
 

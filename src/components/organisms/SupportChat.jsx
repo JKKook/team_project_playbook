@@ -8,9 +8,9 @@ import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import Image from 'next/image';
 import { deleteObject, ref } from 'firebase/storage';
-import { FormInput } from '@/pages/subPages/HelpInquiry';
-const SupportChat = ({ chatObj, isOwner }) => {
+const SupportChat = ({ chatObj, isOwner, isUserName, isUserPhoto }) => {
   // console.log('chat', chatObj);
+  console.log('photo', isUserPhoto);
   const [editting, setEditting] = useState(false);
   const [newChat, setNewChat] = useState(chatObj.text);
 
@@ -51,6 +51,7 @@ const SupportChat = ({ chatObj, isOwner }) => {
                 onChange={handleChange}
                 value={newChat}
                 required
+                placeholder='변경하실 내용을 입력해주세요'
               />
               <input css={[SubmitBtn]} type='submit' value='변경' />
               <button css={[SubmitBtn]} onClick={toggleEditting}>
@@ -59,15 +60,29 @@ const SupportChat = ({ chatObj, isOwner }) => {
             </form>
           ) : (
             <div css={[Chat]}>
-              <div css={[ChatUserName]}>user</div>
+              <div css={{ display: 'flex' }}>
+                <div css={[ChatUserName]}>{isUserName}</div>
+                <div>
+                  {isUserPhoto && (
+                    <Image
+                      css={[ChatUserIcon]}
+                      src={isUserPhoto}
+                      alt='userPhoto'
+                      width={30}
+                      height={30}
+                    />
+                  )}
+                </div>
+              </div>
+
               <p css={[ChatEditText]}>{chatObj.text}</p>
               {chatObj.attachmentURL && (
                 <Image
                   css={[ChatImg]}
                   src={chatObj.attachmentURL}
                   alt='photo_image'
-                  width={150}
-                  height={150}
+                  width={200}
+                  height={200}
                 />
               )}
             </div>
@@ -95,7 +110,9 @@ const ChatFormContainer = css`
   display: flex;
   flex-direction: column;
   justity-content: center;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  border: 1px solid #f3f4ed;
+  border-radius: 12px;
 `;
 
 const Chat = css`
@@ -103,9 +120,9 @@ const Chat = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 250px;
+  width: 350px;
   height: 35px;
-  margin-top: 0.5rem;
+  margin-top: 5rem;
   margin-right: 2rem;
   padding-left: 0.5rem;
   word-break: break-all;
@@ -114,22 +131,32 @@ const Chat = css`
 const ChatUserName = css`
   margin-bottom: 1rem;
   padding-left: 0.2rem;
+  font-weight: bold;
 `;
 
 const ChatEditText = css`
+  width: 100%;
   font-size: 14px;
-  border: thick double #798777;
   border-radius: 12px;
-  padding: 2rem 0;
-  padding-left: 0.2rem;
+  padding: 0.5rem 0;
+  padding-left: 0.8rem;
   margin-bottom: 4rem;
+  background-color: #f3f4ed;
+`;
+
+const ChatUserIcon = css`
+  margin-left: 0.5rem;
+  border: 1px solid white;
+  border-radius: 50%;
+  transform: translateY(-25%);
 `;
 
 const ChatImg = css`
   position: absolute;
   border: 1px solid white;
-  border-radius: 50%;
-  transform: translate(300%, -15%);
+  // border-radius: 12px;
+  transform: translate(300%, 10%);
+  aspect-ratio: 1/1;
 `;
 
 const ChatEditDelete = css`
@@ -139,9 +166,13 @@ const ChatEditDelete = css`
 `;
 
 // edit form
-
 const NewChatInput = css`
   width: 300px;
+  border: none;
+  font-size: 14px;
+  padding-left: 0.8rem;
+  margin-bottom: 4rem;
+  background-color: #f3f4ed;
 `;
 
 const SubmitBtn = css`

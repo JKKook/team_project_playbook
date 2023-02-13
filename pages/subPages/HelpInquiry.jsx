@@ -15,17 +15,15 @@ import {
 } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import SupportChat from '../../src/components/organisms/SupportChat';
-import SupportBoard from '../../src/components/organisms/SupportBoard';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { LoginInnerContainer } from './Login';
 import { MdPhotoCamera } from 'react-icons/md';
-import logo from '../../public/asset/playbook-logo.png';
 import { BsChatLeftText } from 'react-icons/bs';
+import { SupportHeader } from '../mainPages/Support';
 
 const HelpInquiry = () => {
   const router = useRouter();
-  // console.log('Help', router.query.id);
 
   const [inquiry, setInquiry] = useState('');
   const [inquiries, setInquiries] = useState([]);
@@ -39,7 +37,10 @@ const HelpInquiry = () => {
       let attachmentURL;
       if (attachment !== '') {
         // upload attachment
-        const attachmentRef = ref(storage, `${router.query.id}/${uuidv4()}`);
+        const attachmentRef = ref(
+          storage,
+          `${router.query.user[0]}/${uuidv4()}`,
+        );
         const response = await uploadString(
           attachmentRef,
           attachment,
@@ -51,7 +52,7 @@ const HelpInquiry = () => {
       const docRef = {
         text: inquiry,
         createdAt: serverTimestamp(),
-        creatorId: router.query.id,
+        creatorId: router.query.user[0],
         attachmentURL: attachmentURL || null,
       };
       // 지정 된 파이어베이스 경로에 docRef 추가,
@@ -111,7 +112,7 @@ const HelpInquiry = () => {
 
   return (
     <section css={[Section]}>
-      <div>
+      <div css={[SupportHeader]}>
         <h3 css={[SectionHeadLine]}>
           문의 사항을 남겨주세요
           <BsChatLeftText css={{ paddingLeft: '1rem' }} />
@@ -120,8 +121,8 @@ const HelpInquiry = () => {
       <div css={[LoginInnerContainer]}>
         <div css={[ChatContainer]}>
           <form css={[FormContainer]} onSubmit={handleSubmit}>
+            <p css={[FormUser]}>궁금하신 사항이 있으신가요?</p>
             <div>
-              <p css={[FormUser]}>user.email</p>
               <div css={{ position: 'relative' }}>
                 <input
                   css={[FormInput]}
@@ -167,7 +168,9 @@ const HelpInquiry = () => {
               <SupportChat
                 key={inquiry.id}
                 chatObj={inquiry}
-                isOwner={inquiry.creatorId === router.query.id}
+                isOwner={inquiry.creatorId === router.query.user[0]}
+                isUserName={router.query.user[1]}
+                isUserPhoto={router.query.user[3]}
               />
             ))}
           </div>
@@ -186,8 +189,8 @@ const Section = css`
 `;
 
 const SectionHeadLine = css`
-  margin: 2rem;
-  font-size: 1.2rem;
+  margin: 5rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: #ce7777;
 `;
@@ -200,22 +203,20 @@ const FormContainer = css`
   padding-left: 1.2rem;
   width: 100%;
   height: 150px;
-  background-color: white;
+  background-color: #f3f4ed;
   border-radius: 12px;
-  box-shadow: 1px 10px 5px -2px rgba(0.7, 0.7, 0, 0.07);
-  webkit-box-shadow: 10px 10px 5px -2px rgba(0.7, 0.7, 0, 0.07);
-  moz-box-shadow: 10px 10px 5px -2px rgba(0.7, 0.7, 0, 0.07);
-  margin-bottom: 5rem;
 `;
 
 const FormUser = css`
-  font-size: 18px;
-  margin: 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 2rem 0;
   color: #3c4048;
 `;
 
 export const FormInput = css`
   width: 90%;
+  height: 30px;
   border: none;
   color: #3c4048;
 `;
@@ -235,7 +236,7 @@ export const SubmitBtn = css`
   border: none;
   margin-right: 1.5rem;
   color: gray;
-  background-color: white;
+  background-color: #f3f4ed;
   cursor: pointer;
 
   &: hover {

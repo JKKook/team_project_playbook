@@ -90,7 +90,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
 
             <Link
               css={[DropdownItem, DropdownItemLink]}
-              href='/subPages/MyPages'
+              href={{ pathname: '/subPages/MyPages', query: userData.photoURL }}
             >
               <MdContactPage css={[DropDownIcon]} /> 마이페이지
             </Link>
@@ -126,7 +126,16 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
       id: 3,
       link: '/mainPages/Support',
       title: '고객센터',
-      query: !userData ? '' : { id: userData.uid },
+      query: !userData
+        ? ''
+        : {
+            user: [
+              userData.uid,
+              userData.displayName,
+              userData.email,
+              userData.photoURL,
+            ],
+          },
     },
   ];
 
