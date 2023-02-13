@@ -15,17 +15,15 @@ import {
 } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import SupportChat from '../../src/components/organisms/SupportChat';
-import SupportBoard from '../../src/components/organisms/SupportBoard';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { LoginInnerContainer } from './Login';
 import { MdPhotoCamera } from 'react-icons/md';
-import logo from '../../public/asset/playbook-logo.png';
 import { BsChatLeftText } from 'react-icons/bs';
 
 const HelpInquiry = () => {
   const router = useRouter();
-  // console.log('Help', router.query.id);
+  console.log('help', router.query);
 
   const [inquiry, setInquiry] = useState('');
   const [inquiries, setInquiries] = useState([]);
@@ -39,7 +37,10 @@ const HelpInquiry = () => {
       let attachmentURL;
       if (attachment !== '') {
         // upload attachment
-        const attachmentRef = ref(storage, `${router.query.id}/${uuidv4()}`);
+        const attachmentRef = ref(
+          storage,
+          `${router.query.user[0]}/${uuidv4()}`,
+        );
         const response = await uploadString(
           attachmentRef,
           attachment,
@@ -51,7 +52,7 @@ const HelpInquiry = () => {
       const docRef = {
         text: inquiry,
         createdAt: serverTimestamp(),
-        creatorId: router.query.id,
+        creatorId: router.query.user[0],
         attachmentURL: attachmentURL || null,
       };
       // 지정 된 파이어베이스 경로에 docRef 추가,
@@ -121,7 +122,7 @@ const HelpInquiry = () => {
         <div css={[ChatContainer]}>
           <form css={[FormContainer]} onSubmit={handleSubmit}>
             <div>
-              <p css={[FormUser]}>user.email</p>
+              <p css={[FormUser]}></p>
               <div css={{ position: 'relative' }}>
                 <input
                   css={[FormInput]}
@@ -167,7 +168,9 @@ const HelpInquiry = () => {
               <SupportChat
                 key={inquiry.id}
                 chatObj={inquiry}
-                isOwner={inquiry.creatorId === router.query.id}
+                isOwner={inquiry.creatorId === router.query.user[0]}
+                isUserName={router.query.user[1]}
+                isUserPhoto={router.query.user[3]}
               />
             ))}
           </div>

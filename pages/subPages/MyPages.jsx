@@ -16,8 +16,12 @@ import { changePassowordFromEmail, changePassword } from '../api/auth/firebase';
 import Reservation from '@/src/components/molecules/Reservation';
 import { useQuery } from 'react-query';
 import useGetReservation from '@/src/store/server/useGetReservation';
+import { useRouter } from 'next/router';
 
 const MyPages = ({ user }) => {
+  const router = useRouter();
+  console.log('mypage', router);
+
   const [userData, setUserData] = useRecoilState(userFormState);
   const [registerForm, setRegisterForm] = useRecoilState(userFormMessageState);
   const [isForm, setIsForm] = useRecoilState(isUserState);
@@ -89,7 +93,7 @@ const MyPages = ({ user }) => {
     e.preventDefault();
     clearErrors();
     const result = await changePassword(user, userData.password).then(
-      alert('비밀번호가 변경되었습니다.')
+      alert('비밀번호가 변경되었습니다.'),
     );
     return result;
   };
@@ -97,15 +101,12 @@ const MyPages = ({ user }) => {
   // email 인증을 통해 비밀번호 변경
   const handleChangePasswordThroughEmail = async () => {
     const result = await changePassowordFromEmail(userData.email).then(
-      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.')
+      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.'),
     );
     return result;
   };
 
   const { data, isLoading } = useQuery(['listApi'], useGetReservation);
-
-
-
 
   return (
     <div css={[MyPageStyle]}>
@@ -275,7 +276,8 @@ const ReservationSection = css`
 
 const Text = css`
   text-align: center !important;
-  font-size: 1.75rem;
+  font-size: 1.75rem;import { useRouter } from 'next/router';
+
   color: #8d98a0;
   margin-bottom: 0.5rem;
   font-weight: 600;
