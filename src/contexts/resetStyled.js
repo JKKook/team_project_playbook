@@ -92,6 +92,7 @@ const reset = css`
     box-sizing: border-box;
     scroll-behavior: smooth;
   }
+
   /* HTML5 display-role reset for older browsers */
   article,
   aside,
@@ -117,12 +118,15 @@ const reset = css`
     border-radius: 30px;
   }
 
-  html body {
+  html,
+  body {
     line-height: 1;
-    overflow-x: hidden;
+    // overflow: hidden;
+    heigth: 100vh;
     box-sizing: border-box;
     background-color: #eaeded;
   }
+
   ol,
   ul {
     list-style: none;
