@@ -12,7 +12,7 @@ export const userFormState = atom(
       newAccount: '',
       avatar: '',
     },
-  }, // default value (aka initial value)
+  } // default value (aka initial value)
 );
 
 export const userFormMessageState = atom({

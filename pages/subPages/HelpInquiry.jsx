@@ -1,26 +1,24 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useState, useEffect } from 'react';
-import { db, storage } from '../api/auth/firebase';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { SupportHeader } from '../mainPages/Support';
+import { LoginInnerContainer } from './Login';
+import SupportChat from '../../src/components/organisms/SupportChat';
+import { db, storage } from '../api/auth/firebase';
+import { v4 as uuidv4 } from 'uuid';
+import { MdPhotoCamera } from 'react-icons/md';
+import { BsChatLeftText } from 'react-icons/bs';
+import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import {
   collection,
   addDoc,
   serverTimestamp,
   query,
-  getDoc,
-  getDocs,
   orderBy,
   onSnapshot,
 } from 'firebase/firestore';
-import { useRouter } from 'next/router';
-import SupportChat from '../../src/components/organisms/SupportChat';
-import { ref, uploadString, getDownloadURL } from 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid';
-import { LoginInnerContainer } from './Login';
-import { MdPhotoCamera } from 'react-icons/md';
-import { BsChatLeftText } from 'react-icons/bs';
-import { SupportHeader } from '../mainPages/Support';
 
 const HelpInquiry = () => {
   const router = useRouter();
@@ -39,12 +37,12 @@ const HelpInquiry = () => {
         // upload attachment
         const attachmentRef = ref(
           storage,
-          `${router.query.user[0]}/${uuidv4()}`,
+          `${router.query.user[0]}/${uuidv4()}`
         );
         const response = await uploadString(
           attachmentRef,
           attachment,
-          'data_url',
+          'data_url'
         );
         attachmentURL = await getDownloadURL(response.ref); // url은 ref안에 존재 공식사이트 참고
       }
@@ -94,7 +92,7 @@ const HelpInquiry = () => {
     const userCollectionInquiries = query(
       collection(db, 'inquiries'),
       // 최신순으로 업데이트
-      orderBy('createdAt', 'desc'),
+      orderBy('createdAt', 'desc')
     );
     // snapshot이 의미하는 바는 CRUD 형식의 데이터 관리를 의미한다
     onSnapshot(userCollectionInquiries, (snapshot) => {

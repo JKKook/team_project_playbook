@@ -1,20 +1,19 @@
-import React from 'react';
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
-import {
-  AiOutlineGithub,
-  AiFillFacebook,
-  AiOutlineTwitter,
-} from 'react-icons/ai';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Banner1 from '../public/asset/Banner1.svg';
 import Banner2 from '../public/asset/Banner2.svg';
 import Banner3 from '../public/asset/Banner3.svg';
 import Banner4 from '../public/asset/Banner4.svg';
 import Banner5 from '../public/asset/Banner5.svg';
 import PhoneA from '../public/asset/phoneA.gif';
-import { useRouter } from 'next/router';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import {
+  AiOutlineGithub,
+  AiFillFacebook,
+  AiOutlineTwitter,
+} from 'react-icons/ai';
 
 const Home = () => {
   const router = useRouter();
@@ -22,6 +21,13 @@ const Home = () => {
   const onClickBanner = (e) => {
     console.log(e.target.value);
   };
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   const HeaderVars = {
     initial: { y: 100, opacity: 0, scale: 0.5 },
@@ -80,7 +86,6 @@ const Home = () => {
         <div>
           <Image src={Banner1} alt='배너2' width={1100} />
         </div>
-        {/* <div css={[DetailBox]}> */}
         <div css={[DetailBanner]}>
           {DetailImage.map((imgIdx) => (
             <Image
@@ -98,7 +103,6 @@ const Home = () => {
             />
           ))}
         </div>
-        {/* </div> */}
       </motion.section>
 
       <div css={[Container]}>
@@ -210,6 +214,7 @@ const Home = () => {
           </div>
         </div>
       </footer>
+      <motion.div css={[Progress]} style={{ scaleX }}></motion.div>
     </>
   );
 };
@@ -257,29 +262,6 @@ const Black = css`
   font-size: 3.5rem;
 `;
 
-// const HomeSection = css`
-//   height: 90vh;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: relatve;
-
-//   &::after {
-//     position: absolute;
-//     width: 100%;
-//     height: 100vh;
-//     content: '';
-//     // background: url('https://images.unsplash.com/photo-1516416715870-0e59baaef47a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODB8fCVFQyVBMCU4NCVFQyU4QiU5QyVFRCU5QSU4Q3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=2000&q=60')
-//       no-repeat center;
-//     // background-color: gray;
-//     // background-blend-mode: color-burn;
-//     top: 0;
-//     left: 0;
-//     z-index: -1;
-//     opacity: 0.5;
-//   }
-// `;
-
 const BannerSection = css`
   // padding: 40rem 1.5rem 60rem 1.5rem;
   text-align: center;
@@ -291,12 +273,6 @@ const BannerSection = css`
     margin-top: 10rem;
   }
 `;
-
-// const DetailBox = css`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `
 
 const DetailBanner = css`
   display: flex;
@@ -378,7 +354,7 @@ const IntroTextContainer = css`
     font-size: 2.5rem;
     font-weight: bold;
 
-    &:nth-child(2) {
+    &:nth-of-type(2) {
       margin-left: 5rem;
 
       strong {
@@ -505,57 +481,4 @@ const AboutText = css`
     text-align: justify;
     margin-bottom: 1.5rem;
   }
-`;
-
-// TODO: 여기에 플레이북 추천 구현
-// const Index = () => {
-//   // const imageData = useQuery("image", getApiData);
-//   // const recommendData = useQuery("recommend", recommendApiData);
-
-//   // resultData = [{data}, {data}, {...}]
-//   const resultData = useQueries([
-//     {
-//       queryKey: ['image'],
-//       queryFn: getApiData,
-//     },
-//     {
-//       queryKey: ['recommend'],
-//       queryFn: recommendApiData,
-//     },
-//   ]);
-//   const loading = resultData.some((result) => result.isLoading);
-//   {
-//     loading && <Loading />;
-//   }
-
-//   return (
-//     <>
-//       {/* <HomeNavbar /> */}
-//       <div>
-//         <ImageSlider performances={resultData[0]?.data} />
-//       </div>
-//       <div css={[RecommendContainer]}>
-//         <h2 css={[Recommend]}>이런 공연은 어떠세요?</h2>
-//         <ul css={[RecommendList]}>
-//           {<RecommendPerformance performances={resultData[1]?.data} />}
-//         </ul>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Index;
-
-const RecommendContainer = css`
-  margin-top: 5rem;
-`;
-
-const Recommend = css`
-  text-align: center;
-  font-size: 25px;
-  font-weight: bold;
-  // color: white;
-`;
-const RecommendList = css`
-  margin-top: 5rem;
 `;

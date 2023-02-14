@@ -17,7 +17,7 @@ router.get('/', (_, res) => {
       url: requestUrl,
       method: 'GET',
     },
-    (err, response, body) => {
+    (body) => {
       const xmlToJson = converter.xml2json(body);
       res.send(xmlToJson);
     }

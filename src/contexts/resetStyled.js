@@ -1,4 +1,5 @@
 // css 초기화 설정
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
 const reset = css`
@@ -123,7 +124,6 @@ const reset = css`
     width: 100%;
     max-width: 1536px;
     line-height: 1;
-    // overflow: hidden;
     heigth: 100vh;
     box-sizing: border-box;
     background-color: #eaeded;

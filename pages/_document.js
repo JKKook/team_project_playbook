@@ -1,7 +1,6 @@
 // meta 태그를 정의, 전체페이지의 구조를 만들어준다. (html의 meta)
 // _document작성시 랜더함수는 꼭 <Html>, <Head>, <Main>, <NextScript>요소를 리턴해줘야한다.
 
-import React from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 const Document = () => {

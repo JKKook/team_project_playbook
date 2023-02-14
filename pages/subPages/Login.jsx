@@ -1,6 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import toast, { Toaster } from 'react-hot-toast';
+import { userFormState } from '../../src/recoil/recoil-auth';
+import logo from '../../public/asset/playbook-logo.png';
 import {
   addDocRef,
   loginWithGoogle,
@@ -9,13 +16,6 @@ import {
   onUserStateChange,
   signIn,
 } from '../api/auth/firebase';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import logo from '../../public/asset/playbook-logo.png';
-import Link from 'next/link';
-import { useRecoilState } from 'recoil';
-import { userFormState } from '../../src/recoil/recoil-auth';
-import toast, { Toaster } from 'react-hot-toast';
 
 const signInNotify = () =>
   toast.success('로그인 되었습니다!', {

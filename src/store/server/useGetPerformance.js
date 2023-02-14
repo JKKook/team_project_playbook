@@ -32,7 +32,7 @@ const useGetPerformance = () => {
           data: arr,
         };
       },
-    },
+    }
   );
 };
 

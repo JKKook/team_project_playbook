@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import BookmarkHeart from '../atoms/BookmarkHeart';
-import ReservationButton from './ReservationButton';
+import ReservationButton from './reservation/ReservationButton';
 
 const PerformanceList = ({ total }) => {
   return (
@@ -62,7 +62,6 @@ const Performances = css`
   align-items: cetner;
   margin: 20px 0;
   row-gap: 5rem;
-  // background-color: #fff;
 `;
 
 const CardContainer = css`
@@ -98,11 +97,13 @@ const CardTitle = css`
   margin-right: 0.2rem;
   font-size: 1.25rem;
 `;
+
 const CardBookmark = css`
   padding: 0;
   marign: 0;
   margin-left: 0.5rem;
 `;
+
 const Detail = css`
   overflow: hidden;
   text-overflow: ellipsis;

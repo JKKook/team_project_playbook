@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react **/
+import { css } from '@emotion/react';
+import { useState } from 'react';
 import {
   handleReservationInfo,
   reservationMoudle,
-} from '@/src/modules/reservationModules';
-import { css } from '@emotion/react';
-import { useState } from 'react';
+} from '../../../modules/reservationModules';
 
 const ReservationButton = ({ id }) => {
   const [state, setState] = useState(() => reservationMoudle(id));
