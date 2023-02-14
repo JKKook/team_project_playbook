@@ -10,8 +10,9 @@ import { useEffect, useRef, useState } from 'react';
 import AvatarImage from '../atoms/AvatarImage';
 import { FiLogOut } from 'react-icons/fi';
 import { MdContactPage } from 'react-icons/md';
+import toast, { Toaster } from 'react-hot-toast';
 
-const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
+const Navbar = ({ handleLogout, userData }) => {
   const router = useRouter();
   // router.pathname을 pathname이라는 변수에 저장
   const pathname = router.pathname;
@@ -69,7 +70,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
 
           {userData && (
             <span css={[UserAvatarDisPlayName]}>
-              {`${userData.displayName}`}님
+              {`${userData.displayName ? userData.displayName : 'User'}`}님
             </span>
           )}
         </div>
@@ -79,7 +80,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
             <div css={[DropdownItem]}>
               <div>
                 <p css={[DropDownUserAvatarDisPlayName]}>
-                  {`${userData.displayName}님 `}
+                  {`${userData.displayName ? userData.displayName : 'User'}님`}
                 </p>
                 <p>방문해주셔서 감사합니다</p>
               </div>
@@ -98,6 +99,7 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
             </button>
           </div>
         ) : null}
+        <Toaster position='top-right' reverseOrder={false} />
       </li>
     );
   };

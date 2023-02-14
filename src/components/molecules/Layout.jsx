@@ -4,6 +4,13 @@ import { RecoilRoot } from 'recoil';
 import { logout } from '@/pages/api/auth/firebase';
 import { auth } from '../../../pages/api/auth/firebase';
 import { useRouter } from 'next/router';
+import toast, { Toaster } from 'react-hot-toast';
+
+const signOutNotify = () =>
+  toast('반가웠어요 잘가요!', {
+    icon: '👋',
+  });
+
 const Layout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
@@ -25,7 +32,7 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
     // firebase logout이 성공하게 되면 null를 받아옵니다.
-    logout().then(() => router.push('/'));
+    logout().then(() => router.push('/') && signOutNotify());
   };
 
   return (
@@ -40,6 +47,7 @@ const Layout = ({ children }) => {
         ) : (
           ''
         )}
+        <Toaster position='top-right' reverseOrder={false} />
         {children}
       </RecoilRoot>
     </div>
