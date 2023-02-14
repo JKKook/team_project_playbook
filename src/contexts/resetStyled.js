@@ -108,7 +108,7 @@ const reset = css`
     display: block;
   }
   html::-webkit-scrollbar {
-    width: 1rem;
+    width: 0.5rem;
     background: transparent;
   }
 
@@ -120,6 +120,8 @@ const reset = css`
 
   html,
   body {
+    width: 100%;
+    max-width: 1536px;
     line-height: 1;
     // overflow: hidden;
     heigth: 100vh;

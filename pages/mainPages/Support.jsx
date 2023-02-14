@@ -107,7 +107,7 @@ const Section = css`
   width: 1000px;
 `;
 
-const SupportHeader = css`
+export const SupportHeader = css`
   display: flex;
   margin: 5rem;
 `;

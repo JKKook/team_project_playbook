@@ -12,9 +12,6 @@ import { FiLogOut } from 'react-icons/fi';
 import { MdContactPage } from 'react-icons/md';
 
 const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
-  console.log(!!isLoggedIn);
-  console.log('Nav : isUserData', userData);
-
   const router = useRouter();
   // router.pathname을 pathname이라는 변수에 저장
   const pathname = router.pathname;
@@ -120,10 +117,18 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
     {
       id: 2,
       link: '/subPages/Bookmark',
-      title: '북마크',
+      title: '관심 공연',
     },
     {
       id: 3,
+      link: '/subPages/Order',
+      title: 'My Play',
+    },
+  ];
+
+  const SubRouterData = [
+    {
+      id: 1,
       link: '/mainPages/Support',
       title: '고객센터',
       query: !userData
@@ -139,90 +144,120 @@ const Navbar = ({ isLoggedIn, handleLogout, userData }) => {
     },
   ];
 
+  // Header ******
+
   return (
-    <nav css={[NavContainer]}>
-      <Link href='/' css={[NavbarLogo]}>
-        <Image src={logo} alt='로고' width={110} />
-      </Link>
-      <ul css={[NavBar]}>
-        {/* classnames 라이브러리를 활용해 기존 NavBarLink의 클래스도 사용하고 isActive라는 클래스는 router.pathname이 배열의 객체 내에 link랑 같으면 활성화됨. */}
-        {NavRouterData.map((data) => (
-          <li key={data.id}>
-            <Link
-              className={classNames('NavBarLink', {
-                isActive: pathname === data.link,
-              })}
-              href={{
-                pathname: data.link,
-                query: data.query,
-              }}
-              as={`/about/question/${userData}`}
-            >
-              {data.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <ul css={[NavBar]}>
-        {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
-        {!userData ? (
-          <li css={[Main]}>
-            <Link
-              href='/subPages/Login'
-              className={classNames('MainLink', {
-                isActive: pathname === '/subPages/Login',
-              })}
-            >
-              로그인
-            </Link>
-          </li>
-        ) : (
-          loggedRouter()
-        )}
-      </ul>
-    </nav>
+    <header css={[Header]}>
+      <nav css={[NavContainer]}>
+        <div css={[LoginContainer]}>
+          <ul css={[LoginCategory]}>
+            {SubRouterData.map((data) => (
+              <li css={[SubCategoryText]} key={data.id}>
+                <Link
+                  className={classNames('NavBarLink', {
+                    isActive: pathname === data.link,
+                  })}
+                  href={{
+                    pathname: data.link,
+                    query: data.query,
+                  }}
+                  as={`/about/question/${userData}`}
+                >
+                  {data.title}
+                </Link>
+              </li>
+            ))}
+
+            {/* 로그인 전에는 밑에 리스트가 추가되어야 하고 로그인이 완료되면 loggedRouter()실행되도록 구현해야 함(아직 미완료) */}
+            {!userData ? (
+              <li css={[Main]}>
+                <Link
+                  href='/subPages/Login'
+                  className={classNames('MainLink', {
+                    isActive: pathname === '/subPages/Login',
+                  })}
+                >
+                  로그인
+                </Link>
+              </li>
+            ) : (
+              loggedRouter()
+            )}
+          </ul>
+        </div>
+        <div css={[CategoryContainer]}>
+          <Link href='/' css={[NavbarLogo]}>
+            <Image src={logo} alt='로고' width={110} />
+          </Link>
+          <ul css={[NavBar]}>
+            {/* classnames 라이브러리를 활용해 기존 NavBarLink의 클래스도 사용하고 isActive라는 클래스는 router.pathname이 배열의 객체 내에 link랑 같으면 활성화됨. */}
+            {NavRouterData.map((data) => (
+              <li key={data.id}>
+                <Link
+                  className={classNames('NavBarLink', {
+                    isActive: pathname === data.link,
+                  })}
+                  href={{
+                    pathname: data.link,
+                    query: data.query,
+                  }}
+                  as={`/about/question/${userData}`}
+                >
+                  {data.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+    </header>
   );
 };
 
 export default Navbar;
 
+const Header = css`
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+`;
+
 const NavContainer = css`
-  // position: fixed;
-  width: 100%;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  // box-shadow: 1px 1px 3px 1px #d5dada;
   transition: all 0.5s ease;
-  background: #adc5c5;
   z-index: 1000;
-  // opacity: 0.8
-  scroll-snap-stop: always;
 `;
 
-const NavbarLogo = css`
+const LoginContainer = css`
   display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  text-align: center;
+`;
+
+const LoginCategory = css`
+  display: flex;
+  font-size: 0.9rem;
   align-items: center;
-  margin-left: 4rem;
-`;
 
-const NavBar = css`
-  display: flex;
-  margin-right: 3rem;
   .NavBarLink {
+    margin-right: 1rem;
     color: rgba(0, 0, 0, 0.55);
-    font-weight: 800;
-    padding: 5px 0;
-    margin: 0 2rem;
+    // font-weight: 800;
+    // padding: 5px 0;
+    // margin: 0 2rem;
+    // transition: all 0.5s ease;
+    // &:hover {
+    //   color: #eaeded;
+    //   text-decoration: underline;
+    //   text-underline-position: under;
+    // }
+    // &:first-of-type {
+    //   padding-left: 5rem;
+    font-weight: 700;
     transition: all 0.5s ease;
     &:hover {
-      color: #eaeded;
-      text-decoration: underline;
-      text-underline-position: under;
-    }
-    &:first-of-type {
-      padding-left: 5rem;
+      color: #5f7a61;
     }
   }
   .isActive {
@@ -232,6 +267,44 @@ const NavBar = css`
   }
 `;
 
+const SubCategoryText = css`
+  margin-left: 1rem;
+`;
+
+const NavbarLogo = css`
+  display: flex;
+  align-items: center;
+  margin: 0 2rem;
+`;
+
+const CategoryContainer = css`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+`;
+
+// ul
+const NavBar = css`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2rem;
+  flex-basis: 80%;
+
+  .NavBarLink {
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 700;
+
+    transition: all 0.5s ease;
+    &:hover {
+      color: #5f7a61;    
+  }
+  .isActive {
+    color: rgba(0, 0, 0, 0.8);
+  }
+`;
+
+// ** Dropdown Form
 const Dropdown = css`
   position: relative;
 `;
@@ -262,7 +335,7 @@ const DropdownToggle = css`
 const DropdownMenu = css`
   position: absolute;
   top: 130%;
-  left: -9.8rem;
+  right: 0.5%;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -318,16 +391,23 @@ const Button = css`
 const Main = css`
   display: flex;
   align-items: center;
+  &::before {
+    content: '|';
+    margin-right: 1rem;
+    // margin-left: 2rem;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
   .MainLink {
     display: flex;
     align-items: center;
-    margin-right: 25px;
-    margin-left: 10px;
+    // margin-right: 25px;
+    // margin-left: 10px;
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     transition: all 0.5s ease;
     &:hover {
-      color: rgba(0, 0, 0, 0.8);
+      color: #5f7a61;
     }
   }
   .isActive {
@@ -349,7 +429,6 @@ const UserAvatarDisPlayName = css`
 `;
 const DropDownUserAvatarDisPlayName = css`
   padding: 1rem;
-  max-width: 100px;
   word-break: break-all;
 `;
 
