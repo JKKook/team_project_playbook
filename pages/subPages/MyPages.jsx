@@ -1,26 +1,29 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import Link from 'next/link';
+import { useQuery } from 'react-query';
+import { useRouter } from 'next/router';
 import avatar from '../../public/asset/user.png';
 import Image from 'next/image';
+import {
+  changePassowordFromEmail,
+  changePassword,
+  changeProfile,
+} from '../api/auth/firebase';
 import { useRecoilState } from 'recoil';
 import {
   userFormMessageState,
   userFormState,
   isUserState,
-} from '../../src/components/Recoil/recoil-auth';
+} from '../../src/recoil/recoil-auth';
 import { passwordRegex } from '../../src/utils/auth-regex';
-import { RegisterFormText, RegisterNoticeText } from './Register';
-import { changePassowordFromEmail, changePassword } from '../api/auth/firebase';
-import Reservation from '@/src/components/molecules/Reservation';
-import { useQuery } from 'react-query';
-import useGetReservation from '@/src/store/server/useGetReservation';
-import { useRouter } from 'next/router';
+import { RegisterNoticeText } from './Register';
+import Reservation from '../../src/components/molecules/reservation/Reservation';
+import useGetReservation from '../../src/store/server/useGetReservation';
 
 const MyPages = ({ user }) => {
   const router = useRouter();
-  console.log('mypage', router);
+  console.log('mypage', router.query);
 
   const [userData, setUserData] = useRecoilState(userFormState);
   const [registerForm, setRegisterForm] = useRecoilState(userFormMessageState);
@@ -34,8 +37,8 @@ const MyPages = ({ user }) => {
 
   // 선택한 이미지가 저장되도록
   const changeAvatar = (e) => {
-    const file = e.target.files[0];
-    setUserData({ ...userData, avatar: file });
+    e.preventDefault();
+    changeProfile(router.query.userAvatar);
   };
 
   // 에러 방지를 위해 초기값 '' 세팅

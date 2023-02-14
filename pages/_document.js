@@ -4,8 +4,6 @@
 import React from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
 
-const key = process.env.EXAMPLE_KEY; // 환경변수 키 사용법
-
 const Document = () => {
   return (
     <Html lang='ko'>

@@ -4,39 +4,27 @@
 // _app.js 실행 -> _document.js실행 구조
 import React, { useEffect } from 'react';
 import { Global } from '@emotion/react';
-import reset from '@/src/contexts/resetStyled';
+import reset from '../src/contexts/resetStyled';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import Layout from '@/src/components/molecules/Layout';
+import Layout from '../src/components/molecules/Layout';
 import NextNProgress from 'nextjs-progressbar';
-import { auth } from '../pages/api/auth/firebase';
-import { useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 // Recoil
 // props로 받는 Component는 요청한 페이지다. GET/요청시 Component에서는 pages/index.js 파일이 props로 내려온다.
 // pageProps는 페이지 getInitialProps를 통해 내려받은 props들을 말한다.
 const App = ({ Component, pageProps }) => {
-  const [init, setInit] = useState(false);
-
-  useEffect(() => {
-    setInit(true);
-  }, []);
-
   const queryClient = React.useRef(new QueryClient());
   return (
     <>
       <Global styles={reset} />
       <QueryClientProvider client={queryClient.current}>
         <Hydrate state={pageProps.dehydratedState}>
-          {init ? (
-            <Layout>
-              <NextNProgress />
-              <Component {...pageProps} />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </Layout>
-          ) : (
-            '홈페이지를 불러오는 중입니다...'
-          )}
+          <Layout>
+            <NextNProgress />
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </Layout>
         </Hydrate>
       </QueryClientProvider>
     </>
