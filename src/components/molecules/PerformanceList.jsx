@@ -3,23 +3,9 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import BookmarkHeart from '../atoms/BookmarkHeart';
-import {
-  bookmarkState,
-  handlePerformanceBookmark,
-} from '@/src/recoil/bookmarkState';
-import {
-  bookmarkModule,
-  handleBookMarkInfo,
-  isCheckBookMark,
-} from '@/src/modules/bookmarkModules';
-import { useState } from 'react';
 import ReservationButton from './ReservationButton';
 
-// react query localstorage : user, email 등등...
-
 const PerformanceList = ({ total }) => {
-  // console.log(total);
-
   return (
     <div css={[Performances]}>
       {total &&
@@ -161,12 +147,4 @@ const LinkToDescription = css`
   color: #fff;
   background-color: #17a2b8;
   border-color: #17a2b8;
-`;
-
-const ReserveButton = css`
-  width: 100%;
-  color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
-  cursor: pointer;
 `;

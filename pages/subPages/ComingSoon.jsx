@@ -1,10 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
-import { TextContainer, NotFoundText, BackToHomeButton } from '../404';
+import {
+  TextContainer,
+  NotFoundText,
+  BackToHomeButton,
+  NotFoundTextEng,
+} from '../404';
 import { AiOutlineMessage } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { NotFoundTextEng } from '../404';
 
 const ComingSoon = () => {
   const router = useRouter();

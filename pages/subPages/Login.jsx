@@ -14,7 +14,7 @@ import Image from 'next/image';
 import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
 import { useRecoilState } from 'recoil';
-import { userFormState } from '../../src/components/Recoil/recoil-auth';
+import { userFormState } from '../../src/recoil/recoil-auth';
 import toast, { Toaster } from 'react-hot-toast';
 
 const signInNotify = () =>
