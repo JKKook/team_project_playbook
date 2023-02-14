@@ -212,19 +212,23 @@ const NavBar = css`
   margin-right: 3rem;
   .NavBarLink {
     color: rgba(0, 0, 0, 0.55);
-    font-weight: 600;
+    font-weight: 800;
     padding: 5px 0;
     margin: 0 2rem;
     transition: all 0.5s ease;
     &:hover {
-      color: rgba(0, 0, 0, 0.8);
+      color: #eaeded;
+      text-decoration: underline;
+      text-underline-position: under;
     }
     &:first-of-type {
       padding-left: 5rem;
     }
   }
   .isActive {
-    color: rgba(0, 0, 0, 0.8);
+    color: #eaeded;
+    text-decoration: underline;
+    text-underline-position: under;
   }
 `;
 
@@ -241,7 +245,7 @@ const DropdownToggle = css`
   cursor: pointer;
   user-select: none;
   &:hover {
-    color: rgba(0, 0, 0, 0.8);
+    color: #eaeded;
   }
   &::after {
     display: inline-block;
@@ -267,7 +271,7 @@ const DropdownMenu = css`
   margin: 0.125rem 0 0;
   color: #212529;
   text-align: center;
-  background-color: #fff;
+  background-color: #eaeded;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 `;

@@ -1,8 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import Loading from '@/src/components/atoms/Loading';
 import { css } from '@emotion/react';
-import NextImage from 'next/image';
+import Image from 'next/image';
 import useGetDescription from '@/src/store/server/useGetDescription';
+import {
+  AiOutlineUser,
+  AiOutlineClockCircle,
+  AiOutlineCalendar,
+  AiOutlineCreditCard,
+  AiOutlineEnvironment,
+  AiOutlineHourglass,
+  BookmarkHeart,
+} from 'react-icons/ai';
 const { useState, useEffect } = require('react');
 
 const { useRouter } = require('next/router');
@@ -43,37 +52,56 @@ const Post = () => {
     <>
       {!isLoading && data ? (
         <div css={[Container]}>
+          <h1 css={[PerformenceName]}>{data.name}</h1>
           <div css={[ImageContainer]}>
-            <NextImage
+            <Image
               src={data.posterImage}
               alt={data.name}
               width={350}
               height={500}
             />
           </div>
-          <h1 css={[PerformenceName]}>{data.name}</h1>
           <div css={[InfoContainer]}>
             <h2 css={[InfoName]}>공연 정보</h2>
             <ul css={[List]}>
-              <li>장소vv: {data.place}</li>
-              <li>출연진: {data.actor}</li>
               <li>
-                기간: {data.from} ~ {data.to}
+                <AiOutlineEnvironment css={[Icons]} />
+                <span>{data.place}</span>
               </li>
-              <li>가격: {data.price}</li>
-              <li>공연장르: {data.genre}</li>
-              <li>공연시간: {data.runtime}</li>
+              <li>
+                <AiOutlineUser css={[Icons]} />
+                <span>{data.actor}</span>
+              </li>
+              <li>
+                <AiOutlineCalendar css={[Icons]} />
+                <span>
+                  {data.from} ~ {data.to}
+                </span>
+              </li>
+              <li>
+                <AiOutlineCreditCard css={[Icons]} />
+                <span>{data.price}</span>
+              </li>
+              <li>
+                <AiOutlineHourglass css={[Icons]} />
+                <span>{data.genre}</span>
+              </li>
+              <li>
+                <AiOutlineClockCircle css={[Icons]} />
+                <span>{data.runtime}</span>
+              </li>
             </ul>
           </div>
           <div css={[ButtonContainer]}>
-            <button>예매하기</button>
-            <button>북마크</button>
+            <button css={[Btn]}>예매하기</button>
+            <button css={[Btn]}>북마크</button>
           </div>
+          <h2 css={[InfoName]}>상세 이미지</h2>
           <div css={[DescriptionImage]}>
             {/* {data.descripImage.length !== 0 ? (
               data.descripImage.map((item, idx) => {
                 return ( */}
-            <NextImage
+            <Image
               css={[Images]}
               // key={idx}
               src={data.descriptImage}
@@ -116,12 +144,10 @@ const ImageContainer = css`
 `;
 
 const PerformenceName = css`
-  display: flex;
-  flex-direction: column;
-
-  font-size: 25px;
-  font-weight: 500;
-  margin: 10px 20px;
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  margin: 3rem 0;
 
   @media screen and (max-width: 500px) {
     font-size: 18px;
@@ -138,7 +164,22 @@ const PerformenceName = css`
 `;
 
 const List = css`
-  margin: 20px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 3rem 3rem 20rem;
+
+  li {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+  }
+`;
+
+const Icons = css`
+  font-size: 25px;
+  margin-right: 1rem;
 `;
 
 const InfoContainer = css`
@@ -148,13 +189,36 @@ const InfoContainer = css`
 
 const InfoName = css`
   font-size: 20px;
-  color: gray;
-  margin: 20px;
+  margin: 20px 0 5rem 8rem;
 `;
 
 const ButtonContainer = css`
   display: flex;
   justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+`;
+
+const Btn = css`
+  width: 100px;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 5px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:first-of-type {
+    background: #17a2b8;
+    color: #fff;
+  }
+
+  &:last-of-type {
+    background: #28a745;
+    color: #fff;
+  }
 `;
 
 const DescriptionImage = css`
