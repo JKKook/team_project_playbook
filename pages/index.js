@@ -1,76 +1,19 @@
-// /** @jsxImportSource @emotion/react **/
-// 여기에 우리가 원하는 구현들을 넣으면된다
-
-// import { dehydrate, QueryClient, useQueries, useQuery } from 'react-query';
-// import axios from 'axios';
-// import ImageSlider from '@/src/components/molecules/ImageSlider';
-// import { css } from '@emotion/react';
-// import Navbar from '@/src/components/molecules/Navbar';
-// import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
-// import HomeNavbar from '@/src/components/molecules/HomeNavbar';
-// import Loading from '@/src/components/atoms/Loading';
-// // 공공기관 api 경로 (쿼리전까지)
-// const HOST = `http://kopis.or.kr/openApi/restful/pblprfr`;
-// // api key
-// const KEY = '98e02b76a394447699b7324b7ff14b83';
-
-// // 한달전부터 현재까지 공연하는 정보 불러오기
-// const requestUrl = `${HOST}?service=${KEY}&stdate=20221201&eddate=20230401&cpage=1&rows=20`;
-
-// // 8개의 이미지슬라이드를 위해 가져오는 api
-// const getApiData = async () => {
-//   const response = await axios.get('http://localhost:4000/main/image');
-//   const arr = [];
-//   //console.log(response.data.elements[0].elements); // 8개 공연정보
-//   const resData = response.data.elements[0].elements;
-//   resData.map((v) => {
-//     const obj = {
-//       id: v.elements[0].elements[0].text, // 공연 id
-//       name: v.elements[1].elements[0].text, // 공연 이름
-//       image: v.elements[5].elements[0].text, // 공연 포스터이미지
-//     };
-//     arr.push(obj);
-//   });
-//   return arr;
-// };
-
-// // 이런공연은 어떠세요 리스트를 가져오는 api
-// const recommendApiData = async () => {
-//   const response = await axios.get('http://localhost:4000/main/recommend');
-//   const arr = [];
-//   const resData = response.data.elements[0].elements;
-//   // console.log(resData[0].elements);
-//   resData.map((v) => {
-//     const obj = {
-//       id: v.elements[0].elements[0].text,
-//       name: v.elements[1].elements[0].text,
-//       image: v.elements[5].elements[0].text,
-//       genre: v.elements[6].elements[0].text, // 공연 장르
-//       isPlaying: v.elements[7].elements[0].text, // 현재 공연중인지, 예정인지,
-//     };
-//     arr.push(obj);
-//   });
-//   return arr;
-// };
-
-import React from 'react';
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
-import {
-  AiOutlineGithub,
-  AiFillFacebook,
-  AiOutlineTwitter,
-} from 'react-icons/ai';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Banner1 from '../public/asset/Banner1.svg';
 import Banner2 from '../public/asset/Banner2.svg';
 import Banner3 from '../public/asset/Banner3.svg';
 import Banner4 from '../public/asset/Banner4.svg';
 import Banner5 from '../public/asset/Banner5.svg';
 import PhoneA from '../public/asset/phoneA.gif';
-// import Light from '../public/asset/light.svg';
-import { useRouter } from 'next/router';
-import { motion, useScroll, useSpring, Variants } from 'framer-motion';
+import {
+  AiOutlineGithub,
+  AiFillFacebook,
+  AiOutlineTwitter,
+} from 'react-icons/ai';
 
 const Home = () => {
   const router = useRouter();
@@ -78,6 +21,13 @@ const Home = () => {
   const onClickBanner = (e) => {
     console.log(e.target.value);
   };
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   const HeaderVars = {
     initial: { y: 100, opacity: 0, scale: 0.5 },
@@ -136,7 +86,6 @@ const Home = () => {
         <div>
           <Image src={Banner1} alt='배너2' width={1100} />
         </div>
-        {/* <div css={[DetailBox]}> */}
         <div css={[DetailBanner]}>
           {DetailImage.map((imgIdx) => (
             <Image
@@ -154,7 +103,6 @@ const Home = () => {
             />
           ))}
         </div>
-        {/* </div> */}
       </motion.section>
 
       <div css={[Container]}>
@@ -266,6 +214,7 @@ const Home = () => {
           </div>
         </div>
       </footer>
+      <motion.div css={[Progress]} style={{ scaleX }}></motion.div>
     </>
   );
 };
@@ -313,29 +262,6 @@ const Black = css`
   font-size: 3.5rem;
 `;
 
-// const HomeSection = css`
-//   height: 90vh;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: relatve;
-
-//   &::after {
-//     position: absolute;
-//     width: 100%;
-//     height: 100vh;
-//     content: '';
-//     // background: url('https://images.unsplash.com/photo-1516416715870-0e59baaef47a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODB8fCVFQyVBMCU4NCVFQyU4QiU5QyVFRCU5QSU4Q3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=2000&q=60')
-//       no-repeat center;
-//     // background-color: gray;
-//     // background-blend-mode: color-burn;
-//     top: 0;
-//     left: 0;
-//     z-index: -1;
-//     opacity: 0.5;
-//   }
-// `;
-
 const BannerSection = css`
   // padding: 40rem 1.5rem 60rem 1.5rem;
   text-align: center;
@@ -347,12 +273,6 @@ const BannerSection = css`
     margin-top: 10rem;
   }
 `;
-
-// const DetailBox = css`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `
 
 const DetailBanner = css`
   display: flex;
@@ -394,7 +314,7 @@ const Btn = css`
   margin: 0.6rem auto;
   transition: all 0.5s ease-in-out;
 
-  &:first-child {
+  &:first-of-child {
     color: #fff;
     background: #e99c2f;
   }
@@ -404,7 +324,7 @@ const Btn = css`
     color: #fff;
   }
 
-  &:first-child:hover {
+  &:first-of-child:hover {
     background: transparent;
     color: #e99c2f;
   }
@@ -434,7 +354,7 @@ const IntroTextContainer = css`
     font-size: 2.5rem;
     font-weight: bold;
 
-    &:nth-child(2) {
+    &:nth-of-type(2) {
       margin-left: 5rem;
 
       strong {
@@ -561,57 +481,4 @@ const AboutText = css`
     text-align: justify;
     margin-bottom: 1.5rem;
   }
-`;
-
-// TODO: 여기에 플레이북 추천 구현
-// const Index = () => {
-//   // const imageData = useQuery("image", getApiData);
-//   // const recommendData = useQuery("recommend", recommendApiData);
-
-//   // resultData = [{data}, {data}, {...}]
-//   const resultData = useQueries([
-//     {
-//       queryKey: ['image'],
-//       queryFn: getApiData,
-//     },
-//     {
-//       queryKey: ['recommend'],
-//       queryFn: recommendApiData,
-//     },
-//   ]);
-//   const loading = resultData.some((result) => result.isLoading);
-//   {
-//     loading && <Loading />;
-//   }
-
-//   return (
-//     <>
-//       {/* <HomeNavbar /> */}
-//       <div>
-//         <ImageSlider performances={resultData[0]?.data} />
-//       </div>
-//       <div css={[RecommendContainer]}>
-//         <h2 css={[Recommend]}>이런 공연은 어떠세요?</h2>
-//         <ul css={[RecommendList]}>
-//           {<RecommendPerformance performances={resultData[1]?.data} />}
-//         </ul>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Index;
-
-const RecommendContainer = css`
-  margin-top: 5rem;
-`;
-
-const Recommend = css`
-  text-align: center;
-  font-size: 25px;
-  font-weight: bold;
-  // color: white;
-`;
-const RecommendList = css`
-  margin-top: 5rem;
 `;

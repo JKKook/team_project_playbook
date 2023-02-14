@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 import { MdSupportAgent } from 'react-icons/md';
 import { HiOutlineTicket } from 'react-icons/hi';
 import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
-import { css } from '@emotion/react';
-import { useRouter } from 'next/router';
 
 const Support = () => {
   const router = useRouter();

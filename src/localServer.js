@@ -15,10 +15,8 @@ const PORT = 4000;
 // 하단부터 라우터정보 가져오시면 됩니다.
 // 파일은 src/serverRouter/...입니다.
 const mainImageRouter = require('./serverRouter/mainImageRouter');
-const mainRecommend = require('./serverRouter/mainRecommendRouter');
-const descriptionRouter = require('./serverRouter/descriptionRouter');
 const totalRouter = require('./serverRouter/totalPerformanceRouter');
-// const numberRouter = require('./serverRouter/numberRouter');
+
 const KEY = '98e02b76a394447699b7324b7ff14b83';
 
 // cors 정책 허용 라이브러리
@@ -34,9 +32,7 @@ app.use(
 // 라우터 경로 설정
 
 app.use('/main/image', mainImageRouter);
-app.use('/main/recommend', mainRecommend);
 app.use('/main/total', totalRouter);
-// app.use('/main/number', numberRouter);
 
 // server메인
 app.get('/', (_, res) => {
@@ -50,9 +46,8 @@ app.get('/description/:id', (req, res) => {
       url: `https://www.kopis.or.kr/openApi/restful/pblprfr/${params.id}?service=${KEY}`,
       method: 'GET',
     },
-    (err, response, body) => {
+    (body) => {
       const xmlToJson = converter.xml2json(body);
-      console.log(xmlToJson);
       res.send(xmlToJson);
     }
   );

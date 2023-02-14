@@ -1,10 +1,7 @@
 // localStorage로 저장하기
-
-import PerformanceList from '@/src/components/molecules/PerformanceList';
-import { getBookmarkInfo } from '@/src/modules/bookmarkModules';
-import { async } from '@firebase/util';
+import PerformanceList from '../../src/components/molecules/PerformanceList';
+import { getBookmarkInfo } from '../../src/modules/bookmarkModules';
 import { useQuery } from 'react-query';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const getListApi = async () => {
@@ -38,8 +35,6 @@ const getListApi = async () => {
 
 const Bookmark = () => {
   const { data, isLoading } = useQuery(['listApi'], getListApi);
-
-  // console.log(data);
 
   if (isLoading) {
     return <div>로딩중</div>;

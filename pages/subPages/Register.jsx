@@ -1,7 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
+import logo from '../../public/asset/playbook-logo.png';
+import { emailRegex, passwordRegex } from '../../src/utils/auth-regex';
+import MyPages from './MyPages';
+import Layout from '../../src/components/molecules/Layout';
+import { useRecoilState } from 'recoil';
+import {
+  userFormMessageState,
+  userFormState,
+  isUserState,
+} from '../../src/recoil/recoil-auth';
 import { onUserStateChange, signUp } from '../api/auth/firebase';
 import {
   LoginDisplay,
@@ -16,18 +28,6 @@ import {
   LoginSupportMsgFirst,
   LoginSupportMsgSecond,
 } from './Login';
-import Image from 'next/image';
-import logo from '../../public/asset/playbook-logo.png';
-import Link from 'next/link';
-import { emailRegex, passwordRegex } from '../../src/utils/auth-regex';
-import { useRecoilState } from 'recoil';
-import {
-  userFormMessageState,
-  userFormState,
-  isUserState,
-} from '../../src/components/Recoil/recoil-auth';
-import MyPages from './MyPages';
-import Layout from '../../src/components/molecules/Layout';
 
 const Register = () => {
   // 로그인 user 유무

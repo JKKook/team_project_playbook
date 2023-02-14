@@ -1,25 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import Link from 'next/link';
 import { css } from '@emotion/react';
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
+import AvatarImage from '../atoms/AvatarImage';
 import logo from '../../../public/asset/playbook-logo.png';
 import user from '../../../public/asset/user.png';
-import Image from 'next/image';
-import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
-import AvatarImage from '../atoms/AvatarImage';
 import { FiLogOut } from 'react-icons/fi';
 import { MdContactPage } from 'react-icons/md';
-import toast, { Toaster } from 'react-hot-toast';
 
 const Navbar = ({ handleLogout, userData }) => {
   const router = useRouter();
-  // router.pathname을 pathname이라는 변수에 저장
   const pathname = router.pathname;
 
   // useRef로 DOM 접근하도록 생성
   const outsideRef = useRef(null);
-
   const [open, setOpen] = useState(false);
 
   /** ------------------------------- 함수 영역 ------------------------------------ */
@@ -85,10 +82,12 @@ const Navbar = ({ handleLogout, userData }) => {
                 <p>방문해주셔서 감사합니다</p>
               </div>
             </div>
-
             <Link
               css={[DropdownItem, DropdownItemLink]}
-              href={{ pathname: '/subPages/MyPages', query: userData.photoURL }}
+              href={{
+                pathname: '/subPages/MyPages',
+                query: !userData ? '' : { userAvatar: userData.photoURL },
+              }}
             >
               <MdContactPage css={[DropDownIcon]} /> 마이페이지
             </Link>
@@ -99,7 +98,6 @@ const Navbar = ({ handleLogout, userData }) => {
             </button>
           </div>
         ) : null}
-        <Toaster position='top-right' reverseOrder={false} />
       </li>
     );
   };
@@ -123,7 +121,7 @@ const Navbar = ({ handleLogout, userData }) => {
     },
     {
       id: 3,
-      link: '/subPages/Order',
+      link: '/subPages/ComingSoon',
       title: 'My Play',
     },
   ];
@@ -245,17 +243,6 @@ const LoginCategory = css`
   .NavBarLink {
     margin-right: 1rem;
     color: rgba(0, 0, 0, 0.55);
-    // font-weight: 800;
-    // padding: 5px 0;
-    // margin: 0 2rem;
-    // transition: all 0.5s ease;
-    // &:hover {
-    //   color: #eaeded;
-    //   text-decoration: underline;
-    //   text-underline-position: under;
-    // }
-    // &:first-of-type {
-    //   padding-left: 5rem;
     font-weight: 700;
     transition: all 0.5s ease;
     &:hover {
@@ -263,9 +250,7 @@ const LoginCategory = css`
     }
   }
   .isActive {
-    color: #eaeded;
-    text-decoration: underline;
-    text-underline-position: under;
+    color: rgba(0, 0, 0, 0.8);
   }
 `;
 
@@ -320,7 +305,7 @@ const DropdownToggle = css`
   cursor: pointer;
   user-select: none;
   &:hover {
-    color: #eaeded;
+    color: rgba(0, 0, 0, 0.8);
   }
   &::after {
     display: inline-block;
@@ -346,7 +331,7 @@ const DropdownMenu = css`
   margin: 0.125rem 0 0;
   color: #212529;
   text-align: center;
-  background-color: #eaeded;
+  background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 `;
@@ -396,15 +381,12 @@ const Main = css`
   &::before {
     content: '|';
     margin-right: 1rem;
-    // margin-left: 2rem;
     color: rgba(0, 0, 0, 0.55);
   }
 
   .MainLink {
     display: flex;
     align-items: center;
-    // margin-right: 25px;
-    // margin-left: 10px;
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     transition: all 0.5s ease;

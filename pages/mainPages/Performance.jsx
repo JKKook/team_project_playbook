@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
-import PerformanceList from '@/src/components/molecules/PerformanceList';
 import { useState, useEffect } from 'react';
-import Loading from '@/src/components/atoms/Loading';
-import useGetPerformance from '@/src/store/server/useGetPerformance';
+import PerformanceList from '../../src/components/molecules/PerformanceList';
+import Loading from '../../src/components/atoms/Loading';
+import useGetPerformance from '../../src/store/server/useGetPerformance';
+import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format } from 'date-fns';
 
 /**---------------------- 함수 영역-------------------------------- */
 

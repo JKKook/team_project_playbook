@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
 import { css } from '@emotion/react';
 import { CgGhostCharacter } from 'react-icons/cg';
 import { useRouter } from 'next/router';

@@ -1,16 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React from 'react';
-import { TiDelete } from 'react-icons/ti';
-import { FiEdit } from 'react-icons/fi';
-import { db, storage } from '../../../pages/api/auth/firebase';
-import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import Image from 'next/image';
+import { db, storage } from '../../../pages/api/auth/firebase';
+import { TiDelete,FiEdit } from 'react-icons/ti';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
+
 const SupportChat = ({ chatObj, isOwner, isUserName, isUserPhoto }) => {
-  // console.log('chat', chatObj);
-  console.log('photo', isUserPhoto);
+
   const [editting, setEditting] = useState(false);
   const [newChat, setNewChat] = useState(chatObj.text);
 
@@ -154,7 +152,6 @@ const ChatUserIcon = css`
 const ChatImg = css`
   position: absolute;
   border: 1px solid white;
-  // border-radius: 12px;
   transform: translate(300%, 10%);
   aspect-ratio: 1/1;
 `;

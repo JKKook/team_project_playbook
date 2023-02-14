@@ -10,6 +10,7 @@ import {
   createUserWithEmailAndPassword,
   updatePassword,
   sendPasswordResetEmail,
+  updateProfile,
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
@@ -36,6 +37,15 @@ export const auth = getAuth(app);
 // social authentication provider
 const providerGoogle = new GoogleAuthProvider();
 const providerMeta = new FacebookAuthProvider();
+
+// update profile
+
+export const changeProfile = async (userAvatar) => {
+  const user = auth.currentUser;
+  updateProfile(user, {
+    photoURL: userAvatar,
+  });
+};
 
 // 비밀번호 변경
 // ** 단, 비밀번호를 설정하려면 사용자가 최근에 로그인한 적이 있어야 한다!
@@ -76,14 +86,7 @@ export const signIn = async (email, password) => {
 // Google 사용자 로그인
 // auth, provider가 호출되면 결과 값으로 user의 정보를 받아옵니다. 에러가 발생 시, 에러 메시지를 호출합니다.
 export const loginWithGoogle = () => {
-  signInWithPopup(auth, providerGoogle)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      console.log(token);
-      return result.token;
-    })
-    .catch(console.error);
+  signInWithPopup(auth, providerGoogle).then().catch(console.error);
 };
 
 // Meta, faceBook 사용자 로그인
