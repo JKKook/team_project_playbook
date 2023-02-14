@@ -15,6 +15,14 @@ import logo from '../../public/asset/playbook-logo.png';
 import Link from 'next/link';
 import { useRecoilState } from 'recoil';
 import { userFormState } from '../../src/components/Recoil/recoil-auth';
+import toast, { Toaster } from 'react-hot-toast';
+
+const signInNotify = () =>
+  toast.success('로그인 되었습니다!', {
+    style: {
+      transition: 'all 0.5s ease',
+    },
+  });
 
 const Login = () => {
   // 로그인한 사용자의 정보
@@ -102,7 +110,7 @@ const Login = () => {
                     type='submit'
                     defaultValue='로그인'
                     disabled={!loginForm.email && !loginForm.password}
-                    onClick={handleSignIn}
+                    onClick={handleSignIn && signInNotify}
                   />
                 </div>
               </form>
@@ -136,18 +144,7 @@ const Login = () => {
       ) : (
         ''
       )}
-      {/* user가 입력 될 시, navbar로 user정보와 로그아웃 메서드 전달 */}
-      {/* {user ? (
-        <>
-          <Layout
-          // isLoggedIn={user}
-          // userData={loginForm}
-          // handleLogout={handleLogout}
-          />
-        </>
-      ) : (
-        ''
-      )} */}
+      <Toaster position='top-right' reverseOrder={false} />
     </>
   );
 };
