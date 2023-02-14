@@ -1,58 +1,3 @@
-// /** @jsxImportSource @emotion/react **/
-// 여기에 우리가 원하는 구현들을 넣으면된다
-
-// import { dehydrate, QueryClient, useQueries, useQuery } from 'react-query';
-// import axios from 'axios';
-// import ImageSlider from '@/src/components/molecules/ImageSlider';
-// import { css } from '@emotion/react';
-// import Navbar from '@/src/components/molecules/Navbar';
-// import RecommendPerformance from '@/src/components/molecules/RecommendPerformance';
-// import HomeNavbar from '@/src/components/molecules/HomeNavbar';
-// import Loading from '@/src/components/atoms/Loading';
-// // 공공기관 api 경로 (쿼리전까지)
-// const HOST = `http://kopis.or.kr/openApi/restful/pblprfr`;
-// // api key
-// const KEY = '98e02b76a394447699b7324b7ff14b83';
-
-// // 한달전부터 현재까지 공연하는 정보 불러오기
-// const requestUrl = `${HOST}?service=${KEY}&stdate=20221201&eddate=20230401&cpage=1&rows=20`;
-
-// // 8개의 이미지슬라이드를 위해 가져오는 api
-// const getApiData = async () => {
-//   const response = await axios.get('http://localhost:4000/main/image');
-//   const arr = [];
-//   //console.log(response.data.elements[0].elements); // 8개 공연정보
-//   const resData = response.data.elements[0].elements;
-//   resData.map((v) => {
-//     const obj = {
-//       id: v.elements[0].elements[0].text, // 공연 id
-//       name: v.elements[1].elements[0].text, // 공연 이름
-//       image: v.elements[5].elements[0].text, // 공연 포스터이미지
-//     };
-//     arr.push(obj);
-//   });
-//   return arr;
-// };
-
-// // 이런공연은 어떠세요 리스트를 가져오는 api
-// const recommendApiData = async () => {
-//   const response = await axios.get('http://localhost:4000/main/recommend');
-//   const arr = [];
-//   const resData = response.data.elements[0].elements;
-//   // console.log(resData[0].elements);
-//   resData.map((v) => {
-//     const obj = {
-//       id: v.elements[0].elements[0].text,
-//       name: v.elements[1].elements[0].text,
-//       image: v.elements[5].elements[0].text,
-//       genre: v.elements[6].elements[0].text, // 공연 장르
-//       isPlaying: v.elements[7].elements[0].text, // 현재 공연중인지, 예정인지,
-//     };
-//     arr.push(obj);
-//   });
-//   return arr;
-// };
-
 import React from 'react';
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
@@ -68,9 +13,8 @@ import Banner3 from '../public/asset/Banner3.svg';
 import Banner4 from '../public/asset/Banner4.svg';
 import Banner5 from '../public/asset/Banner5.svg';
 import PhoneA from '../public/asset/phoneA.gif';
-// import Light from '../public/asset/light.svg';
 import { useRouter } from 'next/router';
-import { motion, useScroll, useSpring, Variants } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 const Home = () => {
   const router = useRouter();
@@ -394,7 +338,7 @@ const Btn = css`
   margin: 0.6rem auto;
   transition: all 0.5s ease-in-out;
 
-  &:first-child {
+  &:first-of-child {
     color: #fff;
     background: #e99c2f;
   }
@@ -404,7 +348,7 @@ const Btn = css`
     color: #fff;
   }
 
-  &:first-child:hover {
+  &:first-of-child:hover {
     background: transparent;
     color: #e99c2f;
   }

@@ -25,7 +25,7 @@ import {
   userFormMessageState,
   userFormState,
   isUserState,
-} from '../../src/components/Recoil/recoil-auth';
+} from '../../src/recoil/recoil-auth';
 import MyPages from './MyPages';
 import Layout from '../../src/components/molecules/Layout';
 
