@@ -86,7 +86,7 @@ const Performance = () => {
     e.preventDefault();
     if (!data) return;
     const filteredData = data.data.filter((el) =>
-      el.name.toLowerCase().includes(search.toLowerCase()),
+      el.name.toLowerCase().includes(search.toLowerCase())
     );
     setSearchData(filteredData);
   };
@@ -142,7 +142,7 @@ const Performance = () => {
               css={[CalendarText]}
             >{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
               date[0].endDate,
-              'MM/dd/yyyy',
+              'MM/dd/yyyy'
             )}`}</span>
 
             {openDate && (
@@ -196,12 +196,12 @@ const InputGroup = css`
 
 const FormInput = css`
   width: 100%;
-  height: calc(1.5em em + 0.75rem + 2px);
+  height: 100%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
-  border: 1px solid #ced4da;
+  border: 1px solid #000;
   border-radius: 0.25rem;
 `;
 
@@ -214,7 +214,7 @@ const CategoryFilter = css`
 const CategorySelect = css`
   display: inline-block;
   width: 100%;
-  height: calc(1.5em + 0.75rem + 2px);
+  height: 100%;
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -239,6 +239,7 @@ const CalendarText = css`
   color: #495057;
   cursor: pointer;
   user-select: none;
+  height: 100%;
 `;
 
 const Calendar = css`

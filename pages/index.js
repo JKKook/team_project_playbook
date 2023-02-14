@@ -79,13 +79,6 @@ const Home = () => {
     console.log(e.target.value);
   };
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   const HeaderVars = {
     initial: { y: 100, opacity: 0, scale: 0.5 },
     whileInView: { x: 0, opacity: 1, scale: 1 },
@@ -122,7 +115,6 @@ const Home = () => {
           initial={{ y: 100, opacity: 0, scale: 0.5 }}
           whileInView={{ y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          // viewport={{ once: true }}
           css={[HeaderTextContainer]}
         >
           <h1>우리의 공연을 깨우는</h1>
@@ -191,13 +183,6 @@ const Home = () => {
                 >
                   예약하러 가기
                 </button>
-                {/* <button
-                  type='button'
-                  css={[Btn]}
-                  onClick={() => router.push('/mainPages/Support')}
-                >
-                  로그인
-                </button> */}
               </div>
             </div>
           </div>
@@ -281,7 +266,6 @@ const Home = () => {
           </div>
         </div>
       </footer>
-      <motion.div css={[Progress]} style={{ scaleX }}></motion.div>
     </>
   );
 };
