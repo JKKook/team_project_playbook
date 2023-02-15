@@ -2,7 +2,7 @@
 import {
   handleReservationInfo,
   reservationMoudle,
-} from '@/src/modules/reservationModules';
+} from '../../../modules/reservationModules';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 

@@ -17,10 +17,6 @@ const filterCategory = (data, category) => {
   else return data.filter((c) => c.genre === category);
 };
 
-// const filterDate = (data, date) => {
-//   if (!data) return;
-// }
-
 const Performance = () => {
   const { data, isLoading } = useGetPerformance();
 
@@ -51,29 +47,6 @@ const Performance = () => {
     }
     return list;
   };
-
-  // const startDay =
-  //   date[0].startDate.getFullYear() +
-  //   '.' +
-  //   0 +
-  //   Number(new Date().getMonth() + 1) +
-  //   '.' +
-  //   0 +
-  //   new Date().getDate();
-
-  //   const endDay =
-  //   date[0].endDate.getFullYear() +
-  //   '.' +
-  //   0 +
-  //   Number(new Date().getMonth() + 1) +
-  //   '.' +
-  //   0 +
-  //   new Date().getDate();
-
-  // console.log(getDatesStartToEnd(date[0].startDate, date[0].endDate));
-  // console.log(startDay, endDay);
-  // console.log(data);
-  // console.log(Array.from(data.startDate));
 
   const [search, setSearch] = useState('');
   const [searchData, setSearchData] = useState([]);
@@ -120,21 +93,6 @@ const Performance = () => {
                 ))}
             </select>
           </div>
-
-          {/* <div css={[CategoryFilter]}>
-              <select
-                name='filter'
-                value={sort}
-                onChange={handleSort}
-                css={[CategorySelect]}
-              >
-                <option value=''>All</option>
-                <option value='oldest'>오래된 순</option>
-                <option value='newest'>최신 순</option>
-              </select>
-            </div> */}
-
-          {/* <DatePicker data={data} /> */}
 
           <div>
             <span

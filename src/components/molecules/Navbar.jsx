@@ -12,6 +12,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { MdContactPage } from 'react-icons/md';
 
 const Navbar = ({ handleLogout, userData }) => {
+  console.log(userData);
   const router = useRouter();
   const pathname = router.pathname;
 
@@ -139,6 +140,7 @@ const Navbar = ({ handleLogout, userData }) => {
               userData.displayName,
               userData.email,
               userData.photoURL,
+              userData.isAdmin,
             ],
           },
     },
@@ -153,18 +155,31 @@ const Navbar = ({ handleLogout, userData }) => {
           <ul css={[LoginCategory]}>
             {SubRouterData.map((data) => (
               <li css={[SubCategoryText]} key={data.id}>
-                <Link
-                  className={classNames('NavBarLink', {
-                    isActive: pathname === data.link,
-                  })}
-                  href={{
-                    pathname: data.link,
-                    query: data.query,
-                  }}
-                  as={`/about/question/${userData}`}
-                >
-                  {data.title}
-                </Link>
+                {userData && userData.isAdmin ? (
+                  <Link
+                    css={[Admin]}
+                    href={{
+                      pathname: '/mainPages/Admin',
+                      query: data.query,
+                    }}
+                    as={`/about/question/${userData}`}
+                  >
+                    고객 관리
+                  </Link>
+                ) : (
+                  <Link
+                    className={classNames('NavBarLink', {
+                      isActive: pathname === data.link,
+                    })}
+                    href={{
+                      pathname: data.link,
+                      query: data.query,
+                    }}
+                    as={`/about/question/${userData}`}
+                  >
+                    {data.title}
+                  </Link>
+                )}
               </li>
             ))}
 
@@ -215,6 +230,14 @@ const Navbar = ({ handleLogout, userData }) => {
 };
 
 export default Navbar;
+
+// admin
+const Admin = css`
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 4rem;
+  color: red;
+`;
 
 const Header = css`
   display: flex;

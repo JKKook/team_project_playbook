@@ -22,9 +22,6 @@ const Support = () => {
     });
   };
 
-  // 추후, 게시판 만들게 되면
-  // 1:1 상담 컴포넌트를 만들 예정
-
   return (
     <>
       <section css={[Section]}>

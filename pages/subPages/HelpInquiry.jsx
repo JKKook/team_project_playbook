@@ -1,21 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React, { useState, useEffect } from 'react';
-import { db, storage } from '../api/auth/firebase';
+import { storeDatabase, storage } from '../api/auth/firebase';
 import Image from 'next/image';
 import {
   collection,
   addDoc,
   serverTimestamp,
   query,
-  getDoc,
-  getDocs,
   orderBy,
   onSnapshot,
 } from 'firebase/firestore';
+import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { useRouter } from 'next/router';
 import SupportChat from '../../src/components/organisms/SupportChat';
-import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { LoginInnerContainer } from './Login';
 import { MdPhotoCamera } from 'react-icons/md';
@@ -56,7 +54,7 @@ const HelpInquiry = () => {
         attachmentURL: attachmentURL || null,
       };
       // 지정 된 파이어베이스 경로에 docRef 추가,
-      await addDoc(collection(db, 'inquiries'), docRef);
+      await addDoc(collection(storeDatabase, 'inquiries'), docRef);
       // 다 넣어줬으면 초기화
       setInquiry('');
       setAttachment('');
@@ -70,7 +68,6 @@ const HelpInquiry = () => {
   };
 
   const handleFileChange = (e) => {
-    // console.log(e.target.files) // fileList
     const {
       target: { files },
     } = e;
@@ -92,7 +89,7 @@ const HelpInquiry = () => {
     // getInquiries();
     // 데이터베이스가 realtime으로 변화를 인지할 수 있도록
     const userCollectionInquiries = query(
-      collection(db, 'inquiries'),
+      collection(storeDatabase, 'inquiries'),
       // 최신순으로 업데이트
       orderBy('createdAt', 'desc'),
     );
@@ -156,7 +153,7 @@ const HelpInquiry = () => {
                   accept='image/*'
                   onChange={handleFileChange}
                 />
-                <label for='input-file'>
+                <label htmlFor='input-file'>
                   <MdPhotoCamera css={{ cursor: 'pointer' }} />
                 </label>
                 <input css={[SubmitBtn]} type='submit' value='등록' />
@@ -171,6 +168,7 @@ const HelpInquiry = () => {
                 isOwner={inquiry.creatorId === router.query.user[0]}
                 isUserName={router.query.user[1]}
                 isUserPhoto={router.query.user[3]}
+                isAdmin={router.query.user[4]}
               />
             ))}
           </div>
@@ -189,7 +187,6 @@ const Section = css`
 `;
 
 const SectionHeadLine = css`
-  margin: 5rem;
   font-size: 1.6rem;
   font-weight: bold;
   color: #ce7777;
