@@ -16,27 +16,22 @@ const PORT = 4000;
 // 파일은 src/serverRouter/...입니다.
 const mainImageRouter = require('./serverRouter/mainImageRouter');
 const mainRecommend = require('./serverRouter/mainRecommendRouter');
-const descriptionRouter = require('./serverRouter/descriptionRouter');
 const totalRouter = require('./serverRouter/totalPerformanceRouter');
-// const numberRouter = require('./serverRouter/numberRouter');
 const KEY = '98e02b76a394447699b7324b7ff14b83';
 
 // cors 정책 허용 라이브러리
-// 설명: https://velog.io/@logqwerty/CORS
 app.use(
   cors({
     origin: '*', // 권한허용 페이지
     credentials: true, // 쿠키 인증요청 여부
     optionsSuccessStatus: 200, // 상태 설정
-  })
+  }),
 );
 
 // 라우터 경로 설정
-
 app.use('/main/image', mainImageRouter);
 app.use('/main/recommend', mainRecommend);
 app.use('/main/total', totalRouter);
-// app.use('/main/number', numberRouter);
 
 // server메인
 app.get('/', (_, res) => {
@@ -54,13 +49,10 @@ app.get('/description/:id', (req, res) => {
       const xmlToJson = converter.xml2json(body);
       console.log(xmlToJson);
       res.send(xmlToJson);
-    }
+    },
   );
 });
 
 app.listen(PORT, () => {
   console.log('listening on port http://localhost:4000');
 });
-
-// https://velog.io/@garam0410/Java-OPEN-API-%ED%8C%8C%EC%8B%B1%ED%95%98%EA%B8%B0-JSON
-// http://www.kopis.or.kr/openApi/restful/pblprfr/${params}?service=${KEY}

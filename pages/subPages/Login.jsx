@@ -20,7 +20,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const signInNotify = () =>
   toast.success('로그인 되었습니다!', {
     style: {
-      transition: 'all 0.5s ease',
+      transition: 'all 0.3s ease-in',
     },
   });
 
@@ -53,7 +53,9 @@ const Login = () => {
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
   useEffect(() => {
-    onUserStateChange(setUser);
+    onUserStateChange((user) => {
+      setUser(user);
+    });
   }, []);
 
   const handleGoogleLogin = () => {

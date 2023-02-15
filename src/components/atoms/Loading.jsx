@@ -1,6 +1,27 @@
 /** @jsxImportSource @emotion/react **/
 import { css, keyframes } from '@emotion/react';
 
+const Loading = () => {
+  return (
+    <div css={[LoadingImg]}>
+      <svg width='205' height='250' viewBox='0 0 40 50' css={[LoadingSvg]}>
+        <polygon
+          strokeWidth='1'
+          stroke='#fff'
+          fill='none'
+          points='20,1 40,40, 1,40'
+          css={[LoadingPloygon]}
+        ></polygon>
+        <text fill='#fff' x='6' y='47'>
+          Loading
+        </text>
+      </svg>
+    </div>
+  );
+};
+
+export default Loading;
+
 const text = keyframes`
     50% {
       opacity: 0.1;
@@ -42,24 +63,3 @@ const LoadingPloygon = css`
   animation: ${dash} 4s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite
     alternate-reverse;
 `;
-
-const Loading = () => {
-  return (
-    <div css={[LoadingImg]}>
-      <svg width='205' height='250' viewBox='0 0 40 50' css={[LoadingSvg]}>
-        <polygon
-          strokeWidth='1'
-          stroke='#fff'
-          fill='none'
-          points='20,1 40,40, 1,40'
-          css={[LoadingPloygon]}
-        ></polygon>
-        <text fill='#fff' x='6' y='47'>
-          Loading
-        </text>
-      </svg>
-    </div>
-  );
-};
-
-export default Loading;

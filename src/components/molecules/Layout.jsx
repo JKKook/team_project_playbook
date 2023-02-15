@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import { RecoilRoot } from 'recoil';
-import { logout } from '../../../pages/api/auth/firebase';
-import { auth } from '../../../pages/api/auth/firebase';
+import { logout, onUserStateChange } from '../../../pages/api/auth/firebase';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 
 const signOutNotify = () =>
   toast('반가웠어요 잘가요!', {
     icon: '👋',
+    style: {
+      transition: 'all 0.3s ease-in',
+    },
   });
 
 const Layout = ({ children }) => {
@@ -20,7 +22,7 @@ const Layout = ({ children }) => {
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
   useEffect(() => {
     // isLoggedIn은 로그인, 로그아웃, 초기화 시 반응!
-    auth.onAuthStateChanged((user) => {
+    onUserStateChange((user) => {
       if (user) {
         setUserData(user);
       } else {

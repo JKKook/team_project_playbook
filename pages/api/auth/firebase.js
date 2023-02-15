@@ -14,6 +14,7 @@ import {
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+import { getDatabase, ref, child, get } from 'firebase/database';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -28,7 +29,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // database
-export const db = getFirestore(app);
+export const database = getDatabase(app);
+// store database
+export const storeDatabase = getFirestore(app);
 // storage
 export const storage = getStorage(app);
 // authentication
@@ -39,13 +42,25 @@ const providerGoogle = new GoogleAuthProvider();
 const providerMeta = new FacebookAuthProvider();
 
 // update profile
-
-export const changeProfile = async (userAvatar) => {
+export const changeProfile = async (userName, userAvatar) => {
   const user = auth.currentUser;
-  updateProfile(user, {
+  const displayName = user.displayName;
+  const photoURL = user.photoURL;
+  updateProfile(user, displayName, photoURL, {
+    displayName: userName,
     photoURL: userAvatar,
   });
 };
+
+// updateProfile(auth.currentUser, {
+//   displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+// }).then(() => {
+//   // Profile updated!
+//   // ...
+// }).catch((error) => {
+//   // An error occurred
+//   // ...
+// });
 
 // 비밀번호 변경
 // ** 단, 비밀번호를 설정하려면 사용자가 최근에 로그인한 적이 있어야 한다!
@@ -101,8 +116,25 @@ export const logout = async () => {
 };
 
 // Login 컴포넌트의 지속성을 유지해줍니다.
+// isLoggedIn인 경우 user의 정보를
 export const onUserStateChange = (callback) => {
-  onAuthStateChanged(auth, (user) => {
-    callback(user);
+  onAuthStateChanged(auth, async (user) => {
+    const updatedUser = user ? await adminUser(user) : null;
+    callback(updatedUser);
+  });
+};
+
+// User admin ** readAndWrite Data in firebase
+const adminUser = async (user) => {
+  // 사용자가 어드민 권한을 갖고 있는지 확인
+  // {...user, isAdmin : true }
+
+  return get(ref(database, 'admins')).then((snapshot) => {
+    if (snapshot.exists()) {
+      const admins = snapshot.val();
+      const isAdmin = admins.includes(user.uid);
+      return { ...user, isAdmin };
+    }
+    return user;
   });
 };

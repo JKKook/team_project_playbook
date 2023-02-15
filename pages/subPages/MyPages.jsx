@@ -280,6 +280,7 @@ const ReservationSection = css`
 const Text = css`
   text-align: center !important;
   font-size: 1.75rem;import { useRouter } from 'next/router';
+import FileChange from '../../.history/src/components/atoms/FileChange_20230215211410';
 
   color: #8d98a0;
   margin-bottom: 0.5rem;

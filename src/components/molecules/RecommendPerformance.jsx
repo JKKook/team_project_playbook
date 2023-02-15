@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
+// 참고용 **
 const RecommendPerformance = ({ performances }) => {
   return (
     <Swiper

@@ -3,17 +3,24 @@ import { css } from '@emotion/react';
 import React from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
-import { db, storage } from '../../../pages/api/auth/firebase';
-import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { storeDatabase, storage } from '../../../pages/api/auth/firebase';
+import { deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 import { TiDelete } from 'react-icons/ti';
 import { FiEdit } from 'react-icons/fi';
 
-const SupportChat = ({ chatObj, isOwner, isUserName, isUserPhoto }) => {
+const SupportChat = ({
+  chatObj,
+  isOwner,
+  isUserName,
+  isUserPhoto,
+  isAdmin,
+}) => {
+  // edit, delete
   const [editting, setEditting] = useState(false);
   const [newChat, setNewChat] = useState(chatObj.text);
 
-  const inquiryTextRef = doc(db, 'inquiries', `${chatObj.id}`);
+  const inquiryTextRef = doc(storeDatabase, 'inquiries', `${chatObj.id}`);
   const inquiryAttachmentRef = ref(storage, chatObj.attachmentURL);
 
   const handleDeleteClick = async () => {
