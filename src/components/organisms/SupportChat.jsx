@@ -1,16 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
-import { TiDelete } from 'react-icons/ti';
-import { FiEdit } from 'react-icons/fi';
-import { db, storage } from '../../../pages/api/auth/firebase';
-import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import Image from 'next/image';
+import { db, storage } from '../../../pages/api/auth/firebase';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
+import { TiDelete } from 'react-icons/ti';
+import { FiEdit } from 'react-icons/fi';
+
 const SupportChat = ({ chatObj, isOwner, isUserName, isUserPhoto }) => {
-  // console.log('chat', chatObj);
-  console.log('photo', isUserPhoto);
   const [editting, setEditting] = useState(false);
   const [newChat, setNewChat] = useState(chatObj.text);
 
@@ -29,7 +28,6 @@ const SupportChat = ({ chatObj, isOwner, isUserName, isUserPhoto }) => {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     await updateDoc(inquiryTextRef, { text: newChat });
-    // 이것 빼먹으면 변경이 안 됨!!
     setEditting(false);
   };
 

@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import BookmarkHeart from '../atoms/BookmarkHeart';
-import ReservationButton from './ReservationButton';
+import ReservationButton from './reservation/ReservationButton';
 
 const PerformanceList = ({ total }) => {
   return (

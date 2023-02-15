@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import { RecoilRoot } from 'recoil';
-import { logout } from '@/pages/api/auth/firebase';
+import { logout } from '../../../pages/api/auth/firebase';
 import { auth } from '../../../pages/api/auth/firebase';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
