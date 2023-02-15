@@ -10,7 +10,6 @@ const TOTAL_SLIDE = 7;
 
 const ImageSlider = ({ performances }) => {
   const [count, setCount] = useState(0);
-  const [currentIdx, setCurrentIdx] = useState(0);
   const slideRef = useRef(null);
 
   useEffect(() => {
@@ -97,16 +96,3 @@ const Label = styled.div`
     opacity: 1;
   }
 `;
-
-/*
-                    {performances?.map((item) => {
-                        return (
-                            <ImageCard
-                                key={item.id}
-                                itemId={item.id}
-                                itemName={item.name}
-                                itemImage={item.image}
-                            />
-                        );
-                    })}
-*/

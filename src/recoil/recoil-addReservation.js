@@ -1,4 +1,3 @@
-import useGetDescription from '@/src/store/server/useGetDescription';
 import { atom, selector } from 'recoil';
 
 export const performanceListState = atom({

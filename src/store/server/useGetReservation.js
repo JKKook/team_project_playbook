@@ -1,4 +1,4 @@
-import { getReservationInfo } from '@/src/modules/reservationModules';
+import { getReservationInfo } from '../../modules/reservationModules';
 import axios from 'axios';
 
 const useGetReservation = async () => {
@@ -14,7 +14,6 @@ const useGetReservation = async () => {
   const arr = [];
   response.map((elem) => {
     const elemData = elem.data.elements[0].elements[0].elements;
-    // console.log(elemData);
     const obj = {
       id: elemData[0].elements[0]?.text || '정보없음',
       name: elemData[1].elements[0]?.text || '정보없음',

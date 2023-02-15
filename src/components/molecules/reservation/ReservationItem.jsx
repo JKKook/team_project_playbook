@@ -1,14 +1,9 @@
 /** @jsxImportSource @emotion/react **/
-import { PERFORMANCE_RESERVE_KEY } from '@/src/contexts/localStorageKey';
-import {
-  getReservationInfo,
-  removeReservationInfo,
-  reservationMoudle,
-} from '@/src/modules/reservationModules';
+import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
+import { getReservationInfo } from '../../../modules/reservationModules';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 const ReservationItem = ({ total, id }) => {
@@ -17,7 +12,7 @@ const ReservationItem = ({ total, id }) => {
     const newReservation = reserveInfo.filter((item) => item !== performanceid);
     localStorage.setItem(
       PERFORMANCE_RESERVE_KEY,
-      JSON.stringify(newReservation)
+      JSON.stringify(newReservation),
     );
   };
 
@@ -112,34 +107,3 @@ const Detail = css`
 `;
 
 const PlayingStatus = css``;
-
-const ButtonContainer = css`
-  margin-right: 0;
-  margin-left: 0;
-  justify-content: space-between;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem;
-  flex-wrap: wrap;
-`;
-
-const ButtonToDetail = css`
-  display: inline-block;
-  font-weight: 400;
-  color: #212529;
-  text-align: center;
-  vertical-align: middle;
-  user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-`;
-
-const LinkToDescription = css`
-  color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
-`;
