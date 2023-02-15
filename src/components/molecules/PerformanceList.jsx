@@ -21,12 +21,12 @@ const PerformanceList = ({ total }) => {
               />
             </Link>
             <div css={[CardBody]}>
-              <h5 css={[CardTitle]} title={elem.name}>
-                {elem.name}
-                <span css={[CardBookmark]}>
-                  <BookmarkHeart id={elem.id} />
-                </span>
-              </h5>
+              <div css={[TitleBox]}>
+                <h5 css={[CardTitle]} title={elem.name}>
+                  {elem.name}
+                </h5>
+                <BookmarkHeart id={elem.id} />
+              </div>
               <p css={[Detail]} title={elem.place}>
                 장소 : {elem.place}
               </p>
@@ -88,21 +88,20 @@ const CardBody = css`
   padding: 1.25rem;
 `;
 
-const CardTitle = css`
+const TitleBox = css`
   display: flex;
-  align-items: center;
+`;
+
+const CardTitle = css`
+  width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: wrap;
+  white-space: nowrap;
   margin-bottom: 2rem;
   margin-right: 0.2rem;
   font-size: 1.25rem;
 `;
-const CardBookmark = css`
-  padding: 0;
-  marign: 0;
-  margin-left: 0.5rem;
-`;
+
 const Detail = css`
   overflow: hidden;
   text-overflow: ellipsis;
