@@ -12,7 +12,7 @@ const BookmarkHeart = ({ id }) => {
   return (
     <>
       <span css={[Heart]} onClick={() => handleBookMarkInfo(id, setState)}>
-        {state ? <BsHeartFill /> : <BsHeart />}
+        {state ? <BsHeartFill css={[FillHeart]} /> : <BsHeart />}
       </span>
     </>
   );
@@ -21,5 +21,11 @@ const BookmarkHeart = ({ id }) => {
 export default BookmarkHeart;
 
 const Heart = css`
+  font-size: 20px;
+  padding-top: 2px;
   cursor: pointer;
+`;
+
+const FillHeart = css`
+  color: red;
 `;
