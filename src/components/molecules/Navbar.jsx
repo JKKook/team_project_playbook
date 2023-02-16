@@ -155,33 +155,6 @@ const Navbar = ({ handleLogout, userData }) => {
           <ul css={[LoginCategory]}>
             {SubRouterData.map((data) => (
               <li css={[SubCategoryText]} key={data.id}>
-<<<<<<< HEAD
-                {/* {userData && userData.isAdmin ? ( */}
-                <Link
-                  css={[Admin]}
-                  href={{
-                    pathname: '/mainPages/Admin',
-                    query: data.query,
-                  }}
-                  as={`/about/question/${userData}`}
-                >
-                  고객 관리
-                </Link>
-                {/* ) : ( */}
-                <Link
-                  className={classNames('NavBarLink', {
-                    isActive: pathname === data.link,
-                  })}
-                  href={{
-                    pathname: data.link,
-                    query: data.query,
-                  }}
-                  as={`/about/question/${userData}`}
-                >
-                  {data.title}
-                </Link>
-                {/* )} */}
-=======
                 {userData && userData.isAdmin ? (
                   <Link
                     css={[Admin]}
@@ -207,7 +180,6 @@ const Navbar = ({ handleLogout, userData }) => {
                     {data.title}
                   </Link>
                 )}
->>>>>>> ba43614 (FIX-DOCS: resolve typeError and router path redirecting)
               </li>
             ))}
 
