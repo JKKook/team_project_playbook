@@ -13,6 +13,7 @@ const SupportChat = ({
   chatObj,
   isOwner,
   isUserName,
+  isUserEmail,
   isUserPhoto,
   isAdmin,
 }) => {
@@ -47,7 +48,7 @@ const SupportChat = ({
 
   return (
     <>
-      {isOwner && (
+      {isAdmin && (
         <div css={[ChatFormContainer]}>
           {editting ? (
             <form onSubmit={handleUpdateSubmit}>
@@ -66,7 +67,9 @@ const SupportChat = ({
           ) : (
             <div css={[Chat]}>
               <div css={{ display: 'flex' }}>
-                <div css={[ChatUserName]}>{isUserName}</div>
+                <div css={[ChatUserName]}>
+                  {isUserName ? isUserName : isUserEmail}
+                </div>
                 <div>
                   {isUserPhoto && (
                     <Image
@@ -93,16 +96,19 @@ const SupportChat = ({
             </div>
           )}
 
-          <div css={[ChatEditDelete]}>
-            <button css={[SubmitBtn]} onClick={toggleEditting}>
-              수정
-              <FiEdit />
-            </button>
-            <button css={[SubmitBtn]} onClick={handleDeleteClick}>
-              삭제
-              <TiDelete />
-            </button>
-          </div>
+          {isOwner ||
+            (isAdmin && (
+              <div css={[ChatEditDelete]}>
+                <button css={[SubmitBtn]} onClick={toggleEditting}>
+                  수정
+                  <FiEdit />
+                </button>
+                <button css={[SubmitBtn]} onClick={handleDeleteClick}>
+                  삭제
+                  <TiDelete />
+                </button>
+              </div>
+            ))}
         </div>
       )}
     </>

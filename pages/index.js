@@ -347,7 +347,7 @@ const IntroTextContainer = css`
     font-size: 2.5rem;
     font-weight: bold;
 
-    &:nth-child(2) {
+    &:nth-of-child(2) {
       margin-left: 5rem;
 
       strong {
