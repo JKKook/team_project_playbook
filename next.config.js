@@ -1,5 +1,6 @@
 // phase: 설정이 세팅되는 환경 (배포용인지, 개발용인지)
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {

@@ -123,10 +123,8 @@ const reset = css`
     width: 100%;
     max-width: 1536px;
     line-height: 1;
-    // overflow: hidden;
     heigth: 100vh;
     box-sizing: border-box;
-    background-color: #eaeded;
   }
 
   ol,
@@ -151,6 +149,10 @@ const reset = css`
   button {
     cursor: pointer;
     outline: 0;
+  }
+
+  img {
+    max-width: 100%;
   }
 `;
 
