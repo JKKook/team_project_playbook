@@ -8,6 +8,7 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
+import { GoSearch, GoCalendar } from 'react-icons/go';
 
 /**---------------------- 함수 영역-------------------------------- */
 
@@ -77,31 +78,54 @@ const Performance = () => {
     <>
       {!isLoading && (
         <div css={[InputGroup]}>
-          <div css={[CategoryFilter]}>
-            <select
-              name='filter'
-              value={category}
-              onChange={handleCategory}
-              css={[CategorySelect]}
-            >
-              <option value=''>전체 공연</option>
-              {data &&
-                Array.from(data.genreList).map((genre) => (
-                  <option key={genre} value={genre}>
-                    {genre}
-                  </option>
-                ))}
-            </select>
+          <div css={[SelectFormContainer]}>
+            <div css={[CategoryFilter]}>
+              <select
+                name='filter'
+                value={category}
+                onChange={handleCategory}
+                css={[CategorySelect]}
+              >
+                <option value=''>전체 공연</option>
+                {data &&
+                  Array.from(data.genreList).map((genre) => (
+                    <option key={genre} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div css={[InputFormContainer]}>
+              <form onSubmit={onSearch} autoComplete='off' css={[InputForm]}>
+                <input
+                  type='text'
+                  list='performance'
+                  value={search}
+                  placeholder='보고싶은 공연을 입력해주세요'
+                  onChange={onChange}
+                  css={[FormInput]}
+                />
+                <button type='submit' css={[SearchInputButton]}>
+                  <GoSearch />
+                </button>
+              </form>
+            </div>
           </div>
 
-          <div>
-            <span
-              onClick={() => setOpenDate(!openDate)}
-              css={[CalendarText]}
-            >{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
-              date[0].endDate,
-              'MM/dd/yyyy',
-            )}`}</span>
+          <div css={[CalendarContainer]}>
+            <span css={[CalendarUsage]}>
+              *원하시는 날짜가 있다면 캘린더를 이용해보세요 :)
+              <GoCalendar
+                onClick={() => setOpenDate(!openDate)}
+                css={[SearchInputButton]}
+              />
+            </span>
+            <span onClick={() => setOpenDate(!openDate)} css={[CalendarText]}>
+              {`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
+                date[0].endDate,
+                'MM/dd/yyyy',
+              )}`}
+            </span>
 
             {openDate && (
               <DateRange
@@ -114,19 +138,6 @@ const Performance = () => {
               />
             )}
           </div>
-
-          <form onSubmit={onSearch} autoComplete='off' css={[InputForm]}>
-            <input
-              type='text'
-              list='performance'
-              value={search}
-              onChange={onChange}
-              css={[FormInput]}
-            />
-            <button type='submit' css={[HideButton]}>
-              Submit
-            </button>
-          </form>
         </div>
       )}
       {searchData && !isLoading && (
@@ -138,29 +149,20 @@ const Performance = () => {
 
 export default Performance;
 
+// category
 const InputGroup = css`
-  height: 30px;
-  background-color: white;
-  // border: 1px solid #495057;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px 0px;
+  justify-content: center;
+  flex-direction: column;
   border-radius: 5px;
-  position: relative;
-  margin: 0 3rem;
-  bottom: -25px;
+  margin: 2rem 3rem;
+  gap: 1rem;
 `;
 
-const FormInput = css`
-  width: 100%;
-  height: calc(1.5em em + 0.75rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+const SelectFormContainer = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const CategoryFilter = css`
@@ -171,37 +173,74 @@ const CategoryFilter = css`
 
 const CategorySelect = css`
   display: inline-block;
-  width: 100%;
-  height: calc(1.5em + 0.75rem + 2px);
-  padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+  padding: 0.4rem 0;
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
-  border-radius: 0.25rem;
   cursor: pointer;
 `;
 
+// search Input
+const InputFormContainer = css`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 89%;
+`;
+
+const FormInput = css`
+  display: flex;
+  padding: 0.4rem 0;
+  padding-left: 5px;
+  width: 350px;
+  font-size: 1rem;
+  color: #495057;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+`;
+
 const InputForm = css`
-  padding-left: 0;
-  padding-right: 0;
+  display: flex;
+  align-items: center;
   width: 40%;
   border: none;
   outline: none;
 `;
 
-const HideButton = css`
-  display: none;
+const SearchInputButton = css`
+  display: flex;
+  border: none;
+  margin-left: 0.3rem;
+  font-size: 1.5rem;
+  color: #8785a2;
+`;
+
+// calendar
+const CalendarContainer = css`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const CalendarUsage = css`
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #8785a2;
+  margin-top: 0.3rem;
+  cursor: pointer;
+  &:hover {
+    color: #364f6b;
+  }
 `;
 
 const CalendarText = css`
-  color: #495057;
-  cursor: pointer;
-  user-select: none;
+  display: none;
 `;
 
+// when clicked, show-up
 const Calendar = css`
   position: absolute;
-  top: 50px;
-  left: 25rem;
+  top: 118px;
+  left: 35rem;
   z-index: 1;
 `;
