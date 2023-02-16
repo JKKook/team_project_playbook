@@ -167,6 +167,7 @@ const HelpInquiry = () => {
                 chatObj={inquiry}
                 isOwner={inquiry.creatorId === router.query.user[0]}
                 isUserName={router.query.user[1]}
+                isUserEmail={router.query.user[2]}
                 isUserPhoto={router.query.user[3]}
                 isAdmin={router.query.user[4]}
               />
