@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import Loading from '@/src/components/atoms/Loading';
 import { css } from '@emotion/react';
+import Loading from '@/src/components/atoms/Loading';
 import Image from 'next/image';
 import useGetDescription from '@/src/store/server/useGetDescription';
 import {
@@ -46,8 +46,6 @@ const Post = () => {
 
   const { data, isLoading } = useGetDescription(performenceid);
 
-  console.log(data);
-
   return (
     <>
       {!isLoading && data ? (
@@ -92,10 +90,7 @@ const Post = () => {
               </li>
             </ul>
           </div>
-          <div css={[ButtonContainer]}>
-            <button css={[Btn]}>예매하기</button>
-            <button css={[Btn]}>북마크</button>
-          </div>
+
           <h2 css={[InfoName]}>상세 이미지</h2>
           <div css={[DescriptionImage]}>
             {/* {data.descripImage.length !== 0 ? (
@@ -214,11 +209,6 @@ const Btn = css`
     background: #17a2b8;
     color: #fff;
   }
-
-  &:last-of-type {
-    background: #28a745;
-    color: #fff;
-  }
 `;
 
 const DescriptionImage = css`
@@ -226,8 +216,6 @@ const DescriptionImage = css`
 `;
 
 const Images = css`
-  // position: relative;
-  // width: 100%;
   height: 100%;
   object-fit: fill;
 `;

@@ -1,4 +1,3 @@
-import React from 'react';
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
 import {
@@ -7,21 +6,13 @@ import {
   AiOutlineTwitter,
 } from 'react-icons/ai';
 import Image from 'next/image';
-import Banner1 from '../public/asset/Banner1.svg';
-import Banner2 from '../public/asset/Banner2.svg';
-import Banner3 from '../public/asset/Banner3.svg';
-import Banner4 from '../public/asset/Banner4.svg';
-import Banner5 from '../public/asset/Banner5.svg';
-import PhoneA from '../public/asset/phoneA.gif';
+import PhoneA from '../public/asset/phone.gif';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import Gallery from '../performanceImage/Gallery';
 
 const Home = () => {
   const router = useRouter();
-
-  const onClickBanner = (e) => {
-    console.log(e.target.value);
-  };
 
   const HeaderVars = {
     initial: { y: 100, opacity: 0, scale: 0.5 },
@@ -29,75 +20,11 @@ const Home = () => {
     transition: { duration: 0.7 },
   };
 
-  const DetailImage = [
-    {
-      id: 0,
-      imageUrl: Banner1,
-    },
-    {
-      id: 1,
-      imageUrl: Banner2,
-    },
-    {
-      id: 2,
-      imageUrl: Banner3,
-    },
-    {
-      id: 3,
-      imageUrl: Banner4,
-    },
-    {
-      id: 4,
-      imageUrl: Banner5,
-    },
-  ];
-
   return (
     <>
       <header css={[Header]}>
-        <motion.div
-          initial={{ y: 100, opacity: 0, scale: 0.5 }}
-          whileInView={{ y: 0, opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          css={[HeaderTextContainer]}
-        >
-          <h1>우리의 공연을 깨우는</h1>
-          <h1>
-            <span css={[Black]}>공연 예약</span>
-            페이지
-          </h1>
-          <p>우리는 공연을 예약한다.</p>
-        </motion.div>
+        <Gallery />
       </header>
-      <motion.section
-        css={[BannerSection]}
-        variants={HeaderVars}
-        initial='initial'
-        whileInView='whileInView'
-        transition='transition'
-      >
-        <h2 css={[Heading]}>NOTICE</h2>
-        <div>
-          <Image src={Banner1} alt='배너2' width={1100} />
-        </div>
-        <div css={[DetailBanner]}>
-          {DetailImage.map((imgIdx) => (
-            <Image
-              src={imgIdx.imageUrl}
-              key={imgIdx.id}
-              alt='상세 배너'
-              width={45}
-              height={55}
-              onClick={onClickBanner}
-              style={{
-                objectFit: 'cover',
-                borderRadius: '5px',
-                cursor: 'pointer',
-              }}
-            />
-          ))}
-        </div>
-      </motion.section>
 
       <div css={[Container]}>
         <motion.section
@@ -214,65 +141,19 @@ const Home = () => {
 
 export default Home;
 
-const Progress = css`
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: #fafafa;
-  bottom: 100px;
-`;
-
 const Container = css`
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
 `;
 
 const Header = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.7rem;
-  color: #fff;
-  height: 100vh;
-  background: #adc5c5;
-`;
-
-const HeaderTextContainer = css`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  p {
-    text-align: center;
-    font-size: 1rem;
-  }
-`;
-
-const Black = css`
-  color: #1d5054;
-  font-size: 3.5rem;
-`;
-
-const BannerSection = css`
-  // padding: 40rem 1.5rem 60rem 1.5rem;
-  text-align: center;
-  height: 80vh;
   position: relative;
-  margin-bottom: 3rem;
-
-  h2 {
-    margin-top: 10rem;
-  }
-`;
-
-const DetailBanner = css`
   display: flex;
-  gap: 2rem;
-  left: 37rem;
-  top: 25rem;
-  position: absolute;
+  text-align: center;
+  width: 100%;
+  height: 100vh;
 `;
 
 const IntroContent = css`
@@ -307,17 +188,17 @@ const Btn = css`
   margin: 0.6rem auto;
   transition: all 0.5s ease-in-out;
 
-  &:first-of-child {
+  &:first-of-type {
     color: #fff;
     background: #e99c2f;
   }
 
-  &:last-child:hover {
+  &:last-type:hover {
     background: #e99c2f;
     color: #fff;
   }
 
-  &:first-of-child:hover {
+  &:first-of-type:hover {
     background: transparent;
     color: #e99c2f;
   }
@@ -347,7 +228,7 @@ const IntroTextContainer = css`
     font-size: 2.5rem;
     font-weight: bold;
 
-    &:nth-child(2) {
+    &:nth-of-type(2) {
       margin-left: 5rem;
 
       strong {
