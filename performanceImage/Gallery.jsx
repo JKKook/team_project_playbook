@@ -43,3 +43,35 @@ const GalleryWrap = css`
   border-radius: 10px;
   padding: 3rem;
 `;
+
+const RecommandContainer = css`
+  display: flex;
+  justify-content: flex-start;
+  margin: 2rem 0;
+`;
+
+const RecommandPlayBook = css`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+`;
+
+const HighlightTextForward = css`
+  display: block;
+  font-size: 1.4rem;
+  color: #889e81;
+  text-align: left;
+  &::before {
+    content: '"';
+  }
+  &::after {
+    content: '"';
+  }
+`;
+
+const HighlightTextBehind = css`
+  display: block;
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #2b2b2b;
+`;
