@@ -1,15 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 import { MdSupportAgent } from 'react-icons/md';
 import { HiOutlineTicket } from 'react-icons/hi';
 import { BsSearch } from 'react-icons/bs';
 import { AiFillPhone, AiFillEdit } from 'react-icons/ai';
-import { css } from '@emotion/react';
-import { useRouter } from 'next/router';
 
 const Support = () => {
   const router = useRouter();
-  console.log('supportQuery :', router);
 
   const handleAccount = () => {
     return router.push('/subPages/MyPages');
@@ -117,7 +115,6 @@ const SupportHeaderTitleIcon = css`
 
 const SupportHeaderTitleTxt = css`
   color: #ce7777;
-
   margin-left: 1rem;
   font-size: 2rem;
   font-weight: bold;
@@ -129,14 +126,13 @@ const SupportMain = css`
   justify-self: center;
   align-self: center;
   grid-template-columns: repeat(2, 4fr);
-  // column-gap: 1rem;
   row-gap: 5rem;
 `;
 
 const SupportMainCon = css`
   position: relative;
-  // margin-bottom: 5rem;
 `;
+
 const SupportMainTitleCon = css`
   display: flex;
   margin-bottom: 3rem;

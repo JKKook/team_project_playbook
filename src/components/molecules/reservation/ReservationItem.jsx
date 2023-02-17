@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react **/
-import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
-import { getReservationInfo } from '../../../modules/reservationModules';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
+import { getReservationInfo } from '../../../modules/reservationModules';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 const ReservationItem = ({ total, id }) => {
@@ -44,7 +44,7 @@ const ReservationItem = ({ total, id }) => {
                   <p css={[Detail]}>
                     기간 : {elem.start} ~ {elem.end}
                   </p>
-                  <p css={[Detail, PlayingStatus]}>
+                  <p css={[Detail]}>
                     공연상태 : {elem.isPlaying}
                   </p>
                 </div>
@@ -66,7 +66,6 @@ export default ReservationItem;
 const Performances = css`
   display: flex;
   flex-direction: column;
-  // grid-template-columns: repeat(2, 1fr);
   gap: 4rem;
   margin-top: 3rem;
 `;
@@ -84,7 +83,6 @@ const CardBody = css`
   gap: 1rem;
   margin-left: 2rem;
   width: 20rem;
-  // white-space: nowrap;
 `;
 
 const CardTitle = css`
@@ -106,4 +104,3 @@ const Detail = css`
   white-space: nowrap;
 `;
 
-const PlayingStatus = css``;

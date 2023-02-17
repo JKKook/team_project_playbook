@@ -1,15 +1,15 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
+import PhoneA from '../public/asset/phone.gif';
+import Gallery from '../performanceImage/Gallery';
 import {
   AiOutlineGithub,
   AiFillFacebook,
   AiOutlineTwitter,
 } from 'react-icons/ai';
-import Image from 'next/image';
-import PhoneA from '../public/asset/phone.gif';
-import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import Gallery from '../performanceImage/Gallery';
 
 const Home = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const Home = () => {
         >
           <h2 css={[Heading]}>INTRODUCTION</h2>
           <div css={[IntroContent]}>
-            <Image src={PhoneA} alt='phone' width={400} />
+            <Image src={PhoneA} alt='phone' width={300} height={600} />
 
             <div css={[IntroTextContainer]}>
               <p>공연 예약은</p>
@@ -191,11 +191,6 @@ const Btn = css`
   &:first-of-type {
     color: #fff;
     background: #e99c2f;
-  }
-
-  &:last-type:hover {
-    background: #e99c2f;
-    color: #fff;
   }
 
   &:first-of-type:hover {

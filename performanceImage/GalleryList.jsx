@@ -7,7 +7,7 @@ const GalleryList = ({ datas, currItem, onView }) => {
   const { image, title } = currItem;
 
   return (
-    <article css={[Left]}>
+    <article>
       <Image
         src={image}
         alt={title}
@@ -25,8 +25,6 @@ const GalleryList = ({ datas, currItem, onView }) => {
 };
 
 export default GalleryList;
-
-const Left = css``;
 
 const ImageBox = css`
   border-radius: 20px;

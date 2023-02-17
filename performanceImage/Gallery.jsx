@@ -28,8 +28,7 @@ export default Gallery;
 
 const Wrap = css`
   margin: 2rem auto;
-
-`
+`;
 
 const GalleryWrap = css`
   display: grid;

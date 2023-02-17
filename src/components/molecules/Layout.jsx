@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './Navbar';
 import { RecoilRoot } from 'recoil';
-import { logout, onUserStateChange } from '../../../pages/api/auth/firebase';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
+import Navbar from './Navbar';
+import { logout, onUserStateChange } from '../../../pages/api/auth/firebase';
 
 const signOutNotify = () =>
   toast('반가웠어요 잘가요!', {

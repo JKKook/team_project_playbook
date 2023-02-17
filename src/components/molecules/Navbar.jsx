@@ -1,18 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import Link from 'next/link';
 import { css } from '@emotion/react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import logo from '../../../public/asset/playbook-logo.png';
-import user from '../../../public/asset/user.png';
 import Image from 'next/image';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import logo from '../../../public/asset/playbook-logo.png';
+import user from '../../../public/asset/user.png';
 import AvatarImage from '../atoms/AvatarImage';
 import { FiLogOut } from 'react-icons/fi';
 import { MdContactPage } from 'react-icons/md';
 
 const Navbar = ({ handleLogout, userData }) => {
-  console.log(userData);
   const router = useRouter();
   const pathname = router.pathname;
 
@@ -175,7 +174,6 @@ const Navbar = ({ handleLogout, userData }) => {
                       pathname: data.link,
                       query: data.query,
                     }}
-                    // as={`/about/question/${userData}`}
                   >
                     {data.title}
                   </Link>
@@ -216,7 +214,6 @@ const Navbar = ({ handleLogout, userData }) => {
                     pathname: data.link,
                     query: data.query,
                   }}
-                  // as={`/about/question/${userData}`}
                 >
                   {data.title}
                 </Link>
@@ -404,15 +401,12 @@ const Main = css`
   &::before {
     content: '|';
     margin-right: 1rem;
-    // margin-left: 2rem;
     color: rgba(0, 0, 0, 0.55);
   }
 
   .MainLink {
     display: flex;
     align-items: center;
-    // margin-right: 25px;
-    // margin-left: 10px;
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
     transition: all 0.5s ease;

@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
 import { storeDatabase, storage } from '../../../pages/api/auth/firebase';
-import { deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 import { TiDelete } from 'react-icons/ti';
 import { FiEdit } from 'react-icons/fi';
@@ -165,7 +164,6 @@ const ChatUserIcon = css`
 const ChatImg = css`
   position: absolute;
   border: 1px solid white;
-  // border-radius: 12px;
   transform: translate(300%, 10%);
   aspect-ratio: 1/1;
 `;

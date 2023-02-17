@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useState, useEffect } from 'react';
-import { storeDatabase, storage } from '../api/auth/firebase';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
 import {
   collection,
   addDoc,
@@ -12,13 +13,12 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
-import { useRouter } from 'next/router';
+import { storeDatabase, storage } from '../api/auth/firebase';
 import SupportChat from '../../src/components/organisms/SupportChat';
-import { v4 as uuidv4 } from 'uuid';
 import { LoginInnerContainer } from './Login';
+import { SupportHeader } from '../mainPages/Support';
 import { MdPhotoCamera } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
-import { SupportHeader } from '../mainPages/Support';
 
 const HelpInquiry = () => {
   const router = useRouter();

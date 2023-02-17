@@ -62,7 +62,6 @@ const Performances = css`
   align-items: cetner;
   margin: 20px 0;
   row-gap: 5rem;
-  // background-color: #fff;
 `;
 
 const CardContainer = css`
