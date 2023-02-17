@@ -1,15 +1,11 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
-import {
-  AiOutlineGithub,
-  AiFillFacebook,
-  AiOutlineTwitter,
-} from 'react-icons/ai';
 import Image from 'next/image';
 import PhoneA from '../public/asset/phone.gif';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Gallery from '../performanceImage/Gallery';
+import Footer from '../src/components/organisms/Footer';
 
 const Home = () => {
   const router = useRouter();
@@ -36,7 +32,7 @@ const Home = () => {
         >
           <h2 css={[Heading]}>INTRODUCTION</h2>
           <div css={[IntroContent]}>
-            <Image src={PhoneA} alt='phone' width={400} />
+            <Image src={PhoneA} alt='phone' width={250} height={500} />
 
             <div css={[IntroTextContainer]}>
               <p>공연 예약은</p>
@@ -66,82 +62,31 @@ const Home = () => {
         >
           <h2 css={[Heading]}>About</h2>
           <div css={[AboutContent]}>
-            <div>
-              <h2 css={[AboutHead]}>
-                Web Developer, <br />
-                Cyber Security & Web Designer
-              </h2>
-            </div>
             <div css={[AboutText]}>
+              <div css={[AboutSubTitle]}>
+                <strong>플레이북은요</strong>
+              </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                atque soluta natus, vitae tempora quasi voluptate, eaque vel
-                maiores necessitatibus consequatur voluptatum esse doloribus
-                nulla, perferendis eius! Eaque, minus totam.
+                영단어 Play(공연 하다, 놀이, 즐기다)와 Book(예약 하다)의 의미를
+                착안하여{' '}
+                <span css={[AboutHighlight]}>놀이처럼 즐기면서 예약하자</span>의
+                의미를 덧붙여 만든 합성어입니다. 공연을 즐기려고 예약하는 만큼,
+                공연 예약하는 과정도 즐거워야 한다는 취지로 사이트를 제작하게
+                되었습니다
               </p>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore
-                quibusdam in aut pariatur, odit impedit praesentium optio
-                eligendi quam voluptatum numquam nam eius reiciendis fuga
-                voluptates. Animi eos fuga maiores.
-              </p>
-              <p>Get your project book with contact button.</p>
+              <p>그럼 플레이북을 마음 껏 즐겨보세요 :)</p>
             </div>
           </div>
         </motion.section>
       </div>
-
-      <footer css={[FooterContainer]}>
-        <div css={[FooterBanner]}>
-          <div css={[Container]}>
-            <h2 css={[FooterHead]}>더 알고 싶으세요?</h2>
-            <div css={[FooterText]}>
-              <p css={[Text]}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                atque soluta natus, vitae tempora quasi voluptate, eaque vel
-                maiores necessitatibus consequatur voluptatum esse doloribus
-                nulla, perferendis eius! Eaque, minus totam.
-              </p>
-              <p css={[Text]}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                atque soluta natus, vitae tempora quasi voluptate, eaque vel
-                maiores necessitatibus consequatur voluptatum esse doloribus
-                nulla, perferendis eius! Eaque, minus totam.
-              </p>
-              <p css={[Text]}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                atque soluta natus, vitae tempora quasi voluptate, eaque vel
-                maiores necessitatibus consequatur voluptatum esse doloribus
-                nulla, perferendis eius! Eaque, minus totam.
-              </p>
-            </div>
-            <button type='button' css={[FooterBtn]}>
-              고객센터
-            </button>
-          </div>
-        </div>
-
-        <div css={[SocialContainer]}>
-          <div css={[SocialIcons]}>
-            <a href='#' css={[SocialIconsDetail]}>
-              <AiFillFacebook />
-            </a>
-            <a href='#' css={[SocialIconsDetail]}>
-              <AiOutlineTwitter />
-            </a>
-            <a href='#' css={[SocialIconsDetail]}>
-              <AiOutlineGithub />
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 };
 
 export default Home;
 
-const Container = css`
+export const Container = css`
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -160,14 +105,6 @@ const IntroContent = css`
   display: flex;
   align-items: center;
   gap: 10rem;
-`;
-
-const Text = css`
-  font-size: 1.1rem;
-  margin: 1.2rem 0;
-  padding: 0 2rem;
-  line-height: 1.7;
-  opacity: 0.7;
 `;
 
 const Btns = css`
@@ -214,7 +151,7 @@ const IntroSection = css`
   margin: 5rem 0 10rem 0;
 
   h2 {
-    margin-top: 10rem;
+    margin-top: 2rem;
     margin-bottom: 5rem;
   }
 `;
@@ -238,78 +175,6 @@ const IntroTextContainer = css`
   }
 `;
 
-const FooterContainer = css`
-  width: 100%;
-  background-color: #33383c;
-`;
-
-const FooterBanner = css`
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))
-    center/cover no-repeat;
-  padding: 3rem 0;
-  color: #fff;
-  text-align: center;
-`;
-
-const FooterHead = css`
-  font-size: 2.4rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  color: #bcc1c1;
-`;
-
-const FooterText = css`
-  display: flex;
-  padding: 1rem;
-`;
-
-const FooterBtn = css`
-  font-size: 1rem;
-  text-transform: uppercase;
-  font-weight: 600;
-  border: 1px solid #e99c2f;
-  background: transparent;
-  color: #e99c2f;
-  padding: 0.95rem 0;
-  letter-spacing: 2px;
-  display: block;
-  width: 180px;
-  margin: 0.6rem auto;
-  transition: all 0.5s ease-in-out;
-
-  &:hover {
-    color: #fff;
-    background: #e99c2f;
-  }
-`;
-
-const SocialContainer = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SocialIcons = css`
-  display: flex;
-  padding: 3rem 0;
-`;
-
-const SocialIconsDetail = css`
-  color: #626a6a;
-  margin: 0 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  font-size: 1.5rem;
-  transition: all 0.5s ease-in-out;
-
-  &:hover {
-    color: #fff;
-  }
-`;
-
 const Section = css`
   padding: 3rem 0 2rem;
 `;
@@ -317,8 +182,8 @@ const Section = css`
 const Heading = css`
   color: #bcc1c1;
   text-align: center;
-  font-size: 3rem;
-  font-family: 'Cute Font', cursive;
+  font-size: 2.5rem;
+  font-family: 'Open Sans', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 5rem;
@@ -340,19 +205,25 @@ const AboutContent = css`
   gap: 1.5rem;
 `;
 
-const AboutHead = css`
-  font-size: 2rem;
-  line-height: 2.6rem;
-  font-weight: 700;
-  // margin: 1rem 0;
+const AboutText = css`
+  font-family: 'Open Sans', sans-serif;
+
+  p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    line-height: 2rem;
+  }
 `;
 
-const AboutText = css`
-  p {
-    font-size: 0.938rem;
-    letter-spacing: 1px;
-    /* 양쪽 정렬 */
-    text-align: justify;
-    margin-bottom: 1.5rem;
-  }
+const AboutSubTitle = css`
+  font-size: 1.6rem;
+  padding-bottom: 1rem;
+  font-weight: 700;
+`;
+
+const AboutHighlight = css`
+  text-decoration: underline;
 `;
