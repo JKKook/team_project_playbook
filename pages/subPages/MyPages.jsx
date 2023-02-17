@@ -23,7 +23,7 @@ import useGetReservation from '../../src/store/server/useGetReservation';
 
 const MyPages = ({ user }) => {
   const router = useRouter();
-  console.log('mypage', router.query);
+  'mypage', router.query;
 
   const [userData, setUserData] = useRecoilState(userFormState);
   const [registerForm, setRegisterForm] = useRecoilState(userFormMessageState);
@@ -96,7 +96,7 @@ const MyPages = ({ user }) => {
     e.preventDefault();
     clearErrors();
     const result = await changePassword(user, userData.password).then(
-      alert('비밀번호가 변경되었습니다.')
+      alert('비밀번호가 변경되었습니다.'),
     );
     return result;
   };
@@ -104,7 +104,7 @@ const MyPages = ({ user }) => {
   // email 인증을 통해 비밀번호 변경
   const handleChangePasswordThroughEmail = async () => {
     const result = await changePassowordFromEmail(userData.email).then(
-      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.')
+      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.'),
     );
     return result;
   };
@@ -143,6 +143,7 @@ const MyPages = ({ user }) => {
                 name='name'
                 css={[FormInput]}
                 placeholder='이름을 작성하세요.'
+                autoComplete='on'
                 onChange={handleChange}
               />
             </div>
@@ -186,16 +187,17 @@ const MyPages = ({ user }) => {
               />
             </div>
             <div>
-              {userData.password.length > 0 && (
-                <span
-                  css={[RegisterNoticeText]}
-                  className={`message ${
-                    isForm.isPassword ? 'success' : 'error'
-                  }`}
-                >
-                  {registerForm.passwordMessage}
-                </span>
-              )}
+              {userData.password !== null ||
+                (undefined && (
+                  <span
+                    css={[RegisterNoticeText]}
+                    className={`message ${
+                      isForm.isPassword ? 'success' : 'error'
+                    }`}
+                  >
+                    {registerForm.passwordMessage}
+                  </span>
+                ))}
             </div>
 
             <div css={[FormGroup]}>
@@ -212,16 +214,17 @@ const MyPages = ({ user }) => {
               />
             </div>
             <div>
-              {userData.passwordConfirm.length > 0 && (
-                <span
-                  css={[RegisterNoticeText]}
-                  className={`message ${
-                    isForm.isPasswordConfirm ? 'success' : 'error'
-                  }`}
-                >
-                  {registerForm.passwordConfirmMessage}
-                </span>
-              )}
+              {userData.passwordConfirm !== null ||
+                (undefined && (
+                  <span
+                    css={[RegisterNoticeText]}
+                    className={`message ${
+                      isForm.isPasswordConfirm ? 'success' : 'error'
+                    }`}
+                  >
+                    {registerForm.passwordConfirmMessage}
+                  </span>
+                ))}
             </div>
 
             <div css={[BtnContainer]}>

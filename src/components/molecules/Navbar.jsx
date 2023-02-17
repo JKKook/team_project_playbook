@@ -12,7 +12,6 @@ import { FiLogOut } from 'react-icons/fi';
 import { MdContactPage } from 'react-icons/md';
 
 const Navbar = ({ handleLogout, userData }) => {
-  console.log(userData);
   const router = useRouter();
   const pathname = router.pathname;
 

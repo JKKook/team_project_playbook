@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 
 const Support = () => {
   const router = useRouter();
-  console.log('supportQuery :', router);
 
   const handleAccount = () => {
     return router.push('/subPages/MyPages');

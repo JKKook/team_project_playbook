@@ -43,12 +43,9 @@ const Login = () => {
     try {
       const authUser = await signIn(loginForm.email, loginForm.password);
       const userDoc = await addDocRef(authUser);
-      console.log('doc', userDoc);
       const resultRouter = await router.push('/');
       return resultRouter;
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   // 현재 로그인 한 사용자 가져오기, 렌더링 시 null값 되는 것 방지
