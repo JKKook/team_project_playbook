@@ -20,7 +20,6 @@ const Post = () => {
   const router = useRouter();
   // path 아디 정보
   const { performenceid } = router.query;
-  let imageSize = null;
 
   const { data, isLoading } = useGetDescription(performenceid);
 

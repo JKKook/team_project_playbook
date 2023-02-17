@@ -212,6 +212,7 @@ const SearchInputButton = css`
   margin-left: 0.3rem;
   font-size: 1.5rem;
   color: #8785a2;
+  background-color: white;
 `;
 
 // calendar

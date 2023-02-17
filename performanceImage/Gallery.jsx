@@ -16,6 +16,12 @@ const Gallery = () => {
 
   return (
     <div css={[Wrap]}>
+      <div css={[RecommandContainer]}>
+        <strong css={[RecommandPlayBook]}>
+          <span css={[HighlightTextForward]}>Let is Play</span>
+          <span css={[HighlightTextBehind]}>오늘의 플레이북 Pick!!</span>
+        </strong>
+      </div>
       <div css={[GalleryWrap]}>
         <GalleryList datas={datas} onView={onView} currItem={currItem} />
         <GalleryView currItem={currItem} />
@@ -35,6 +41,5 @@ const GalleryWrap = css`
   grid-template-columns: 1fr 1fr;
   max-width: 1000px;
   border-radius: 10px;
-  background: skyblue;
   padding: 3rem;
 `;

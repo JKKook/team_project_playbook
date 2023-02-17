@@ -157,9 +157,10 @@ const Register = () => {
                   css={[LoginEmailInput]}
                   type='email'
                   name='email'
+                  autoComplete='on'
                   placeholder='생성하고자 하는 이메일 주소를 입력하십시오'
                   required
-                  value={registerForm.email}
+                  value={registerForm.email || ''}
                   onChange={handleCheckEmail}
                 />
                 {registerForm.email !== null && (
@@ -181,7 +182,7 @@ const Register = () => {
                     placeholder='생성하고자 하는 비밀번호를 입력하십시오'
                     required
                     autoComplete='on'
-                    value={registerForm.password}
+                    value={registerForm.password || ''}
                     onChange={handleCheckPassword}
                   />
                   <div>
@@ -206,7 +207,7 @@ const Register = () => {
                     placeholder='생성하고자 하는 비밀번호를 확인하십시오'
                     required
                     autoComplete='on'
-                    value={registerForm.passwordConfirm}
+                    value={registerForm.passwordConfirm || ''}
                     onChange={handleCheckPasswordConfirm}
                   />
                   <div>
