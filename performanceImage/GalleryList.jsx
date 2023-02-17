@@ -11,8 +11,8 @@ const GalleryList = ({ datas, currItem, onView }) => {
       <Image
         src={image}
         alt={title}
-        width={500}
-        height={450}
+        width={400}
+        height={500}
         css={[ImageBox]}
       />
       <ul css={[ThumbBox]}>
@@ -30,6 +30,8 @@ const Left = css``;
 
 const ImageBox = css`
   border-radius: 20px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
 `;
 
 const ThumbBox = css`

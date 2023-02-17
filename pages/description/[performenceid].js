@@ -10,7 +10,6 @@ import {
   AiOutlineCreditCard,
   AiOutlineEnvironment,
   AiOutlineHourglass,
-  BookmarkHeart,
 } from 'react-icons/ai';
 const { useState, useEffect } = require('react');
 
