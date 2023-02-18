@@ -36,6 +36,14 @@ const Wrap = css`
   margin: 2rem auto;
 `;
 
+const GalleryWrap = css`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
+  border-radius: 10px;
+  padding: 3rem;
+`;
+
 const RecommandContainer = css`
   display: flex;
   justify-content: flex-start;
@@ -66,12 +74,4 @@ const HighlightTextBehind = css`
   font-size: 2rem;
   font-weight: 800;
   color: #2b2b2b;
-`;
-
-const GalleryWrap = css`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 1000px;
-  border-radius: 10px;
-  padding: 3rem;
 `;

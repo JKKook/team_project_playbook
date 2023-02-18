@@ -38,7 +38,7 @@ const useGetDescription = (performenceid) => {
             : [],
         };
       },
-    },
+    }
   );
 };
 

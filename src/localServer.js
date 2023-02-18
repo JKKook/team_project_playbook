@@ -15,7 +15,6 @@ const PORT = 4000;
 // 하단부터 라우터정보 가져오시면 됩니다.
 // 파일은 src/serverRouter/...입니다.
 const mainImageRouter = require('./serverRouter/mainImageRouter');
-const mainRecommend = require('./serverRouter/mainRecommendRouter');
 const totalRouter = require('./serverRouter/totalPerformanceRouter');
 const KEY = '98e02b76a394447699b7324b7ff14b83';
 
@@ -30,7 +29,6 @@ app.use(
 
 // 라우터 경로 설정
 app.use('/main/image', mainImageRouter);
-app.use('/main/recommend', mainRecommend);
 app.use('/main/total', totalRouter);
 
 // server메인

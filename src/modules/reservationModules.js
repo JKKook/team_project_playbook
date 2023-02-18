@@ -2,7 +2,6 @@ import { PERFORMANCE_RESERVE_KEY } from '../contexts/localStorageKey';
 
 export const reservationMoudle = (performanceid) => {
   const result = getReservationInfo();
-  // console.log(performanceid);
 
   if (result.find((info) => info === performanceid)) {
     console.log(true);

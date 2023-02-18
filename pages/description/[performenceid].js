@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import Loading from '@/src/components/atoms/Loading';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
-import useGetDescription from '@/src/store/server/useGetDescription';
+import Loading from '../../src/components/atoms/Loading';
+import useGetDescription from '../../src/store/server/useGetDescription';
 import {
   AiOutlineUser,
   AiOutlineClockCircle,
@@ -11,37 +12,14 @@ import {
   AiOutlineEnvironment,
   AiOutlineHourglass,
 } from 'react-icons/ai';
-const { useState, useEffect } = require('react');
 
-const { useRouter } = require('next/router');
 
 // 여기서 공연 상세정보 API 불러오기
-
-const getImageSize = (src) => {
-  let img = new Image();
-  img.src = src;
-  const widthImage = img.width;
-  const heightImage = img.height;
-  return {
-    width: widthImage,
-    height: heightImage,
-  };
-};
-
-const srcMatch = (src) => {
-  const regexp = RegExp(/^(http:\/\/)/);
-  const isSrc = regexp.test(src);
-  if (!isSrc) {
-    return `http://www.kopis.or.kr/upload/pfmIntroImage/${src}.jpg`;
-  }
-  return src;
-};
 
 const Post = () => {
   const router = useRouter();
   // path 아디 정보
   const { performenceid } = router.query;
-  let imageSize = null;
 
   const { data, isLoading } = useGetDescription(performenceid);
 
@@ -127,7 +105,6 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: url();
 `;
 
 const ImageContainer = css`

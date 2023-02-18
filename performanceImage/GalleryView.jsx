@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import paintG from '../public/asset/home_paint2.png';
+
 const GalleryView = ({ currItem }) => {
   const { title, description } = currItem;
   return (

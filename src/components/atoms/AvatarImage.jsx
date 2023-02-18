@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import React from 'react';
 import Image from 'next/image';
 import { UserAvatar } from '../molecules/Navbar';
 

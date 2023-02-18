@@ -14,7 +14,7 @@ import {
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
-import { getDatabase, ref, child, get } from 'firebase/database';
+import { getDatabase, ref, get } from 'firebase/database';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -127,8 +127,6 @@ export const onUserStateChange = (callback) => {
 // User admin ** readAndWrite Data in firebase
 const adminUser = async (user) => {
   // 사용자가 어드민 권한을 갖고 있는지 확인
-  // {...user, isAdmin : true }
-
   return get(ref(database, 'admins')).then((snapshot) => {
     if (snapshot.exists()) {
       const admins = snapshot.val();

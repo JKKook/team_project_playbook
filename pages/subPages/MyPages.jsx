@@ -1,21 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
-import avatar from '../../public/asset/user.png';
-import Image from 'next/image';
-import {
-  changePassowordFromEmail,
-  changePassword,
-  changeProfile,
-} from '../api/auth/firebase';
 import { useRecoilState } from 'recoil';
 import {
   userFormMessageState,
   userFormState,
   isUserState,
 } from '../../src/recoil/recoil-auth';
+import avatar from '../../public/asset/user.png';
+import {
+  changePassowordFromEmail,
+  changePassword,
+  changeProfile,
+} from '../api/auth/firebase';
 import { passwordRegex } from '../../src/utils/auth-regex';
 import { RegisterNoticeText } from './Register';
 import Reservation from '../../src/components/molecules/reservation/Reservation';
@@ -109,7 +109,7 @@ const MyPages = ({ user }) => {
     return result;
   };
 
-  const { data, isLoading } = useQuery(['listApi'], useGetReservation);
+  const { data } = useQuery(['listApi'], useGetReservation);
 
   return (
     <div css={[MyPageStyle]}>
@@ -158,7 +158,6 @@ const MyPages = ({ user }) => {
                 value={userData.email}
                 css={[FormInput]}
                 placeholder='Email을 작성하세요.'
-                // disabled={true}
                 onChange={handleChange}
               />
             </div>
@@ -259,8 +258,6 @@ const MyPageStyle = css`
 `;
 
 const MypageSection = css`
-  // display: grid;
-  // grid-template-columns: 1.2fr 2fr;
   width: 40%;
   flex-wrap: wrap;
   margin-left: 2rem;
@@ -282,9 +279,7 @@ const ReservationSection = css`
 
 const Text = css`
   text-align: center !important;
-  font-size: 1.75rem;import { useRouter } from 'next/router';
-import FileChange from '../../.history/src/components/atoms/FileChange_20230215211410';
-
+  font-size: 1.75rem;
   color: #8d98a0;
   margin-bottom: 0.5rem;
   font-weight: 600;
@@ -344,7 +339,6 @@ const UploadFile = css`
 `;
 
 const FormGroup = css`
-  // margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
