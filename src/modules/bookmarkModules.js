@@ -13,7 +13,6 @@ export const bookmarkModule = (performanceid) => {
 
 export const getBookmarkInfo = () => {
   const result = JSON.parse(localStorage.getItem(PERFORMANCE_LIKE_KEY)) ?? [];
-
   return result;
 };
 
@@ -23,7 +22,7 @@ export const removeBookMarkInfo = (performanceid) => {
   localStorage.setItem(PERFORMANCE_LIKE_KEY, JSON.stringify(newBookmarkInfo));
 };
 
-export const handleBookMarkInfo = (id, state) => {
+export const handleBookMarkInfo = (id, bookMarks,onAddMarks,onRemoveMarks) => {
   const bookmarkInfo = getBookmarkInfo();
 
   if (!bookmarkInfo.find((info) => info === id)) {
@@ -31,18 +30,10 @@ export const handleBookMarkInfo = (id, state) => {
       PERFORMANCE_LIKE_KEY,
       JSON.stringify([...bookmarkInfo, id]),
     );
-    state(true);
+    onAddMarks([...bookmarkInfo, id]);
   } else {
     removeBookMarkInfo(id);
-    state(false);
+    onRemoveMarks(bookMarks,id);
   }
 };
 
-export const isCheckBookMark = (id) => {
-  const bookmarkInfo = getBookmarkInfo();
-
-  if (!bookmarkInfo.find((info) => info === id)) {
-    return false;
-  }
-  return true;
-};

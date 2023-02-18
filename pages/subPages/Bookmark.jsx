@@ -2,6 +2,7 @@ import PerformanceList from '../../src/components/molecules/PerformanceList';
 import { getBookmarkInfo } from '../../src/modules/bookmarkModules';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 // localStorage로 저장하기
 export const getListApi = async () => {
@@ -40,10 +41,13 @@ const Bookmark = () => {
   }
   if (data.length === 0) {
     return <div>북마크 정보가 없습니다.</div>;
-  }
+  };
+
   return (
     <div>
-      <PerformanceList total={data} />
+      <PerformanceList 
+        total={data} 
+      />
     </div>
   );
 };

@@ -4,8 +4,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import BookmarkHeart from '../atoms/BookmarkHeart';
 import ReservationButton from './reservation/ReservationButton';
+import { useState } from 'react';
 
-const PerformanceList = ({ total }) => {
+const PerformanceList = ({total}) => {
+  const [bookMarks, setBookMarks] = useState([]);
+
+  const addBookMarks = (data) => {
+    setBookMarks(data);
+  };
+
+  const removedBookMarks = (data, id) => {
+    const items = data.filter(item => item !== id);
+    setBookMarks(items);
+  };
+
   return (
     <div css={[Performances]}>
       {total &&
@@ -25,7 +37,12 @@ const PerformanceList = ({ total }) => {
                 <h5 css={[CardTitle]} title={elem.name}>
                   {elem.name}
                 </h5>
-                <BookmarkHeart id={elem.id} />
+                <BookmarkHeart 
+                  id={elem.id}
+                  bookMarks={bookMarks}
+                  onAddMarks={addBookMarks}
+                  onRemoveMarks={removedBookMarks}
+                />
               </div>
               <p css={[Detail]} title={elem.place}>
                 장소 : {elem.place}
@@ -67,7 +84,7 @@ const Performances = css`
 const CardContainer = css`
   width: 18rem;
   margin: 30px auto;
-  osition: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.125);

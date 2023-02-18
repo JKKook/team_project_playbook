@@ -1,18 +1,37 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 import {
   bookmarkModule,
+  getBookmarkInfo,
   handleBookMarkInfo,
 } from '../../modules/bookmarkModules';
+import {useQueryClient } from 'react-query';
 
-const BookmarkHeart = ({ id }) => {
-  const [state, setState] = useState(() => bookmarkModule(id));
+const BookmarkHeart = ({ id,bookMarks, onAddMarks, onRemoveMarks }) => {
+  const [state, setState] = useState(false);
+  const queryClient = useQueryClient();
+  const cancelQuery = () => {
+    queryClient.invalidateQueries(['listApi']);
+  };
+
+  const bookmarkInfo = getBookmarkInfo();
+  useEffect(() => {
+    if(!bookmarkInfo.find((info) => info === id)){
+      setState(false);
+    } else {
+      setState(true);
+    }
+  },[bookmarkInfo,id]);
+
   return (
     <>
-      <span css={[Heart]} onClick={() => handleBookMarkInfo(id, setState)}>
-        {state ? <BsHeartFill css={[FillHeart]} /> : <BsHeart />}
+      <span css={[Heart]} onClick={() =>  {
+        handleBookMarkInfo(id,bookMarks,onAddMarks, onRemoveMarks)
+        cancelQuery();  
+      }}>
+        {state === true ? <BsHeartFill css={[FillHeart]} /> : <BsHeart />}
       </span>
     </>
   );
