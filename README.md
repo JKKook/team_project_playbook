@@ -1,8 +1,6 @@
 # Team_PlayBook
 
----
-
-###### Period (23.01.14 ~ 23.02.16)
+### Period (23.01.14 ~ 23.02.16)
 
 - 기획 및 프로젝트 셋업 (23.01.14 ~ 23.01.17)
 - 프로젝트 작업 (23.01.17 ~ 23.02.16)
@@ -11,29 +9,25 @@
 
 ## Index
 
----
+### 1. 기획서 및 프로젝트 셋업 (초기 청사진)
 
-###### 1. 기획서 및 프로젝트 셋업 (초기 청사진)
+### 2. PlayBook 소개
 
-###### 2. PlayBook 소개
+### 3. Stacks
 
-###### 3. Stacks
+### 4. 주요 기능
 
-###### 4. 주요 기능
+### 5. 주요 기능 상세 설명
 
-###### 5. 주요 기능 상세 설명
+### 6. Co-workers
 
-###### 6. Co-workers
-
-###### 7. 프로젝트 후기
+### 7. 프로젝트 후기
 
 <br>
 
 ## 1. 기획서 및 프로젝트 셋업 (초기 청사진)
 
----
-
-#### Setting
+### Setting
 
 ![image_description](./public/asset/setup1.png)
 ![image_description](./public/asset/setup2.png)
@@ -41,11 +35,11 @@
 
 <br>
 
-#### Git
+### Git
 
-###### 1). Git Flow : main - develop - feature
+#### 1). Git Flow : main - develop - feature
 
-###### 2). Git Convention
+#### 2). Git Convention
 
 ```js
 - FEAT : 새로운 기능의 추가
@@ -59,7 +53,7 @@
 
 <br>
 
-#### Unify composition
+### Unify composition
 
 ```jsx
 *** 경로 설정
@@ -98,10 +92,9 @@ Etc
 ```
 
 <br>
+<br>
 
 ## 2. PlayBook 소개
-
----
 
 <img src="./public/asset/playbook-logo.png" width="100">
 
@@ -110,11 +103,13 @@ Etc
 따라서, 색상은 피로감을 줄이며 산뜻한 느낌으로 다가갈 수 있도록 그린, 화이트 계열을 선택했습니다. 그리고 다른 최대한 웹사이트를 이용하는데 불편함을 줄이고자 분류 카테고리를 통합하여 검색과 필터형식으로 '한 곳'에서 '한 눈'에 볼 수 있도록 타 공연사이트와 차별점을 두고 작업하였습니다.
 </span>
 
+<br>
+<br>
+
+
 ## 3. Stacks
 
----
-
-#### FRONTEND
+### FRONTEND
 
 |                                                       Next.js                                                       |                                                 React                                                 |                               Styled</br>Component                                |                                                 esLint                                                 |                                                 Prettier                                                 |
 | :-----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
@@ -128,10 +123,11 @@ Etc
 | <img src="https://cdn.dribbble.com/users/6295/screenshots/2923288/firebaseload.gif" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/nginx-icon.svg" alt="icon" width="65" height="65" /> |
 
 <br>
+<br>
+
 
 ## 4. 주요 기능
 
----
 
 #### 1) 메인 화면
 
@@ -180,47 +176,65 @@ Etc
 - user 정보에 따른 edit, delete 기능 처리
 
 <br>
+<br>
+
 
 ## 5. 주요 기능 이미지 첨부
 
----
 
-- 메인 화면
+#### 메인 화면
+<br>
   <br>
   <img src='./public/asset/main.gif' alt='main' width='500'>
   <br>
-- 공연 소개
+  
+#### 공연 소개
+<br>
   <br>
   <img src='./public/asset/performance.gif' alt='performance' width='500'>
   <br>
-- 상세페이지
+  
+#### 상세페이지
+<br>
   <br>
   <img src='./public/asset/description.gif' alt='description' width='500'>
   <br>
-- 북마크
+  
+#### 북마크
+<br>
   <br>
   <img src='./public/asset/bookmark.gif' alt='bookmark' width='500'>
   <br>
-- 공연 예약
+  
+#### 공연 예약
+<br>
   <br>
   <img src='./public/asset/reservation.gif' alt='reservation' width='500'>
   <br>
-- 로그인
+  
+#### 로그인
+<br>
   <br>
   <img src='./public/asset/signin.gif' alt='signin' width='500'>
   <br>
-- 회원 가입
+  
+#### 회원 가입
+<br>
   <br>
   <img src='./public/asset/register.gif' alt='register' width='500'>
   <br>
-- 고객센터
+  
+#### 고객센터
+<br>
   <br>
   <img src='./public/asset/chat.gif' alt='main' width='500'>
   <br>
+  
+  <br>
+
 
 ## 협업 🤝
 
----
 
 #### PlayBook project\_작업 공정
 
