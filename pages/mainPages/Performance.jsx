@@ -7,7 +7,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
 import PerformanceList from '../../src/components/molecules/PerformanceList';
 import Loading from '../../src/components/atoms/Loading';
-import useGetPerformance from '../../src/store/server/useGetPerformance';
+import useGetPerformance from '../../src/store/server/getAPI/useGetPerformance'
 import { GoSearch, GoCalendar } from 'react-icons/go';
 
 /**---------------------- 함수 영역-------------------------------- */
@@ -35,20 +35,6 @@ const Performance = () => {
     },
   ]);
 
-  const getDatesStartToEnd = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const date = new Date(start.getTime());
-
-    let list = [];
-
-    while (data <= end) {
-      list.push(new Date(date));
-      date.setDate(date.getDate() + 1);
-    }
-    return list;
-  };
-
   const [search, setSearch] = useState('');
   const [searchData, setSearchData] = useState([]);
 
@@ -65,14 +51,27 @@ const Performance = () => {
     setSearchData(filteredData);
   };
 
+ 
   useEffect(() => {
     if (!data) return;
     if (!search) setSearchData(data.data);
   }, [data, search]);
 
+  // useEffect(() => {
+  //   if(!searchData) return;
+  //   const newData = searchData.filter(item => {
+  //     if((new Date(item.end) <= date[0].endDate && new Date(item.end) >= date[0].startDate) || 
+  //         new Date(item.start) >= date[0].startDate && new Date(item.start) <= date[0].endDate 
+  //     ){
+  //       return item;
+  //     }
+  //   });
+  //   setSearchData(newData);
+  // },[date, search]);
+
   if (isLoading) {
     return <Loading />;
-  }
+  };
 
   return (
     <>
@@ -140,7 +139,8 @@ const Performance = () => {
           </div>
         </div>
       )}
-      {searchData && !isLoading && (
+
+      { searchData && !isLoading && (
         <PerformanceList total={filterCategory(searchData, category)} />
       )}
     </>

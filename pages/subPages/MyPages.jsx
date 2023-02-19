@@ -19,7 +19,7 @@ import {
 import { passwordRegex } from '../../src/utils/auth-regex';
 import { RegisterNoticeText } from './Register';
 import Reservation from '../../src/components/molecules/reservation/Reservation';
-import useGetReservation from '../../src/store/server/useGetReservation';
+import useGetReservation from '../../src/store/server/getAPI/useGetReservation';
 
 const MyPages = ({ user }) => {
   const router = useRouter();
@@ -96,7 +96,7 @@ const MyPages = ({ user }) => {
     e.preventDefault();
     clearErrors();
     const result = await changePassword(user, userData.password).then(
-      alert('비밀번호가 변경되었습니다.'),
+      alert('비밀번호가 변경되었습니다.')
     );
     return result;
   };
@@ -104,7 +104,7 @@ const MyPages = ({ user }) => {
   // email 인증을 통해 비밀번호 변경
   const handleChangePasswordThroughEmail = async () => {
     const result = await changePassowordFromEmail(userData.email).then(
-      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.'),
+      alert('해당 이메일로 비밀번호 변경 요청을 보냈습니다.')
     );
     return result;
   };
