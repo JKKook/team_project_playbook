@@ -181,55 +181,61 @@ Etc
 
 ## 5. 주요 기능 이미지 첨부
 
-
 #### 메인 화면
-<br>
   <br>
-  <img src='./public/asset/main.gif' alt='main' width='500'>
+  <img src='./public/asset/main.gif' alt='main' width='800'>
   <br>
-  
+    <br>
+
 #### 공연 소개
-<br>
   <br>
-  <img src='./public/asset/performance.gif' alt='performance' width='500'>
+  <img src='./public/asset/performance.gif' alt='performance' width='800'>
   <br>
+    <br>
   
 #### 상세페이지
 <br>
   <br>
-  <img src='./public/asset/description.gif' alt='description' width='500'>
+  <img src='./public/asset/description.gif' alt='description' width='800'>
   <br>
-  
+    <br>
+
 #### 북마크
 <br>
   <br>
-  <img src='./public/asset/bookmark.gif' alt='bookmark' width='500'>
+  <img src='./public/asset/bookmark.gif' alt='bookmark' width='800'>
   <br>
+    <br>
+
   
 #### 공연 예약
 <br>
   <br>
-  <img src='./public/asset/reservation.gif' alt='reservation' width='500'>
+  <img src='./public/asset/reservation.gif' alt='reservation' width='800'>
   <br>
-  
+    <br>
+
 #### 로그인
 <br>
   <br>
-  <img src='./public/asset/signin.gif' alt='signin' width='500'>
+  <img src='./public/asset/signin.gif' alt='signin' width='800'>
   <br>
+    <br>
+
   
 #### 회원 가입
 <br>
   <br>
-  <img src='./public/asset/register.gif' alt='register' width='500'>
+  <img src='./public/asset/register.gif' alt='register' width='800'>
   <br>
+    <br>
+
   
 #### 고객센터
 <br>
   <br>
-  <img src='./public/asset/chat.gif' alt='main' width='500'>
+  <img src='./public/asset/chat.gif' alt='main' width='800'>
   <br>
-  
   <br>
 
 
