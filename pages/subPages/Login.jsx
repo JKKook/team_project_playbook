@@ -42,9 +42,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const authUser = await signIn(loginForm.email, loginForm.password);
-      const userDoc = await addDocRef(authUser);
       const resultRouter = await router.push('/');
-      return resultRouter;
+      return authUser && resultRouter;
     } catch (err) {}
   };
 
@@ -143,7 +142,7 @@ const Login = () => {
       ) : (
         ''
       )}
-      <Toaster position='top-right' reverseOrder={false} />
+      <Toaster position='top-right' reverseOrder={false} autoClose={1000} />
     </>
   );
 };

@@ -8,9 +8,6 @@ import { logout, onUserStateChange } from '../../../pages/api/auth/firebase';
 const signOutNotify = () =>
   toast('반가웠어요 잘가요!', {
     icon: '👋',
-    style: {
-      transition: 'all 0.3s ease-in',
-    },
   });
 
 const Layout = ({ children }) => {
@@ -49,7 +46,7 @@ const Layout = ({ children }) => {
         ) : (
           ''
         )}
-        <Toaster position='top-right' reverseOrder={false} />
+        <Toaster position='top-right' reverseOrder={false} autoClose={1000} />
         {children}
       </RecoilRoot>
     </div>

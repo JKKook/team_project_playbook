@@ -29,7 +29,7 @@
 
 <br>
 
-#### 1. 기획서 및 프로젝트 셋업 (초기 청사진)
+## 1. 기획서 및 프로젝트 셋업 (초기 청사진)
 
 ---
 
@@ -99,7 +99,7 @@ Etc
 
 <br>
 
-#### 2. PlayBook 소개
+## 2. PlayBook 소개
 
 ---
 
@@ -109,3 +109,128 @@ Etc
 의미를 착안하여 **놀이처럼 즐기면서 예약하다**의 의미를 덧붙여 만든 합성어입니다.
 따라서, 색상은 피로감을 줄이며 산뜻한 느낌으로 다가갈 수 있도록 그린, 화이트 계열을 선택했습니다. 그리고 다른 최대한 웹사이트를 이용하는데 불편함을 줄이고자 분류 카테고리를 통합하여 검색과 필터형식으로 '한 곳'에서 '한 눈'에 볼 수 있도록 타 공연사이트와 차별점을 두고 작업하였습니다.
 </span>
+
+## 3. Stacks
+
+---
+
+#### FRONTEND
+
+|                                                       Next.js                                                       |                                                 React                                                 |                               Styled</br>Component                                |                                                 esLint                                                 |                                                 Prettier                                                 |
+| :-----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
+| <img src="https://leo-xee.github.io/81aefd7d1672183644b6579d60eee69e/Next.gif" alt="icon" width="50" height="50" /> | <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://styled-components.com/logo.png" width="65" height="65" /></div> | <img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /> |
+
+<br>
+### BACKEND
+
+|                                                         FireBase                                                         |                                                Nodejs                                                 |
+| :----------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
+| <img src="https://cdn.dribbble.com/users/6295/screenshots/2923288/firebaseload.gif" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/nginx-icon.svg" alt="icon" width="65" height="65" /> |
+
+<br>
+
+## 4. 주요 기능
+
+---
+
+#### 1) 메인 화면
+
+- 공연 API의 일부분을 받아와서 캐러셀 형식으로 User에게 정보 제공
+- Pages 서버사이드랜더링(SSR)
+
+#### 2) 공연 소개
+
+- Node 서버와 연결하여 XML -> JSON 형식으로 변환
+- API 장르에 따른 필터링 정보 제공
+- 보고 싶은 공연을 찾을 수 있도록 검색기능 제공
+- 캘린더를 통해 희망 일자 설정
+- 북마크 기능을 제공
+- 예약하기 기능을 제공해서 마이페이지와 연동
+
+#### 3) 상세페이지
+
+- API의 상세 정보들 제공
+
+#### 4) 로그인
+
+- Firebase 기반으로 Email, Password 서버에 요청 -> 처리
+- Firebase 기반의 소셜 네트워크 Google, Meta(Facebook) 로그인 서버에 요청 -> 처리
+- 신규 고객일 경우, 회원가입 진행
+- Firebase database 기반으로 어드민 계정 생성
+- Firebase Auth 정보, router.query 전달
+
+#### 5) 회원 가입
+
+- 회원 가입 시, 각 항목 유효성 검사
+- 모든 항목 유효성 검사 통과 -> Firebase Authentication 계정 생성
+- 로그인 후 -> Toast 알림과 함께 user 정보 전체 페이지에 전달
+
+#### 6) 마이페이지
+
+- Firebase 이메일로 비밀번호 변경 링크 받기
+- Firebase 비밀번호 업데이트
+- 메인 페이지, 공연 예약 목록 -> 마이페이지에 위치
+- 예약 목록 공연 삭제
+
+#### 7) 고객 센터
+
+- Cloud FireStore collection(text, id, createdAt, attachmentURL) 제공
+- Storage를 기반한 이미지 저장
+- user 정보에 따른 user.photoURL, userDisplayName 비동기 처리
+- user 정보에 따른 edit, delete 기능 처리
+
+<br>
+
+## 5. 주요 기능 이미지 첨부
+
+---
+
+- 메인 화면
+  <br>
+  <img src='./public/asset/main.gif' alt='main' width='500'>
+  <br>
+- 공연 소개
+  <br>
+  <img src='./public/asset/performance.gif' alt='performance' width='500'>
+  <br>
+- 상세페이지
+  <br>
+  <img src='./public/asset/description.gif' alt='description' width='500'>
+  <br>
+- 북마크
+  <br>
+  <img src='./public/asset/bookmark.gif' alt='bookmark' width='500'>
+  <br>
+- 공연 예약
+  <br>
+  <img src='./public/asset/reservation.gif' alt='reservation' width='500'>
+  <br>
+- 로그인
+  <br>
+  <img src='./public/asset/signin.gif' alt='signin' width='500'>
+  <br>
+- 회원 가입
+  <br>
+  <img src='./public/asset/register.gif' alt='register' width='500'>
+  <br>
+- 고객센터
+  <br>
+  <img src='./public/asset/chat.gif' alt='main' width='500'>
+  <br>
+
+## 협업 🤝
+
+---
+
+#### PlayBook project\_작업 공정
+
+[기능구현 현황리스트](https://www.notion.so/edbb97ee7ac147f8bf4ef688e3792007)
+
+⬆️ 작업 세부 사항 Notion 기록
+<br>
+
+#### co-worker
+
+- 이인재 : https://github.com/llinjae
+- 김다빈 : https://github.com/Dabiny
+- 이종국(본인) : https://github.com/JKKook
