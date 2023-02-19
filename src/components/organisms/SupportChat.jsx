@@ -47,7 +47,7 @@ const SupportChat = ({
 
   return (
     <>
-      {isAdmin && (
+      {isOwner && (
         <div css={[ChatFormContainer]}>
           {editting ? (
             <form onSubmit={handleUpdateSubmit}>
@@ -94,20 +94,17 @@ const SupportChat = ({
               )}
             </div>
           )}
-
-          {isOwner ||
-            (isAdmin && (
-              <div css={[ChatEditDelete]}>
-                <button css={[SubmitBtn]} onClick={toggleEditting}>
-                  수정
-                  <FiEdit />
-                </button>
-                <button css={[SubmitBtn]} onClick={handleDeleteClick}>
-                  삭제
-                  <TiDelete />
-                </button>
-              </div>
-            ))}
+          <div css={[ChatEditDelete]}>
+            <button css={[SubmitBtn]} onClick={toggleEditting}>
+              수정
+              <FiEdit />
+            </button>
+            <button css={[SubmitBtn]} onClick={handleDeleteClick}>
+              삭제
+              <TiDelete />
+            </button>
+          </div>
+          ,
         </div>
       )}
     </>
