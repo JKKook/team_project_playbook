@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "node src/localServer.js"
+    "server": "node src/store/server/localServer.js"
   },
   "dependencies": {
     "@emotion/css": "^11.10.5",

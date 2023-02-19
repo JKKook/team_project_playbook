@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Loading from '../../src/components/atoms/Loading';
-import useGetDescription from '../../src/store/server/useGetDescription';
+import useGetDescription from '../../src/store/server/getAPI/useGetDescription'
 import {
   AiOutlineUser,
   AiOutlineClockCircle,
