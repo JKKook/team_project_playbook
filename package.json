@@ -36,12 +36,17 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "react-query": "^3.39.3",
-    "react-query-devtools": "^2.6.3",
     "recoil": "^0.7.6",
     "request": "^2.88.2",
     "swiper": "^8.4.6",
     "uuidv4": "^6.2.13",
     "webpack": "^5.75.0",
     "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react-hot-toast": "csstype@^3.0.10"
   }
 }
