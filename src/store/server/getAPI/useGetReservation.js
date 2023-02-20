@@ -1,4 +1,4 @@
-import { getReservationInfo } from '../../modules/reservationModules';
+import { getReservationInfo } from '../../../modules/reservationModules';
 import axios from 'axios';
 
 const useGetReservation = async () => {
