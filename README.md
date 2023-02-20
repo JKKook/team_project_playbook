@@ -106,7 +106,6 @@ Etc
 <br>
 <br>
 
-
 ## 3. Stacks
 
 ### FRONTEND
@@ -116,6 +115,7 @@ Etc
 | <img src="https://leo-xee.github.io/81aefd7d1672183644b6579d60eee69e/Next.gif" alt="icon" width="50" height="50" /> | <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://styled-components.com/logo.png" width="65" height="65" /></div> | <img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /> |
 
 <br>
+
 ### BACKEND
 
 |                                                         FireBase                                                         |                                                Nodejs                                                 |
@@ -125,9 +125,7 @@ Etc
 <br>
 <br>
 
-
 ## 4. 주요 기능
-
 
 #### 1) 메인 화면
 
@@ -178,16 +176,17 @@ Etc
 <br>
 <br>
 
-
 ## 5. 주요 기능 이미지 첨부
 
 #### 메인 화면
+
   <br>
   <img src='./public/asset/main.gif' alt='main' width='800'>
   <br>
     <br>
 
 #### 공연 소개
+
   <br>
   <img src='./public/asset/performance.gif' alt='performance' width='800'>
   <br>
@@ -201,14 +200,15 @@ Etc
     <br>
 
 #### 북마크
+
 <br>
   <br>
   <img src='./public/asset/bookmark.gif' alt='bookmark' width='800'>
   <br>
     <br>
 
-  
 #### 공연 예약
+
 <br>
   <br>
   <img src='./public/asset/reservation.gif' alt='reservation' width='800'>
@@ -216,31 +216,30 @@ Etc
     <br>
 
 #### 로그인
+
 <br>
   <br>
   <img src='./public/asset/signin.gif' alt='signin' width='800'>
   <br>
     <br>
 
-  
 #### 회원 가입
+
 <br>
   <br>
   <img src='./public/asset/register.gif' alt='register' width='800'>
   <br>
     <br>
 
-  
 #### 고객센터
+
 <br>
   <br>
   <img src='./public/asset/chat.gif' alt='main' width='800'>
   <br>
   <br>
 
-
 ## 협업 🤝
-
 
 #### PlayBook project\_작업 공정
 
