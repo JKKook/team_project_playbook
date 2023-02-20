@@ -27,7 +27,6 @@
     "firebase-tools": "^11.23.1",
     "framer-motion": "^9.0.2",
     "install": "^0.13.0",
-    "install-peers": "^1.0.4",
     "next": "13.1.2",
     "nextjs-progressbar": "^0.0.16",
     "nodemon": "^2.0.20",
@@ -46,5 +45,8 @@
   },
   "devDependencies": {
     "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react-hot-toast": "csstype@^3.0.10"
   }
 }
