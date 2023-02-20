@@ -27,6 +27,7 @@
     "firebase-tools": "^11.23.1",
     "framer-motion": "^9.0.2",
     "install": "^0.13.0",
+    "install-peers": "^1.0.4",
     "next": "13.1.2",
     "nextjs-progressbar": "^0.0.16",
     "nodemon": "^2.0.20",
@@ -36,12 +37,14 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "react-query": "^3.39.3",
-    "react-query-devtools": "^2.6.3",
     "recoil": "^0.7.6",
     "request": "^2.88.2",
     "swiper": "^8.4.6",
     "uuidv4": "^6.2.13",
     "webpack": "^5.75.0",
     "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }
