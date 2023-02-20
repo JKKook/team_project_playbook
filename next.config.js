@@ -9,7 +9,7 @@ module.exports = (phase, { defaultConfig }) => {
       swcMinify: true,
       env: {
         // 개발용 환경변수
-        EXMAPLE_KEY: 'example-key',
+        baseUrlKey: process.env.NEXT_PUBLIC_ENV_URL,
       },
       /* basePath: '/docs', //도메인의 하위 경로 아래에 Next.js 애플리케이션을 배포하려면 basePath구성 옵션을 사용할 수 있습니다. */
     };
