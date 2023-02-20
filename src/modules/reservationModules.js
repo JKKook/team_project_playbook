@@ -28,7 +28,7 @@ export const removeReservationInfo = (performanceid) => {
   );
 };
 
-export const handleReservationInfo = (id, state) => {
+export const handleToggleReservationInfo = (id) => {
   const reservationInfo = getReservationInfo();
 
   if (!reservationInfo.find((info) => info === id)) {
@@ -36,10 +36,20 @@ export const handleReservationInfo = (id, state) => {
       PERFORMANCE_RESERVE_KEY,
       JSON.stringify([...reservationInfo, id])
     );
-    state(true);
-  }
-   else {
+  } else {
     removeReservationInfo(id);
-    state(false);
+  }
+};
+
+export const handleRemoveReservationInfo = (
+  id,
+  reserveList,
+  onRemoveReservation
+) => {
+  const reservationInfo = getReservationInfo();
+
+  if (!reservationInfo.find((info) => info !== id)) {
+    removeReservationInfo(id);
+    onRemoveReservation(reserveList, id);
   }
 };

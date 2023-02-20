@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import {useEffect, useState } from 'react';
 import {
-  bookmarkModule,
   getBookmarkInfo,
   handleBookMarkInfo,
 } from '../../modules/bookmarkModules';

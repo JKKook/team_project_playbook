@@ -2,18 +2,33 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
-import { getReservationInfo } from '../../../modules/reservationModules';
-import { AiOutlineDelete } from 'react-icons/ai';
+// import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
+import {
+  getReservationInfo,
+  handleReservationInfo,
+} from '../../../modules/reservationModules';
+
+import { useState, useEffect } from 'react';
+import DeleteReservationButton from '../../atoms/DeleteReservationButton';
 
 const ReservationItem = ({ total, id }) => {
-  const handleRemoveReservation = (performanceid) => {
-    const reserveInfo = getReservationInfo();
-    const newReservation = reserveInfo.filter((item) => item !== performanceid);
-    localStorage.setItem(
-      PERFORMANCE_RESERVE_KEY,
-      JSON.stringify(newReservation),
-    );
+  // const handleRemoveReservation = (performanceid) => {
+  //   const reserveInfo = getReservationInfo();
+  //   const newReservation = reserveInfo.filter((item) => item !== performanceid);
+  //   localStorage.setItem(
+  //     PERFORMANCE_RESERVE_KEY,
+  //     JSON.stringify(newReservation),
+  //   );
+  // };
+  const [reserveList, setReserveList] = useState([]);
+
+  const addReservation = (data) => {
+    setReserveList(data);
+  };
+
+  const removeReservation = (data, id) => {
+    const items = data.filter((item) => item !== id);
+    setReserveList(items);
   };
 
   return (
@@ -44,16 +59,15 @@ const ReservationItem = ({ total, id }) => {
                   <p css={[Detail]}>
                     기간 : {elem.start} ~ {elem.end}
                   </p>
-                  <p css={[Detail]}>
-                    공연상태 : {elem.isPlaying}
-                  </p>
+                  <p css={[Detail]}>공연상태 : {elem.isPlaying}</p>
                 </div>
               </div>
-              <div css={[DeleteIcon]}>
-                <AiOutlineDelete
-                  onClick={() => handleRemoveReservation(elem.id)}
-                />
-              </div>
+              <DeleteReservationButton
+                id={elem.id}
+                reserveList={reserveList}
+                onAddReservation={addReservation}
+                onRemoveReservation={removeReservation}
+              />
             </div>
           </div>
         ))}
@@ -91,16 +105,8 @@ const CardTitle = css`
   white-space: nowrap;
 `;
 
-const DeleteIcon = css`
-  position: relative;
-  font-size: 1.5rem;
-  color: red;
-  cursor: pointer;
-`;
-
 const Detail = css`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
-
