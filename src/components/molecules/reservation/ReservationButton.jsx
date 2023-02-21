@@ -1,25 +1,42 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
+  getReservationInfo,
   handleReservationInfo,
-  reservationMoudle,
 } from '../../../modules/reservationModules';
 
-const ReservationButton = ({ id }) => {
-  const [state, setState] = useState(() => reservationMoudle(id));
+const ReservationButton = ({
+  id,
+  reserveList,
+  onAddReservation,
+  onRemoveReservation,
+}) => {
+  const [state, setState] = useState(false);
 
-  const getReservation = () => {
-    handleReservationInfo(id, setState);
-  };
+  const reservationInfo = getReservationInfo();
+  useEffect(() => {
+    if (!reservationInfo.find((info) => info === id)) {
+      setState(false);
+    } else {
+      setState(true);
+    }
+  }, [reservationInfo, id]);
 
   return (
     <button
       id='changeBtn'
       css={[ButtonToDetail, ButtonReserve]}
-      onClick={getReservation}
+      onClick={() => {
+        handleReservationInfo(
+          id,
+          reserveList,
+          onAddReservation,
+          onRemoveReservation
+        );
+      }}
     >
-      {state ? '예약 취소' : '예약하기'}
+      {state === true ? '예약 취소' : '예약하기'}
     </button>
   );
 };

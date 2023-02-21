@@ -1,6 +1,6 @@
 import { PERFORMANCE_RESERVE_KEY } from '../contexts/localStorageKey';
 
-export const reservationMoudle = (performanceid) => {
+export const reservationModule = (performanceid) => {
   const result = getReservationInfo();
 
   if (result.find((info) => info === performanceid)) {
@@ -28,7 +28,12 @@ export const removeReservationInfo = (performanceid) => {
   );
 };
 
-export const handleReservationInfo = (id, state) => {
+export const handleReservationInfo = (
+  id,
+  reserveList,
+  onAddReservation,
+  onRemoveReservation
+) => {
   const reservationInfo = getReservationInfo();
 
   if (!reservationInfo.find((info) => info === id)) {
@@ -36,10 +41,20 @@ export const handleReservationInfo = (id, state) => {
       PERFORMANCE_RESERVE_KEY,
       JSON.stringify([...reservationInfo, id])
     );
-    state(true);
-  }
-   else {
+    onAddReservation([...reservationInfo, id]);
+  } else {
     removeReservationInfo(id);
-    state(false);
+    onRemoveReservation(reserveList, id);
   }
+};
+
+export const handleRemoveReservationInfo = (
+  id,
+  reserveList,
+  onRemoveReservation
+) => {
+  const reservationInfo = getReservationInfo();
+  const newList = reservationInfo.filter((info) => info !== id);
+  localStorage.setItem(PERFORMANCE_RESERVE_KEY, JSON.stringify(newList));
+  onRemoveReservation(reserveList, id);
 };

@@ -5,18 +5,32 @@ import Image from 'next/image';
 import BookmarkHeart from '../atoms/BookmarkHeart';
 import ReservationButton from './reservation/ReservationButton';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { reserveListState } from '@/src/recoil/recoil-deleteReservation';
 
-const PerformanceList = ({total}) => {
+const PerformanceList = ({ total }) => {
   const [bookMarks, setBookMarks] = useState([]);
+  const [reserveList, setReserveList] = useRecoilState(reserveListState);
 
   const addBookMarks = (data) => {
     setBookMarks(data);
   };
 
   const removedBookMarks = (data, id) => {
-    const items = data.filter(item => item !== id);
+    const items = data.filter((item) => item !== id);
     setBookMarks(items);
   };
+
+  const addReservation = (data) => {
+    setReserveList(data);
+  };
+
+  const removeReservation = (data, id) => {
+    const items = data.filter((item) => item !== id);
+    setReserveList(items);
+  };
+
+  console.log(reserveList);
 
   return (
     <div css={[Performances]}>
@@ -37,7 +51,7 @@ const PerformanceList = ({total}) => {
                 <h5 css={[CardTitle]} title={elem.name}>
                   {elem.name}
                 </h5>
-                <BookmarkHeart 
+                <BookmarkHeart
                   id={elem.id}
                   bookMarks={bookMarks}
                   onAddMarks={addBookMarks}
@@ -61,7 +75,13 @@ const PerformanceList = ({total}) => {
                 >
                   자세히
                 </Link>
-                <ReservationButton data={total} id={elem.id} />
+                <ReservationButton
+                  data={total}
+                  id={elem.id}
+                  reserveList={reserveList}
+                  onAddReservation={addReservation}
+                  onRemoveReservation={removeReservation}
+                />
               </div>
             </div>
           </div>
