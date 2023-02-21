@@ -93,15 +93,18 @@ const Performance = () => {
     }
 
     const renderFunction = () => {
-        if (dateData && !isLoading) {
-            return <PerformanceList total={dateData} />;
-        }
-        if (searchData && !isLoading) {
-            return (
-                <PerformanceList total={filterCategory(searchData, category)} />
-            );
-        } else {
-            return <PerformanceList total={data} />;
+        if (!isLoading) {
+            if (!searchData && dateData) {
+                return <PerformanceList total={dateData} />;
+            }
+            if (searchData && dateData) {
+                return (
+                    <PerformanceList
+                        total={filterCategory(searchData, category)}
+                    />
+                );
+            }
+            return <PerformanceList total={data.data} />;
         }
     };
 
