@@ -1,29 +1,18 @@
 /** @jsxImportSource @emotion/react **/
+import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
 import {
   getReservationInfo,
   handleRemoveReservationInfo,
-  handleReservationInfo,
-} from '@/src/modules/reservationModules';
-import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
+} from '../../modules/reservationModules';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { useQueryClient } from 'react-query';
 
 const DeleteReservationButton = ({ id, reserveList, onRemoveReservation }) => {
-  const [state, setState] = useState(false);
   const queryClient = useQueryClient();
   const cancelQuery = () => {
     queryClient.invalidateQueries(['listApi']);
   };
-
-  const reservationInfo = getReservationInfo();
-  useEffect(() => {
-    if (!reservationInfo.find((info) => info === id)) {
-      setState(false);
-    } else {
-      setState(true);
-    }
-  }, [reservationInfo, id]);
 
   return (
     <div css={[DeleteIcon]}>

@@ -1,26 +1,12 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
-import { getReservationInfo } from '../../../modules/reservationModules';
-import { AiOutlineDelete } from 'react-icons/ai';
-import DeleteReservationButton from '../../atoms/DeleteReservationButton';
 import { useRecoilState } from 'recoil';
-import { reserveListState } from '@/src/recoil/recoil-deleteReservation';
+import DeleteReservationButton from '../../atoms/DeleteReservationButton';
+import { reserveListState } from '../../../recoil/recoil-deleteReservation';
 
-const ReservationItem = ({ total, id }) => {
-  // const handleRemoveReservation = (performanceid) => {
-  //   const reserveInfo = getReservationInfo();
-  //   const newReservation = reserveInfo.filter((item) => item !== performanceid);
-  //   localStorage.setItem(
-  //     PERFORMANCE_RESERVE_KEY,
-  //     JSON.stringify(newReservation)
-  //   );
-  // };
-
-  // const [reservations, setReservations] = useState([]);
+const ReservationItem = ({ total }) => {
   const [reserveList, setReserveList] = useRecoilState(reserveListState);
 
   const removedReservation = (data, id) => {
