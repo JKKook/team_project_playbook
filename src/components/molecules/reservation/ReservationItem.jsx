@@ -1,15 +1,14 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-// import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
-import {
-  getReservationInfo,
-  handleReservationInfo,
-} from '../../../modules/reservationModules';
-
-import { useState, useEffect } from 'react';
+import { PERFORMANCE_RESERVE_KEY } from '../../../contexts/localStorageKey';
+import { getReservationInfo } from '../../../modules/reservationModules';
+import { AiOutlineDelete } from 'react-icons/ai';
 import DeleteReservationButton from '../../atoms/DeleteReservationButton';
+import { useRecoilState } from 'recoil';
+import { reserveListState } from '@/src/recoil/recoil-deleteReservation';
 
 const ReservationItem = ({ total, id }) => {
   // const handleRemoveReservation = (performanceid) => {
@@ -17,16 +16,14 @@ const ReservationItem = ({ total, id }) => {
   //   const newReservation = reserveInfo.filter((item) => item !== performanceid);
   //   localStorage.setItem(
   //     PERFORMANCE_RESERVE_KEY,
-  //     JSON.stringify(newReservation),
+  //     JSON.stringify(newReservation)
   //   );
   // };
-  const [reserveList, setReserveList] = useState([]);
 
-  const addReservation = (data) => {
-    setReserveList(data);
-  };
+  // const [reservations, setReservations] = useState([]);
+  const [reserveList, setReserveList] = useRecoilState(reserveListState);
 
-  const removeReservation = (data, id) => {
+  const removedReservation = (data, id) => {
     const items = data.filter((item) => item !== id);
     setReserveList(items);
   };
@@ -65,8 +62,7 @@ const ReservationItem = ({ total, id }) => {
               <DeleteReservationButton
                 id={elem.id}
                 reserveList={reserveList}
-                onAddReservation={addReservation}
-                onRemoveReservation={removeReservation}
+                onRemoveReservation={removedReservation}
               />
             </div>
           </div>

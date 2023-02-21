@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react **/
 import {
   getReservationInfo,
+  handleRemoveReservationInfo,
   handleReservationInfo,
 } from '@/src/modules/reservationModules';
 import { css } from '@emotion/react';
@@ -8,21 +9,14 @@ import { useEffect, useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useQueryClient } from 'react-query';
 
-const DeleteReservationButton = (
-  id,
-  reserveList,
-  onAddReservation,
-  onRemoveReservation
-) => {
+const DeleteReservationButton = ({ id, reserveList, onRemoveReservation }) => {
   const [state, setState] = useState(false);
-
   const queryClient = useQueryClient();
   const cancelQuery = () => {
     queryClient.invalidateQueries(['listApi']);
   };
 
   const reservationInfo = getReservationInfo();
-
   useEffect(() => {
     if (!reservationInfo.find((info) => info === id)) {
       setState(false);
@@ -35,12 +29,7 @@ const DeleteReservationButton = (
     <div css={[DeleteIcon]}>
       <AiOutlineDelete
         onClick={() => {
-          handleReservationInfo(
-            id,
-            reserveList,
-            onAddReservation,
-            onRemoveReservation
-          );
+          handleRemoveReservationInfo(id, reserveList, onRemoveReservation);
           cancelQuery();
         }}
       />

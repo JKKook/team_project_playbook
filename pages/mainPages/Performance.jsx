@@ -54,7 +54,7 @@ const Performance = () => {
  
   useEffect(() => {
     if (!data) return;
-    if (!search) setSearchData(data.data);
+    if (!search) setSearchData(data.data); // 검색한 게 없어도 데이터들이 보이도록
   }, [data, search]);
 
   // useEffect(() => {

@@ -5,10 +5,12 @@ import Image from 'next/image';
 import BookmarkHeart from '../atoms/BookmarkHeart';
 import ReservationButton from './reservation/ReservationButton';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { reserveListState } from '@/src/recoil/recoil-deleteReservation';
 
 const PerformanceList = ({ total }) => {
   const [bookMarks, setBookMarks] = useState([]);
-  const [reserveList, setReserveList] = useState([]);
+  const [reserveList, setReserveList] = useRecoilState(reserveListState);
 
   const addBookMarks = (data) => {
     setBookMarks(data);
@@ -27,6 +29,8 @@ const PerformanceList = ({ total }) => {
     const items = data.filter((item) => item !== id);
     setReserveList(items);
   };
+
+  console.log(reserveList);
 
   return (
     <div css={[Performances]}>
