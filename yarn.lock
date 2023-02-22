@@ -6757,6 +6757,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"moment@npm:^2.29.4":
+  version: 2.29.4
+  resolution: "moment@npm:2.29.4"
+  checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
+  languageName: node
+  linkType: hard
+
 "morgan@npm:^1.10.0, morgan@npm:^1.8.2":
   version: 1.10.0
   resolution: "morgan@npm:1.10.0"
@@ -6819,11 +6826,11 @@ __metadata:
     firebase-tools: ^11.23.1
     framer-motion: ^9.0.2
     install: ^0.13.0
+    moment: ^2.29.4
     next: 13.1.2
     nextjs-progressbar: ^0.0.16
     nodemon: ^2.0.20
     react: 18.2.0
-    react-date-range: ^1.4.0
     react-datepicker: ^4.10.0
     react-dom: 18.2.0
     react-hot-toast: ^2.4.0
@@ -7607,7 +7614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -7857,21 +7864,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-date-range@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "react-date-range@npm:1.4.0"
-  dependencies:
-    classnames: ^2.2.6
-    prop-types: ^15.7.2
-    react-list: ^0.8.13
-    shallow-equal: ^1.2.1
-  peerDependencies:
-    date-fns: 2.0.0-alpha.7 || >=2.0.0
-    react: ^0.14 || ^15.0.0-rc || >=15.0
-  checksum: ea26bcc268aef2045fc89c1f15148d2578a83712aedcced401da91e8bb613d929264ee71e6c5b4783147c07a175b14a0264c3cea01749a8414f7d9eb09a43b5a
-  languageName: node
-  linkType: hard
-
 "react-datepicker@npm:^4.10.0":
   version: 4.10.0
   resolution: "react-datepicker@npm:4.10.0"
@@ -7933,17 +7925,6 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
-  languageName: node
-  linkType: hard
-
-"react-list@npm:^0.8.13":
-  version: 0.8.17
-  resolution: "react-list@npm:0.8.17"
-  dependencies:
-    prop-types: 15
-  peerDependencies:
-    react: 0.14 || 15 - 18
-  checksum: ab73693e36e33046e0fbf4aa8046433bc5dd146f06ec9ee273c78149f8f9c093d85f65705c42779d927fc8b5b8826eb3ddb21171830d34197c4f690313eb89d7
   languageName: node
   linkType: hard
 
@@ -8515,13 +8496,6 @@ __metadata:
   version: 1.2.0
   resolution: "setprototypeof@npm:1.2.0"
   checksum: be18cbbf70e7d8097c97f713a2e76edf84e87299b40d085c6bf8b65314e994cc15e2e317727342fa6996e38e1f52c59720b53fe621e2eb593a6847bf0356db89
-  languageName: node
-  linkType: hard
-
-"shallow-equal@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "shallow-equal@npm:1.2.1"
-  checksum: 4f1645cc516e7754c4438db687e1da439a5f29a7dba2ba90c5f88e5708aeb17bc4355ba45cad805b0e95dc898e37d8bf6d77d854919c7512f89939986cff8cd1
   languageName: node
   linkType: hard
 

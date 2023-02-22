@@ -30,8 +30,6 @@ const PerformanceList = ({ total }) => {
     setReserveList(items);
   };
 
-  console.log(reserveList);
-
   return (
     <div css={[Performances]}>
       {total &&
