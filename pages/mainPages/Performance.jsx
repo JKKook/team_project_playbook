@@ -1,12 +1,9 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
 import { useState, useEffect, useRef } from 'react';
-import { DateRange } from 'react-date-range';
+import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format, parse } from 'date-fns';
 import PerformanceList from '../../src/components/molecules/PerformanceList';
 import Loading from '../../src/components/atoms/Loading';
 import useGetPerformance from '../../src/store/server/getAPI/useGetPerformance';
@@ -20,12 +17,12 @@ const filterCategory = (data, category) => {
   else return data.filter((c) => c.genre === category);
 };
 
-const parseDate = (date) => {
-  const parseYear = date.getFullYear();
-  const parseMonth = date.getMonth();
-  const parseDay = date.getDate();
-  return [parseYear, parseMonth, parseDay];
-};
+// const parseDate = (date) => {
+//   const parseYear = date.getFullYear();
+//   const parseMonth = date.getMonth();
+//   const parseDay = date.getDate();
+//   return [parseYear, parseMonth, parseDay];
+// };
 
 const Performance = () => {
   const { data, isLoading } = useGetPerformance();
@@ -35,22 +32,10 @@ const Performance = () => {
     setCategory(e.target.value);
   };
 
-  // const [openDate, setOpenDate] = useState(false);
-  // const [date, setDate] = useState([
-  //     {
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //         key: "selection",
-  //     },
-  // ]);
-
-  // Fri Feb 24 2023 11:23:48 GMT+0900 (한국 표준시)
-  const [startDate, setStartDate] = useState(new Date());
-  const [dateData, setDateData] = useState([]);
-
+  // 검색 파트
   const [search, setSearch] = useState('');
   const [searchData, setSearchData] = useState([]);
-  const { current: myData } = useRef(searchData);
+  // const { current: myData } = useRef(searchData);
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -65,44 +50,30 @@ const Performance = () => {
     setSearchData(filteredData);
   };
 
+  // 날짜 선택 파트
+  const [openDate, setOpenDate] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+
+  // useEffect
   useEffect(() => {
     if (!data) return;
-    if (!search) setSearchData(data.data);
-  }, [data, search]);
+  }, [data]);
 
   useEffect(() => {
-    if (!data) return;
-
-    setDateData(
-      data.data.filter((v) => {
-        const data = v.start.replace(/[.]/g, '');
-        const parseYear = +data.slice(0, 4);
-        const parseMonth = +data.slice(4, 6) - 1;
-        const parseDay = +data.slice(6, 8);
-
-        const compareDate = new Date(parseYear, parseMonth, parseDay);
-        if (compareDate >= startDate) return true;
-      })
-    );
-
-    console.log(dateData, parseDate(startDate));
-  }, [startDate, myData]);
+    if (!searchData) return;
+    const newData = searchData.filter((item) => {
+      if (new Date(item.start) >= startDate) {
+        return item;
+      }
+    });
+    // console.log(searchData);
+    // if (!search) return setSearchData(newData);
+    setSearchData(newData);
+  }, [startDate, search]);
 
   if (isLoading) {
     return <Loading />;
   }
-
-  const renderFunction = () => {
-    if (!isLoading) {
-      if (!searchData && dateData) {
-        return <PerformanceList total={dateData} />;
-      }
-      if (searchData && dateData) {
-        return <PerformanceList total={filterCategory(searchData, category)} />;
-      }
-      return <PerformanceList total={data.data} />;
-    }
-  };
 
   return (
     <>
@@ -142,50 +113,38 @@ const Performance = () => {
             </div>
           </div>
 
-          {/* <div css={[CalendarContainer]}>
+          <div css={[CalendarContainer]}>
             <span css={[CalendarUsage]}>
               *원하시는 날짜가 있다면 캘린더를 이용해보세요 :)
               <GoCalendar
                 onClick={() => setOpenDate(!openDate)}
-                css={[SearchInputButton]}
+                css={[CalendarIcon]}
               />
-            </span>
-            <span onClick={() => setOpenDate(!openDate)} css={[CalendarText]}>
-              {`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
-                date[0].endDate,
-                'MM/dd/yyyy',
-              )}`}
             </span>
 
             {openDate && (
-              <DateRange
-                editableDateInputs={true}
-                onChange={(item) => setDate([item.selection])}
-                moveRangeOnFirstSelection={false}
-                ranges={date}
-                minDate={new Date()}
-                css={[Calendar]}
+              <DatePicker
+                css={DateInput}
+                selected={startDate}
+                withPortal
+                locale='ko'
+                dateFormat='yyyy.MM.dd'
+                useWeekdaysShort={true}
+                onChange={(date) => {
+                  setStartDate(date);
+                }}
               />
             )}
-          </div> */}
-          <div css={DatePickContainer}>
-            <span css={DatePickName}>원하시는 날짜를 선택해주세요:</span>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => {
-                setStartDate(date);
-              }}
-            />
           </div>
         </div>
       )}
 
-      {/* {searchData && !isLoading && (
-                <PerformanceList total={filterCategory(searchData, category)} />
-            )}
+      {!isLoading && searchData && (
+        <PerformanceList total={filterCategory(searchData, category)} />
+      )}
 
-            {dateData && !isLoading && <PerformanceList total={dateData} />} */}
-      {renderFunction()}
+      {/* {dateData && !isLoading && <PerformanceList total={dateData} />} */}
+      {/* {renderFunction()} */}
     </>
   );
 };
@@ -261,8 +220,20 @@ const SearchInputButton = css`
 // calendar
 const CalendarContainer = css`
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
+  user-select: none;
+`;
+
+const CalendarIcon = css`
+  border: none;
+  margin-left: 0.3rem;
+  font-size: 1.5rem;
+  color: #8785a2;
+  background-color: white;
+  cursor: pointer;
+  &:hover {
+    color: #364f6b;
+  }
 `;
 
 const CalendarUsage = css`
@@ -271,30 +242,17 @@ const CalendarUsage = css`
   font-size: 0.8rem;
   color: #8785a2;
   margin-top: 0.3rem;
-  cursor: pointer;
   &:hover {
     color: #364f6b;
   }
 `;
 
-const CalendarText = css`
-  display: none;
-`;
-
-// when clicked, show-up
-const Calendar = css`
-  position: absolute;
-  top: 118px;
-  left: 35rem;
-  z-index: 1;
-`;
-
-const DatePickContainer = css`
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-`;
-
-const DatePickName = css`
-  width: 250px;
+const DateInput = css`
+  margin-top: 6px;
+  margin-left: 20px;
+  text-align: center;
+  border: 1px solid #8785a2;
+  border-radius: 5px;
+  color: #8785a2;
+  cursor: pointer;
 `;
