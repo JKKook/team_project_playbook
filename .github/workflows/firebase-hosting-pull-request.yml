@@ -10,6 +10,7 @@ env:
   NEXT_PUBLIC_FIREBASE_PROJECT_ID: '${{secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID}}'
   NEXT_PUBLIC_FIREBASE_STORE: '${{secrets.NEXT_PUBLIC_FIREBASE_STORE}}'
 jobs:
+  test:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
