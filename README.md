@@ -1,5 +1,7 @@
 # Team_PlayBook
 
+https://team-project-playbook-wndn.vercel.app/
+
 ### Period (23.01.14 ~ 23.02.16)
 
 - 기획 및 프로젝트 셋업 (23.01.14 ~ 23.01.17)
@@ -110,9 +112,9 @@ Etc
 
 ### FRONTEND
 
-|                                                       Next.js                                                       |                                                 React                                                 |                               Styled</br>Component                                |                                                 esLint                                                 |                                                 Prettier                                                 |
-| :-----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
-| <img src="https://leo-xee.github.io/81aefd7d1672183644b6579d60eee69e/Next.gif" alt="icon" width="50" height="50" /> | <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://styled-components.com/logo.png" width="65" height="65" /></div> | <img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /> |
+|                                                           Next.js                                                           |                                               React.js                                                |                                                     State</br> Management                                                      |                                                Emotion</br>Styled                                                |                                                 EsLint                                                 |                                                 Prettier                                                 |
+| :-------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
+| <img src="https://seeklogo.com/images/N/next-js-icon-logo-EE302D5DBD-seeklogo.com.png" alt="icon" width="50" height="50" /> | <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="50" height="50" /> | <img src="https://blog.kakaocdn.net/dn/A4ANT/btrHoMUAw6C/ikblOMCARWgVNDONK1My3k/img.png" alt="icon" width="100" height="65" /> | <img src="https://raw.githubusercontent.com/emotion-js/emotion/main/emotion.png" width="50" height="50" /></div> | <img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="50" height="50" /> | <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="50" height="50" /> |
 
 <br>
 
