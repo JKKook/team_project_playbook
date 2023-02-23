@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react **/
 import { css } from '@emotion/react';
 import { useState, useEffect, useRef } from 'react';
-import moment from 'moment';
-import DatePicker from 'react-datepicker';
+// import moment from 'moment';
+import ko from 'date-fns/locale/ko';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PerformanceList from '../../src/components/molecules/PerformanceList';
 import Loading from '../../src/components/atoms/Loading';
@@ -12,7 +13,9 @@ import { GoSearch, GoCalendar } from 'react-icons/go';
 /**---------------------- 함수 영역-------------------------------- */
 
 const filterCategory = (data, category) => {
-  if (!data) return;
+  console.log('data', data);
+  console.log('category', category);
+  if (data === null || undefined) return;
   if (category === '') return data;
   else return data.filter((c) => c.genre === category);
 };
@@ -43,9 +46,9 @@ const Performance = () => {
 
   const onSearch = (e) => {
     e.preventDefault();
-    if (!data) return;
+    // if (!data) return;
     const filteredData = data.data.filter((el) =>
-      el.name.toLowerCase().includes(search.toLowerCase())
+      el.name.toLowerCase().includes(search.toLowerCase()),
     );
     setSearchData(filteredData);
   };
@@ -55,10 +58,17 @@ const Performance = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   // useEffect
+  // ⚠️ A locale object was not found for the provided string ['ko'] 지속성 유지
+  useEffect(() => {
+    registerLocale('ko', ko);
+  }, []);
+
+  // data 지속성 관리 어디서? ,  출처 : useGetPerformance
   useEffect(() => {
     if (!data) return;
   }, [data]);
 
+  //
   useEffect(() => {
     if (!searchData) return;
     const newData = searchData.filter((item) => {

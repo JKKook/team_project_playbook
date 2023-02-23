@@ -12,6 +12,7 @@ const useGetPerformance = () => {
 
     {
       select: (data) => {
+        if (!data) return;
         const resData = data.data.elements[0].elements;
         const arr = [];
         resData.map((v) => {
