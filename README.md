@@ -253,4 +253,3 @@ Etc
 - 이인재 : https://github.com/llinjae
 - 김다빈 : https://github.com/Dabiny
 - 이종국(본인) : https://github.com/JKKook
-# play_book_vercel_test
