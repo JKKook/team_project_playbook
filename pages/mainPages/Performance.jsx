@@ -57,19 +57,6 @@ const Performance = () => {
     if(!search) setSearchData(data.data);
   }, [data, search]);
 
-  //
-  useEffect(() => {
-    if (!searchData) return;
-    const newData = searchData.filter((item) => {
-      if (new Date(item.start) >= startDate) {
-        return item;
-      }
-    });
-    // console.log(searchData);
-    // if (!search) return setSearchData(newData);
-    setSearchData(newData);
-  }, [startDate, search]);
-
   if (isLoading) {
     return <Loading />;
   }
