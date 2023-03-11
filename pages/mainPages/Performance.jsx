@@ -35,19 +35,6 @@ const Performance = () => {
     setCategory(e.target.value);
   };
 
-  // const [openDate, setOpenDate] = useState(false);
-  // const [date, setDate] = useState([
-  //     {
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //         key: "selection",
-  //     },
-  // ]);
-
-  // Fri Feb 24 2023 11:23:48 GMT+0900 (한국 표준시)
-  const [startDate, setStartDate] = useState(new Date());
-  const [dateData, setDateData] = useState([]);
-
   const [search, setSearch] = useState('');
   const [searchData, setSearchData] = useState([]);
   const { current: myData } = useRef(searchData);
@@ -70,34 +57,16 @@ const Performance = () => {
     if (!search) setSearchData(data.data);
   }, [data, search]);
 
-  useEffect(() => {
-    if (!data) return;
-
-    setDateData(
-      data.data.filter((v) => {
-        const data = v.start.replace(/[.]/g, '');
-        const parseYear = +data.slice(0, 4);
-        const parseMonth = +data.slice(4, 6) - 1;
-        const parseDay = +data.slice(6, 8);
-
-        const compareDate = new Date(parseYear, parseMonth, parseDay);
-        if (compareDate >= startDate) return true;
-      })
-    );
-
-    console.log(dateData, parseDate(startDate));
-  }, [startDate, myData]);
-
   if (isLoading) {
     return <Loading />;
   }
 
   const renderFunction = () => {
     if (!isLoading) {
-      if (!searchData && dateData) {
+      if (!searchData) {
         return <PerformanceList total={dateData} />;
       }
-      if (searchData && dateData) {
+      if (searchData) {
         return <PerformanceList total={filterCategory(searchData, category)} />;
       }
       return <PerformanceList total={data.data} />;
@@ -141,50 +110,9 @@ const Performance = () => {
               </form>
             </div>
           </div>
-
-          {/* <div css={[CalendarContainer]}>
-            <span css={[CalendarUsage]}>
-              *원하시는 날짜가 있다면 캘린더를 이용해보세요 :)
-              <GoCalendar
-                onClick={() => setOpenDate(!openDate)}
-                css={[SearchInputButton]}
-              />
-            </span>
-            <span onClick={() => setOpenDate(!openDate)} css={[CalendarText]}>
-              {`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
-                date[0].endDate,
-                'MM/dd/yyyy',
-              )}`}
-            </span>
-
-            {openDate && (
-              <DateRange
-                editableDateInputs={true}
-                onChange={(item) => setDate([item.selection])}
-                moveRangeOnFirstSelection={false}
-                ranges={date}
-                minDate={new Date()}
-                css={[Calendar]}
-              />
-            )}
-          </div> */}
-          <div css={DatePickContainer}>
-            <span css={DatePickName}>원하시는 날짜를 선택해주세요:</span>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => {
-                setStartDate(date);
-              }}
-            />
-          </div>
         </div>
       )}
 
-      {/* {searchData && !isLoading && (
-                <PerformanceList total={filterCategory(searchData, category)} />
-            )}
-
-            {dateData && !isLoading && <PerformanceList total={dateData} />} */}
       {renderFunction()}
     </>
   );
