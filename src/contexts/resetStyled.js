@@ -121,9 +121,7 @@ const reset = css`
   html,
   body {
     width: 100%;
-    max-width: 1536px;
     line-height: 1;
-    heigth: 100vh;
     box-sizing: border-box;
   }
 
