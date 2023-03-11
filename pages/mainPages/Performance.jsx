@@ -13,8 +13,6 @@ import { GoSearch, GoCalendar } from 'react-icons/go';
 /**---------------------- 함수 영역-------------------------------- */
 
 const filterCategory = (data, category) => {
-  console.log('data', data);
-  console.log('category', category);
   if (data === null || undefined) return;
   if (category === '') return data;
   else return data.filter((c) => c.genre === category);
@@ -53,20 +51,11 @@ const Performance = () => {
     setSearchData(filteredData);
   };
 
-  // 날짜 선택 파트
-  const [openDate, setOpenDate] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-
-  // useEffect
-  // ⚠️ A locale object was not found for the provided string ['ko'] 지속성 유지
-  useEffect(() => {
-    registerLocale('ko', ko);
-  }, []);
-
   // data 지속성 관리 어디서? ,  출처 : useGetPerformance
   useEffect(() => {
     if (!data) return;
-  }, [data]);
+    if(!search) setSearchData(data.data);
+  }, [data, search]);
 
   //
   useEffect(() => {
@@ -122,39 +111,12 @@ const Performance = () => {
               </form>
             </div>
           </div>
-
-          <div css={[CalendarContainer]}>
-            <span css={[CalendarUsage]}>
-              *원하시는 날짜가 있다면 캘린더를 이용해보세요 :)
-              <GoCalendar
-                onClick={() => setOpenDate(!openDate)}
-                css={[CalendarIcon]}
-              />
-            </span>
-
-            {openDate && (
-              <DatePicker
-                css={DateInput}
-                selected={startDate}
-                withPortal
-                locale='ko'
-                dateFormat='yyyy.MM.dd'
-                useWeekdaysShort={true}
-                onChange={(date) => {
-                  setStartDate(date);
-                }}
-              />
-            )}
-          </div>
         </div>
       )}
 
       {!isLoading && searchData && (
         <PerformanceList total={filterCategory(searchData, category)} />
       )}
-
-      {/* {dateData && !isLoading && <PerformanceList total={dateData} />} */}
-      {/* {renderFunction()} */}
     </>
   );
 };
