@@ -1,6 +1,6 @@
 # Team_PlayBook
 
-https://shopify-39b6d.web.app/
+https://team-project-playbook-wndn-bly7z2q60-jkkook.vercel.app/
 (백엔드 부분은 배포 시도 중입니다.)
 
 ### Period (23.01.14 ~ 23.02.16)
